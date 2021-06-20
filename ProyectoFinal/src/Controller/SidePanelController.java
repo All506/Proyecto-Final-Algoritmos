@@ -51,6 +51,8 @@ public class SidePanelController implements Initializable {
     private JFXButton btnDisplayRestSup;
     @FXML
     private JFXButton btnCancelRestSup;
+    
+    String module;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -64,27 +66,31 @@ public class SidePanelController implements Initializable {
     @FXML
     private void changeColor(ActionEvent event) {
         JFXButton btn = (JFXButton) event.getSource();
-        System.out.println(btn.getText());
-        /*switch (btn.getText()) {
-            case "Color 1":
-                callback.updateColor("#00FF00");
-                break;
-            case "Color 2":
-                callback.updateColor("#0000FF");
-                break;
-            case "Color 3":
-                callback.updateColor("#FF0000");
-                break;
-        }*/
         switch (btn.getId()) {
+            
             case "b1":
-                System.out.println("El primer boton fue cliqueado");
                 apB1.setVisible(true);
-//                callback.updateColor("Confirmation");
+                module="Restaurants";
                 break;
             case "b2":
-                System.out.println("El segundo boton fue cliqueado");
-                callback.updateColor("Error");
+                apB1.setVisible(true);
+                module="Food";
+                break;
+            case "b3":
+                apB1.setVisible(true);
+                module="Products";
+                break;
+            case "b4":
+                apB1.setVisible(true);
+                module="Users";
+                break;
+            case "b5":
+                apB1.setVisible(true);
+                module="Places";
+                break;
+            case "b6":
+                apB1.setVisible(true);
+                module="Market";
                 break;
         }
     }
@@ -96,7 +102,33 @@ public class SidePanelController implements Initializable {
 
     @FXML
     private void btnNewRestSup(ActionEvent event) {
-        callback.updateColor("Confirmation");
+        switch (module) {
+            
+            case "Restaurants":
+                apB1.setVisible(true);
+                module="";
+                break;
+            case "Food":
+                apB1.setVisible(true);
+                module="Food";
+                break;
+            case "Products":
+                apB1.setVisible(true);
+                module="Products";
+                break;
+            case "Users":
+                apB1.setVisible(true);
+                module="Users";
+                break;
+            case "Places":
+                apB1.setVisible(true);
+                module="Places";
+                break;
+            case "Market":
+                apB1.setVisible(true);
+                module="Market";
+                break;
+        }
     }
 
     @FXML

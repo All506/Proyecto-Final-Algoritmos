@@ -39,7 +39,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="b4" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="184.0" layoutY="306.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Places">
+      <JFXButton fx:id="b5" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="184.0" layoutY="306.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Places">
          <graphic>
             <ImageView fitHeight="53.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -48,7 +48,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="b5" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="42.0" layoutY="306.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Users">
+      <JFXButton fx:id="b4" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="42.0" layoutY="306.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Users">
          <graphic>
             <ImageView fitHeight="47.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -118,7 +118,7 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <JFXButton fx:id="b41" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="325.0" layoutY="306.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Market">
+      <JFXButton fx:id="b6" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="325.0" layoutY="306.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Market">
          <graphic>
             <ImageView fitHeight="53.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                <image>
