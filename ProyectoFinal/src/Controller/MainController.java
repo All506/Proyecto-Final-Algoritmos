@@ -19,8 +19,11 @@ import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -40,7 +43,12 @@ public class MainController implements Initializable, ColorChangeCallback {
 
     @FXML
     private AnchorPane root;
+    @FXML
+    private ScrollPane scpMenu;
+    @FXML
+    private BorderPane bpRoot;
 
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         if (!MainClassFX.isSplashLoaded) {
@@ -56,6 +64,8 @@ public class MainController implements Initializable, ColorChangeCallback {
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
 
         HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
         transition.setRate(-1);
@@ -75,7 +85,7 @@ public class MainController implements Initializable, ColorChangeCallback {
         try {
             MainClassFX.isSplashLoaded = true;
 
-            StackPane pane = FXMLLoader.load(getClass().getResource(("/splash/splash.fxml")));
+            StackPane pane = FXMLLoader.load(getClass().getResource(("/UI/splash.fxml")));
             root.getChildren().setAll(pane);
 
             FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.5), pane);
@@ -110,6 +120,20 @@ public class MainController implements Initializable, ColorChangeCallback {
 
     @Override
     public void updateColor(String newColor) {
-        root.setStyle("-fx-background-color:" + newColor);
+        loadPage(newColor);
     }
+
+    public void loadPage(String page) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/UI/"+page + ".fxml"));
+
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        scpMenu.setContent(root);
+    }
+    
+    
+
 }
