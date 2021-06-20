@@ -91,6 +91,37 @@ public class Utility {
         }
         return "unknown";
     }
+    
+    public static boolean lessT(Object a, Object b) {
+        switch(instanceOf(a, b)){
+            case "integer":
+               Integer x =(Integer)a; Integer y = (Integer)b;
+               return x<y;
+            case "string":
+                String s1 =(String)a; String s2 = (String)b;
+               return s1.compareTo(s2)<0;
+            case "character":
+                Character c1=(Character)a; Character c2=(Character)b;
+                return c1.compareTo(c2)<0;
+        }
+        return false; //en cualquier otro caso
+    }
+     
+
+    public static boolean greaterT(Object a, Object b) {
+        switch(instanceOf(a, b)){
+            case "integer":
+               Integer x =(Integer)a; Integer y = (Integer)b;
+               return x>y;
+            case "string":
+                String s1 =(String)a; String s2 = (String)b;
+               return s1.compareTo(s2)>0;
+            case "character":
+                Character c1=(Character)a; Character c2=(Character)b;
+                return c1.compareTo(c2)>0;
+        }
+        return false; //en cualquier otro caso
+    }
 
     public static String dateFormat(Date date) {
         return new SimpleDateFormat("dd-MM-yyyy")
