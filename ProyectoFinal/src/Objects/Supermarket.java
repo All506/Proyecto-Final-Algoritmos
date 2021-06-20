@@ -47,7 +47,5 @@ public class Supermarket {
     @Override
     public String toString() {
         return "Supermarket{" + "ID:" + ID + ", name:" + name + ", location:" + location + '}';
-    }
-    
-    
+    }    
 }
