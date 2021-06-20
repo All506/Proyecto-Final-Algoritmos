@@ -15,6 +15,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import Misc.ChangeCallback;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * FXML Controller class
@@ -53,6 +56,8 @@ public class SidePanelController implements Initializable {
     private JFXButton btnCancelRestSup;
     
     String module;
+    
+    MainController mc = new MainController();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -105,28 +110,28 @@ public class SidePanelController implements Initializable {
         switch (module) {
             
             case "Restaurants":
-                apB1.setVisible(true);
-                module="";
+               
+                
                 break;
             case "Food":
-                apB1.setVisible(true);
-                module="Food";
+                
+                callback.updateColor("FoodCreate");
                 break;
             case "Products":
-                apB1.setVisible(true);
-                module="Products";
+                
+                callback.updateColor("ProductCreate");
                 break;
             case "Users":
-                apB1.setVisible(true);
-                module="Users";
+                
+                callback.updateColor("UserCreate");
                 break;
             case "Places":
-                apB1.setVisible(true);
-                module="Places";
+               
+              
                 break;
             case "Market":
-                apB1.setVisible(true);
-                module="Market";
+               
+              
                 break;
         }
     }
@@ -147,5 +152,7 @@ public class SidePanelController implements Initializable {
     private void btnCancelRestSup(ActionEvent event) {
         apB1.setVisible(false);
     }
+    
+    
 
 }
