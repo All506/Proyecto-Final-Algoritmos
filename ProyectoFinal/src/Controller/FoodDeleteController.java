@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author LuisGa
  */
-public class RestSupCRUDController implements Initializable {
+public class FoodDeleteController implements Initializable {
 
     /**
      * Initializes the controller class.

@@ -96,6 +96,7 @@ public class SidePanelController implements Initializable {
 
     @FXML
     private void btnNewRestSup(ActionEvent event) {
+        callback.updateColor("Confirmation");
     }
 
     @FXML
