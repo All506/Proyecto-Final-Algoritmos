@@ -5,7 +5,6 @@
  */
 package Controller;
 
-import Misc.ColorChangeCallback;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
+import Misc.ChangeCallback;
 
 /**
  * FXML Controller class
@@ -32,7 +32,7 @@ public class SidePanelController implements Initializable {
     @FXML
     private JFXButton exit;
 
-    private ColorChangeCallback callback;
+    private ChangeCallback callback;
     @FXML
     private JFXButton b4;
     @FXML
@@ -57,7 +57,7 @@ public class SidePanelController implements Initializable {
 
     }
 
-    public void setCallback(ColorChangeCallback callback) {
+    public void setCallback(ChangeCallback callback) {
         this.callback = callback;
     }
 

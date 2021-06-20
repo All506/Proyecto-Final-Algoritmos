@@ -4,6 +4,6 @@ package Misc;
  *
  * @author Villan
  */
-public interface ColorChangeCallback {
+public interface ChangeCallback {
     void updateColor(String newColor);
 }

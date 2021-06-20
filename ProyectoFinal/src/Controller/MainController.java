@@ -6,7 +6,6 @@
 package Controller;
 
 import Main.MainClassFX;
-import Misc.ColorChangeCallback;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
@@ -27,13 +26,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import Misc.ChangeCallback;
 
 /**
  * FXML Controller class
  *
  * @author Alán
  */
-public class MainController implements Initializable, ColorChangeCallback {
+public class MainController implements Initializable, ChangeCallback {
 
     @FXML
     private JFXDrawer drawer;
