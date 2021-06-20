@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controller.LogInController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogInController">
    <children>
       <ImageView fitHeight="116.0" fitWidth="133.0" layoutX="235.0" layoutY="45.0" pickOnBounds="true" smooth="false">
          <image>
@@ -19,6 +18,6 @@
       <TextField fx:id="txtUser" layoutX="227.0" layoutY="175.0" />
       <Text layoutX="277.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
       <TextField fx:id="txtPassword" layoutX="227.0" layoutY="232.0" />
-      <Button fx:id="btnLogIn" layoutX="227.0" layoutY="271.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="LogIn" />
+      <Button fx:id="btnLogIn" layoutX="227.0" layoutY="271.0" mnemonicParsing="false" onAction="#btnLogIn" prefHeight="25.0" prefWidth="149.0" text="LogIn" />
    </children>
 </AnchorPane>
