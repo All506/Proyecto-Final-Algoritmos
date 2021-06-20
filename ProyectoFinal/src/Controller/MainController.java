@@ -75,8 +75,10 @@ public class MainController implements Initializable, ChangeCallback {
 
             if (drawer.isOpened()) {
                 drawer.close();
+                scpMenu.toFront();
             } else {
                 drawer.open();
+                scpMenu.toBack();
             }
         });
     }
