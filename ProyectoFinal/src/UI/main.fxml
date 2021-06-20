@@ -6,16 +6,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="652.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
     <children>
-      <ScrollPane fx:id="scpMenu" prefHeight="600.0" prefWidth="800.0">
+      <ScrollPane fx:id="scpMenu" layoutX="8.0" layoutY="8.0" prefHeight="635.0" prefWidth="784.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
         </content>
       </ScrollPane>
       <BorderPane fx:id="bpRoot" prefHeight="600.0" prefWidth="800.0">
          <top>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="500.0" prefHeight="600.0" prefWidth="500.0" BorderPane.alignment="CENTER" />
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="500.0" prefHeight="643.0" prefWidth="765.0" BorderPane.alignment="CENTER" />
          </top></BorderPane>
       <JFXHamburger fx:id="hamburger" layoutX="755.0" layoutY="14.0" />
     </children>
