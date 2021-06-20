@@ -1,4 +1,4 @@
-package splash;
+package Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;

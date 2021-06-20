@@ -86,7 +86,7 @@ public class LogInController implements Initializable {
         stage.close();
         //Se abre el nuevo stage
         //Se llama al controller de la nueva ventana abierta
-        Parent root = FXMLLoader.load(getClass().getResource("/MainMenu/main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/UI/main.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Main Menu");
