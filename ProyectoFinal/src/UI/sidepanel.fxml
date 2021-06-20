@@ -3,21 +3,31 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<VBox prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SidePanelController">
+
+<AnchorPane prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SidePanelController">
    <children>
+      <JFXButton fx:id="b1" buttonType="RAISED" layoutX="1.0" layoutY="127.0" onAction="#changeColor" prefHeight="65.0" prefWidth="500.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Mant rest y sup" />
       <ImageView fitHeight="127.0" fitWidth="501.0" pickOnBounds="true">
          <image>
             <Image url="@../Resources/back.jpg" />
          </image>
       </ImageView>
-      <JFXButton fx:id="b1" buttonType="RAISED" onAction="#changeColor" prefHeight="65.0" prefWidth="500.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Mant rest y sup" />
-      <JFXButton fx:id="b2" buttonType="RAISED" layoutX="10.0" layoutY="123.0" onAction="#changeColor" prefHeight="65.0" prefWidth="500.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="mant comidas" />
-      <JFXButton fx:id="b3" buttonType="RAISED" layoutX="10.0" layoutY="197.0" onAction="#changeColor" prefHeight="68.0" prefWidth="500.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="mant productos" />
-      <JFXButton fx:id="b4" buttonType="RAISED" layoutX="10.0" layoutY="264.0" onAction="#changeColor" prefHeight="57.0" prefWidth="500.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="busqueda de rest y sup" />
-      <JFXButton fx:id="b5" buttonType="RAISED" layoutX="10.0" layoutY="421.0" onAction="#changeColor" prefHeight="57.0" prefWidth="500.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="reportes" />
-      <JFXButton fx:id="b6" buttonType="RAISED" layoutX="10.0" layoutY="479.0" onAction="#changeColor" prefHeight="57.0" prefWidth="500.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="grafo lugares" />
-      <JFXButton fx:id="exit" buttonType="RAISED" layoutX="10.0" layoutY="271.0" onAction="#exit" prefHeight="100.0" prefWidth="500.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="EXIT" />
+      <JFXButton fx:id="b2" buttonType="RAISED" layoutX="1.0" layoutY="193.0" onAction="#changeColor" prefHeight="65.0" prefWidth="500.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="mant comidas" />
+      <JFXButton fx:id="b3" buttonType="RAISED" layoutX="1.0" layoutY="259.0" onAction="#changeColor" prefHeight="68.0" prefWidth="500.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="mant productos" />
+      <JFXButton fx:id="b4" buttonType="RAISED" layoutY="327.0" onAction="#changeColor" prefHeight="57.0" prefWidth="500.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="busqueda de rest y sup" />
+      <JFXButton fx:id="b5" buttonType="RAISED" layoutY="385.0" onAction="#changeColor" prefHeight="57.0" prefWidth="500.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="reportes" />
+      <JFXButton fx:id="b6" buttonType="RAISED" layoutY="443.0" onAction="#changeColor" prefHeight="78.0" prefWidth="500.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="grafo lugares" />
+      <JFXButton fx:id="exit" buttonType="RAISED" layoutX="1.0" layoutY="521.0" onAction="#exit" prefHeight="78.0" prefWidth="500.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="EXIT" />
+      <AnchorPane fx:id="apB1" layoutY="126.0" prefHeight="66.0" prefWidth="500.0" style="-fx-background-color: #eeeeee;" visible="false">
+         <children>
+            <JFXButton fx:id="btnNewRestSup" onAction="#btnNewRestSup" prefHeight="66.0" prefWidth="106.0" text="Create" />
+            <JFXButton fx:id="btnModifyRestSup" layoutX="106.0" onAction="#btnModifyRestSup" prefHeight="66.0" prefWidth="106.0" text="Update" />
+            <JFXButton fx:id="btnRemoveRestSup" layoutX="212.0" onAction="#btnRemoveRestSup" prefHeight="66.0" prefWidth="106.0" text="Remove" />
+            <JFXButton fx:id="btnDisplayRestSup" layoutX="318.0" onAction="#btnDisplayRestSup" prefHeight="66.0" prefWidth="90.0" text="Display" />
+            <JFXButton fx:id="btnCancelRestSup" layoutX="408.0" onAction="#btnCancelRestSup" prefHeight="66.0" prefWidth="90.0" text="Cancel" />
+         </children>
+      </AnchorPane>
    </children>
-</VBox>
+</AnchorPane>

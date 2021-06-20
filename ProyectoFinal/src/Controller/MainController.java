@@ -57,7 +57,7 @@ public class MainController implements Initializable, ColorChangeCallback {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/sidepanel.fxml"));
-            VBox box = loader.load();
+            AnchorPane box = loader.load();
             SidePanelController controller = loader.getController();
             controller.setCallback(this);
             drawer.setSidePane(box);

@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -38,6 +39,18 @@ public class SidePanelController implements Initializable {
     private JFXButton b5;
     @FXML
     private JFXButton b6;
+    @FXML
+    private AnchorPane apB1;
+    @FXML
+    private JFXButton btnNewRestSup;
+    @FXML
+    private JFXButton btnModifyRestSup;
+    @FXML
+    private JFXButton btnRemoveRestSup;
+    @FXML
+    private JFXButton btnDisplayRestSup;
+    @FXML
+    private JFXButton btnCancelRestSup;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -66,7 +79,8 @@ public class SidePanelController implements Initializable {
         switch (btn.getId()) {
             case "b1":
                 System.out.println("El primer boton fue cliqueado");
-                callback.updateColor("Confirmation");
+                apB1.setVisible(true);
+//                callback.updateColor("Confirmation");
                 break;
             case "b2":
                 System.out.println("El segundo boton fue cliqueado");
@@ -78,6 +92,27 @@ public class SidePanelController implements Initializable {
     @FXML
     private void exit(ActionEvent event) {
         System.exit(0);
+    }
+
+    @FXML
+    private void btnNewRestSup(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnModifyRestSup(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnRemoveRestSup(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnDisplayRestSup(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnCancelRestSup(ActionEvent event) {
+        apB1.setVisible(false);
     }
 
 }
