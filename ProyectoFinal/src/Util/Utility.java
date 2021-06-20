@@ -5,8 +5,11 @@
  */
 package Util;
 
+import Domain.BST;
 import Domain.CircularLinkList;
 import Domain.ListException;
+import Domain.TreeException;
+import Objects.Product;
 import Objects.Security;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -19,12 +22,22 @@ public class Utility {
     
     public static CircularLinkList lSecurity = new CircularLinkList();
 
+    public static BST treeProducts = new BST();
     //Métodos relacionados al manejo de las listas
     
     public static boolean addSecurity(Security sec) throws ListException{
         boolean flag = false;
         if (lSecurity.isEmpty() || !lSecurity.contains(sec)){
             lSecurity.add(sec);
+            flag = true;
+        }
+        return flag;
+    }
+    
+    public static boolean addProduct(Product product) throws TreeException{
+        boolean flag = false;
+        if (treeProducts.isEmpty() || !treeProducts.contains(product)){
+            treeProducts.add(product);
             flag = true;
         }
         return flag;
