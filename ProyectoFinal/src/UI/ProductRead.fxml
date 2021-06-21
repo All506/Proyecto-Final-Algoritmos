@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProductReadController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controller.ProductReadController">
     <stylesheets>
-        <URL value="@/CSS/General.css"/>
+        <URL value="@/CSS/General.css" />
     </stylesheets>
+   <children>
+      <TableView fx:id="tableProduct" editable="true" layoutX="32.0" layoutY="31.0" prefHeight="349.0" prefWidth="554.0">
+        <columns>
+          <TableColumn fx:id="columnId" prefWidth="85.0" text="Identificator" />
+            <TableColumn fx:id="columnName" prefWidth="177.0" text="Name" />
+            <TableColumn fx:id="columnPrice" prefWidth="122.0" text="Price" />
+            <TableColumn fx:id="columnSupermarket" prefWidth="168.0" text="Supermarket " />
+        </columns>
+      </TableView>
+   </children>
 </AnchorPane>

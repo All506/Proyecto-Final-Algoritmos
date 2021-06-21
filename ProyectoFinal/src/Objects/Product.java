@@ -5,15 +5,21 @@
  */
 package Objects;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+
 /**
  *
  * @author Your Name <Sebastián Navarro Martínez>
  */
 public class Product {
+
     private int ID;
     private String name;
     private double price;
     private int restaurantID;
+
+    public static int consecutivo;
 
     public Product(int ID, String name, double price, int restaurantID) {
         this.ID = ID;
@@ -22,6 +28,21 @@ public class Product {
         this.restaurantID = restaurantID;
     }
 
+    public Product(String name, double price, int restaurantID) {
+        this.name = name;
+        this.price = price;
+        this.restaurantID = restaurantID;
+    }
+
+    public static void setConsecuntivo(int size){
+        consecutivo = size;
+    }
+    
+    public void setIDConsecutivo(){
+        this.ID = consecutivo;
+        consecutivo++;
+    }
+    
     public int getID() {
         return ID;
     }
@@ -59,7 +80,14 @@ public class Product {
         return "Product{" + "ID:" + ID + ", name:" + name + ", price:" + price + ", restaurantID:" + restaurantID + '}';
     }
 
-  
-    
-    
-}
+    public String[] dataName() {
+        String[] dataName = {"ID", "name", "price", "restaurantID"};
+        return dataName;
+    }
+
+    public String[] data() {
+        String[] data = {String.valueOf(ID), name, String.valueOf(price), String.valueOf(restaurantID)};
+        return data;
+    }
+
+}//end class
