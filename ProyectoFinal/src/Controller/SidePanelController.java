@@ -146,6 +146,35 @@ public class SidePanelController implements Initializable {
 
     @FXML
     private void btnDisplayRestSup(ActionEvent event) {
+        
+         switch (module) {
+            
+            case "Restaurants":
+               
+                
+                break;
+            case "Food":
+                
+                callback.updateColor("FoodRead");
+                break;
+            case "Products":
+                
+                callback.updateColor("ProductRead");
+                break;
+            case "Users":
+                
+               
+                break;
+            case "Places":
+               
+              
+                break;
+            case "Market":
+               
+              
+                break;
+        }
+        
     }
 
     @FXML

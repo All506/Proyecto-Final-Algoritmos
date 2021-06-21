@@ -48,7 +48,7 @@ public class MainController implements Initializable, ChangeCallback {
     @FXML
     private BorderPane bpRoot;
 
-    
+    boolean f = false;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         if (!MainClassFX.isSplashLoaded) {
@@ -77,8 +77,11 @@ public class MainController implements Initializable, ChangeCallback {
                 drawer.close();
                 scpMenu.toFront();
             } else {
+                
                 drawer.open();
                 scpMenu.toBack();
+                
+                
             }
         });
     }
