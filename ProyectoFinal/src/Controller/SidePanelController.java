@@ -10,14 +10,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import Misc.ChangeCallback;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * FXML Controller class
@@ -138,10 +133,66 @@ public class SidePanelController implements Initializable {
 
     @FXML
     private void btnModifyRestSup(ActionEvent event) {
+         switch (module) {
+            
+            case "Restaurants":
+               
+                
+                break;
+            case "Food":
+                
+                callback.updateColor("FoodUpdate");
+                break;
+            case "Products":
+                
+                callback.updateColor("ProductUpdate");
+                break;
+            case "Users":
+                
+               
+                break;
+            case "Places":
+               
+              
+                break;
+            case "Market":
+               
+              
+                break;
+        }
     }
 
     @FXML
     private void btnRemoveRestSup(ActionEvent event) {
+        
+         switch (module) {
+            
+            case "Restaurants":
+               
+                
+                break;
+            case "Food":
+                
+                callback.updateColor("FoodDelete");
+                break;
+            case "Products":
+                
+                callback.updateColor("ProductDelete");
+                break;
+            case "Users":
+                
+               
+                break;
+            case "Places":
+               
+              
+                break;
+            case "Market":
+               
+              
+                break;
+        }
+        
     }
 
     @FXML
