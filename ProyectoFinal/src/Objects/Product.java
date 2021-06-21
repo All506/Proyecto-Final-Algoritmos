@@ -1,12 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Objects;
-
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 
 /**
  *
@@ -17,21 +9,21 @@ public class Product {
     private int ID;
     private String name;
     private double price;
-    private int restaurantID;
+    private int supermarketID;
 
     public static int consecutivo;
 
-    public Product(int ID, String name, double price, int restaurantID) {
+    public Product(int ID, String name, double price, int supermarketID) {
         this.ID = ID;
         this.name = name;
         this.price = price;
-        this.restaurantID = restaurantID;
+        this.supermarketID = supermarketID;
     }
 
     public Product(String name, double price, int restaurantID) {
         this.name = name;
         this.price = price;
-        this.restaurantID = restaurantID;
+        this.supermarketID = restaurantID;
     }
 
     public static void setConsecuntivo(int size){
@@ -67,26 +59,26 @@ public class Product {
         this.price = price;
     }
 
-    public int getRestaurantID() {
-        return restaurantID;
+    public int getSupermarketID() {
+        return supermarketID;
     }
 
-    public void setRestaurantID(int restaurantID) {
-        this.restaurantID = restaurantID;
+    public void setSupermarketID(int supermarketID) {
+        this.supermarketID = supermarketID;
     }
 
     @Override
     public String toString() {
-        return "Product{" + "ID:" + ID + ", name:" + name + ", price:" + price + ", restaurantID:" + restaurantID + '}';
+        return "Product{" + "ID:" + ID + ", name:" + name + ", price:" + price + ", supermarketID:" + supermarketID + '}';
     }
 
     public String[] dataName() {
-        String[] dataName = {"ID", "name", "price", "restaurantID"};
+        String[] dataName = {"ID", "name", "price", "supermarketID"};
         return dataName;
     }
 
     public String[] data() {
-        String[] data = {String.valueOf(ID), name, String.valueOf(price), String.valueOf(restaurantID)};
+        String[] data = {String.valueOf(ID), name, String.valueOf(price), String.valueOf(supermarketID)};
         return data;
     }
 
