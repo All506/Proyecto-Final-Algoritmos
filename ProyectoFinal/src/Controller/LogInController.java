@@ -9,6 +9,7 @@ import Domain.CircularLinkList;
 import Domain.ListException;
 import Objects.Security;
 import XML.FileXML;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +23,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -37,9 +43,34 @@ public class LogInController implements Initializable {
     private TextField txtPassword;
     @FXML
     private Button btnLogIn;
+    @FXML
+    private AnchorPane AnchorBackground;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        String path = "src/Resources/Video" +Util.Utility.random(5)+ ".mp4"; 
+        Media media = new Media(new File(path).toURI().toString());
+
+        //Instantiating MediaPlayer class
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        //Instantiating MediaView class
+        MediaView mediaView = new MediaView(mediaPlayer);
+         
+
+        mediaView.setFitHeight(394);
+        mediaView.setFitWidth(700);
+
+        mediaPlayer.setOnEndOfMedia(new Runnable() {   
+        @Override
+        public void run() {
+            mediaPlayer.seek(Duration.ZERO);
+            mediaPlayer.play();
+        }}); 
+         mediaPlayer.setAutoPlay(true);
+        
+        AnchorBackground.getChildren().addAll(mediaView);
+        
         try {
             FileXML fXML = new FileXML();
             CircularLinkList lUsers = new CircularLinkList();

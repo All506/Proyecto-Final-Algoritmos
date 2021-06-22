@@ -7,17 +7,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogInController">
+<AnchorPane id="AnchorPane" prefHeight="379.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogInController">
    <children>
-      <ImageView fitHeight="116.0" fitWidth="133.0" layoutX="235.0" layoutY="45.0" pickOnBounds="true" smooth="false">
+      <AnchorPane fx:id="AnchorBackground" layoutY="-2.0" prefHeight="381.0" prefWidth="640.0" />
+      <ImageView fitHeight="139.0" fitWidth="149.0" layoutX="273.0" layoutY="30.0" pickOnBounds="true" smooth="false">
          <image>
             <Image url="@../Resources/user.png" />
          </image>
       </ImageView>
-      <Text layoutX="288.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User" />
-      <TextField fx:id="txtUser" layoutX="227.0" layoutY="175.0" />
-      <Text layoutX="277.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-      <TextField fx:id="txtPassword" layoutX="227.0" layoutY="232.0" />
-      <Button fx:id="btnLogIn" layoutX="227.0" layoutY="271.0" mnemonicParsing="false" onAction="#btnLogIn" prefHeight="25.0" prefWidth="149.0" text="LogIn" />
+      <Text layoutX="333.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User" />
+      <TextField fx:id="txtUser" layoutX="272.0" layoutY="191.0" />
+      <Text layoutX="322.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+      <TextField fx:id="txtPassword" layoutX="272.0" layoutY="248.0" />
+      <Button fx:id="btnLogIn" layoutX="272.0" layoutY="287.0" mnemonicParsing="false" onAction="#btnLogIn" prefHeight="25.0" prefWidth="149.0" text="LogIn" />
    </children>
 </AnchorPane>
