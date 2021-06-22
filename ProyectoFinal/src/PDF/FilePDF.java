@@ -20,6 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Cell;
 
 public class FilePDF {
 
@@ -44,30 +45,33 @@ public class FilePDF {
     }
 
     //Genera el pdf y escribe lo que queremos
-    public void careerPDF(String fileName) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException {
+    public void productsAndFood(String fileName) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException {
         FileOutputStream file = new FileOutputStream(fileName + ".pdf");
         Document document = new Document();
         PdfWriter.getInstance(document, file);
 
         //Instancia para poder hacer la img, importante poner la imagen en la carpeta img
-        Image header = Image.getInstance("src/img/logo-ucr.png");
+        Image header = Image.getInstance("src/img/products&food.png");
         header.scaleToFit(150, 250);
         header.setAlignment(Chunk.ALIGN_CENTER);
         //Se abre el documento para poder escribir en el
         document.open();
         document.add(header);//Se agrega la img
 
+        //PRODUCTS
         Paragraph parrafo = new Paragraph();
         parrafo.setAlignment(Paragraph.ALIGN_CENTER);
         parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.BLACK));
-        parrafo.add("\n\nRegistered Careers\n\n");
+        parrafo.add("\n\nRegistered Products\n\n");
         document.add(parrafo);
 
         //Tabla
-        PdfPTable table = new PdfPTable(2);//Columnas y nombres
-        table.addCell("Identification");
-        table.addCell("Description");
-
+        PdfPTable table = new PdfPTable(4);//Columnas y nombres
+        table.addCell("Identificator");
+        table.addCell("Name");
+        table.addCell("$Price");
+        table.addCell("Supermarket");
+        
 //        try {
 //            for (int i = 1; i <= list.size(); i++) {
 //                Career career = (Career) list.getNode(i).data;
@@ -78,6 +82,20 @@ public class FilePDF {
 //
 //        } catch (ListException | DocumentException e) {
 //        }
+
+        //FOOD
+        Paragraph parrafo2 = new Paragraph();
+        parrafo2.setAlignment(Paragraph.ALIGN_CENTER);
+        parrafo2.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.BLACK));
+        parrafo2.add("\n\nRegistered Food\n\n");
+        document.add(parrafo2);
+
+        //Tabla
+        PdfPTable table2 = new PdfPTable(4);//Columnas y nombres
+        table2.addCell("Identificator");
+        table2.addCell("Name");
+        table2.addCell("$Price");
+        table2.addCell("Restaurant");
 
         //Importante cerrar el pdf
         document.close();
@@ -122,7 +140,6 @@ public class FilePDF {
 //
 //        } catch (ListException | DocumentException e) {
 //        }
-
         //Importante cerrar el pdf
         document.close();
     }

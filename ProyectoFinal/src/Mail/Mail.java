@@ -82,7 +82,7 @@ public class Mail {
             emailContent.addBodyPart(mimeBody);
 
             //Agregamos al mensaje el contenido a mandar
-            message.setSubject("Universidad de Costa Rica");
+            message.setSubject("Suggestion System");
             message.setContent(emailContent);
 
             return message;
