@@ -7,7 +7,6 @@ package Controller;
 
 import Domain.CircularLinkList;
 import Domain.ListException;
-import Main.MainClassFX;
 import Objects.Security;
 import XML.FileXML;
 import java.io.IOException;
@@ -38,49 +37,56 @@ public class LogInController implements Initializable {
     private TextField txtPassword;
     @FXML
     private Button btnLogIn;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }    
-
-    @FXML
-    private void btnLogIn(ActionEvent event) throws IOException {
-        FileXML fXML = new FileXML();
-        Security auxiliar = new Security("admin","prueba"); //En caso de que no haya ninguno registrado, admin-prueba se utilizarán para entrar 
         try {
-            Util.Utility.addSecurity(auxiliar);
+            FileXML fXML = new FileXML();
+            CircularLinkList lUsers = new CircularLinkList();
             
-             if (txtUser.getText().equalsIgnoreCase("") || txtPassword.getText().equalsIgnoreCase("")){
-            System.out.println("El usuario se encuentra vacio");
-        } else { 
-            if (!fXML.exist("Security.xml")){ //Si el archivo del login no existe
-                   
-                    Security user = new Security(txtUser.getText(),txtPassword.getText());
-
-                    if (Util.Utility.lSecurity.contains(user)){
-                        System.out.println("LogIn exitoso");
-                        
-                        callMenu();
+            if (fXML.exist("Security.xml")) {
+                
+                lUsers = fXML.readXMLtoSecurityList();
+                
+                try {
+                    for (int i = 1; i <= lUsers.size(); i++) {
+                        Util.Utility.lSecurity.add((Security)lUsers.getNode(i).data);
                     }
-                    System.out.println(Util.Utility.lSecurity.toString());
-                
-            } else { //Si el documento sí existe
-                CircularLinkList lDecrypt = fXML.readXMLtoSecurityList(); //Se obtiene la informacion del xml
-                for (int i = 1; i < lDecrypt.size(); i++) { //Se envia la informacion que tenia el xml a la lista en utiltity
-                    Util.Utility.lSecurity.add(lDecrypt.getNode(i));
+                    
+                } catch (ListException ex) {
+                    Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
             }
-        }
-             
+            
+            Security auxiliar = new Security("admin", "prueba"); //En caso de que no haya ninguno registrado, admin-prueba se utilizarán para entrar
+            Util.Utility.addSecurity(auxiliar);
+            System.out.println("La lista contiene: " + Util.Utility.lSecurity.toString());
         } catch (ListException ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       
+
     }
-    
+
+    @FXML
+    private void btnLogIn(ActionEvent event) throws IOException, ListException {
+        FileXML fXML = new FileXML();
+
+        System.out.println("La lista contiene: " + Util.Utility.lSecurity.toString());
+        
+        if (txtUser.getText().equalsIgnoreCase("") || txtPassword.getText().equalsIgnoreCase("")) {
+            System.out.println("El usuario se encuentra vacio");
+        } else {
+            Security logInUser = new Security(txtUser.getText(), txtPassword.getText());
+            if (Util.Utility.lSecurity.contains(logInUser)) {
+                Util.Utility.userName = txtUser.getText();
+                callMenu();
+            } else {
+                System.out.println("Intente nuevamente");
+            }
+        }
+        
+    }
+
     private void callMenu() throws IOException {
         Stage stage = (Stage) this.txtUser.getScene().getWindow();
         stage.close();
@@ -93,5 +99,5 @@ public class LogInController implements Initializable {
         stage.setResizable(false);
         stage.show();
     }
-    
+
 }

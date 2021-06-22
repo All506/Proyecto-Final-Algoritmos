@@ -140,21 +140,23 @@ public class FileXML {
             Document doc = dBuilder.parse(inputFile);
             doc.getDocumentElement().normalize();
 
-            NodeList nList = doc.getElementsByTagName("User");
+            NodeList nList = doc.getElementsByTagName("Security"); //Cabecera de objeto
 
             for (int indice = 0; indice < nList.getLength(); indice++) {
                 Security sec = new Security("", "");
                 Node nNode = nList.item(indice);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
-                    sec.setUser(eElement.getAttribute("user"));
-                    sec.setPassword(eElement.getElementsByTagName("password").item(0).getTextContent());
+                    sec.setUser(eElement.getAttribute("User"));
+                    sec.setPassword(eElement.getElementsByTagName("Password").item(0).getTextContent());
 
                 }
                 AES deEnc = new AES();
                 Security desUser = new Security(deEnc.deCrypt(sec.getUser(), "Proyecto"), deEnc.deCrypt(sec.getPassword(), "Proyecto"));
                 lSecurity.add(desUser);
-            }
+            }   
+            
+            System.out.println("La lista en metodo decrypt es: " + lSecurity.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }

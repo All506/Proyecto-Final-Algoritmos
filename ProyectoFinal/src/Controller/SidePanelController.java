@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Domain.ListException;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,6 +14,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import Misc.ChangeCallback;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
 
 /**
  * FXML Controller class
@@ -96,8 +102,22 @@ public class SidePanelController implements Initializable {
     }
 
     @FXML
-    private void exit(ActionEvent event) {
-        System.exit(0);
+    private void exit(ActionEvent event) { //al cliquear en el boton salir
+        
+        try {
+            Util.SaveData dataSaver = new Util.SaveData();
+            dataSaver.saveData();
+            System.exit(0);
+        } catch (ListException ex) {
+            Logger.getLogger(SidePanelController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(SidePanelController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(SidePanelController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SidePanelController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @FXML

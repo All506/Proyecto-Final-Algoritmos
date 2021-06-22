@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 public class Utility {
 
     public static CircularLinkList lSecurity = new CircularLinkList();
+    public static String userName;
 
     public static BST treeProducts = new BST();
     //Métodos relacionados al manejo de las listas, arboles y grafos
@@ -38,11 +39,17 @@ public class Utility {
         return flag;
     }
 
+    //Metodos para devolver listas
+    
+    public static CircularLinkList getListSecurity() {
+        return lSecurity;
+    }
+
     //Devuelve arbol de productos
     public static BST getTreeProducts() {
         return treeProducts;
     }
-    
+
     //UTILIDAD 
     public static int random() {
         return 1 + (int) Math.floor(Math.random() * 99);
@@ -183,8 +190,8 @@ public class Utility {
 
         return x;
     }
-    
-    public static Supermarket getSupermarketById(int id){
+
+    public static Supermarket getSupermarketById(int id) {
 //        for (int i = 1; i <= lStudent.size(); i++) {
 //            Student s = (Student) lStudent.getNode(i).data;
 //            if (String.valueOf(s.getId()).equals(id)) {
@@ -193,5 +200,5 @@ public class Utility {
 //        }
         return null;
     }
-    
+
 }//end class

@@ -40,7 +40,15 @@ public class Security {
         return "Security{" + "user:" + user + ", password:" + password + '}';
     }
 
-
+    public String[] getDataName(){
+        String[] dataName = {"User","Password"};
+        return dataName;
+    }
+    
+    public String[] getData(){
+        String[] data = {this.getUser(), this.getPassword()};
+        return data;
+    }
 
     
     

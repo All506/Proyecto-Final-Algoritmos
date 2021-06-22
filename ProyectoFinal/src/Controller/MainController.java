@@ -27,6 +27,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import Misc.ChangeCallback;
+import java.util.Calendar;
+import javafx.animation.Animation;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -49,8 +54,12 @@ public class MainController implements Initializable, ChangeCallback {
     private BorderPane bpRoot;
 
     boolean f = false;
+    @FXML
+    private Text txtWelcome;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        setWelcome();
         if (!MainClassFX.isSplashLoaded) {
             loadSplashScreen();
         }
@@ -64,8 +73,6 @@ public class MainController implements Initializable, ChangeCallback {
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
 
         HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
         transition.setRate(-1);
@@ -75,13 +82,39 @@ public class MainController implements Initializable, ChangeCallback {
 
             if (drawer.isOpened()) {
                 drawer.close();
-                scpMenu.toFront();
+
+                /*if (drawer.isOpening()){
+                drawer.toFront();
+                }*/
+                transition.setOnFinished(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        if (transition.getStatus().equals(Animation.Status.STOPPED)) {
+                            drawer.toBack();
+                            scpMenu.toFront();
+                        }
+
+                    }
+                });
+
             } else {
-                
+
                 drawer.open();
+                drawer.toFront();
                 scpMenu.toBack();
-                
-                
+
+                transition.setOnFinished(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+
+                        if (transition.getStatus().equals(Animation.Status.STOPPED)) {
+                            drawer.toFront();
+                            scpMenu.toBack();
+                        }
+
+                    }
+                });
+
             }
         });
     }
@@ -96,11 +129,11 @@ public class MainController implements Initializable, ChangeCallback {
             FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.1), pane);
             fadeIn.setFromValue(0);
             fadeIn.setToValue(1);
-            fadeIn.setCycleCount(1);    
+            fadeIn.setCycleCount(1);
 
             FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.1), pane);
             fadeOut.setFromValue(1);
-            fadeOut.setToValue(0);  
+            fadeOut.setToValue(0);
             fadeOut.setCycleCount(1);
 
             fadeIn.play();
@@ -131,14 +164,27 @@ public class MainController implements Initializable, ChangeCallback {
     public void loadPage(String page) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/UI/"+page + ".fxml"));
+            root = FXMLLoader.load(getClass().getResource("/UI/" + page + ".fxml"));
 
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
         scpMenu.setContent(root);
     }
-    
-    
+
+    public void setWelcome() {
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+
+        if (timeOfDay < 12) {
+            txtWelcome.setText("Good Moorning, " + Util.Utility.userName);
+        } else if (timeOfDay < 16) {
+            txtWelcome.setText("Good afternoon, " + Util.Utility.userName);
+        } else if (timeOfDay < 19) {
+             txtWelcome.setText("Good evening, " + Util.Utility.userName);
+        } else {
+             txtWelcome.setText("Good night, " + Util.Utility.userName);
+        }
+    }
 
 }
