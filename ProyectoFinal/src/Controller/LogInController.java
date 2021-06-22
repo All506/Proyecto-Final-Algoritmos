@@ -48,47 +48,48 @@ public class LogInController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        String path = "src/Resources/Video" +Util.Utility.random(5)+ ".mp4"; 
+
+        String path = "src/Resources/Video" + Util.Utility.random(5) + ".mp4";
         Media media = new Media(new File(path).toURI().toString());
 
         //Instantiating MediaPlayer class
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         //Instantiating MediaView class
         MediaView mediaView = new MediaView(mediaPlayer);
-         
 
-        mediaView.setFitHeight(394);
-        mediaView.setFitWidth(700);
-
-        mediaPlayer.setOnEndOfMedia(new Runnable() {   
-        @Override
-        public void run() {
-            mediaPlayer.seek(Duration.ZERO);
-            mediaPlayer.play();
-        }}); 
-         mediaPlayer.setAutoPlay(true);
+        mediaView.setPreserveRatio(false);
+        mediaView.fitWidthProperty().bind(AnchorBackground.widthProperty());
+        mediaView.fitHeightProperty().bind(AnchorBackground.heightProperty());
         
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                mediaPlayer.seek(Duration.ZERO);
+                mediaPlayer.play();
+            }
+        });
+        mediaPlayer.setAutoPlay(true);
+
         AnchorBackground.getChildren().addAll(mediaView);
-        
+
         try {
             FileXML fXML = new FileXML();
             CircularLinkList lUsers = new CircularLinkList();
-            
+
             if (fXML.exist("Security.xml")) {
-                
+
                 lUsers = fXML.readXMLtoSecurityList();
-                
+
                 try {
                     for (int i = 1; i <= lUsers.size(); i++) {
-                        Util.Utility.lSecurity.add((Security)lUsers.getNode(i).data);
+                        Util.Utility.lSecurity.add((Security) lUsers.getNode(i).data);
                     }
-                    
+
                 } catch (ListException ex) {
                     Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
+
             Security auxiliar = new Security("admin", "prueba"); //En caso de que no haya ninguno registrado, admin-prueba se utilizarán para entrar
             Util.Utility.addSecurity(auxiliar);
             System.out.println("La lista contiene: " + Util.Utility.lSecurity.toString());
@@ -103,7 +104,7 @@ public class LogInController implements Initializable {
         FileXML fXML = new FileXML();
 
         System.out.println("La lista contiene: " + Util.Utility.lSecurity.toString());
-        
+
         if (txtUser.getText().equalsIgnoreCase("") || txtPassword.getText().equalsIgnoreCase("")) {
             System.out.println("El usuario se encuentra vacio");
         } else {
@@ -115,7 +116,7 @@ public class LogInController implements Initializable {
                 System.out.println("Intente nuevamente");
             }
         }
-        
+
     }
 
     private void callMenu() throws IOException {
