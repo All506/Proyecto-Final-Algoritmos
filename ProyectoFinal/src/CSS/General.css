@@ -1,25 +1,12 @@
 /*
- * Empty Stylesheet file.
+ * Empty Stylesheet file. //#3c7fb1
  */
 
 .defaultWindow{
-    -fx-background-color: #3c7fb1;
+    -fx-background-color: #6D848A; 
     -fx-opacity: 0.75;
 }
 
-.mainFxmlClass {
-    /*-fx-background-color: black;*/
-}
-
-.green {
-    -fx-background-color:
-        linear-gradient(#f0ff35, #a9ff00),
-        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
-    -fx-background-radius: 6, 5;
-    -fx-background-insets: 0, 1;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
-    -fx-text-fill: #395306;
-}
 .round-red {
     -fx-background-color: linear-gradient(#ff5400, #be1d00);
     -fx-background-radius: 30;
@@ -37,16 +24,7 @@
     -fx-text-fill: black;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
-.glass-grey {
-    -fx-background-color: 
-        #c3c4c4,
-        linear-gradient(#d6d6d6 50%, white 100%),
-        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
-    -fx-background-radius: 30;
-    -fx-background-insets: 0,1,1;
-    -fx-text-fill: black;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
-}
+
 .shiny-orange {
     -fx-background-color: 
         linear-gradient(#ffd65b, #e68400),
@@ -220,9 +198,9 @@
 }
 .windows7-default {
     -fx-background-color: 
-        #44CADE,
-        linear-gradient(#f2f7fa, #e8f5fc),
-        linear-gradient(#44CADE 0%, #44c1d4 49%, #45b4c4 50%, #48b2c2 100%);
+        #91ABF5,
+        linear-gradient(#91ABF5, #576693),
+        linear-gradient(#91abf5 0%, #8299dc 49%, #7488c4 50%, #6577ab 100%);
     -fx-background-insets: 0,1,2;
     -fx-background-radius: 3,2,1;
     -fx-padding: 3 30 3 30;
@@ -231,7 +209,7 @@
 }
 .windows7 {
     -fx-background-color: 
-        #707070,
+        #91ABF5,
         linear-gradient(#fcfcfc, #f3f3f3),
         linear-gradient(#f2f2f2 0%, #ebebeb 49%, #dddddd 50%, #cfcfcf 100%);
     -fx-background-insets: 0,1,2;

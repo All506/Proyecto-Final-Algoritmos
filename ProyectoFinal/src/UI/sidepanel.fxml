@@ -6,8 +6,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="500.0" styleClass="defaultWindow" stylesheets="@../CSS/General.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SidePanelController">
+<AnchorPane prefHeight="600.0" prefWidth="500.0" style="-fx-background-image: src\Resources\backbar.jpg;" stylesheets="@../CSS/General.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SidePanelController">
    <children>
+      <ImageView fitHeight="446.0" fitWidth="508.0" layoutY="127.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Resources/backbar.jpg" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="127.0" fitWidth="508.0" pickOnBounds="true">
          <image>
             <Image url="@../Resources/back.jpg" />
@@ -69,7 +74,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <AnchorPane fx:id="apB1" layoutY="429.0" prefHeight="143.0" prefWidth="500.0" style="-fx-background-color: #eeeeee;" visible="false">
+      <AnchorPane fx:id="apB1" layoutY="429.0" prefHeight="143.0" prefWidth="500.0" visible="false">
          <children>
             <JFXButton fx:id="btnNewRestSup" contentDisplay="TOP" onAction="#btnNewRestSup" prefHeight="141.0" prefWidth="100.0" text="Create">
                <graphic>
