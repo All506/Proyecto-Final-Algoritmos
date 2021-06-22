@@ -15,7 +15,7 @@
          </image>
       </ImageView>
       <Pane opacity="0.45" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #000000;" />
-      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME">
+      <Text fx:id="idTextSplash" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME">
          <font>
             <Font name="Roboto Medium" size="56.0" />
          </font>
