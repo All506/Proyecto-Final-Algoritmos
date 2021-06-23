@@ -122,6 +122,7 @@ public class SidePanelController implements Initializable {
 
     @FXML
     private void btnNewRestSup(ActionEvent event) {
+        apB1.setVisible(false);
         switch (module) {
             
             case "Restaurants":
@@ -153,8 +154,7 @@ public class SidePanelController implements Initializable {
 
     @FXML
     private void btnModifyRestSup(ActionEvent event) {
-       
-        
+         apB1.setVisible(false);
          switch (module) {
             
             case "Restaurants":
@@ -186,7 +186,7 @@ public class SidePanelController implements Initializable {
 
     @FXML
     private void btnRemoveRestSup(ActionEvent event) {
-        
+         apB1.setVisible(false);
          switch (module) {
             
             case "Restaurants":
@@ -219,7 +219,7 @@ public class SidePanelController implements Initializable {
 
     @FXML
     private void btnDisplayRestSup(ActionEvent event) {
-        
+        apB1.setVisible(false);
          switch (module) {
             
             case "Restaurants":
