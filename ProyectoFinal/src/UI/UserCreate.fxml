@@ -21,9 +21,9 @@
       <Text layoutX="286.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User" />
       <Text layoutX="261.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
       <TextField fx:id="txtUser" layoutX="331.0" layoutY="226.0" prefHeight="25.0" prefWidth="174.0" />
-      <Button fx:id="btnCreate" layoutX="381.0" layoutY="345.0" mnemonicParsing="false" onAction="#btnCreate" text="Create" />
       <PasswordField fx:id="txtPassword" layoutX="332.0" layoutY="262.0" prefHeight="25.0" prefWidth="174.0" />
-      <Text layoutX="225.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password Check" />
       <PasswordField fx:id="txtPassword2" layoutX="331.0" layoutY="302.0" prefHeight="25.0" prefWidth="174.0" />
+      <Button fx:id="btnCreate" layoutX="381.0" layoutY="345.0" mnemonicParsing="false" onAction="#btnCreate" text="Create" />
+      <Text layoutX="225.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password Check" />
    </children>
 </AnchorPane>

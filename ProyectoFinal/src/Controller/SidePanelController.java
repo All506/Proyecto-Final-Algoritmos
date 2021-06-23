@@ -129,15 +129,15 @@ public class SidePanelController implements Initializable {
                 
                 break;
             case "Food":
-                
+                callback.setPaneVisible(Boolean.TRUE);
                 callback.updateColor("FoodCreate");
                 break;
             case "Products":
-                
+                callback.setPaneVisible(Boolean.TRUE);
                 callback.updateColor("ProductCreate");
                 break;
             case "Users":
-                
+                callback.setPaneVisible(Boolean.TRUE);
                 callback.updateColor("UserCreate");
                 break;
             case "Places":
@@ -153,6 +153,8 @@ public class SidePanelController implements Initializable {
 
     @FXML
     private void btnModifyRestSup(ActionEvent event) {
+       
+        
          switch (module) {
             
             case "Restaurants":
@@ -160,11 +162,11 @@ public class SidePanelController implements Initializable {
                 
                 break;
             case "Food":
-                
+                callback.setPaneVisible(Boolean.TRUE);
                 callback.updateColor("FoodUpdate");
                 break;
             case "Products":
-                
+                callback.setPaneVisible(Boolean.TRUE);
                 callback.updateColor("ProductUpdate");
                 break;
             case "Users":
@@ -192,11 +194,11 @@ public class SidePanelController implements Initializable {
                 
                 break;
             case "Food":
-                
+                callback.setPaneVisible(Boolean.TRUE);
                 callback.updateColor("FoodDelete");
                 break;
             case "Products":
-                
+                callback.setPaneVisible(Boolean.TRUE);
                 callback.updateColor("ProductDelete");
                 break;
             case "Users":
@@ -225,11 +227,11 @@ public class SidePanelController implements Initializable {
                 
                 break;
             case "Food":
-                
+                callback.setPaneVisible(Boolean.TRUE);
                 callback.updateColor("FoodRead");
                 break;
             case "Products":
-                
+                callback.setPaneVisible(Boolean.TRUE);
                 callback.updateColor("ProductRead");
                 break;
             case "Users":
