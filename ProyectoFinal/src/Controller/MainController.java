@@ -52,6 +52,8 @@ public class MainController implements Initializable, ChangeCallback {
     private ScrollPane scpMenu;
     @FXML
     private BorderPane bpRoot;
+    
+     HamburgerBackArrowBasicTransition transition;
 
     boolean f = false;
     @FXML
@@ -74,7 +76,7 @@ public class MainController implements Initializable, ChangeCallback {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
+        transition = new HamburgerBackArrowBasicTransition(hamburger);
         transition.setRate(-1);
         hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
             transition.setRate(transition.getRate() * -1);
@@ -115,6 +117,7 @@ public class MainController implements Initializable, ChangeCallback {
 
             }
         });
+        scpMenu.setVisible(false);
     }
 
     private void loadSplashScreen() {
@@ -184,5 +187,50 @@ public class MainController implements Initializable, ChangeCallback {
              txtWelcome.setText("Good night, " + Util.Utility.userName);
         }
     }
+    
+       @Override
+    public void setPaneVisible(Boolean b) {
+            transition.setRate(transition.getRate() * -1);
+            transition.play();
+
+            if (drawer.isOpened()) {
+                drawer.close();
+
+                transition.setOnFinished(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        if (transition.getStatus().equals(Animation.Status.STOPPED)) {
+                            drawer.toBack();
+                            scpMenu.toFront();
+                            
+                        }
+
+                    }
+                });
+
+            } else {
+
+                drawer.open();
+                drawer.toFront();
+                scpMenu.toBack();
+
+                transition.setOnFinished(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+
+                        if (transition.getStatus().equals(Animation.Status.STOPPED)) {
+                            drawer.toFront();
+                            scpMenu.toBack();
+                        }
+
+                    }
+                });
+
+            }
+    
+    scpMenu.setVisible(true);
+    }
 
 }
+
+
