@@ -51,26 +51,50 @@ public class UserCreateController implements Initializable {
     @FXML
     private void btnCreate(ActionEvent event) {
         if (txtUser.getText().equals("") || txtPassword.getText().equals("") || txtPassword2.getText().equals("")){ //Si hay espacios vacios
-            System.out.println("HAY ESPACIOS VACIOS");
+            callAlert("Error", "There are empty spaces!!!");
+            //System.out.println("HAY ESPACIOS VACIOS");
         } else {
             if (txtPassword.getText().equals(txtPassword2.getText())){   
                 try {
                     Security newUser = new Security(txtUser.getText(),txtPassword.getText());
                     if (Util.Utility.addSecurity(newUser)){ //Cambiar para que solo chequee por nombre de usuario en utitlty
-                        System.out.println("El usuario ha sido añadido");
+                        callAlert("Error", "The user has been registered");
+                        //System.out.println("El usuario ha sido añadido");
                         System.out.println(Util.Utility.lSecurity.toString());
                         txtUser.setText("");
                         txtPassword.setText("");
                         txtPassword2.setText("");
                     } else {
-                        System.out.println("El usuario ya existe. Intente con uno nuevo");
+                        callAlert("Error", "The user already exist. Try again with new one...");
+                        //System.out.println("El usuario ya existe. Intente con uno nuevo");
                     }
                 } catch (ListException ex) {
                     Logger.getLogger(UserCreateController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                System.out.println("Las contraseñas no coinciden");
+                callAlert("Error", "The passwords are not the same!!!");
+                //System.out.println("Las contraseñas no coinciden");
             }
+        }
+    }
+    
+    private void callAlert(String fxmlName, String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ErrorController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Alert");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

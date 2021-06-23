@@ -27,6 +27,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -106,14 +107,16 @@ public class LogInController implements Initializable {
         System.out.println("La lista contiene: " + Util.Utility.lSecurity.toString());
 
         if (txtUser.getText().equalsIgnoreCase("") || txtPassword.getText().equalsIgnoreCase("")) {
-            System.out.println("El usuario se encuentra vacio");
+            callAlert("Error", "The User spacer is empty!!!");
+            //System.out.println("El usuario se encuentra vacio");
         } else {
             Security logInUser = new Security(txtUser.getText(), txtPassword.getText());
             if (Util.Utility.lSecurity.contains(logInUser)) {
                 Util.Utility.userName = txtUser.getText();
                 callMenu();
             } else {
-                System.out.println("Intente nuevamente");
+                callAlert("Error", "Try again...");
+                //System.out.println("Intente nuevamente");
             }
         }
 
@@ -132,4 +135,24 @@ public class LogInController implements Initializable {
         stage.show();
     }
 
+    private void callAlert(String fxmlName, String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ErrorController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Alert");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }
