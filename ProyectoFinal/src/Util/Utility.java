@@ -98,7 +98,7 @@ public class Utility {
             case "product":
                 Product p1 = (Product) a;
                 Product p2 = (Product) b;
-                return p1.getName().equalsIgnoreCase(p2.getName());
+                return p1.getName().equalsIgnoreCase(p2.getName()) && p1.getID() == p2.getID() && p1.getSupermarketID() == p2.getSupermarketID();
 
         }
         return false; //En cualquier otro caso retorna un false
@@ -137,7 +137,7 @@ public class Utility {
             case "product":
                 Product p1 = (Product) a;
                 Product p2 = (Product) b;
-                return p1.getPrice() < p2.getPrice();
+                return p1.getID() == p2.getID()? p1.getSupermarketID() < p2.getSupermarketID(): p1.getID() < p2.getID();
         }
         return false; //en cualquier otro caso
     }
@@ -159,7 +159,7 @@ public class Utility {
             case "product":
                 Product p1 = (Product) a;
                 Product p2 = (Product) b;
-                return p1.getPrice() > p2.getPrice();
+                return p1.getID() == p2.getID()? p1.getSupermarketID() > p2.getSupermarketID(): p1.getID() > p2.getID();
         }
         return false; //en cualquier otro caso
     }
@@ -191,14 +191,15 @@ public class Utility {
         return x;
     }
 
-    public static Supermarket getSupermarketById(int id) {
+    public static Supermarket getSupermarketById(String superMarket) {
+        Supermarket super1 = new Supermarket(0, "Fresh Market", "Cartago");
 //        for (int i = 1; i <= lStudent.size(); i++) {
 //            Student s = (Student) lStudent.getNode(i).data;
 //            if (String.valueOf(s.getId()).equals(id)) {
 //                return s;
 //            }
 //        }
-        return null;
+        return super1;
     }
 
 }//end class
