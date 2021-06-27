@@ -144,7 +144,8 @@ public class SidePanelController implements Initializable {
                 callback.updateColor("UserCreate");
                 break;
             case "Places":
-
+                callback.setPaneVisible(Boolean.TRUE);
+                callback.updateColor("PlaceCreate");
                 break;
             case "Market":
 
@@ -172,7 +173,7 @@ public class SidePanelController implements Initializable {
 
                 break;
             case "Places":
-
+                
                 break;
             case "Market":
 
@@ -200,7 +201,8 @@ public class SidePanelController implements Initializable {
 
                 break;
             case "Places":
-
+                callback.setPaneVisible(Boolean.TRUE);
+                callback.updateColor("PlaceDelete");
                 break;
             case "Market":
 
@@ -229,7 +231,8 @@ public class SidePanelController implements Initializable {
 
                 break;
             case "Places":
-
+                callback.setPaneVisible(Boolean.TRUE);
+                callback.updateColor("PlaceRead");
                 break;
             case "Market":
 
