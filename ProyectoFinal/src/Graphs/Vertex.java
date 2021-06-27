@@ -30,6 +30,12 @@ public class Vertex {
     public boolean isVisited() {
         return visited;
     }
+
+    @Override
+    public String toString() {
+        return "Vertex{" + "data=" + data + '}';
+    }
+    
     
     
 }

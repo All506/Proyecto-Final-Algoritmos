@@ -19,6 +19,7 @@ public class Utility {
 
     public static CircularLinkList lSecurity = new CircularLinkList();
     public static AdjacencyListGraph gRestaurants = new AdjacencyListGraph(10);
+    public static AdjacencyListGraph gPlaces = new AdjacencyListGraph(100);
     public static String userName;
 
     public static BST treeProducts = new BST();
@@ -46,7 +47,11 @@ public class Utility {
     public static CircularLinkList getListSecurity() {
         return lSecurity;
     }
-
+    
+    public static AdjacencyListGraph getPlacesGraph(){
+        return gPlaces;
+    }
+    
     //Devuelve arbol de productos
     public static BST getTreeProducts() {
         return treeProducts;

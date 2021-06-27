@@ -116,6 +116,8 @@ public class SidePanelController implements Initializable {
             Logger.getLogger(SidePanelController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(SidePanelController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (list.ListException ex) {
+            Logger.getLogger(SidePanelController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

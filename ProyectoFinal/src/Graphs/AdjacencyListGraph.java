@@ -6,6 +6,7 @@
 package Graphs;
 
 import list.ListException;
+import list.SinglyLinkedList;
 import queue.LinkedQueue;
 import queue.QueueException;
 import stack.LinkedStack;
@@ -237,9 +238,14 @@ public class AdjacencyListGraph implements Graph {
 
     @Override
     public Vertex getVertexByIndex(int index){
-    
         return vertexList[index];
-    
     }
     
+    public SinglyLinkedList getAllItemsAsList(){
+        SinglyLinkedList allItems = new SinglyLinkedList();
+        for (int i = 0; i < count; i++) {
+            allItems.add(vertexList[i].data);
+        }
+        return allItems;
+    }
 }
