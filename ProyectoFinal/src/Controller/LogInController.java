@@ -7,6 +7,7 @@ package Controller;
 
 import Domain.CircularLinkList;
 import Domain.ListException;
+import Graphs.GraphException;
 import Objects.Security;
 import XML.FileXML;
 import java.io.File;
@@ -101,7 +102,7 @@ public class LogInController implements Initializable {
     }
 
     @FXML
-    private void btnLogIn(ActionEvent event) throws IOException, ListException {
+    private void btnLogIn(ActionEvent event) throws IOException, ListException, list.ListException, GraphException {
         FileXML fXML = new FileXML();
 
         System.out.println("La lista contiene: " + Util.Utility.lSecurity.toString());
@@ -122,7 +123,9 @@ public class LogInController implements Initializable {
 
     }
 
-    private void callMenu() throws IOException {
+    private void callMenu() throws IOException, list.ListException, GraphException {
+        FileXML fXML = new FileXML();
+        fXML.loadFiles();
         Stage stage = (Stage) this.txtUser.getScene().getWindow();
         stage.close();
         //Se abre el nuevo stage

@@ -8,7 +8,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="423.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RestaurantCreateController">
    <children>
-      <TextField fx:id="txtId" layoutX="272.0" layoutY="151.0" />
+      <TextField fx:id="txtId" editable="false" layoutX="272.0" layoutY="151.0" />
       <Label layoutX="249.0" layoutY="155.0" text="ID" />
       <Label layoutX="233.0" layoutY="190.0" text="Name" />
       <Label layoutX="219.0" layoutY="225.0" text="Location" />

@@ -7,6 +7,7 @@ import Domain.TreeException;
 import Graphs.AdjacencyListGraph;
 import Objects.Food;
 import Objects.Product;
+import Objects.Restaurant;
 import Objects.Security;
 import Objects.Supermarket;
 import java.text.DecimalFormat;
@@ -21,8 +22,11 @@ public class Utility {
     public static AdjacencyListGraph gRestaurants = new AdjacencyListGraph(10);
     public static AdjacencyListGraph gPlaces = new AdjacencyListGraph(100);
     public static String userName;
-
     public static BST treeProducts = new BST();
+    
+    //Last Indexes
+    public static int lastIndexGRestaurant;
+    
     //Métodos relacionados al manejo de las listas, arboles y grafos
 
     public static boolean addSecurity(Security sec) throws ListException {
@@ -42,7 +46,7 @@ public class Utility {
         }
         return flag;
     }
-
+    
     //Metodos para devolver listas
     public static CircularLinkList getListSecurity() {
         return lSecurity;
@@ -110,6 +114,10 @@ public class Utility {
                 Food f1 = (Food) a;
                 Food f2 = (Food) b;
                 return f1.getID() == f2.getID() ? f1.getRestaurantID() < f2.getRestaurantID() : f1.getID() < f2.getID();
+            case "restaurant":
+                Restaurant res1 = (Restaurant)a;
+                Restaurant res2 = (Restaurant)b;
+                return res1.getName().equals(res2.getName()) && res1.getLocation().equals(res2.getLocation());
         }
         return false; //En cualquier otro caso retorna un false
     }
@@ -129,6 +137,9 @@ public class Utility {
         }
         if (a instanceof Food && b instanceof Food) {
             return "food";
+        }
+        if (a instanceof Restaurant && b instanceof Restaurant){
+            return "restaurant";
         }
         return "unknown";
     }

@@ -54,7 +54,8 @@ public class RestaurantCreateController implements Initializable {
         cmbLocation.getItems().add("Cartago");
         cmbLocation.getItems().add("San Jose");
         cmbLocation.getItems().add("Alajuela");
-        
+        txtId.setText(String.valueOf(Util.Utility.lastIndexGRestaurant));
+
     }
 
     @FXML
@@ -65,6 +66,7 @@ public class RestaurantCreateController implements Initializable {
             } else {
                 Restaurant rest = new Restaurant(Integer.valueOf(txtId.getText()), txtName.getText(), cmbLocation.getValue());
                 Util.Utility.gRestaurants.addVertex(rest);
+                Util.Utility.lastIndexGRestaurant++; //Se suma uno al ultimo indice
                 callAlert("Error", "Restaurant has been added");
                 cleanUI();
             }
@@ -73,7 +75,7 @@ public class RestaurantCreateController implements Initializable {
             Logger.getLogger(RestaurantCreateController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ListException ex) {
             Logger.getLogger(RestaurantCreateController.class.getName()).log(Level.SEVERE, null, ex);
-        }   
+        }
     }
 
     @FXML
@@ -83,7 +85,7 @@ public class RestaurantCreateController implements Initializable {
 
     public void cleanUI() {
         cmbLocation.getSelectionModel().select("Cartago");
-        txtId.setText(""); //Llamar al util.utility.lastIdRestaurants
+        txtId.setText(String.valueOf(Util.Utility.lastIndexGRestaurant));
         txtName.setText("");
     }
 

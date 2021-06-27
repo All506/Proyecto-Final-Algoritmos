@@ -90,7 +90,7 @@ public class SaveData {
             SinglyLinkedList restaurantsToSave = Util.Utility.gRestaurants.getAllItemsAsList();
             for (int i = 1; i <= restaurantsToSave.size(); i++) {
                 Restaurant restaurant = (Restaurant) restaurantsToSave.getNode(i).data;
-                fXML.writeXML("Restaurants.xml", "RestaurantsXML", restaurant.dataName(), restaurant.data());
+                fXML.writeXML("Restaurants.xml", "Restaurants", restaurant.dataName(), restaurant.data());
             }
         }
     }

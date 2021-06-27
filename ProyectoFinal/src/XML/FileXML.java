@@ -6,7 +6,9 @@
 package XML;
 
 import Domain.CircularLinkList;
+import Graphs.GraphException;
 import Objects.Security;
+import Objects.Restaurant;
 import Security.AES;
 import java.io.File;
 import java.io.IOException;
@@ -28,6 +30,8 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import list.ListException;
+import list.SinglyLinkedList;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -59,8 +63,6 @@ public class FileXML {
 
             StreamResult result = new StreamResult(new File(/*address + "\\" + */fileName + ".xml"));
             transformer.transform(source, result);
-
-           
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -111,8 +113,6 @@ public class FileXML {
             StreamResult result = new StreamResult(new File(FileName));
             transformer.transform(source, result);
 
-           
-
         } catch (ParserConfigurationException pce) {
 
             pce.printStackTrace();
@@ -128,7 +128,7 @@ public class FileXML {
         }
         return false;
     }
-    
+
     public CircularLinkList readXMLtoSecurityList() {
 
         CircularLinkList lSecurity = new CircularLinkList();
@@ -154,13 +154,63 @@ public class FileXML {
                 AES deEnc = new AES();
                 Security desUser = new Security(deEnc.deCrypt(sec.getUser(), "Proyecto"), deEnc.deCrypt(sec.getPassword(), "Proyecto"));
                 lSecurity.add(desUser);
-            }   
-            
+            }
+
             System.out.println("La lista en metodo decrypt es: " + lSecurity.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return lSecurity;
+    }
+
+    public SinglyLinkedList readXMLtoRestaurantList() {
+        SinglyLinkedList lRestaurants = new SinglyLinkedList();
+        
+        if (exist("Restaurants.xml")) {
+
+            try {
+                File inputFile = new File("Restaurants.xml");
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                Document doc = dBuilder.parse(inputFile);
+                doc.getDocumentElement().normalize();
+
+                NodeList nList = doc.getElementsByTagName("Restaurants"); //Cabecera de objeto
+
+                for (int indice = 0; indice < nList.getLength(); indice++) {
+                    Restaurant newRestaurant = new Restaurant(0, "", "");
+                    Node nNode = nList.item(indice);
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element eElement = (Element) nNode;
+                        newRestaurant.setID(Integer.valueOf(eElement.getAttribute("id")));
+                        newRestaurant.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
+                        newRestaurant.setLocation(eElement.getElementsByTagName("location").item(0).getTextContent());
+                    }
+                    lRestaurants.add(newRestaurant);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return lRestaurants;
+    }
+
+    public void loadFiles() throws ListException, GraphException {
+        if (readXMLtoRestaurantList().isEmpty()) {
+            Util.Utility.lastIndexGRestaurant = 0; //Si no existe el documento, no se ha guardado ningun objeto
+            System.out.println("El archivo de restaurantes no existe");
+        } else {
+            SinglyLinkedList lRestaurantes = readXMLtoRestaurantList();
+            System.out.println("El contenido de la lista es \n " + lRestaurantes.toString());
+            for (int i = 1; i <= lRestaurantes.size(); i++) {
+                Util.Utility.gRestaurants.addVertex(lRestaurantes.getNode(i).data);
+                Restaurant temporalRest = (Restaurant)lRestaurantes.getNode(i).data;
+                Util.Utility.lastIndexGRestaurant = temporalRest.getID(); //Se setea el valor del ultimo indice almacenado
+            }
+        }
+        Util.Utility.lastIndexGRestaurant++; //Se anhade uno mas para que el siguiente valor almacenado conicida
     }
 }
