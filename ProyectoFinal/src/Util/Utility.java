@@ -4,6 +4,7 @@ import Domain.BST;
 import Domain.CircularLinkList;
 import Domain.ListException;
 import Domain.TreeException;
+import Graphs.AdjacencyListGraph;
 import Objects.Food;
 import Objects.Product;
 import Objects.Security;
@@ -17,6 +18,7 @@ import java.util.regex.Pattern;
 public class Utility {
 
     public static CircularLinkList lSecurity = new CircularLinkList();
+    public static AdjacencyListGraph gRestaurants = new AdjacencyListGraph(10);
     public static String userName;
 
     public static BST treeProducts = new BST();

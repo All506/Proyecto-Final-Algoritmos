@@ -55,9 +55,9 @@ public class SidePanelController implements Initializable {
     private JFXButton btnDisplayRestSup;
     @FXML
     private JFXButton btnCancelRestSup;
-    
+
     String module;
-    
+
     MainController mc = new MainController();
 
     @Override
@@ -73,37 +73,37 @@ public class SidePanelController implements Initializable {
     private void changeColor(ActionEvent event) {
         JFXButton btn = (JFXButton) event.getSource();
         switch (btn.getId()) {
-            
+
             case "b1":
                 apB1.setVisible(true);
-                module="Restaurants";
+                module = "Restaurants";
                 break;
             case "b2":
                 apB1.setVisible(true);
-                module="Food";
+                module = "Food";
                 break;
             case "b3":
                 apB1.setVisible(true);
-                module="Products";
+                module = "Products";
                 break;
             case "b4":
                 apB1.setVisible(true);
-                module="Users";
+                module = "Users";
                 break;
             case "b5":
                 apB1.setVisible(true);
-                module="Places";
+                module = "Places";
                 break;
             case "b6":
                 apB1.setVisible(true);
-                module="Market";
+                module = "Market";
                 break;
         }
     }
 
     @FXML
     private void exit(ActionEvent event) { //al cliquear en el boton salir
-        
+
         try {
             Util.SaveData dataSaver = new Util.SaveData();
             dataSaver.saveData();
@@ -117,17 +117,17 @@ public class SidePanelController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(SidePanelController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     @FXML
     private void btnNewRestSup(ActionEvent event) {
         apB1.setVisible(false);
         switch (module) {
-            
+
             case "Restaurants":
-               
-                
+                callback.setPaneVisible(Boolean.TRUE);
+                callback.updateColor("RestaurantCreate");
                 break;
             case "Food":
                 callback.setPaneVisible(Boolean.TRUE);
@@ -142,24 +142,21 @@ public class SidePanelController implements Initializable {
                 callback.updateColor("UserCreate");
                 break;
             case "Places":
-               
-              
+
                 break;
             case "Market":
-               
-              
+
                 break;
         }
     }
 
     @FXML
     private void btnModifyRestSup(ActionEvent event) {
-         apB1.setVisible(false);
-         switch (module) {
-            
+        apB1.setVisible(false);
+        switch (module) {
+
             case "Restaurants":
-               
-                
+
                 break;
             case "Food":
                 callback.setPaneVisible(Boolean.TRUE);
@@ -170,28 +167,24 @@ public class SidePanelController implements Initializable {
                 callback.updateColor("ProductUpdate");
                 break;
             case "Users":
-                
-               
+
                 break;
             case "Places":
-               
-              
+
                 break;
             case "Market":
-               
-              
+
                 break;
         }
     }
 
     @FXML
     private void btnRemoveRestSup(ActionEvent event) {
-         apB1.setVisible(false);
-         switch (module) {
-            
+        apB1.setVisible(false);
+        switch (module) {
+
             case "Restaurants":
-               
-                
+
                 break;
             case "Food":
                 callback.setPaneVisible(Boolean.TRUE);
@@ -202,29 +195,25 @@ public class SidePanelController implements Initializable {
                 callback.updateColor("ProductDelete");
                 break;
             case "Users":
-                
-               
+
                 break;
             case "Places":
-               
-              
+
                 break;
             case "Market":
-               
-              
+
                 break;
         }
-        
+
     }
 
     @FXML
     private void btnDisplayRestSup(ActionEvent event) {
         apB1.setVisible(false);
-         switch (module) {
-            
+        switch (module) {
+
             case "Restaurants":
-               
-                
+
                 break;
             case "Food":
                 callback.setPaneVisible(Boolean.TRUE);
@@ -235,26 +224,21 @@ public class SidePanelController implements Initializable {
                 callback.updateColor("ProductRead");
                 break;
             case "Users":
-                
-               
+
                 break;
             case "Places":
-               
-              
+
                 break;
             case "Market":
-               
-              
+
                 break;
         }
-        
+
     }
 
     @FXML
     private void btnCancelRestSup(ActionEvent event) {
         apB1.setVisible(false);
     }
-    
-    
 
 }

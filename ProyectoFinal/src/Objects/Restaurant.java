@@ -10,6 +10,7 @@ package Objects;
  * @author Your Name <Sebastián Navarro Martínez>
  */
 public class Restaurant {
+
     private int ID;
     private String name;
     private String location;
@@ -49,7 +50,14 @@ public class Restaurant {
         return "Restaurant{" + "ID:" + ID + ", name:" + name + ", location:" + location + '}';
     }
 
+    public String[] dataName() {
+        String[] dataName = {"id","name","location"};
+        return dataName;
+    }
+    
+    public String[] data(){
+        String[] data = {String.valueOf(this.ID), this.name, this.location};
+        return data;
+    }
 
-    
-    
 }
