@@ -4,6 +4,7 @@ import Domain.BST;
 import Domain.CircularLinkList;
 import Domain.ListException;
 import Domain.TreeException;
+import Objects.Food;
 import Objects.Product;
 import Objects.Security;
 import Objects.Supermarket;
@@ -40,7 +41,6 @@ public class Utility {
     }
 
     //Metodos para devolver listas
-    
     public static CircularLinkList getListSecurity() {
         return lSecurity;
     }
@@ -99,7 +99,10 @@ public class Utility {
                 Product p1 = (Product) a;
                 Product p2 = (Product) b;
                 return p1.getName().equalsIgnoreCase(p2.getName()) && p1.getID() == p2.getID() && p1.getSupermarketID() == p2.getSupermarketID();
-
+            case "food":
+                Food f1 = (Food) a;
+                Food f2 = (Food) b;
+                return f1.getID() == f2.getID() ? f1.getRestaurantID() < f2.getRestaurantID() : f1.getID() < f2.getID();
         }
         return false; //En cualquier otro caso retorna un false
     }
@@ -116,6 +119,9 @@ public class Utility {
         }
         if (a instanceof Product && b instanceof Product) {
             return "product";
+        }
+        if (a instanceof Food && b instanceof Food) {
+            return "food";
         }
         return "unknown";
     }
@@ -137,7 +143,11 @@ public class Utility {
             case "product":
                 Product p1 = (Product) a;
                 Product p2 = (Product) b;
-                return p1.getID() == p2.getID()? p1.getSupermarketID() < p2.getSupermarketID(): p1.getID() < p2.getID();
+                return p1.getID() == p2.getID() ? p1.getSupermarketID() < p2.getSupermarketID() : p1.getID() < p2.getID();
+            case "food":
+                Food f1 = (Food) a;
+                Food f2 = (Food) b;
+                return f1.getID() == f2.getID() ? f1.getRestaurantID() < f2.getRestaurantID() : f1.getID() < f2.getID();
         }
         return false; //en cualquier otro caso
     }
@@ -159,7 +169,11 @@ public class Utility {
             case "product":
                 Product p1 = (Product) a;
                 Product p2 = (Product) b;
-                return p1.getID() == p2.getID()? p1.getSupermarketID() > p2.getSupermarketID(): p1.getID() > p2.getID();
+                return p1.getID() == p2.getID() ? p1.getSupermarketID() > p2.getSupermarketID() : p1.getID() > p2.getID();
+            case "food":
+                Food f1 = (Food) a;
+                Food f2 = (Food) b;
+                return f1.getID() == f2.getID() ? f1.getRestaurantID() > f2.getRestaurantID() : f1.getID() > f2.getID();
         }
         return false; //en cualquier otro caso
     }

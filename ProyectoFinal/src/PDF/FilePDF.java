@@ -4,7 +4,10 @@ import Domain.BST;
 import Domain.BTreeNode;
 import Domain.CircularLinkList;
 import Domain.ListException;
+import Objects.Food;
 import Objects.Product;
+import Objects.Restaurant;
+import Objects.Supermarket;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -27,8 +30,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FilePDF {
+    
     //Constructor
-
     public FilePDF() {
 
     }
@@ -62,7 +65,7 @@ public class FilePDF {
         document.open();
         document.add(header);//Se agrega la img
 
-        //PRODUCTS
+        //----------------------------------------------------------------------PRODUCTS
         Paragraph parrafo = new Paragraph();
         parrafo.setAlignment(Paragraph.ALIGN_CENTER);
         parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.BLACK));
@@ -71,6 +74,7 @@ public class FilePDF {
 
         //Tabla
         PdfPTable table = new PdfPTable(4);//Columnas y nombres
+
         table.addCell("Identificator");
         table.addCell("Name");
         table.addCell("$Price");
@@ -86,7 +90,7 @@ public class FilePDF {
                     table.addCell(String.valueOf(product.getID()));
                     table.addCell(product.getName());
                     table.addCell(String.valueOf(product.getPrice()));
-                    table.addCell(String.valueOf(product.getSupermarketID()));//Cambiar para que aparezca el supermarcado
+                    table.addCell(String.valueOf(product.getSupermarketID()));//Cambiar para que aparezca el supermercado
                 }
                 document.add(table);//Agrega la tabla al documento
 
@@ -100,7 +104,7 @@ public class FilePDF {
             document.add(parrafoTemp);
         }
 
-        //FOOD
+        //----------------------------------------------------------------------FOOD
         Paragraph parrafo2 = new Paragraph();
         parrafo2.setAlignment(Paragraph.ALIGN_CENTER);
         parrafo2.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.BLACK));
@@ -116,15 +120,15 @@ public class FilePDF {
 
         CircularLinkList arrayListTemp2 = new CircularLinkList();
         CircularLinkList arrayList2 = tourTree(treeFood.getRoot(), arrayListTemp2);
-
+        
         if (!arrayList2.isEmpty()) {
             try {
                 for (int i = 1; i <= arrayList2.size(); i++) {
-                    Product product = (Product) arrayList2.getNode(i).data;
-                    table2.addCell(String.valueOf(product.getID()));
-                    table2.addCell(product.getName());
-                    table2.addCell(String.valueOf(product.getPrice()));
-                    table2.addCell(String.valueOf(product.getSupermarketID()));//Cambiar para que aparezca el restaurante
+                    Food food = (Food) arrayList2.getNode(i).data;
+                    table2.addCell(String.valueOf(food.getID()));
+                    table2.addCell(food.getName());
+                    table2.addCell(String.valueOf(food.getPrice()));
+                    table2.addCell(String.valueOf(food.getRestaurantID()));//Cambiar para que aparezca el restaurante
                 }
                 document.add(table2);//Agrega la tabla al documento
 
@@ -145,15 +149,20 @@ public class FilePDF {
     private CircularLinkList tourTree(BTreeNode node, CircularLinkList arrayList2) {
         if (node != null) {
             tourTree(node.left, arrayList2);
-            Product p = (Product) node.data;
-            arrayList2.add(p);
+            if (node.data instanceof Product) {
+                Product p = (Product) node.data;
+                arrayList2.add(p);
+            } else {
+                Food f = (Food) node.data;
+                arrayList2.add(f);
+            }
             tourTree(node.right, arrayList2);
         }
         return arrayList2;
     }
 
-    //Genera el pdf y escribe lo que queremos
-    public void restaurantsAndSupermarket(String fileName) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException, ListException {
+    /*Genera el pdf y escribe lo que queremos
+    public void restaurantsAndSupermarket(String fileName, AdjacencyListGraph graph) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException, ListException, domain.list.ListException {
         FileOutputStream file = new FileOutputStream(fileName + ".pdf");
         Document document = new Document();
         PdfWriter.getInstance(document, file);
@@ -166,7 +175,7 @@ public class FilePDF {
         document.open();
         document.add(header);//Se agrega la img
 
-        //SUPERMARKETS
+        //----------------------------------------------------------------------SUPERMARKETS
         Paragraph parrafo = new Paragraph();
         parrafo.setAlignment(Paragraph.ALIGN_CENTER);
         parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.BLACK));
@@ -179,30 +188,29 @@ public class FilePDF {
         table.addCell("Name");
         table.addCell("Location");
 
-//        CircularLinkList arrayListTemp = new CircularLinkList();
-//        CircularLinkList arrayList = tourTree(treeProducts.getRoot(), arrayListTemp);
-//        if (!arrayList.isEmpty()) {
-//            try {
-//                for (int i = 1; i <= arrayList.size(); i++) {
-//                    Product product = (Product) arrayList.getNode(i).data;
-//                    table.addCell(String.valueOf(product.getID()));
-//                    table.addCell(product.getName());
-//                    table.addCell(String.valueOf(product.getPrice()));
-//                    table.addCell(String.valueOf(product.getSupermarketID()));//Cambiar para que aparezca el supermarcado
-//                }
-//                document.add(table);//Agrega la tabla al documento
-//
-//            } catch (ListException | DocumentException e) {
-//            }
-//        } else {
-//            Paragraph parrafoTemp = new Paragraph();
-//            parrafoTemp.setAlignment(Paragraph.ALIGN_CENTER);
-//            parrafoTemp.add("\n\nThere's no products registered\n\n");
-        document.add(table);//Agrega la tabla al documento 
-//            document.add(parrafoTemp);
-//        }
-//
-        //RESTAURANTS
+        if (!graph.isEmpty()) {
+            try {
+                for (int i = 0; i < graph.size(); i++) {
+                    if (graph.getVertexByIndex(i).data instanceof Supermarket) {
+                        Supermarket supermarket = (Supermarket) graph.getVertexByIndex(i).data;
+                        table.addCell(String.valueOf(supermarket.getID()));
+                        table.addCell(supermarket.getName());
+                        table.addCell(supermarket.getLocation());
+                    }
+                }
+                document.add(table);//Agrega la tabla al documento
+
+            } catch (DocumentException e) {
+            }
+        } else {
+            Paragraph parrafoTemp = new Paragraph();
+            parrafoTemp.setAlignment(Paragraph.ALIGN_CENTER);
+            parrafoTemp.add("\n\nThere's no Supermarkets registered\n\n");
+            document.add(table);//Agrega la tabla al documento 
+            document.add(parrafoTemp);
+        }
+
+        //----------------------------------------------------------------------RESTAURANTS
         Paragraph parrafo2 = new Paragraph();
         parrafo2.setAlignment(Paragraph.ALIGN_CENTER);
         parrafo2.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.BLACK));
@@ -214,33 +222,32 @@ public class FilePDF {
         table2.addCell("Identificator");
         table2.addCell("Name");
         table2.addCell("Location");
-//
-//        CircularLinkList arrayListTemp2 = new CircularLinkList();
-//        CircularLinkList arrayList2 = tourTree(treeFood.getRoot(), arrayListTemp2);
-//
-//        if (!arrayList2.isEmpty()) {
-//            try {
-//                for (int i = 1; i <= arrayList2.size(); i++) {
-//                    Product product = (Product) arrayList2.getNode(i).data;
-//                    table2.addCell(String.valueOf(product.getID()));
-//                    table2.addCell(product.getName());
-//                    table2.addCell(String.valueOf(product.getPrice()));
-//                    table2.addCell(String.valueOf(product.getSupermarketID()));//Cambiar para que aparezca el restaurante
-//                }
-//                document.add(table2);//Agrega la tabla al documento
-//
-//            } catch (ListException | DocumentException e) {
-//            }
-//        } else {
-//            Paragraph parrafoTemp = new Paragraph();
-//            parrafoTemp.setAlignment(Paragraph.ALIGN_CENTER);
-//            parrafoTemp.add("\nThere's no food registered\n");
-        document.add(table2);//Agrega la tabla al documento
-//            document.add(parrafoTemp);
-//        }
+
+        if (!graph.isEmpty()) {
+            try {
+                for (int i = 0; i < graph.size(); i++) {
+                    if (graph.getVertexByIndex(i).data instanceof Restaurant) {
+                        Restaurant restaurant = (Restaurant) graph.getVertexByIndex(i).data;
+                        table2.addCell(String.valueOf(restaurant.getID()));
+                        table2.addCell(restaurant.getName());
+                        table2.addCell(restaurant.getLocation());
+                    }
+                }
+                document.add(table2);//Agrega la tabla al documento
+
+            } catch (DocumentException e) {
+            }
+        } else {
+            Paragraph parrafoTemp = new Paragraph();
+            parrafoTemp.setAlignment(Paragraph.ALIGN_CENTER);
+            parrafoTemp.add("\nThere's no food registered\n");
+            document.add(table2);//Agrega la tabla al documento
+            document.add(parrafoTemp);
+        }
 
         //Importante cerrar el pdf
         document.close();
-    }
+    }*/
+
     
 }//end class
