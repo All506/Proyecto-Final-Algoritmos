@@ -186,7 +186,8 @@ public class SidePanelController implements Initializable {
         switch (module) {
 
             case "Restaurants":
-
+                callback.setPaneVisible(Boolean.TRUE);
+                callback.updateColor("RestaurantDelete");
                 break;
             case "Food":
                 callback.setPaneVisible(Boolean.TRUE);
