@@ -63,7 +63,7 @@ public class RestaurantCreateController implements Initializable {
             if (txtId.getText().equals("") || cmbLocation.getValue().equals("") || txtName.getText().equals("")) {
                 callAlert("Error", "There are empty spaces. Fill all blank spaces");
             } else {
-                Restaurant rest = new Restaurant(Integer.valueOf(txtId.getText()), txtName.getText(), cmbLocation.get);
+                Restaurant rest = new Restaurant(Integer.valueOf(txtId.getText()), txtName.getText(), txtLocation.getText());
                 Util.Utility.gRestaurants.addVertex(rest);
                 callAlert("Confirmation", "Restaurant has been added");
                 cleanUI();
