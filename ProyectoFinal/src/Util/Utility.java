@@ -241,18 +241,22 @@ public class Utility {
         return super1;
     }
 
+    Product p;
     public static Product getProductByName(String product) {
         return tourTree(treeProducts.getRoot(), product);
+        
     }
 
     private static Product tourTree(BTreeNode node, String product) {
         if (node != null) {
-            tourTree(node.left, product);
-            tourTree(node.right, product);
             Product p = (Product) node.data;
             if (p.getName().equalsIgnoreCase(product)) {
                 return p;
             }
+            tourTree(node.left, product);
+            tourTree(node.right, product);
+            
+            
         }
         return null;
     }

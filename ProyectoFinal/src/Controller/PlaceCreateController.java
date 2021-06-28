@@ -47,20 +47,19 @@ public class PlaceCreateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gPlaces = Util.Utility.getPlacesGraph();
-        Place p=null;
         try {
-            p = (Place)gPlaces.getVertexByIndex(gPlaces.size()-1).data;
-            txfPlaceId.setText(String.valueOf(p.getID()+1));
-        } catch (ListException | NullPointerException ex) {
-            txfPlaceId.setText("0");
+            loadTextField();
+        } catch (ListException ex) {
+            Logger.getLogger(PlaceCreateController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }    
 
     @FXML
     private void btnSavePlace(ActionEvent event) throws GraphException, ListException {
-        if(txfPlaceId.getText().length()>5){
+        if(txfPlaceId.getText().length()<5){
             gPlaces.addVertex(new Place(Integer.parseInt(txfPlaceId.getText()), txfPlaceName.getText()));
+            loadTextField();
         }else{
             callAlert("Error", "The name must contain at least 5 characters.");  
         }
@@ -85,6 +84,17 @@ public class PlaceCreateController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void loadTextField() throws ListException{
+      
+        if (!gPlaces.isEmpty()) {
+            Place p = (Place) gPlaces.getVertexByIndex(gPlaces.size() - 1).data;
+            txfPlaceId.setText(String.valueOf(p.getID() + 1));
+        } else {
+            txfPlaceId.setText("0");
+        }
+
     }
     
 }
