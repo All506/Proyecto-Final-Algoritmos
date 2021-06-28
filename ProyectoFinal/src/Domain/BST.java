@@ -94,12 +94,12 @@ public class BST implements Tree {
     
     private BTreeNode remove(BTreeNode node, Object element){
         if(node!=null){
-            if(Util.Utility.lessT(element, node.data))
+//            if(Util.Utility.lessT(node.data, element))
                 node.left = remove(node.left, element);
-            else
-            if(Util.Utility.greaterT(element, node.data))
+//            else
+//            if(Util.Utility.greaterT(node.data, element))
                 node.right = remove(node.right, element);
-            else
+//            else
             if(Util.Utility.equals(node.data, element)){
                 //Caso 1. El nodo a suprimir no tiene hijos
                 if(node.left==null&&node.right==null){

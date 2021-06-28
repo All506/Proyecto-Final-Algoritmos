@@ -7,6 +7,7 @@ import Domain.ListException;
 import Domain.TreeException;
 import Graphs.AdjacencyListGraph;
 import Objects.Food;
+import Objects.Place;
 import Objects.Product;
 import Objects.Restaurant;
 import Objects.Security;
@@ -121,7 +122,12 @@ public class Utility {
             case "productRemove":
                 Product p3 = (Product) a;
                 String string = (String) b;
-                return p3.getName().equals(string);
+                return p3.getName().equalsIgnoreCase(string);
+            case "place":
+                Place pla1 = (Place) a;
+                Place pla2 = (Place) b;
+                return pla1.getID()==(pla2.getID());
+            
         }
         return false; //En cualquier otro caso retorna un false
     }
@@ -145,9 +151,13 @@ public class Utility {
         if (a instanceof Restaurant && b instanceof Restaurant) {
             return "restaurant";
         }
+        if (a instanceof Place && b instanceof Place) {
+            return "place";
+        }
         if (a instanceof Product && b instanceof String) {
             return "productRemove";
         }
+        
         return "unknown";
     }
 
@@ -173,6 +183,12 @@ public class Utility {
                 Food f1 = (Food) a;
                 Food f2 = (Food) b;
                 return f1.getID() == f2.getID() ? f1.getRestaurantID() < f2.getRestaurantID() : f1.getID() < f2.getID();
+            case "productRemove":
+                Product pr1 = (Product) a;
+                String pr2 = (String) b;
+                return pr1.getName().compareToIgnoreCase(pr2)<0|| pr1.getName().equalsIgnoreCase(pr2);
+       
+        
         }
         return false; //en cualquier otro caso
     }
@@ -199,6 +215,11 @@ public class Utility {
                 Food f1 = (Food) a;
                 Food f2 = (Food) b;
                 return f1.getID() == f2.getID() ? f1.getRestaurantID() > f2.getRestaurantID() : f1.getID() > f2.getID();
+            case "productRemove":
+                Product pr1 = (Product) a;
+                String pr2 = (String) b;
+                return pr1.getName().compareToIgnoreCase(pr2)>0 || pr1.getName().equalsIgnoreCase(pr2);
+        
         }
         return false; //en cualquier otro caso
     }
@@ -241,24 +262,24 @@ public class Utility {
         return super1;
     }
 
-    Product p;
+    static Product pro;
     public static Product getProductByName(String product) {
-        return tourTree(treeProducts.getRoot(), product);
-        
+        tourTree(treeProducts.getRoot(), product);
+        return pro;
     }
 
-    private static Product tourTree(BTreeNode node, String product) {
+    private static void tourTree(BTreeNode node, String product) {
         if (node != null) {
             Product p = (Product) node.data;
             if (p.getName().equalsIgnoreCase(product)) {
-                return p;
+                pro=p;
             }
             tourTree(node.left, product);
             tourTree(node.right, product);
             
             
         }
-        return null;
+//        return null;
     }
 
 }//end class
