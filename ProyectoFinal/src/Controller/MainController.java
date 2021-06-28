@@ -27,10 +27,14 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import Misc.ChangeCallback;
+import java.io.File;
 import java.util.Calendar;
 import javafx.animation.Animation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
 
 /**
@@ -52,8 +56,8 @@ public class MainController implements Initializable, ChangeCallback {
     private ScrollPane scpMenu;
     @FXML
     private BorderPane bpRoot;
-    
-     HamburgerBackArrowBasicTransition transition;
+
+    HamburgerBackArrowBasicTransition transition;
 
     boolean f = false;
     @FXML
@@ -61,6 +65,34 @@ public class MainController implements Initializable, ChangeCallback {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        String path = "src/Resources/backgroundVideo.mp4";
+        Media media = new Media(new File(path).toURI().toString());
+
+        //Instantiating MediaPlayer class
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        //Instantiating MediaView class
+        MediaView mediaView = new MediaView(mediaPlayer);
+
+        mediaView.setPreserveRatio(true);
+
+        //mediaView.maxWidth(901);
+        //mediaView.maxHeight(708);
+        mediaView.fitWidthProperty().bind(root.minHeightProperty());
+        mediaView.fitHeightProperty().bind(root.minHeightProperty());
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                mediaPlayer.seek(Duration.ZERO);
+                mediaPlayer.play();
+            }
+        });
+        mediaPlayer.setAutoPlay(true);
+
+        root.getChildren().add(mediaView);
+        mediaView.toBack();
+
+        //⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆
         setWelcome();
         if (!MainClassFX.isSplashLoaded) {
             loadSplashScreen();
@@ -91,7 +123,7 @@ public class MainController implements Initializable, ChangeCallback {
                         if (transition.getStatus().equals(Animation.Status.STOPPED)) {
                             drawer.toBack();
                             scpMenu.toFront();
-                            
+
                         }
 
                     }
@@ -182,55 +214,53 @@ public class MainController implements Initializable, ChangeCallback {
         } else if (timeOfDay < 16) {
             txtWelcome.setText("Good afternoon, " + Util.Utility.userName);
         } else if (timeOfDay < 19) {
-             txtWelcome.setText("Good evening, " + Util.Utility.userName);
+            txtWelcome.setText("Good evening, " + Util.Utility.userName);
         } else {
-             txtWelcome.setText("Good night, " + Util.Utility.userName);
+            txtWelcome.setText("Good night, " + Util.Utility.userName);
         }
     }
-    
-       @Override
+
+    @Override
     public void setPaneVisible(Boolean b) {
-            transition.setRate(transition.getRate() * -1);
-            transition.play();
+        transition.setRate(transition.getRate() * -1);
+        transition.play();
 
-            if (drawer.isOpened()) {
-                drawer.close();
+        if (drawer.isOpened()) {
+            drawer.close();
 
-                transition.setOnFinished(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        if (transition.getStatus().equals(Animation.Status.STOPPED)) {
-                            drawer.toBack();
-                            scpMenu.toFront();
-                            
-                        }
+            transition.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    if (transition.getStatus().equals(Animation.Status.STOPPED)) {
+                        drawer.toBack();
+                        scpMenu.toFront();
 
                     }
-                });
 
-            } else {
+                }
+            });
 
-                drawer.open();
-                drawer.toFront();
-                scpMenu.toBack();
+        } else {
 
-                transition.setOnFinished(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
+            drawer.open();
+            drawer.toFront();
+            scpMenu.toBack();
 
-                        if (transition.getStatus().equals(Animation.Status.STOPPED)) {
-                            drawer.toFront();
-                            scpMenu.toBack();
-                        }
+            transition.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
 
+                    if (transition.getStatus().equals(Animation.Status.STOPPED)) {
+                        drawer.toFront();
+                        scpMenu.toBack();
                     }
-                });
 
-            }
-    
-    scpMenu.setVisible(true);
+                }
+            });
+
+        }
+
+        scpMenu.setVisible(true);
     }
 
 }
-
-
