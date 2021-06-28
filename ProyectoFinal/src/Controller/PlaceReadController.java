@@ -12,15 +12,21 @@ import Objects.Place;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -28,6 +34,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -36,6 +43,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 import list.ListException;
 import queue.QueueException;
 import stack.StackException;
@@ -53,10 +61,12 @@ public class PlaceReadController implements Initializable {
 
     int hip;
 
-//    int n;
+    
+
     int edgesCounter = 0;
 
     Button btnArray[];
+    RadioButton rdbArray[];
 
     int counter;
 
@@ -80,15 +90,15 @@ public class PlaceReadController implements Initializable {
     @FXML
     private ScrollPane scrRadioButtons;
     @FXML
-    private TableView<?> tblPlaces;
-    @FXML
-    private TableColumn<?, ?> colId;
-    @FXML
-    private TableColumn<?, ?> colName;
+    private TableView<String[]> tblPlaces;
     @FXML
     private Button btnRandomize;
     @FXML
     private Button btnGenerateGraph;
+    @FXML
+    private RadioButton rdbButton;
+    @FXML
+    private VBox vbxRadioButtons;
 
     /**
      * Initializes the controller class.
@@ -108,7 +118,7 @@ public class PlaceReadController implements Initializable {
             graph.addVertex(new Place(50, "Cervantes"));
             graph.addVertex(new Place(60, "Guapiles"));
             randomizeEdges();
-            drawGraph(graph);
+//            drawGraph(graph);
 
         } catch (GraphException | ListException ex) {
             Logger.getLogger(PlaceReadController.class.getName()).log(Level.SEVERE, null, ex);
@@ -125,13 +135,14 @@ public class PlaceReadController implements Initializable {
                     counter = 0;
                     apRoot.getChildren().clear();
                     btnArray = new Button[10];
-                    drawVertices(graph);
-                    drawEdges(graph);
+//                    drawVertices(aux);
+//                    drawEdges(aux);
+                    drawGraph(aux);
                     txtTitle = new Text(100, 100, "");
-                    apRoot.getChildren().add(rectangleGraph);
-                    apRoot.getChildren().add(imageMap);
-                    rectangleGraph.toBack();
-                    imageMap.toBack();
+//                    apRoot.getChildren().add(rectangleGraph);
+//                    apRoot.getChildren().add(imageMap);
+//                    rectangleGraph.toBack();
+//                    imageMap.toBack();
                     apRoot.getChildren().add(txtTitle);
 
                 } catch (GraphException | ListException ex) {
@@ -140,7 +151,82 @@ public class PlaceReadController implements Initializable {
 
             }
         });
-
+        
+        
+        
+        try {
+            loadRadioButtons();
+        } catch (ListException ex) {
+            Logger.getLogger(PlaceReadController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    AdjacencyListGraph aux;
+    public void loadRadioButtons() throws ListException{
+    graph=Util.Utility.getPlacesGraph();
+    rdbArray = new RadioButton[graph.size()];
+    vbxRadioButtons.getChildren().clear();
+        for (int i = 0; i < graph.size(); i++) {
+            Place p =(Place) graph.getVertexByIndex(i).data;
+            rdbButton = new RadioButton(p.getName());
+            rdbButton.setId(p.toString());
+            vbxRadioButtons.getChildren().add(rdbButton);
+            rdbButton.getStyleClass().add("button");
+            rdbButton.setPrefWidth(209);
+            rdbArray[i]=rdbButton;
+            rdbButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
+                    String[][] matrix =new String[graph.size()*graph.size()][2];
+                    matrix[0][1]="Dist.";
+                    matrix[0][0]="Origen-Destino";
+                    int arrowCounter=1;
+                    rdbButton = (RadioButton) event.getSource();
+                    aux = new AdjacencyListGraph(graph.size());
+                    
+                        for (int j = 0; j < graph.size(); j++) {
+                            if(rdbArray!=null){
+                                if(rdbArray[j].isSelected()){
+                                    Place p = (Place) graph.getVertexByIndex(j).data;
+                                    aux.addVertex(p);
+      
+                                }
+                            }
+                        }
+                        
+                        
+                        String edges="";
+                        for (int j = 0; j < aux.size(); j++) {
+                            for (int k = 0; k < aux.size(); k++) {
+                                if(graph.containsEdge(aux.getVertexByIndex(j).data, graph.getVertexByIndex(k).data)){
+                                    Place p1 = (Place)aux.getVertexByIndex(j).data;
+                                    Place p2 = (Place)aux.getVertexByIndex(k).data;
+                                    if(!edges.contains((p2.getName()+"-"+p1.getName()))){
+                                        edges+=p1.getName()+"-"+p2.getName()+"//";
+//                                        System.out.println(p1.getName()+"-"+p2.getName()+"//"+graph.getWeight(p1, p2));
+                                        matrix[arrowCounter][0]=p1.getName()+"-"+p2.getName();
+                                        matrix[arrowCounter++][1]=graph.getWeight(p1, p2)+" Km";
+                                        aux.addEdge(p1, p2);
+                                        aux.addWeight(p1, p2, graph.getWeight(p1, p2));
+                                        
+                                    }
+                                }
+                            }
+                        }
+                        load(tblPlaces, matrix);
+                        System.out.println("-----------------------------");
+                        drawGraph(aux);
+                    } catch (ListException | GraphException ex) {
+                        Logger.getLogger(PlaceReadController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    
+                }
+            });
+        }
+    
     }
 
     public void drawGraph(AdjacencyListGraph graph) throws ListException, GraphException {
@@ -154,18 +240,8 @@ public class PlaceReadController implements Initializable {
         if (graph != null && !graph.isEmpty()) {
             drawVertices(graph);
         }
-//        boolean hasEdges = false;
-//        for (int i = 0; i < graph.size(); i++) {
-//            for (int j = 0; j < graph.size(); j++) {
-//                if (graph.containsEdge(graph.getVertexByIndex(i).data, graph.getVertexByIndex(j).data)) {
-//                    hasEdges = true;
-//                }
-//            }
-//        }
 
-//        if (graph != null && !graph.isEmpty()) {
         drawEdges(graph);
-//        }
 
         txtTitle = new Text("");
         apRoot.getChildren().add(rectangleGraph);
@@ -512,4 +588,46 @@ public class PlaceReadController implements Initializable {
     private void btnGenerateGraph(ActionEvent event) {
     }
 
+    public void load(TableView<String[]> tbl, String[][] stringMatrix){
+    
+    
+      tbl.getColumns().clear();
+//    String stringMatrix[][] = new String[2][array2.length];
+//    for (int i = 0; i < array2.length; i++) {
+//
+//            if(array3==null){
+//                stringMatrix[0][i]=i+"";
+//            }else{
+//                stringMatrix[0][i]=array3[i]+"";
+//            }
+//            stringMatrix[1][i]=array2[i]+"";
+//            
+//        }
+
+        ObservableList<String[]> data = FXCollections.observableArrayList();
+        data.addAll(Arrays.asList(stringMatrix));
+        data.remove(0);//remove titles from data
+        
+        for (int i = 0; i < stringMatrix[0].length; i++) {
+            TableColumn tc = new TableColumn(stringMatrix[0][i]);
+            tc.setEditable(false);
+            tc.setSortable(false);
+            final int colNo = i;
+            tc.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
+                @Override
+                public ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> p) {
+                    return new SimpleStringProperty((p.getValue()[colNo]));
+                }
+            });
+//            tc.setPrefWidth(37.5);
+            
+            tbl.getColumns().add(tc);
+        }
+        tbl.setItems(data);
+        
+        
+    
+    
+    }
+    
 }
