@@ -6,6 +6,7 @@ import Domain.CircularLinkList;
 import Domain.ListException;
 import Domain.TreeException;
 import Graphs.AdjacencyListGraph;
+import Graphs.EdgeWeight;
 import Objects.Food;
 import Objects.Place;
 import Objects.Product;
@@ -94,6 +95,9 @@ public class Utility {
     }
 
     public static boolean equals(Object a, Object b) { //Objeto de lista, objeto buscado
+//        System.out.println("Instancia de los objetos en el equals:" + a.getClass()+"-///-"+b.getClass()+"  \n ");
+//        System.out.println("Objeto a  "+a.toString());
+//        System.out.println("Objeto b  "+b.toString());
         switch (instanceOf(a, b)) {
             case "integer":
                 Integer x = (Integer) a;
@@ -126,10 +130,25 @@ public class Utility {
             case "place":
                 Place pla1 = (Place) a;
                 Place pla2 = (Place) b;
-                return pla1.getID()==(pla2.getID());
-            
+                return pla1.getName().equalsIgnoreCase(pla2.getName());
+//            case "placeString":
+//                Place x1 = (Place) a;
+//                String x2 = (String) b;
+//                return x1.getName().equalsIgnoreCase(x2);
+          case "edgeWeight":
+                EdgeWeight ew1=(EdgeWeight)a; EdgeWeight ew2=(EdgeWeight)b;
+                //return ew1.getEdge().equals(ew2.getEdge());
+                return equals(ew1.getEdge(), ew2.getEdge());
+                
+            default:
+                System.out.println("Objects");
+                Object o1 = (Object) a;
+                Object o2 = (Object) b;
+                return o1.toString().equalsIgnoreCase(o2.toString()); 
+                
         }
-        return false; //En cualquier otro caso retorna un false
+        
+//        return false; //En cualquier otro caso retorna un false
     }
 
     private static String instanceOf(Object a, Object b) {
@@ -157,7 +176,14 @@ public class Utility {
         if (a instanceof Product && b instanceof String) {
             return "productRemove";
         }
-        
+        if (a instanceof Place && b instanceof String) {
+            return "placeString";
+        }
+
+        if(a instanceof EdgeWeight && b instanceof EdgeWeight){
+            return "edgeWeight";
+        }
+       
         return "unknown";
     }
 

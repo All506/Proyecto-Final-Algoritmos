@@ -119,9 +119,13 @@ public class AdjacencyListGraph implements Graph {
         }
         EdgeWeight ew = (EdgeWeight) vertexList[indexOf(a)].edgesList.getNode(
                 vertexList[indexOf(a)].edgesList.indexOf(new EdgeWeight(b, null))).getData();
+        System.out.println("-----"+ew.toString());
         ew.setWeight(weight); //setteamos el peso
         vertexList[indexOf(a)].edgesList.getNode(
-                vertexList[indexOf(a)].edgesList.indexOf(new EdgeWeight(b, null))).setData(ew);
+                vertexList[indexOf(a)].
+                        edgesList.indexOf(
+                                new EdgeWeight(b, null))).
+                setData(ew);
 
         //grafo no dirigido
         ew = (EdgeWeight) vertexList[indexOf(b)].edgesList.getNode(

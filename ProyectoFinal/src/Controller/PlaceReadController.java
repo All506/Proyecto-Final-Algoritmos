@@ -49,7 +49,7 @@ public class PlaceReadController implements Initializable {
 
     int hip;
 
-    int n;
+//    int n;
 
     int edgesCounter = 0;
 
@@ -72,17 +72,8 @@ public class PlaceReadController implements Initializable {
 
     public Text txtTitle;
   
-    private Button btnContainsEdge;
-    
-    private Button btnContainsVertex;
-    
-    
-    private Button btnAddRandom;
     private Button btnRemoveRandom;
-    private Button btnClearGraph;
-    
-   
-
+  
     /**
      * Initializes the controller class.
      */
@@ -97,44 +88,45 @@ public class PlaceReadController implements Initializable {
         //********************************************************
         try {
             graph.addVertex(new Place(1, "Cartago"));
-            graph.addVertex(new Place(2, "Turrielba"));
+            graph.addVertex(new Place(2, "Turrialba"));
             graph.addVertex(new Place(3, "Alajuela"));
             graph.addVertex(new Place(4, "Paraíso"));
             graph.addVertex(new Place(5, "Cervantes"));
             graph.addVertex(new Place(6, "Guapiles"));
             randomizeEdges();
             drawGraph(graph);
+            System.out.println(graph.toString());
             
         } catch (GraphException | ListException ex) {
             Logger.getLogger(PlaceReadController.class.getName()).log(Level.SEVERE, null, ex);
         }
         //********************************************************
         
-        rectangleGraph.setOnMouseMoved(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-
-                if (graph != null && !graph.isEmpty())
-                        try {
-                    counter = 0;
-                    apRoot.getChildren().clear();
-                    btnArray = new Button[10];
-                    drawVertices(graph);
-                    drawEdges(graph);
-                    txtTitle = new Text(100, 100, "");
-                    apRoot.getChildren().add(rectangleGraph);
-                    rectangleGraph.toBack();
-                    apRoot.getChildren().add(txtTitle);
-
-                } catch (GraphException | ListException ex) {
-                    Logger.getLogger(PlaceReadController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-        });
-        
-        
+//        rectangleGraph.setOnMouseMoved(new EventHandler<MouseEvent>() {
+//
+//            @Override
+//            public void handle(MouseEvent event) {
+//
+//                if (graph != null && !graph.isEmpty())
+//                        try {
+//                    counter = 0;
+//                    apRoot.getChildren().clear();
+//                    btnArray = new Button[10];
+//                    drawVertices(graph);
+//                    drawEdges(graph);
+//                    txtTitle = new Text(100, 100, "");
+//                    apRoot.getChildren().add(rectangleGraph);
+//                    rectangleGraph.toBack();
+//                    apRoot.getChildren().add(txtTitle);
+//
+//                } catch (GraphException | ListException ex) {
+//                    Logger.getLogger(PlaceReadController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//
+//            }
+//        });
+//        
+//        
     }
     
     public void drawGraph(AdjacencyListGraph graph) throws ListException, GraphException{
@@ -179,7 +171,7 @@ public class PlaceReadController implements Initializable {
             btn.setId(String.valueOf(i));
             apRoot.getChildren().add(btn);
             Place p = (Place)graph.getVertexByIndex(counter).data;
-            btn.setText(p.getName());
+            btn.setText(p.toString());
             counter++;
 
             if (i >= 0 && i < 90) {
@@ -409,11 +401,14 @@ public class PlaceReadController implements Initializable {
 
     private void randomizeEdges() throws GraphException, ListException {
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+        for (int i = 0; i < graph.size(); i++) {
+            for (int j = 0; j < graph.size(); j++) {
                
                     if (!graph.containsEdge(graph.getVertexByIndex(i).data, graph.getVertexByIndex(j).data) && !(graph.getVertexByIndex(i).data.equals(graph.getVertexByIndex(j).data))) {
                         graph.addEdge(graph.getVertexByIndex(i).data, graph.getVertexByIndex(j).data);
+                        System.out.println(graph.getVertexByIndex(i).data);
+                        System.out.println(graph.getVertexByIndex(j).data);
+                        
                         graph.addWeight(graph.getVertexByIndex(i).data, graph.getVertexByIndex(j).data, Util.Utility.random());
                     }
                 
