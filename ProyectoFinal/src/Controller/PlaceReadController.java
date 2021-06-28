@@ -21,6 +21,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -51,7 +54,6 @@ public class PlaceReadController implements Initializable {
     int hip;
 
 //    int n;
-
     int edgesCounter = 0;
 
     Button btnArray[];
@@ -59,51 +61,60 @@ public class PlaceReadController implements Initializable {
     int counter;
 
     Line lne;
-    
-    
+
     @FXML
     private Rectangle rectangleGraph;
-    
+
     AdjacencyListGraph graph;
-    
+
     @FXML
     private Button btnCenter;
     @FXML
     private AnchorPane apRoot;
 
     public Text txtTitle;
-  
+
     private Button btnRemoveRandom;
     @FXML
     private ImageView imageMap;
-  
+    @FXML
+    private ScrollPane scrRadioButtons;
+    @FXML
+    private TableView<?> tblPlaces;
+    @FXML
+    private TableColumn<?, ?> colId;
+    @FXML
+    private TableColumn<?, ?> colName;
+    @FXML
+    private Button btnRandomize;
+    @FXML
+    private Button btnGenerateGraph;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
-        
+
         clean();
-        
-        
+
         graph = Util.Utility.getPlacesGraph();
         //********************************************************
         try {
-            graph.addVertex(new Place(1, "Cartago"));
-            graph.addVertex(new Place(2, "Turrialba"));
-            graph.addVertex(new Place(3, "Alajuela"));
-            graph.addVertex(new Place(4, "Paraíso"));
-            graph.addVertex(new Place(5, "Cervantes"));
-            graph.addVertex(new Place(6, "Guapiles"));
+            graph.addVertex(new Place(10, "Cartago"));
+            graph.addVertex(new Place(20, "Turrialba"));
+            graph.addVertex(new Place(30, "Alajuela"));
+            graph.addVertex(new Place(40, "Paraíso"));
+            graph.addVertex(new Place(50, "Cervantes"));
+            graph.addVertex(new Place(60, "Guapiles"));
             randomizeEdges();
             drawGraph(graph);
-            
+
         } catch (GraphException | ListException ex) {
             Logger.getLogger(PlaceReadController.class.getName()).log(Level.SEVERE, null, ex);
         }
         //********************************************************
-        
+
         rectangleGraph.setOnMouseMoved(new EventHandler<MouseEvent>() {
 
             @Override
@@ -129,13 +140,12 @@ public class PlaceReadController implements Initializable {
 
             }
         });
-        
-        
+
     }
-    
-    public void drawGraph(AdjacencyListGraph graph) throws ListException, GraphException{
-     apRoot.getChildren().clear();
-     apRoot.setVisible(true);
+
+    public void drawGraph(AdjacencyListGraph graph) throws ListException, GraphException {
+        apRoot.getChildren().clear();
+        apRoot.setVisible(true);
 
         counter = 0;
         hip = 180;//longitud del centro a cada vertice
@@ -154,7 +164,7 @@ public class PlaceReadController implements Initializable {
 //        }
 
 //        if (graph != null && !graph.isEmpty()) {
-            drawEdges(graph);
+        drawEdges(graph);
 //        }
 
         txtTitle = new Text("");
@@ -163,21 +173,19 @@ public class PlaceReadController implements Initializable {
         rectangleGraph.toBack();
         imageMap.toBack();
         apRoot.getChildren().add(txtTitle);
-        
 
     }
 
     public void drawVertices(Graph graph) throws ListException {//Dibuja los vertices
-        
 
         for (float i = 0; i < 360f - 0.1; i += 360f / graph.size()) {
 
             btn = new Button();
             btnArray[counter] = btn;
 //            btn.setId(String.valueOf(i));
-            
+
             apRoot.getChildren().add(btn);
-            Place p = (Place)graph.getVertexByIndex(counter).data;
+            Place p = (Place) graph.getVertexByIndex(counter).data;
             btn.setId(p.toString());
             btn.setText(p.getName());
             counter++;
@@ -187,7 +195,7 @@ public class PlaceReadController implements Initializable {
                 double x = Math.sin(Math.toRadians(auxI)) * hip;
                 double y = Math.cos(Math.toRadians(auxI)) * hip;
 
-                btn.setLayoutX(btnCenter.getLayoutX() + y * 1.5);
+                btn.setLayoutX(btnCenter.getLayoutX() + y * 1.2);
                 btn.setLayoutY(btnCenter.getLayoutY() - x);
             }
             if (i >= 90 && i < 180) {
@@ -195,7 +203,7 @@ public class PlaceReadController implements Initializable {
                 double x = Math.sin(Math.toRadians(auxI)) * hip;
                 double y = Math.cos(Math.toRadians(auxI)) * hip;
 
-                btn.setLayoutX(btnCenter.getLayoutX() - x * 1.5);
+                btn.setLayoutX(btnCenter.getLayoutX() - x * 1.2);
                 btn.setLayoutY(btnCenter.getLayoutY() - y);
             }
             if (i >= 180 && i < 270) {
@@ -203,7 +211,7 @@ public class PlaceReadController implements Initializable {
                 double x = Math.sin(Math.toRadians(auxI)) * hip;
                 double y = Math.cos(Math.toRadians(auxI)) * hip;
 
-                btn.setLayoutX(btnCenter.getLayoutX() - y * 1.5);
+                btn.setLayoutX(btnCenter.getLayoutX() - y * 1.2);
                 btn.setLayoutY(btnCenter.getLayoutY() + x);
             }
             if (i >= 270 && i < 360) {
@@ -211,7 +219,7 @@ public class PlaceReadController implements Initializable {
                 double x = Math.sin(Math.toRadians(auxI)) * hip;
                 double y = Math.cos(Math.toRadians(auxI)) * hip;
 
-                btn.setLayoutX(btnCenter.getLayoutX() + x * 1.5);
+                btn.setLayoutX(btnCenter.getLayoutX() + x * 1.2);
                 btn.setLayoutY(btnCenter.getLayoutY() + y);
             }
         }
@@ -220,14 +228,14 @@ public class PlaceReadController implements Initializable {
     Line line = new Line();
 
     public void drawEdges(AdjacencyListGraph graph) throws GraphException, ListException {//Dibuja las aristas
-        
+
         edgesCounter = 0;
         int i;
         int j;
 
         for (i = 0; i < graph.size(); i++) {
             for (j = 0; j < graph.size(); j++) {
-                if (btnArray[j].getId()!= btnArray[i].getId()) {
+                if (btnArray[j].getId() != btnArray[i].getId()) {
                     //Arista hacia otro vertice    
                     if (graph.containsEdge(btnArray[i].getId(), btnArray[j].getId())) {
                         edgesCounter++;
@@ -244,9 +252,9 @@ public class PlaceReadController implements Initializable {
                         lne.setEndY((btnArray[i]).getLayoutY() - btnArray[j].getLayoutY() + 15);
                         lne.setStrokeWidth(8);
                         lne.setStroke(Paint.valueOf("#666666"));
-                        lne.setOpacity(0.7);
+                        lne.setOpacity(0.4);
 
-                        lne.setId("Weight: " + String.valueOf(graph.getWeight(btnArray[i].getId(), btnArray[j].getId())));
+                        lne.setId(String.valueOf(graph.getWeight(btnArray[i].getId(), btnArray[j].getId()))+" Km");
 
                         lne.setOnMouseMoved(new EventHandler<MouseEvent>() {
 
@@ -255,7 +263,7 @@ public class PlaceReadController implements Initializable {
                                 line.setStroke(Paint.valueOf("#666666"));
 
                                 line = (Line) event.getSource();
-                                line.setStroke(Paint.valueOf("#C0392B"));
+                                line.setStroke(Paint.valueOf("#008080"));
                                 line.setOpacity(0.9);
                                 txtTitle.setText(line.getId());
                                 Bounds boundsInScreen = rectangleGraph.localToScreen(rectangleGraph.getBoundsInLocal());
@@ -264,9 +272,8 @@ public class PlaceReadController implements Initializable {
                                 double y = punto.y - boundsInScreen.getMinY();
                                 txtTitle.setLayoutX(x - 130);
                                 txtTitle.setLayoutY(y - 130);
-                                txtTitle.setFill(Paint.valueOf("white"));
-                                txtTitle.setStyle("-fx-font-family: Century Gothic;"
-                                        + " -fx-font-size: 20pt;");
+                                txtTitle.setFill(Paint.valueOf("#000035"));
+                                txtTitle.setFont(Font.font("Century Gothic", FontWeight.EXTRA_BOLD, 25));
 
                             }
                         });
@@ -382,52 +389,46 @@ public class PlaceReadController implements Initializable {
 
     }
 
-
     private void btnAdd(ActionEvent event) throws GraphException, ListException {
         clean();
-       
-        
-       
+
         graph = null;
         apRoot.getChildren().clear();
         apRoot.getChildren().add(rectangleGraph);
         apRoot.setVisible(true);
-       
+
     }
 
     private void btnRemove(ActionEvent event) throws GraphException, ListException {
-       
+
         clean();
-        
-        
+
         graph = null;
         btnRemoveRandom.setVisible(true);
-        
+
         apRoot.getChildren().clear();
         apRoot.getChildren().add(rectangleGraph);
         apRoot.setVisible(true);
-       
-         }
+
+    }
 
     private void randomizeEdges() throws GraphException, ListException {
 
         for (int i = 0; i < graph.size(); i++) {
             for (int j = 0; j < graph.size(); j++) {
-               
-                    if (!graph.containsEdge(graph.getVertexByIndex(i).data, graph.getVertexByIndex(j).data) && !(graph.getVertexByIndex(i).data.equals(graph.getVertexByIndex(j).data))) {
-                        graph.addEdge(graph.getVertexByIndex(i).data, graph.getVertexByIndex(j).data);
-                        graph.addWeight(graph.getVertexByIndex(i).data, graph.getVertexByIndex(j).data, Util.Utility.random());
-                    }
-                
+
+                if (!graph.containsEdge(graph.getVertexByIndex(i).data, graph.getVertexByIndex(j).data) && !(graph.getVertexByIndex(i).data.equals(graph.getVertexByIndex(j).data))) {
+                    graph.addEdge(graph.getVertexByIndex(i).data, graph.getVertexByIndex(j).data);
+                    graph.addWeight(graph.getVertexByIndex(i).data, graph.getVertexByIndex(j).data, 15+Util.Utility.random(40));
+                }
+
             }
         }
 
     }
 
-   
-
     private void btnDFS(ActionEvent event) throws GraphException, StackException, ListException, QueueException {
-        
+
         if (graph != null && !graph.isEmpty()) {
 
             String s = graph.dfs();
@@ -462,7 +463,7 @@ public class PlaceReadController implements Initializable {
     }
 
     private void btnBFS(ActionEvent event) throws GraphException, StackException, ListException, QueueException {
-        
+
         if (graph != null && !graph.isEmpty()) {
 
             String s = graph.bfs();
@@ -497,18 +498,18 @@ public class PlaceReadController implements Initializable {
         }
     }
 
- 
-    
-
-  
-
     public void clean() {
-       
-       
+
         apRoot.setVisible(false);
-   
 
     }
 
-    
+    @FXML
+    private void btnRandomize(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnGenerateGraph(ActionEvent event) {
+    }
+
 }

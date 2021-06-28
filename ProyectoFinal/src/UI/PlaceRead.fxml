@@ -2,26 +2,43 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane id="AnchorPane" prefHeight="610.0" prefWidth="780.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PlaceReadController">
+<AnchorPane id="AnchorPane" prefHeight="592.0" prefWidth="762.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PlaceReadController">
     <stylesheets>
         <URL value="@/CSS/General.css" />
     </stylesheets>
    <children>
-      <AnchorPane fx:id="apRoot" layoutX="38.0" layoutY="141.0" prefHeight="426.0" prefWidth="702.0" style="-fx-background-color: #bbbbbb;" stylesheets="@../CSS/GraphButtons.css">
+      <AnchorPane fx:id="apRoot" layoutX="201.0" layoutY="175.0" prefHeight="410.0" prefWidth="546.0" style="-fx-background-color: #bbbbbb;" stylesheets="@../CSS/GraphButtons.css">
          <children>
-            <ImageView fx:id="imageMap" fitHeight="460.0" fitWidth="702.0" pickOnBounds="true">
+            <ImageView fx:id="imageMap" fitHeight="410.0" fitWidth="555.0" pickOnBounds="true">
                <image>
                   <Image url="@../Resources/map.jpg" />
                </image>
             </ImageView>
-            <Button fx:id="btnCenter" layoutX="312.0" layoutY="200.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="1.0" text="Button" visible="false" />
-            <Rectangle fx:id="rectangleGraph" arcHeight="5.0" arcWidth="5.0" fill="#3c4956" height="426.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="702.0" />
+            <Button fx:id="btnCenter" layoutX="222.0" layoutY="188.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="1.0" text="Button" visible="false" />
+            <Rectangle fx:id="rectangleGraph" arcHeight="5.0" arcWidth="5.0" fill="#3c4956" height="410.0" layoutX="2.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="555.0" />
          </children>
       </AnchorPane>
+      <ScrollPane fx:id="scrRadioButtons" layoutX="238.0" layoutY="6.0" prefHeight="295.0" prefWidth="212.0" stylesheets="@../CSS/General.css">
+         <content>
+            <RadioButton mnemonicParsing="false" prefHeight="26.0" prefWidth="205.0" styleClass="windows7-default" text="RadioButton" />
+         </content>
+      </ScrollPane>
+      <TableView fx:id="tblPlaces" layoutX="5.0" layoutY="4.0" opacity="0.73" prefHeight="582.0" prefWidth="192.0">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="129.60001182556152" text="Origen-Destino" />
+          <TableColumn fx:id="colName" prefWidth="58.399932861328125" text="Distancia" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnRandomize" layoutX="483.0" layoutY="69.0" mnemonicParsing="false" onAction="#btnRandomize" text="Randomize distances" />
+      <Button fx:id="btnGenerateGraph" layoutX="483.0" layoutY="20.0" mnemonicParsing="false" onAction="#btnGenerateGraph" prefHeight="26.0" prefWidth="128.0" text="Generate graph" />
    </children>
 </AnchorPane>
