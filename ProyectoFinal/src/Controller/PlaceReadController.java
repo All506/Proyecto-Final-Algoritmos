@@ -244,7 +244,7 @@ public class PlaceReadController implements Initializable {
                         lne.setEndY((btnArray[i]).getLayoutY() - btnArray[j].getLayoutY() + 15);
                         lne.setStrokeWidth(8);
                         lne.setStroke(Paint.valueOf("#666666"));
-                        lne.setOpacity(0.5);
+                        lne.setOpacity(0.7);
 
                         lne.setId("Weight: " + String.valueOf(graph.getWeight(btnArray[i].getId(), btnArray[j].getId())));
 
@@ -256,6 +256,7 @@ public class PlaceReadController implements Initializable {
 
                                 line = (Line) event.getSource();
                                 line.setStroke(Paint.valueOf("#C0392B"));
+                                line.setOpacity(0.9);
                                 txtTitle.setText(line.getId());
                                 Bounds boundsInScreen = rectangleGraph.localToScreen(rectangleGraph.getBoundsInLocal());
                                 Point punto = MouseInfo.getPointerInfo().getLocation();

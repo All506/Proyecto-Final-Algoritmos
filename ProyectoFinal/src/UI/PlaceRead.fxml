@@ -12,7 +12,7 @@
         <URL value="@/CSS/General.css" />
     </stylesheets>
    <children>
-      <AnchorPane fx:id="apRoot" layoutX="38.0" layoutY="141.0" prefHeight="426.0" prefWidth="702.0" style="-fx-background-color: #bbbbbb;">
+      <AnchorPane fx:id="apRoot" layoutX="38.0" layoutY="141.0" prefHeight="426.0" prefWidth="702.0" style="-fx-background-color: #bbbbbb;" stylesheets="@../CSS/GraphButtons.css">
          <children>
             <ImageView fx:id="imageMap" fitHeight="460.0" fitWidth="702.0" pickOnBounds="true">
                <image>
