@@ -21,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -73,6 +74,8 @@ public class PlaceReadController implements Initializable {
     public Text txtTitle;
   
     private Button btnRemoveRandom;
+    @FXML
+    private ImageView imageMap;
   
     /**
      * Initializes the controller class.
@@ -95,38 +98,39 @@ public class PlaceReadController implements Initializable {
             graph.addVertex(new Place(6, "Guapiles"));
             randomizeEdges();
             drawGraph(graph);
-            System.out.println(graph.toString());
             
         } catch (GraphException | ListException ex) {
             Logger.getLogger(PlaceReadController.class.getName()).log(Level.SEVERE, null, ex);
         }
         //********************************************************
         
-//        rectangleGraph.setOnMouseMoved(new EventHandler<MouseEvent>() {
-//
-//            @Override
-//            public void handle(MouseEvent event) {
-//
-//                if (graph != null && !graph.isEmpty())
-//                        try {
-//                    counter = 0;
-//                    apRoot.getChildren().clear();
-//                    btnArray = new Button[10];
-//                    drawVertices(graph);
-//                    drawEdges(graph);
-//                    txtTitle = new Text(100, 100, "");
-//                    apRoot.getChildren().add(rectangleGraph);
-//                    rectangleGraph.toBack();
-//                    apRoot.getChildren().add(txtTitle);
-//
-//                } catch (GraphException | ListException ex) {
-//                    Logger.getLogger(PlaceReadController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//
-//            }
-//        });
-//        
-//        
+        rectangleGraph.setOnMouseMoved(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+
+                if (graph != null && !graph.isEmpty())
+                        try {
+                    counter = 0;
+                    apRoot.getChildren().clear();
+                    btnArray = new Button[10];
+                    drawVertices(graph);
+                    drawEdges(graph);
+                    txtTitle = new Text(100, 100, "");
+                    apRoot.getChildren().add(rectangleGraph);
+                    apRoot.getChildren().add(imageMap);
+                    rectangleGraph.toBack();
+                    imageMap.toBack();
+                    apRoot.getChildren().add(txtTitle);
+
+                } catch (GraphException | ListException ex) {
+                    Logger.getLogger(PlaceReadController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        });
+        
+        
     }
     
     public void drawGraph(AdjacencyListGraph graph) throws ListException, GraphException{
@@ -134,7 +138,7 @@ public class PlaceReadController implements Initializable {
      apRoot.setVisible(true);
 
         counter = 0;
-        hip = 150;//longitud del centro a cada vertice
+        hip = 180;//longitud del centro a cada vertice
 
         btnArray = new Button[graph.size()];
         if (graph != null && !graph.isEmpty()) {
@@ -155,7 +159,9 @@ public class PlaceReadController implements Initializable {
 
         txtTitle = new Text("");
         apRoot.getChildren().add(rectangleGraph);
+        apRoot.getChildren().add(imageMap);
         rectangleGraph.toBack();
+        imageMap.toBack();
         apRoot.getChildren().add(txtTitle);
         
 
@@ -168,10 +174,12 @@ public class PlaceReadController implements Initializable {
 
             btn = new Button();
             btnArray[counter] = btn;
-            btn.setId(String.valueOf(i));
+//            btn.setId(String.valueOf(i));
+            
             apRoot.getChildren().add(btn);
             Place p = (Place)graph.getVertexByIndex(counter).data;
-            btn.setText(p.toString());
+            btn.setId(p.toString());
+            btn.setText(p.getName());
             counter++;
 
             if (i >= 0 && i < 90) {
@@ -219,9 +227,9 @@ public class PlaceReadController implements Initializable {
 
         for (i = 0; i < graph.size(); i++) {
             for (j = 0; j < graph.size(); j++) {
-                if (btnArray[j].getText() != btnArray[i].getText()) {
+                if (btnArray[j].getId()!= btnArray[i].getId()) {
                     //Arista hacia otro vertice    
-                    if (graph.containsEdge(btnArray[i].getText(), btnArray[j].getText())) {
+                    if (graph.containsEdge(btnArray[i].getId(), btnArray[j].getId())) {
                         edgesCounter++;
 
                         lne = new Line();
@@ -236,8 +244,9 @@ public class PlaceReadController implements Initializable {
                         lne.setEndY((btnArray[i]).getLayoutY() - btnArray[j].getLayoutY() + 15);
                         lne.setStrokeWidth(8);
                         lne.setStroke(Paint.valueOf("#666666"));
+                        lne.setOpacity(0.5);
 
-                        lne.setId("Weight: " + String.valueOf(graph.getWeight(btnArray[i].getText(), btnArray[j].getText())));
+                        lne.setId("Weight: " + String.valueOf(graph.getWeight(btnArray[i].getId(), btnArray[j].getId())));
 
                         lne.setOnMouseMoved(new EventHandler<MouseEvent>() {
 
@@ -265,7 +274,7 @@ public class PlaceReadController implements Initializable {
 
                 } else {
                     //Arista hacia si mismo
-                    if (graph.containsEdge(btnArray[i].getText(), btnArray[j].getText())) {
+                    if (graph.containsEdge(btnArray[i].getId(), btnArray[j].getId())) {
                         drawItSelfEdge(btnArray[i]);
                     }
                 }
@@ -406,9 +415,6 @@ public class PlaceReadController implements Initializable {
                
                     if (!graph.containsEdge(graph.getVertexByIndex(i).data, graph.getVertexByIndex(j).data) && !(graph.getVertexByIndex(i).data.equals(graph.getVertexByIndex(j).data))) {
                         graph.addEdge(graph.getVertexByIndex(i).data, graph.getVertexByIndex(j).data);
-                        System.out.println(graph.getVertexByIndex(i).data);
-                        System.out.println(graph.getVertexByIndex(j).data);
-                        
                         graph.addWeight(graph.getVertexByIndex(i).data, graph.getVertexByIndex(j).data, Util.Utility.random());
                     }
                 
@@ -431,7 +437,7 @@ public class PlaceReadController implements Initializable {
             for (int i = 0; i < dfs.length; i++) {
 
                 for (int j = 0; j < btnArray.length; j++) {
-                    if (btnArray[j] != null && btnArray[j].getText().equals(dfs[i])) {
+                    if (btnArray[j] != null && btnArray[j].getId().equals(dfs[i])) {
                         b = btnArray[j];
                     }
                 }
@@ -466,7 +472,7 @@ public class PlaceReadController implements Initializable {
             for (int i = 0; i < bfs.length; i++) {
 
                 for (int j = 0; j < btnArray.length; j++) {
-                    if (btnArray[j] != null && btnArray[j].getText().equals(bfs[i])) {
+                    if (btnArray[j] != null && btnArray[j].getId().equals(bfs[i])) {
                         b = btnArray[j];
                     }
                 }

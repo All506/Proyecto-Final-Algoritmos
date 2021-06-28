@@ -131,17 +131,13 @@ public class Utility {
                 Place pla1 = (Place) a;
                 Place pla2 = (Place) b;
                 return pla1.getName().equalsIgnoreCase(pla2.getName());
-//            case "placeString":
-//                Place x1 = (Place) a;
-//                String x2 = (String) b;
-//                return x1.getName().equalsIgnoreCase(x2);
           case "edgeWeight":
                 EdgeWeight ew1=(EdgeWeight)a; EdgeWeight ew2=(EdgeWeight)b;
                 //return ew1.getEdge().equals(ew2.getEdge());
                 return equals(ew1.getEdge(), ew2.getEdge());
                 
             default:
-                System.out.println("Objects");
+//                System.out.println("Objects");
                 Object o1 = (Object) a;
                 Object o2 = (Object) b;
                 return o1.toString().equalsIgnoreCase(o2.toString()); 
