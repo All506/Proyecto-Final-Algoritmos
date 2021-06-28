@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="620.0" prefWidth="500.0" style="-fx-background-image: src\Resources\backbar.jpg;" stylesheets="@../CSS/General.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SidePanelController">
+<AnchorPane prefHeight="706.0" prefWidth="508.0" style="-fx-background-image: src\Resources\backbar.jpg;" stylesheets="@../CSS/General.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SidePanelController">
    <children>
-      <ImageView fitHeight="460.0" fitWidth="508.0" layoutY="127.0" pickOnBounds="true">
-         <image>
-            <Image url="@../Resources/backbar.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="127.0" fitWidth="508.0" pickOnBounds="true">
-         <image>
-            <Image url="@../Resources/back.jpg" />
-         </image>
-      </ImageView>
-      <JFXButton fx:id="b1" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="42.0" layoutY="194.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Restaurants">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="718.0" stroke="#ffffff00" strokeType="INSIDE" width="508.0">
+         <fill>
+            <LinearGradient endX="0.9619047619047619" endY="0.32380952380952377" startX="0.9571428571428572" startY="0.07619047619047617">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.16862745583057404" green="0.5686274766921997" blue="0.8941176533699036" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.8784313797950745" green="0.8784313797950745" blue="0.8784313797950745" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <JFXButton fx:id="b1" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="48.0" layoutY="184.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Restaurants">
          <graphic>
             <ImageView fitHeight="60.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -26,7 +41,7 @@
                </image>
             </ImageView>
          </graphic></JFXButton>
-      <JFXButton fx:id="b2" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="184.0" layoutY="194.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Foods">
+      <JFXButton fx:id="b2" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="190.0" layoutY="184.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Foods">
          <graphic>
             <ImageView fitHeight="60.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -35,7 +50,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="b3" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="325.0" layoutY="194.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Products">
+      <JFXButton fx:id="b3" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="331.0" layoutY="184.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Products">
          <graphic>
             <ImageView fitHeight="52.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -44,7 +59,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="b5" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="184.0" layoutY="306.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Places">
+      <JFXButton fx:id="b5" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="190.0" layoutY="304.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Places">
          <graphic>
             <ImageView fitHeight="53.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -53,7 +68,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="b4" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="42.0" layoutY="306.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Users">
+      <JFXButton fx:id="b4" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="48.0" layoutY="304.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Users">
          <graphic>
             <ImageView fitHeight="47.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -62,19 +77,12 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="exit" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutY="572.0" onAction="#exit" prefHeight="92.0" prefWidth="508.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Exit" textAlignment="JUSTIFY">
+      <JFXButton fx:id="exit" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutY="630.0" onAction="#exit" prefHeight="88.0" prefWidth="508.0" ripplerFill="#fc0000" styleClass="windows7-default" text=" " textAlignment="JUSTIFY">
          <font>
             <Font size="15.0" />
          </font>
-         <graphic>
-            <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Resources/Exit.png" />
-               </image>
-            </ImageView>
-         </graphic>
       </JFXButton>
-      <AnchorPane fx:id="apB1" layoutY="429.0" prefHeight="143.0" prefWidth="500.0" visible="false">
+      <AnchorPane fx:id="apB1" layoutX="-3.0" layoutY="483.0" prefHeight="143.0" prefWidth="500.0" visible="false">
          <children>
             <JFXButton fx:id="btnNewRestSup" contentDisplay="TOP" onAction="#btnNewRestSup" prefHeight="141.0" prefWidth="100.0" text="Create">
                <graphic>
@@ -123,7 +131,7 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <JFXButton fx:id="b6" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="325.0" layoutY="306.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Market">
+      <JFXButton fx:id="b6" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="331.0" layoutY="304.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Market">
          <graphic>
             <ImageView fitHeight="53.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -132,5 +140,40 @@
             </ImageView>
          </graphic>
       </JFXButton>
+      <Text fill="WHITE" layoutX="80.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We will find it for you!" wrappingWidth="347.13671875">
+         <font>
+            <Font name="Freestyle Script" size="55.0" />
+         </font>
+         <effect>
+            <DropShadow spread="0.16">
+               <color>
+                  <Color red="1.0" green="1.0" blue="1.0" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Text>
+      <Line endX="245.0" layoutX="184.0" layoutY="41.0" startX="-100.0" stroke="WHITE">
+         <effect>
+            <DropShadow spread="0.64">
+               <color>
+                  <Color red="1.0" green="1.0" blue="1.0" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Line>
+      <Line endX="245.0" layoutX="184.0" layoutY="120.0" startX="-100.0" stroke="WHITE">
+         <effect>
+            <DropShadow spread="0.64">
+               <color>
+                  <Color red="1.0" green="1.0" blue="1.0" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Line>
+      <ImageView fitHeight="65.0" fitWidth="75.0" layoutX="224.0" layoutY="642.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/Exit.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
