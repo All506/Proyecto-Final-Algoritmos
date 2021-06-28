@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="root" prefHeight="708.0" prefWidth="901.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
     <children>
-      <ScrollPane fx:id="scpMenu" layoutX="60.0" layoutY="55.0" prefHeight="613.0" prefWidth="784.0">
+      <ScrollPane fx:id="scpMenu" layoutX="60.0" layoutY="55.0" prefHeight="610.0" prefWidth="780.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
         </content>

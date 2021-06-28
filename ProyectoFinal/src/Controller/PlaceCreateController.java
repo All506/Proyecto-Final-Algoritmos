@@ -57,8 +57,10 @@ public class PlaceCreateController implements Initializable {
 
     @FXML
     private void btnSavePlace(ActionEvent event) throws GraphException, ListException {
-        if(txfPlaceId.getText().length()<5){
+        if(txfPlaceName.getText().length()>4){
             gPlaces.addVertex(new Place(Integer.parseInt(txfPlaceId.getText()), txfPlaceName.getText()));
+//            callAlert("Confirmation", "Place added successfully");  
+            txfPlaceName.setText("");
             loadTextField();
         }else{
             callAlert("Error", "The name must contain at least 5 characters.");  

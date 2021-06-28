@@ -74,6 +74,11 @@ public class AdjacencyListGraph implements Graph {
         if (isEmpty()) {
             throw new GraphException("Adjacency Matrix Graph is Empty");
         }
+        
+         if (indexOf(a)==-1||indexOf(b)==-1) {
+            return false;
+        }
+        
         return !vertexList[indexOf(a)].edgesList.isEmpty()
                 ? vertexList[indexOf(a)].edgesList.contains(new EdgeWeight(b, null))
                 : false;
@@ -248,4 +253,12 @@ public class AdjacencyListGraph implements Graph {
         }
         return allItems;
     }
+    
+    
+    public Object getWeight(Object a, Object b) throws GraphException, ListException {
+        EdgeWeight ew = (EdgeWeight) vertexList[indexOf(a)].edgesList.getNode(
+        vertexList[indexOf(a)].edgesList.indexOf(new EdgeWeight(b, null))).getData();
+        return ew.getWeight();
+    }
+    
 }

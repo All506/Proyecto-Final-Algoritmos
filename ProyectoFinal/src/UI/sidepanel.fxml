@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="500.0" style="-fx-background-image: src\Resources\backbar.jpg;" stylesheets="@../CSS/General.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SidePanelController">
+<AnchorPane prefHeight="620.0" prefWidth="500.0" style="-fx-background-image: src\Resources\backbar.jpg;" stylesheets="@../CSS/General.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SidePanelController">
    <children>
-      <ImageView fitHeight="446.0" fitWidth="508.0" layoutY="127.0" pickOnBounds="true">
+      <ImageView fitHeight="460.0" fitWidth="508.0" layoutY="127.0" pickOnBounds="true">
          <image>
             <Image url="@../Resources/backbar.jpg" />
          </image>

@@ -8,16 +8,22 @@ package Controller;
 import Graphs.AdjacencyListGraph;
 import Graphs.GraphException;
 import Objects.Place;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import list.ListException;
 
 /**
@@ -54,7 +60,7 @@ public class PlaceDeleteController implements Initializable {
 
     @FXML
     private void cmbPlaceId(ActionEvent event) throws ListException {
-        if(!cmbPlaceId.getValue().isEmpty()){
+        if(cmbPlaceId.getValue()!=null){
             Place p = null;
             for (int i = 0; i < gPlace.size(); i++) {
                 p=(Place)gPlace.getVertexByIndex(i).data;
@@ -69,10 +75,12 @@ public class PlaceDeleteController implements Initializable {
 
     @FXML
     private void btnDeletePlace(ActionEvent event) throws GraphException, ListException {
-        
+        txfPlaceId.setText("");
+        txfPlaceName.setText("");
         gPlace.removeVertex(aux);
         cmbPlaceId.getItems().clear();
         loadCombobox();
+        callAlert("Confirmation", "Place deleted successfully");  
         
     }
     
@@ -83,6 +91,26 @@ public class PlaceDeleteController implements Initializable {
             cmbPlaceId.getItems().add(p.getName());
         }
     
+    }
+    
+    private void callAlert(String fxmlName, String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ErrorController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Alert");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
