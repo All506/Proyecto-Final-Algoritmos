@@ -1,6 +1,7 @@
 package Util;
 
 import Domain.BST;
+import Domain.BTreeNode;
 import Domain.CircularLinkList;
 import Domain.ListException;
 import Domain.TreeException;
@@ -23,12 +24,11 @@ public class Utility {
     public static AdjacencyListGraph gPlaces = new AdjacencyListGraph(100);
     public static String userName;
     public static BST treeProducts = new BST();
-    
+
     //Last Indexes
     public static int lastIndexGRestaurant;
-    
-    //Métodos relacionados al manejo de las listas, arboles y grafos
 
+    //Métodos relacionados al manejo de las listas, arboles y grafos
     public static boolean addSecurity(Security sec) throws ListException {
         boolean flag = false;
         if (lSecurity.isEmpty() || !lSecurity.contains(sec)) {
@@ -46,16 +46,16 @@ public class Utility {
         }
         return flag;
     }
-    
+
     //Metodos para devolver listas
     public static CircularLinkList getListSecurity() {
         return lSecurity;
     }
-    
-    public static AdjacencyListGraph getPlacesGraph(){
+
+    public static AdjacencyListGraph getPlacesGraph() {
         return gPlaces;
     }
-    
+
     //Devuelve arbol de productos
     public static BST getTreeProducts() {
         return treeProducts;
@@ -115,9 +115,13 @@ public class Utility {
                 Food f2 = (Food) b;
                 return f1.getID() == f2.getID() ? f1.getRestaurantID() < f2.getRestaurantID() : f1.getID() < f2.getID();
             case "restaurant":
-                Restaurant res1 = (Restaurant)a;
-                Restaurant res2 = (Restaurant)b;
+                Restaurant res1 = (Restaurant) a;
+                Restaurant res2 = (Restaurant) b;
                 return res1.getName().equals(res2.getName()) && res1.getLocation().equals(res2.getLocation());
+            case "productRemove":
+                Product p3 = (Product) a;
+                String string = (String) b;
+                return p3.getName().equals(string);
         }
         return false; //En cualquier otro caso retorna un false
     }
@@ -138,8 +142,11 @@ public class Utility {
         if (a instanceof Food && b instanceof Food) {
             return "food";
         }
-        if (a instanceof Restaurant && b instanceof Restaurant){
+        if (a instanceof Restaurant && b instanceof Restaurant) {
             return "restaurant";
+        }
+        if (a instanceof Product && b instanceof String) {
+            return "productRemove";
         }
         return "unknown";
     }
@@ -232,6 +239,22 @@ public class Utility {
 //            }
 //        }
         return super1;
+    }
+
+    public static Product getProductByName(String product) {
+        return tourTree(treeProducts.getRoot(), product);
+    }
+
+    private static Product tourTree(BTreeNode node, String product) {
+        if (node != null) {
+            tourTree(node.left, product);
+            tourTree(node.right, product);
+            Product p = (Product) node.data;
+            if (p.getName().equalsIgnoreCase(product)) {
+                return p;
+            }
+        }
+        return null;
     }
 
 }//end class
