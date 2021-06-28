@@ -75,9 +75,6 @@ public class MainController implements Initializable, ChangeCallback {
         MediaView mediaView = new MediaView(mediaPlayer);
 
         mediaView.setPreserveRatio(true);
-
-        //mediaView.maxWidth(901);
-        //mediaView.maxHeight(708);
         mediaView.fitWidthProperty().bind(root.minHeightProperty());
         mediaView.fitHeightProperty().bind(root.minHeightProperty());
         mediaPlayer.setOnEndOfMedia(new Runnable() {

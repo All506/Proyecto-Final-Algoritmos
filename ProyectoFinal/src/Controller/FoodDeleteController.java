@@ -7,7 +7,11 @@ package Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 
 /**
  * FXML Controller class
@@ -16,6 +20,11 @@ import javafx.fxml.Initializable;
  */
 public class FoodDeleteController implements Initializable {
 
+    @FXML
+    private ComboBox<?> comboFood;
+    @FXML
+    private Button btnRemove;
+
     /**
      * Initializes the controller class.
      */
@@ -23,5 +32,13 @@ public class FoodDeleteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void loadData(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnRemove(ActionEvent event) {
+    }
     
 }

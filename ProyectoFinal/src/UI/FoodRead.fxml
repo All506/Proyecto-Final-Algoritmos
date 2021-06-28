@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FoodReadController">
+<AnchorPane id="AnchorPane" prefHeight="610.0" prefWidth="780.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FoodReadController">
     <stylesheets>
-        <URL value="@/CSS/General.css"/>
+        <URL value="@/CSS/General.css" />
     </stylesheets>
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a35d10" height="97.0" layoutX="-1.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="782.0" />
+      <Label alignment="CENTER" layoutX="257.0" layoutY="18.0" prefHeight="61.0" prefWidth="266.0" text="Available Read" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="26.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableFood" editable="true" layoutX="26.0" layoutY="130.0" prefHeight="426.0" prefWidth="729.0">
+         <columns>
+            <TableColumn fx:id="columnId" prefWidth="85.0" text="Identificator" />
+            <TableColumn fx:id="columnName" prefWidth="308.0" text="Name" />
+            <TableColumn fx:id="columnPrice" prefWidth="117.0" text="Price" />
+            <TableColumn fx:id="columnSupermarket" prefWidth="217.0" text="Supermarket " />
+         </columns>
+      </TableView>
+   </children>
 </AnchorPane>

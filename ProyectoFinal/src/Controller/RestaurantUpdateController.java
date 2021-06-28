@@ -11,30 +11,24 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Spinner;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
  *
- * @author LuisGa
+ * @author Sebastián Navarro Martínez
  */
-public class FoodCreateController implements Initializable {
+public class RestaurantUpdateController implements Initializable {
 
     @FXML
-    private TextField textID;
+    private ComboBox<?> cmbRestaurant;
     @FXML
-    private TextField textName;
+    private TextField txtName;
     @FXML
-    private Spinner<?> spinnerPrice;
+    private TextField txtLocation;
     @FXML
-    private Button btnAdd;
-    @FXML
-    private ScrollPane scrollPane;
-    @FXML
-    private AnchorPane anchorPane;
+    private Button btnUpdate;
 
     /**
      * Initializes the controller class.
@@ -45,7 +39,7 @@ public class FoodCreateController implements Initializable {
     }    
 
     @FXML
-    private void btnAdd(ActionEvent event) {
+    private void btnUpdate(ActionEvent event) {
     }
     
 }

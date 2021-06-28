@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 /**
@@ -54,6 +55,10 @@ public class ProductCreateController implements Initializable {
         value.setValue(1);
         spinnerPrice.setValueFactory(value);
 
+        Popup pop = new Popup();
+        
+      
+        
         try {
             textID.setText(String.valueOf(Util.Utility.getTreeProducts().size()));
         } catch (TreeException ex) {

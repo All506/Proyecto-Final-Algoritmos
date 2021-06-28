@@ -39,5 +39,9 @@ public class CautionController implements Initializable {
         Stage stage = (Stage) this.btnContinue.getScene().getWindow();
         stage.close();
     }
+    
+    public void fill(String content){
+        this.txtContent.setText(content);
+    }
 
 }

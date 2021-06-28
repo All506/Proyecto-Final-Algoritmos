@@ -7,7 +7,10 @@ package Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 /**
  * FXML Controller class
@@ -15,6 +18,17 @@ import javafx.fxml.Initializable;
  * @author LuisGa
  */
 public class FoodReadController implements Initializable {
+
+    @FXML
+    private TableView<?> tableFood;
+    @FXML
+    private TableColumn<?, ?> columnId;
+    @FXML
+    private TableColumn<?, ?> columnName;
+    @FXML
+    private TableColumn<?, ?> columnPrice;
+    @FXML
+    private TableColumn<?, ?> columnSupermarket;
 
     /**
      * Initializes the controller class.

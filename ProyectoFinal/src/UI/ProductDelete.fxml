@@ -10,19 +10,21 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="491.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProductDeleteController">
+<AnchorPane id="AnchorPane" prefHeight="610.0" prefWidth="780.0" style="-fx-background-color: #FFFFFF;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProductDeleteController">
     <stylesheets>
         <URL value="@/CSS/General.css" />
     </stylesheets>
    <children>
-      <Label layoutX="77.0" layoutY="46.0" prefHeight="42.0" prefWidth="88.0" text="Remove">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e4e4e4" height="61.0" layoutX="78.0" layoutY="173.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="627.0" />
+      <Label layoutX="123.0" layoutY="183.0" prefHeight="42.0" prefWidth="239.0" text="Choose a product to delete">
          <font>
-            <Font size="21.0" />
+            <Font name="Segoe UI" size="19.0" />
          </font>
       </Label>
-      <ComboBox fx:id="comboProducts" layoutX="277.0" layoutY="54.0" onAction="#loadData" prefHeight="25.0" prefWidth="199.0" />
+      <ComboBox fx:id="comboProducts" layoutX="409.0" layoutY="191.0" onAction="#loadData" prefHeight="25.0" prefWidth="260.0" />
       <GridPane fx:id="gridProduct" layoutX="77.0" layoutY="97.0" prefHeight="270.0" prefWidth="399.0" visible="false">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -73,14 +75,15 @@
             <TextArea fx:id="textAreaSupermarkets" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <Button fx:id="btnRemove" layoutX="276.0" layoutY="411.0" mnemonicParsing="false" onAction="#btnRemove" prefHeight="45.0" prefWidth="200.0" text="Remove">
+      <Button fx:id="btnRemove" layoutX="279.0" layoutY="274.0" mnemonicParsing="false" onAction="#btnRemove" prefHeight="31.0" prefWidth="260.0" stylesheets="@../CSS/coolThings.css" text="Remove">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Label layoutX="195.0" layoutY="14.0" text="Remove Products" underline="true">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0c73c2" height="97.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="782.0" />
+      <Label alignment="CENTER" layoutX="295.0" layoutY="18.0" prefHeight="61.0" prefWidth="195.0" text="Remove Product" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font size="21.0" />
+            <Font name="Segoe UI" size="26.0" />
          </font>
       </Label>
    </children>

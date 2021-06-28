@@ -7,28 +7,26 @@ package Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 /**
  * FXML Controller class
  *
- * @author LuisGa
+ * @author Sebastián Navarro Martínez
  */
-public class FoodUpdateController implements Initializable {
+public class RestaurantReadController implements Initializable {
 
     @FXML
-    private ComboBox<?> cmbFood;
+    private TableView<?> tableRestaurant;
     @FXML
-    private TextField txtName;
+    private TableColumn<?, ?> columnId;
     @FXML
-    private TextField txtPrice;
+    private TableColumn<?, ?> columnName;
     @FXML
-    private Button btnUpdate;
+    private TableColumn<?, ?> columnLocation;
 
     /**
      * Initializes the controller class.
@@ -37,9 +35,5 @@ public class FoodUpdateController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-    @FXML
-    private void btnUpdate(ActionEvent event) {
-    }
     
 }
