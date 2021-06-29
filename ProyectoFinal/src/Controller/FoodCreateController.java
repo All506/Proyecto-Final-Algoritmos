@@ -8,6 +8,8 @@ package Controller;
 import Domain.TreeException;
 import Objects.Food;
 import Objects.Product;
+import Objects.Restaurant;
+import com.jfoenix.controls.JFXRadioButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,9 +29,11 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import list.ListException;
 
 /**
  * FXML Controller class
@@ -63,17 +67,20 @@ public class FoodCreateController implements Initializable {
         value.setValue(1);
         spinnerPrice.setValueFactory(value);
 
-        Popup pop = new Popup();
-
         try {
-            textID.setText(String.valueOf(Util.Utility.getTreeProducts().size()));
+            textID.setText(String.valueOf(Util.Utility.getTreeFoods().size()));
         } catch (TreeException ex) {
             textID.setText(String.valueOf("0"));
         }
 
-        //Supermarkets Radio Buttons
-        supermarket = new RadioButton[20];//metodo donde llene el arreglo jeje
-        fillSupermarket();
+        //Food Radio Buttons Array
+        supermarket = new RadioButton[20];
+
+        try {
+            fillSupermarket();
+        } catch (ListException ex) {
+            Logger.getLogger(FoodCreateController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         //Cargar el combobox
         loadComboBoxCourse();
@@ -102,13 +109,11 @@ public class FoodCreateController implements Initializable {
         System.out.println(Util.Utility.getTreeProducts().toString());
         cleanDisplay();
     }
-    
-    
+
     //Carga el combo con los supermarcados
     public void loadComboBoxCourse() {
 
     }
-
 
     public void maskText(TextField txtField) {
         txtField.setOnKeyTyped((KeyEvent event) -> {
@@ -138,22 +143,20 @@ public class FoodCreateController implements Initializable {
         spinnerPrice.setValueFactory(value);
     }
 
-    private void fillSupermarket() {
-        RadioButton radio = new RadioButton(String.valueOf("Fresh Market Cartago"));//38 caracteres
-        System.out.println(count);
-        radio.setLayoutY(count * 20);
-        anchorPane.setPrefHeight(anchorPane.getHeight() + 20);
-        supermarket[count] = radio;
-        anchorPane.getChildren().add(radio);
-        count++;
-
-        RadioButton radio2 = new RadioButton(String.valueOf("Fresh Market San Jose"));//38 caracteres
-        System.out.println(count);
-        radio2.setLayoutY(count * 20);
-        anchorPane.setPrefHeight(anchorPane.getHeight() + 20);
-        supermarket[count] = radio2;
-        anchorPane.getChildren().add(radio2);
-        count++;
+    private void fillSupermarket() throws ListException {
+        if (Util.Utility.gRestaurants.size() == 0) {
+            Text empty = new Text("No restaurants added yet");
+            anchorPane.getChildren().add(empty);
+        } else {
+            for (int i = 0; i < Util.Utility.gRestaurants.size(); i++) {
+                Restaurant rest = (Restaurant) Util.Utility.gRestaurants.getVertexByIndex(i).data;
+                RadioButton radio = new RadioButton(rest.getName());
+                radio.setLayoutY(count * 20);
+                supermarket[count] = radio;
+                anchorPane.getChildren().add(radio);
+                count++;
+            }
+        }
     }
 
     private void callAlert(String fxmlName, String text) {
