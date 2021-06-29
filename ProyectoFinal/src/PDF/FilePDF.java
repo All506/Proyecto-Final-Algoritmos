@@ -6,8 +6,6 @@ import Domain.CircularLinkList;
 import Domain.ListException;
 import Objects.Food;
 import Objects.Product;
-import Objects.Restaurant;
-import Objects.Supermarket;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;

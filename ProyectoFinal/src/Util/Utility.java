@@ -30,6 +30,8 @@ public class Utility {
     //Last Indexes
     public static int lastIndexGRestaurant;
     public static int lastIndexGPlace;
+    public static int lastIDFood;
+    public static int lastIDProduct;
 
     //Métodos relacionados al manejo de las listas, arboles y grafos
     public static boolean addSecurity(Security sec) throws ListException {
@@ -76,7 +78,23 @@ public class Utility {
     public static BST getTreeFoods() {
         return treeFoods;
     }
-    
+    //Devuelve el ultimo id del arbol de food
+    public static int getLastIDFood() {
+        return lastIDFood;
+    }
+
+    public static void setLastIDFood(int lastIDFood) {
+        Utility.lastIDFood = lastIDFood;
+    }
+
+    public static int getLastIDProduct() {
+        return lastIDProduct;
+    }
+
+    public static void setLastIDProduct(int lastIDProduct) {
+        Utility.lastIDProduct = lastIDProduct;
+    }
+
 
     //UTILIDAD 
     public static int random() {
@@ -288,41 +306,111 @@ public class Utility {
         return x;
     }
 
-    public static Supermarket getSupermarketById(String superMarket) {
-        Supermarket super1 = new Supermarket(0, "Fresh Market", "Cartago");
-//        for (int i = 1; i <= lStudent.size(); i++) {
-//            Student s = (Student) lStudent.getNode(i).data;
-//            if (String.valueOf(s.getId()).equals(id)) {
-//                return s;
-//            }
-//        }
-        return super1;
+public static Restaurant getRestaurantId(String restaurant) throws list.ListException {
+        for (int i = 0; i < gRestaurants.size(); i++) {
+            Restaurant restauran = (Restaurant) gRestaurants.getVertexByIndex(i).data;
+            if (String.valueOf(restauran.getName()).equalsIgnoreCase(restaurant)) {
+                return restauran;
+            }
+        }
+        return null;
     }
 
+    public static Restaurant getRestaurantId2(int restaurant) throws list.ListException {
+        for (int i = 0; i < gRestaurants.size(); i++) {
+            Restaurant restauran = (Restaurant) gRestaurants.getVertexByIndex(i).data;
+            if (restauran.getID() == restaurant) {
+                return restauran;
+            }
+        }
+        return null;
+    }
+    
+//    public static Restaurant getSupermarketId(String supermarket) throws list.ListException {
+//        for (int i = 0; i < g.size(); i++) {
+//            Restaurant restauran = (Restaurant) gRestaurants.getVertexByIndex(i).data;
+//            if (String.valueOf(restauran.getName()).equalsIgnoreCase(restaurant)) {
+//                return restauran;
+//            }
+//        }
+//        return null;
+//    }
+//
+//    public static Restaurant getSupermarketId2(int supermarket) throws list.ListException {
+//        for (int i = 0; i < gRestaurants.size(); i++) {
+//            Restaurant restauran = (Restaurant) gRestaurants.getVertexByIndex(i).data;
+//            if (restauran.getID() == restaurant) {
+//                return restauran;
+//            }
+//        }
+//        return null;
+//    }
+    
+    
     static Product pro;
     public static Product getProductByName(String product) {
         tourTree(treeProducts.getRoot(), product);
         return pro;
-    }
-    
-    static Food foo;
-     public static Food getFoodByName(String foodName) {
-        tourTree(treeFoods.getRoot(), foodName);
-        return foo;
     }
 
     private static void tourTree(BTreeNode node, String product) {
         if (node != null) {
             Product p = (Product) node.data;
             if (p.getName().equalsIgnoreCase(product)) {
-                pro=p;
+                pro = p;
             }
             tourTree(node.left, product);
             tourTree(node.right, product);
-            
-            
         }
-//        return null;
     }
 
+    static Food foo;
+    public static Food getFoodByName(String foodName) {
+        tourTreeFood(treeFoods.getRoot(), foodName);
+        return foo;
+    }
+
+    private static void tourTreeFood(BTreeNode node, String foodName) {
+        if (node != null) {
+            Food f = (Food) node.data;
+            if (f.getName().equalsIgnoreCase(foodName)) {
+                foo = f;
+            }
+            tourTree(node.left, foodName);
+            tourTree(node.right, foodName);
+        }
+    }
+    
+    public static int getProductID() {
+        tourTreeProductID(treeProducts.getRoot());
+        return lastIDProduct;
+    }
+
+    private static void tourTreeProductID(BTreeNode node) {
+        if (node != null) {
+            Product p = (Product) node.data;
+            if (p.getID() > lastIDProduct) {
+                setLastIDProduct(p.getID());
+            }
+            tourTreeProductID(node.left);
+            tourTreeProductID(node.right);
+        }
+    }
+    
+    public static int getFoodID() {
+        tourTreeFoodID(treeFoods.getRoot());
+        return lastIDFood;
+    }
+
+    private static void tourTreeFoodID(BTreeNode node) {
+        if (node != null) {
+            Food f = (Food) node.data;
+            if (f.getID() > lastIDFood) {
+                setLastIDFood(f.getID());
+            }
+            tourTreeFoodID(node.left);
+            tourTreeFoodID(node.right);
+        }
+    }
+    
 }//end class

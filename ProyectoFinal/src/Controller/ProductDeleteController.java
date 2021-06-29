@@ -99,7 +99,7 @@ public class ProductDeleteController implements Initializable {
             textId.setText(String.valueOf(p.getID()));
             textName.setText(p.getName());
             textPrice.setText(String.valueOf(p.getPrice()));
-            textAreaSupermarkets.setText(Util.Utility.getSupermarketById(String.valueOf(p.getSupermarketID())).getName());
+            //textAreaSupermarkets.setText(Util.Utility.getSupermarketById(String.valueOf(p.getSupermarketID())).getName());
             gridProduct.setVisible(true);
         } else {
             System.out.println("no hay");
