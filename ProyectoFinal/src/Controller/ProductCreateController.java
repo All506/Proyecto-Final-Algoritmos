@@ -47,7 +47,7 @@ public class ProductCreateController implements Initializable {
 
     RadioButton[] supermarket;
     int count = 0;
-    
+
     SpinnerValueFactory<Integer> value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000000);
 
     @Override
@@ -56,13 +56,11 @@ public class ProductCreateController implements Initializable {
         spinnerPrice.setValueFactory(value);
 
         Popup pop = new Popup();
-        
-      
-        
-        try {
-            textID.setText(String.valueOf(Util.Utility.getTreeProducts().size()));
-        } catch (TreeException ex) {
-            textID.setText(String.valueOf("0"));
+
+        if (!Util.Utility.getTreeProducts().isEmpty()) {
+            textID.setText(String.valueOf(Util.Utility.getProductID() + 1));
+        } else {
+            textID.setText(String.valueOf(1));
         }
 
         //Supermarkets Radio Buttons
@@ -95,23 +93,22 @@ public class ProductCreateController implements Initializable {
             callAlert("Error", "The name space is empty");
             System.out.println("alert");
         }
-        System.out.println(Util.Utility.getTreeProducts().toString());
         cleanDisplay();
     }
 
     //Carga el combo con los supermarcados
     public void loadComboBoxSuperMarkets() {
-        
+
     }
 
     public void cleanDisplay() {
         this.textName.setText("");
-        try {
-            textID.setText(String.valueOf(Util.Utility.getTreeProducts().size()));
-        } catch (TreeException ex) {
-            textID.setText(String.valueOf("0"));
-        }
         value.setValue(1);
+       if (!Util.Utility.getTreeProducts().isEmpty()) {
+            textID.setText(String.valueOf(Util.Utility.getProductID() + 1));
+        } else {
+            textID.setText(String.valueOf(1));
+        }
         spinnerPrice.setValueFactory(value);
     }
 

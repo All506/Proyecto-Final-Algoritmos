@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
 public class ProductUpdateController implements Initializable {
 
     @FXML
-    private ComboBox<?> cmbProducts;
+    private ComboBox<String> cmbProducts;
     @FXML
     private TextField txtName;
     @FXML

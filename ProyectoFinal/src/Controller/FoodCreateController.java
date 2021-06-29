@@ -7,9 +7,7 @@ package Controller;
 
 import Domain.TreeException;
 import Objects.Food;
-import Objects.Product;
 import Objects.Restaurant;
-import com.jfoenix.controls.JFXRadioButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,7 +29,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import list.ListException;
 
@@ -55,7 +52,7 @@ public class FoodCreateController implements Initializable {
     @FXML
     private AnchorPane anchorPane;
 
-    RadioButton[] supermarket;
+    RadioButton[] restaurant;
     int count = 0;
     SpinnerValueFactory<Integer> value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000000);
 
@@ -67,14 +64,13 @@ public class FoodCreateController implements Initializable {
         value.setValue(1);
         spinnerPrice.setValueFactory(value);
 
-        try {
-            textID.setText(String.valueOf(Util.Utility.getTreeFoods().size()));
-        } catch (TreeException ex) {
-            textID.setText(String.valueOf("0"));
+        if (!Util.Utility.getTreeFoods().isEmpty()) {
+            textID.setText(String.valueOf(Util.Utility.getFoodID() + 1));
+        } else {
+            textID.setText(String.valueOf(1));
         }
-
         //Food Radio Buttons Array
-        supermarket = new RadioButton[20];
+        restaurant = new RadioButton[20];//CAMBIAR
 
         try {
             fillSupermarket();
@@ -90,23 +86,21 @@ public class FoodCreateController implements Initializable {
     }
 
     @FXML
-    private void btnAdd(ActionEvent event) throws TreeException {
+    private void btnAdd(ActionEvent event) throws TreeException, ListException {
         if (!textName.getText().equals("") && spinnerPrice.getValue() > 0) {
-            for (int i = 0; supermarket[i] != null; i++) {
+            for (int i = 0; restaurant[i] != null; i++) {
                 Food food;
-                if (supermarket[i].isSelected()) {
-                    food = new Food(Integer.parseInt(textID.getText()), textName.getText(), spinnerPrice.getValue(), i/*Util.Utility.getSupermarketById(supermarket[i].getText()).getID()*/);
+                if (restaurant[i].isSelected()) {
+                    food = new Food(Integer.parseInt(textID.getText()), textName.getText(), spinnerPrice.getValue(), Util.Utility.getRestaurantId(restaurant[i].getText()).getID());
                     System.out.println(food.toString());
                     Util.Utility.addFood(food);
                 }
             }
-
         } else {
             //Alert de que hay espacios vacios
             callAlert("Error", "The Name space is empty!!!");
             System.out.println("alert");
         }
-        System.out.println(Util.Utility.getTreeProducts().toString());
         cleanDisplay();
     }
 
@@ -134,12 +128,12 @@ public class FoodCreateController implements Initializable {
 
     public void cleanDisplay() {
         this.textName.setText("");
-        try {
-            textID.setText(String.valueOf(Util.Utility.getTreeProducts().size()));
-        } catch (TreeException ex) {
-            textID.setText(String.valueOf("0"));
-        }
         value.setValue(1);
+        if (!Util.Utility.getTreeFoods().isEmpty()) {
+            textID.setText(String.valueOf(Util.Utility.getFoodID() + 1));
+        } else {
+            textID.setText(String.valueOf(1));
+        }
         spinnerPrice.setValueFactory(value);
     }
 
@@ -152,7 +146,7 @@ public class FoodCreateController implements Initializable {
                 Restaurant rest = (Restaurant) Util.Utility.gRestaurants.getVertexByIndex(i).data;
                 RadioButton radio = new RadioButton(rest.getName());
                 radio.setLayoutY(count * 20);
-                supermarket[count] = radio;
+                restaurant[count] = radio;
                 anchorPane.getChildren().add(radio);
                 count++;
             }
