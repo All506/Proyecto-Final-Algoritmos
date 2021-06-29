@@ -151,7 +151,7 @@ public class Utility {
             case "food":
                 Food f1 = (Food) a;
                 Food f2 = (Food) b;
-                return f1.getID() == f2.getID() ? f1.getRestaurantID() < f2.getRestaurantID() : f1.getID() < f2.getID();
+                return f1.getName().equalsIgnoreCase(f2.getName()) && f1.getID() == f2.getID() && f1.getRestaurantID() == f2.getRestaurantID();
             case "restaurant":
                 Restaurant res1 = (Restaurant) a;
                 Restaurant res2 = (Restaurant) b;
