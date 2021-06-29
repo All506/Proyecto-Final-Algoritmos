@@ -147,9 +147,9 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <Text fill="WHITE" layoutX="80.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We will find it for you!" wrappingWidth="347.13671875">
+      <Text fill="WHITE" layoutX="80.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We will find it for you!" textAlignment="CENTER" wrappingWidth="347.13671875">
          <font>
-            <Font name="Freestyle Script" size="55.0" />
+            <Font name="Freestyle Script" size="50.0" />
          </font>
          <effect>
             <DropShadow spread="0.16">
