@@ -51,7 +51,7 @@ public class LogInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        String path = "src/Resources/Video" + Util.Utility.random(5) + ".mp4";
+        String path = "src/Resources/Video" + Util.Utility.random(7) + ".mp4";
         Media media = new Media(new File(path).toURI().toString());
 
         //Instantiating MediaPlayer class

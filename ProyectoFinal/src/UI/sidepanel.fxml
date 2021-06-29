@@ -82,7 +82,7 @@
             <Font size="15.0" />
          </font>
          <graphic>
-            <ImageView fitHeight="43.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="41.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Resources/Exit.png" />
                </image>
@@ -146,10 +146,13 @@
                </image>
             </ImageView>
          </graphic>
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
       </JFXButton>
       <Text fill="WHITE" layoutX="80.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We will find it for you!" textAlignment="CENTER" wrappingWidth="347.13671875">
          <font>
-            <Font name="Freestyle Script" size="50.0" />
+            <Font name="Gabriola" size="50.0" />
          </font>
          <effect>
             <DropShadow spread="0.16">
