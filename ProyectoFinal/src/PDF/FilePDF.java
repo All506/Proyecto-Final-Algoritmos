@@ -4,8 +4,11 @@ import Domain.BST;
 import Domain.BTreeNode;
 import Domain.CircularLinkList;
 import Domain.ListException;
+import Graphs.AdjacencyListGraph;
 import Objects.Food;
 import Objects.Product;
+import Objects.Restaurant;
+import Objects.Supermarket;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -28,7 +31,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FilePDF {
-    
+
     //Constructor
     public FilePDF() {
 
@@ -118,7 +121,7 @@ public class FilePDF {
 
         CircularLinkList arrayListTemp2 = new CircularLinkList();
         CircularLinkList arrayList2 = tourTree(treeFood.getRoot(), arrayListTemp2);
-        
+
         if (!arrayList2.isEmpty()) {
             try {
                 for (int i = 1; i <= arrayList2.size(); i++) {
@@ -159,8 +162,8 @@ public class FilePDF {
         return arrayList2;
     }
 
-    /*Genera el pdf y escribe lo que queremos
-    public void restaurantsAndSupermarket(String fileName, AdjacencyListGraph graph) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException, ListException, domain.list.ListException {
+    //Genera el pdf y escribe lo que queremos
+    public void restaurantsAndSupermarket(String fileName, AdjacencyListGraph graph) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException, ListException, list.ListException {
         FileOutputStream file = new FileOutputStream(fileName + ".pdf");
         Document document = new Document();
         PdfWriter.getInstance(document, file);
@@ -238,14 +241,15 @@ public class FilePDF {
         } else {
             Paragraph parrafoTemp = new Paragraph();
             parrafoTemp.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafoTemp.add("\nThere's no food registered\n");
+            parrafoTemp.add("\nThere's no Restaurants registered\n");
             document.add(table2);//Agrega la tabla al documento
             document.add(parrafoTemp);
         }
 
         //Importante cerrar el pdf
         document.close();
-    }*/
+    }
 
+    
     
 }//end class

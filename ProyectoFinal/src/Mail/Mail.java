@@ -26,16 +26,17 @@ public class Mail {
     }
 
     //Metodo para enviar el correo de registrar estudiante
-    public static void sugestedEmail(String recepient, CircularLinkList[] data) throws Exception {
+    public static void sendEmail(String recepient) throws Exception {
+        System.out.println("Preparando para mandar el correo");
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", 587);
 
-        //Cuenta desde donde mandamos el correo
-        String myAccountEmail = "noreplyucr1@gmail.com";//CAMBIAR CUENTA
-        String password = "ucr12345!";
+        //Cuenta desde donde mandamos el correo       
+        String myAccountEmail = "foodfinders.cr@gmail.com";//CAMBIAR CUENTA
+        String password = "foodFinders.cr123";
 
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
@@ -44,13 +45,13 @@ public class Mail {
             }
         });
 
-        Message message = sendEmailRegister(session, myAccountEmail, recepient, data);
+        Message message = sendEmailSuggestion(session, myAccountEmail, recepient);
         Transport.send(message);
-
+        System.out.println("Correo Registrar listo");
     }
 
     //Contenido del message register(Correo)
-    private static Message sendEmailRegister(Session session, String myAccountEmail, String recepient, CircularLinkList[] data) throws IOException{
+    private static Message sendEmailSuggestion(Session session, String myAccountEmail, String recepient) throws IOException{
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
@@ -61,28 +62,28 @@ public class Mail {
 
             //Body 
             MimeBodyPart mimeBody = new MimeBodyPart();
-//            String text = "Your information about your registration: \n";
+            String text = "Your information about your search: \n";
 //            text += "\n";
-            for (int i = 1; i < data.length; i++) {
-                if (i == 2) {
-                    //text += (dataName[i] + ": " + data[i] + " - " + Util.Utility.getCarrerByID(data[2]).getDescription() +"\n");
-                }else{
-//                    text += (dataName[i] + ": " + data[i] + "\n");
-                }
-                
-            }
+//            for (int i = 1; i < data.length; i++) {
+//                if (i == 2) {
+//                    //text += (dataName[i] + ": " + data[i] + " - " + Util.Utility.getCarrerByID(data[2]).getDescription() +"\n");
+//                }else{
+////                    text += (dataName[i] + ": " + data[i] + "\n");
+//                }
+//                
+//            }
 //            text += "\nYour User is: " + data[1] + " and your Password is: " + data[0];
-//            mimeBody.setText(text);
+            mimeBody.setText(text);
 
             //Image Attachment
-            MimeBodyPart pdfAttachment = new MimeBodyPart();
+//            MimeBodyPart pdfAttachment = new MimeBodyPart();
             //pdfAttachment.attachFile("src/img/logo-ucr.png");
 
-            emailContent.addBodyPart(pdfAttachment);
+//            emailContent.addBodyPart(pdfAttachment);
             emailContent.addBodyPart(mimeBody);
 
             //Agregamos al mensaje el contenido a mandar
-            message.setSubject("Suggestion System");
+            message.setSubject("Food Finders");
             message.setContent(emailContent);
 
             return message;
@@ -92,7 +93,6 @@ public class Mail {
         return null;
     }
 
-
-
+    
 
 }//end class
