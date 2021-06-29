@@ -7,6 +7,7 @@ package XML;
 
 import Domain.CircularLinkList;
 import Graphs.GraphException;
+import Objects.Place;
 import Objects.Security;
 import Objects.Restaurant;
 import Security.AES;
@@ -197,14 +198,47 @@ public class FileXML {
 
         return lRestaurants;
     }
+    
+    public SinglyLinkedList readXMLtoPlacesList() {
+        SinglyLinkedList lPlaces = new SinglyLinkedList();
+        
+        if (exist("Places.xml")) {
+
+            try {
+                File inputFile = new File("Places.xml");
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                Document doc = dBuilder.parse(inputFile);
+                doc.getDocumentElement().normalize();
+
+                NodeList nList = doc.getElementsByTagName("Places"); //Cabecera de objeto
+
+                for (int indice = 0; indice < nList.getLength(); indice++) {
+                    Place newPlace = new Place(0, "");
+                    Node nNode = nList.item(indice);
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element eElement = (Element) nNode;
+                        newPlace.setID(Integer.valueOf(eElement.getAttribute("id")));
+                        newPlace.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
+                    }
+                    lPlaces.add(newPlace);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return lPlaces;
+    }
 
     public void loadFiles() throws ListException, GraphException {
+        //Se carga la informacion de los restaurantes 
         if (readXMLtoRestaurantList().isEmpty()) {
             Util.Utility.lastIndexGRestaurant = 0; //Si no existe el documento, no se ha guardado ningun objeto
             System.out.println("El archivo de restaurantes no existe");
         } else {
             SinglyLinkedList lRestaurantes = readXMLtoRestaurantList();
-            System.out.println("El contenido de la lista es \n " + lRestaurantes.toString());
             for (int i = 1; i <= lRestaurantes.size(); i++) {
                 Util.Utility.gRestaurants.addVertex(lRestaurantes.getNode(i).data);
                 Restaurant temporalRest = (Restaurant)lRestaurantes.getNode(i).data;
@@ -212,5 +246,22 @@ public class FileXML {
             }
         }
         Util.Utility.lastIndexGRestaurant++; //Se anhade uno mas para que el siguiente valor almacenado conicida
+        
+        //Se carga la informacion de los lugares
+    if (readXMLtoPlacesList().isEmpty()) {
+            Util.Utility.lastIndexGPlace = 0; //Si no existe el documento, no se ha guardado ningun objeto
+            System.out.println("El archivo de lugares no existe");
+        } else {
+            SinglyLinkedList lPlaces = readXMLtoPlacesList();
+            System.out.println("lRestaurantes contiene " + lPlaces.toString());
+            for (int i = 1; i <= lPlaces.size(); i++) {
+                Util.Utility.gPlaces.addVertex(lPlaces.getNode(i).data);
+                Place temporalPlaces = (Place)lPlaces.getNode(i).data;
+                Util.Utility.lastIndexGPlace = temporalPlaces.getID(); //Se setea el valor del ultimo indice almacenado
+            }
+        }
+        Util.Utility.lastIndexGPlace++; //Se anhade uno mas para que el siguiente valor almacenado conicida
+    
     }
+    
 }

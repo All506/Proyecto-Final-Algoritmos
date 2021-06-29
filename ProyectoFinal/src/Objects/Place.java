@@ -39,7 +39,15 @@ public class Place {
         return "Place{" + "ID:" + ID + ", name:" + name + '}';
     }
 
- 
+    public String[] dataName(){
+        String[] dataName = {"id","name"};
+        return dataName;
+    }
+    
+    public String[] data(){
+        String[] data = {String.valueOf(this.ID),name};
+        return data;
+    }
     
     
 }

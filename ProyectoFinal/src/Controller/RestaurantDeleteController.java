@@ -7,6 +7,7 @@ package Controller;
 
 import Domain.ListException;
 import Graphs.GraphException;
+import Objects.Place;
 import Objects.Restaurant;
 import java.io.IOException;
 import java.net.URL;
@@ -43,6 +44,7 @@ public class RestaurantDeleteController implements Initializable {
     private TextField txtLocation;
     @FXML
     private Button btnDelete;
+    Restaurant aux;
 
     /**
      * Initializes the controller class.
@@ -51,18 +53,15 @@ public class RestaurantDeleteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         loadComboBoxRestaurants();
         cmbRestaurant.getSelectionModel().select(0);
-        cmbRestaurant.setOnMouseReleased(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                loadInfo();
-            }
-        });
         loadInfo();
     }
 
     @FXML
     private void btnDelete(ActionEvent event) throws GraphException, list.ListException {
-        Restaurant rest = new Restaurant(0, txtName.getText(), txtLocation.getText());
+        if (Util.Utility.gRestaurants.isEmpty()){
+            callAlert("Error", "Graph is empty");
+        } else {
+            Restaurant rest = new Restaurant(0, txtName.getText(), txtLocation.getText());
         if (Util.Utility.gRestaurants.containsVertex(rest)) {
             Util.Utility.gRestaurants.removeVertex(rest);
 
@@ -72,6 +71,8 @@ public class RestaurantDeleteController implements Initializable {
         } else {
             callAlert("Error", "Restaurant is not registered");
         }
+        }
+        
 
     }
 
@@ -106,7 +107,18 @@ public class RestaurantDeleteController implements Initializable {
     }
 
     @FXML
-    private void cmbChanged(ActionEvent event) {
+    private void cmbChanged(ActionEvent event) throws list.ListException {
+         if(cmbRestaurant.getValue()!=null){
+            Restaurant p = null;
+            for (int i = 0; i < Util.Utility.gRestaurants.size(); i++) {
+                p=(Restaurant)Util.Utility.gRestaurants.getVertexByIndex(i).data;
+                if(p.getName().equals(cmbRestaurant.getValue())){
+                txtLocation.setText(p.getLocation());
+                txtName.setText(p.getName());
+                aux=p;
+                }
+            }
+        }
 
     }
 

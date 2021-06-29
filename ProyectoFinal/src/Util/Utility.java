@@ -22,13 +22,14 @@ import java.util.regex.Pattern;
 public class Utility {
 
     public static CircularLinkList lSecurity = new CircularLinkList();
-    public static AdjacencyListGraph gRestaurants = new AdjacencyListGraph(10);
+    public static AdjacencyListGraph gRestaurants = new AdjacencyListGraph(100);
     public static AdjacencyListGraph gPlaces = new AdjacencyListGraph(100);
     public static String userName;
     public static BST treeProducts = new BST();
     public static BST treeFoods = new BST();
     //Last Indexes
     public static int lastIndexGRestaurant;
+    public static int lastIndexGPlace;
 
     //Métodos relacionados al manejo de las listas, arboles y grafos
     public static boolean addSecurity(Security sec) throws ListException {

@@ -100,7 +100,7 @@ public class PlaceDeleteController implements Initializable {
             Parent root1;
             root1 = (Parent) loader.load();
             //Se llama al controller de la nueva ventana abierta
-            ErrorController controller = loader.getController();
+            ConfirmationController controller = loader.getController();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Alert");

@@ -7,6 +7,7 @@ package Util;
 
 import Domain.CircularLinkList;
 import Domain.ListException;
+import Objects.Place;
 import Objects.Restaurant;
 import Objects.Security;
 import Security.AES;
@@ -44,7 +45,7 @@ public class SaveData {
                 writeSecurity();
             }
         }
-        
+
         //La información acerca de restaurantes es almacenada
         if (!fXML.exist("Restaurants.xml")) { //Si el archivo no existe
             fXML.createXML("RestaurantsXML", "Restaurants");
@@ -58,7 +59,20 @@ public class SaveData {
                 writeRestaurants();
             }
         }
-        
+
+        //La información acerca de lugares es almacenada
+        if (!fXML.exist("Places.xml")) { //Si el archivo no existe
+            fXML.createXML("PlacesXML", "Places");
+            if (!Util.Utility.gPlaces.isEmpty()) {
+                writePlaces();
+            }
+        } else {
+            fXML.deleteFile("Places");
+            fXML.createXML("PlacesXML", "Places");
+            if (!Util.Utility.gPlaces.isEmpty()) {
+                writePlaces();
+            }
+        }
     }
 
     public void writeSecurity() throws ListException, TransformerException, SAXException, IOException {
@@ -94,5 +108,21 @@ public class SaveData {
             }
         }
     }
-    
+
+    private void writePlaces() throws list.ListException, TransformerException, SAXException, IOException {
+        FileXML fXML = new FileXML();
+
+        if (Util.Utility.gPlaces.isEmpty()) {
+            if (fXML.exist("Places.xml")) {
+                fXML.deleteFile("Places");
+            }
+        } else {
+            SinglyLinkedList placesToSave = Util.Utility.gPlaces.getAllItemsAsList();
+            for (int i = 1; i <= placesToSave.size(); i++) {
+                Place place = (Place) placesToSave.getNode(i).data;
+                fXML.writeXML("Places.xml", "Places", place.dataName(), place.data());
+            }
+        }
+    }
+
 }

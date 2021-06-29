@@ -61,6 +61,7 @@ public class PlaceCreateController implements Initializable {
             gPlaces.addVertex(new Place(Integer.parseInt(txfPlaceId.getText()), txfPlaceName.getText()));
 //            callAlert("Confirmation", "Place added successfully");  
             txfPlaceName.setText("");
+            Util.Utility.lastIndexGPlace++;
             loadTextField();
         }else{
             callAlert("Error", "The name must contain at least 5 characters.");  
@@ -92,9 +93,9 @@ public class PlaceCreateController implements Initializable {
       
         if (!gPlaces.isEmpty()) {
             Place p = (Place) gPlaces.getVertexByIndex(gPlaces.size() - 1).data;
-            txfPlaceId.setText(String.valueOf(p.getID() + 1));
+            txfPlaceId.setText(String.valueOf(Util.Utility.lastIndexGPlace));
         } else {
-            txfPlaceId.setText("0");
+            txfPlaceId.setText("1");
         }
 
     }
