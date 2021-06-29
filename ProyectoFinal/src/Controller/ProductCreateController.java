@@ -70,11 +70,10 @@ public class ProductCreateController implements Initializable {
         fillSupermarket();
 
         //Cargar el combobox
-        loadComboBoxCourse();
+        loadComboBoxSuperMarkets();
 
         //Mascaras
         maskText(textName);
-
     }
 
     @FXML
@@ -93,7 +92,7 @@ public class ProductCreateController implements Initializable {
 
         } else {
             //Alert de que hay espacios vacios
-            callAlert("Error", "The Name space is empty!!!");
+            callAlert("Error", "The name space is empty");
             System.out.println("alert");
         }
         System.out.println(Util.Utility.getTreeProducts().toString());
@@ -101,8 +100,8 @@ public class ProductCreateController implements Initializable {
     }
 
     //Carga el combo con los supermarcados
-    public void loadComboBoxCourse() {
-
+    public void loadComboBoxSuperMarkets() {
+        
     }
 
     public void cleanDisplay() {
@@ -142,7 +141,7 @@ public class ProductCreateController implements Initializable {
         anchorPane.getChildren().add(radio);
         count++;
 
-        RadioButton radio2 = new RadioButton(String.valueOf("Fresh Market San Jose"));//38 caracteres
+        RadioButton radio2 = new RadioButton(String.valueOf("Fresh Market San José"));//38 caracteres
         System.out.println(count);
         radio2.setLayoutY(count * 20);
         anchorPane.setPrefHeight(anchorPane.getHeight() + 20);

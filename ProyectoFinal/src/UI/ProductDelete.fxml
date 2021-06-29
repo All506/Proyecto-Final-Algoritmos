@@ -81,7 +81,7 @@
          </font>
       </Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0c73c2" height="97.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="782.0" />
-      <Label alignment="CENTER" layoutX="295.0" layoutY="18.0" prefHeight="61.0" prefWidth="195.0" text="Remove Product" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="295.0" layoutY="18.0" prefHeight="61.0" prefWidth="195.0" text="Delete a Product" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Segoe UI" size="26.0" />
          </font>

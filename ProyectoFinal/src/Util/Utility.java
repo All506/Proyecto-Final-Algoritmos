@@ -26,7 +26,7 @@ public class Utility {
     public static AdjacencyListGraph gPlaces = new AdjacencyListGraph(100);
     public static String userName;
     public static BST treeProducts = new BST();
-
+    public static BST treeFoods = new BST();
     //Last Indexes
     public static int lastIndexGRestaurant;
 
@@ -48,6 +48,15 @@ public class Utility {
         }
         return flag;
     }
+    
+    public static boolean addFood(Food food) throws TreeException {
+        boolean flag = false;
+        if (treeFoods.isEmpty() || !treeProducts.contains(food)) {
+            treeFoods.add(food);
+            flag = true;
+        }
+        return flag;
+    }
 
     //Metodos para devolver listas
     public static CircularLinkList getListSecurity() {
@@ -62,6 +71,11 @@ public class Utility {
     public static BST getTreeProducts() {
         return treeProducts;
     }
+    
+    public static BST getFoodProducts() {
+        return treeFoods;
+    }
+    
 
     //UTILIDAD 
     public static int random() {
@@ -288,6 +302,12 @@ public class Utility {
     public static Product getProductByName(String product) {
         tourTree(treeProducts.getRoot(), product);
         return pro;
+    }
+    
+    static Food foo;
+     public static Food getFoodByName(String foodName) {
+        tourTree(treeFoods.getRoot(), foodName);
+        return foo;
     }
 
     private static void tourTree(BTreeNode node, String product) {
