@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="706.0" prefWidth="508.0" style="-fx-background-image: src\Resources\backbar.jpg;" stylesheets="@../CSS/General.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SidePanelController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="718.0" stroke="#ffffff00" strokeType="INSIDE" width="508.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="718.0" layoutY="-1.0" stroke="#ffffff00" strokeType="INSIDE" width="508.0">
          <fill>
             <LinearGradient endX="0.9619047619047619" endY="0.32380952380952377" startX="0.9571428571428572" startY="0.07619047619047617">
                <stops>
@@ -33,96 +33,103 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <JFXButton fx:id="b1" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="48.0" layoutY="184.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Restaurants">
+      <JFXButton fx:id="b1" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="50.0" layoutY="357.0" onAction="#changeColor" prefHeight="79.0" prefWidth="272.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Restaurants and Supermarkets">
          <graphic>
-            <ImageView fitHeight="60.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="44.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Resources/restaurant.png" />
                </image>
             </ImageView>
          </graphic></JFXButton>
-      <JFXButton fx:id="b2" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="190.0" layoutY="184.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Foods">
+      <JFXButton fx:id="b2" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="190.0" layoutY="450.0" onAction="#changeColor" prefHeight="79.0" prefWidth="129.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Foods">
          <graphic>
-            <ImageView fitHeight="60.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="43.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Resources/food.png" />
                </image>
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="b3" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="331.0" layoutY="184.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Products">
+      <JFXButton fx:id="b3" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="50.0" layoutY="450.0" onAction="#changeColor" prefHeight="79.0" prefWidth="129.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Products">
          <graphic>
-            <ImageView fitHeight="52.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="44.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Resources/product.png" />
                </image>
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="b5" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="190.0" layoutY="304.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Places">
+      <JFXButton fx:id="b5" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="335.0" layoutY="450.0" onAction="#changeColor" prefHeight="79.0" prefWidth="129.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Places">
          <graphic>
-            <ImageView fitHeight="53.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="39.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Resources/place.png" />
                </image>
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="b4" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="48.0" layoutY="304.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Users">
+      <JFXButton fx:id="b4" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="335.0" layoutY="357.0" onAction="#changeColor" prefHeight="79.0" prefWidth="129.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Users">
          <graphic>
-            <ImageView fitHeight="47.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="45.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Resources/userMenu.png" />
                </image>
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="exit" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutY="630.0" onAction="#exit" prefHeight="88.0" prefWidth="508.0" ripplerFill="#fc0000" styleClass="windows7-default" text=" " textAlignment="JUSTIFY">
+      <JFXButton fx:id="exit" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutY="646.0" onAction="#exit" prefHeight="72.0" prefWidth="508.0" ripplerFill="#fc0000" styleClass="windows7-default" text=" " textAlignment="JUSTIFY">
          <font>
             <Font size="15.0" />
          </font>
+         <graphic>
+            <ImageView fitHeight="43.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/Exit.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </JFXButton>
-      <AnchorPane fx:id="apB1" layoutX="-3.0" layoutY="483.0" prefHeight="143.0" prefWidth="500.0" visible="false">
+      <AnchorPane fx:id="apB1" layoutY="547.0" prefHeight="79.0" prefWidth="508.0">
          <children>
-            <JFXButton fx:id="btnNewRestSup" contentDisplay="TOP" onAction="#btnNewRestSup" prefHeight="141.0" prefWidth="100.0" text="Create">
+            <JFXButton fx:id="btnNewRestSup" contentDisplay="TOP" onAction="#btnNewRestSup" prefHeight="98.0" prefWidth="100.0" text="Create">
                <graphic>
-                  <ImageView fitHeight="71.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Resources/new.png" />
                      </image>
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnModifyRestSup" contentDisplay="TOP" layoutX="106.0" onAction="#btnModifyRestSup" prefHeight="141.0" prefWidth="100.0" text="Update">
+            <JFXButton fx:id="btnModifyRestSup" contentDisplay="TOP" layoutX="103.0" onAction="#btnModifyRestSup" prefHeight="98.0" prefWidth="100.0" text="Update">
                <graphic>
-                  <ImageView fitHeight="70.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="48.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Resources/update.png" />
                      </image>
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnRemoveRestSup" contentDisplay="TOP" layoutX="212.0" onAction="#btnRemoveRestSup" prefHeight="141.0" prefWidth="100.0" text="Remove">
+            <JFXButton fx:id="btnRemoveRestSup" contentDisplay="TOP" layoutX="206.0" layoutY="1.0" onAction="#btnRemoveRestSup" prefHeight="98.0" prefWidth="100.0" text="Remove">
                <graphic>
-                  <ImageView fitHeight="82.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="49.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Resources/remove.png" />
                      </image>
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnDisplayRestSup" contentDisplay="TOP" layoutX="318.0" onAction="#btnDisplayRestSup" prefHeight="141.0" prefWidth="100.0" text="Display">
+            <JFXButton fx:id="btnDisplayRestSup" contentDisplay="TOP" layoutX="307.0" layoutY="1.0" onAction="#btnDisplayRestSup" prefHeight="98.0" prefWidth="100.0" text="Display">
                <graphic>
-                  <ImageView fitHeight="65.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="49.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Resources/show.png" />
                      </image>
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnCancelRestSup" contentDisplay="TOP" layoutX="408.0" onAction="#btnCancelRestSup" prefHeight="141.0" prefWidth="100.0" text="Cancel">
+            <JFXButton fx:id="btnCancelRestSup" contentDisplay="TOP" layoutX="408.0" layoutY="2.0" onAction="#btnCancelRestSup" prefHeight="98.0" prefWidth="100.0" text="Cancel">
                <graphic>
-                  <ImageView fitHeight="68.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="54.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Resources/back.png" />
                      </image>
@@ -131,18 +138,18 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <JFXButton fx:id="b6" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="331.0" layoutY="304.0" onAction="#changeColor" prefHeight="107.0" prefWidth="134.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Market">
+      <JFXButton fx:id="b6" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="48.0" layoutY="167.0" onAction="#changeColor" prefHeight="84.0" prefWidth="417.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Find your perfect meal!">
          <graphic>
-            <ImageView fitHeight="53.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Resources/supermarket.png" />
                </image>
             </ImageView>
          </graphic>
       </JFXButton>
-      <Text fill="WHITE" layoutX="80.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We will find it for you!" wrappingWidth="347.13671875">
+      <Text fill="WHITE" layoutX="80.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We will find it for you!" textAlignment="CENTER" wrappingWidth="347.13671875">
          <font>
-            <Font name="Freestyle Script" size="55.0" />
+            <Font name="Freestyle Script" size="50.0" />
          </font>
          <effect>
             <DropShadow spread="0.16">
@@ -170,10 +177,14 @@
             </DropShadow>
          </effect>
       </Line>
-      <ImageView fitHeight="65.0" fitWidth="75.0" layoutX="224.0" layoutY="642.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Resources/Exit.png" />
-         </image>
-      </ImageView>
+      <JFXButton fx:id="b51" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="48.0" layoutY="261.0" onAction="#changeColor" prefHeight="84.0" prefWidth="417.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Reports">
+         <graphic>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/reports.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>
