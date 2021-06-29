@@ -24,7 +24,7 @@
             <TableColumn fx:id="columnId" prefWidth="85.0" text="Identificator" />
             <TableColumn fx:id="columnName" prefWidth="308.0" text="Name" />
             <TableColumn fx:id="columnPrice" prefWidth="117.0" text="Price" />
-            <TableColumn fx:id="columnSupermarket" prefWidth="217.0" text="Supermarket " />
+            <TableColumn fx:id="columnSupermarket" prefWidth="217.0" text="Restaurant" />
          </columns>
       </TableView>
    </children>

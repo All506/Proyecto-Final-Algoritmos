@@ -46,9 +46,9 @@ public class ProductDeleteController implements Initializable {
 
     @FXML
     private void btnRemove(ActionEvent event) throws TreeException {
-       
-        while (!Util.Utility.getTreeProducts().isEmpty()&&Util.Utility.getTreeProducts().contains(textName.getText())) { 
-             System.out.println("remove");
+
+        while (!Util.Utility.getTreeProducts().isEmpty() && Util.Utility.getTreeProducts().contains(textName.getText())) {
+            System.out.println("remove");
             Util.Utility.getTreeProducts().remove(textName.getText());
         }
 //        if (pTemp != null) {
@@ -57,8 +57,6 @@ public class ProductDeleteController implements Initializable {
         comboProducts.getItems().clear();
         loadComboProducts();
     }
-
-  
 
     private void loadComboProducts() {
         BST treeProductsTemp = new BST();
@@ -76,9 +74,10 @@ public class ProductDeleteController implements Initializable {
             tourTree(node.left, comboProducts);
             tourTree(node.right, comboProducts);
             Product p = (Product) node.data;
-            if(!comboProducts.getItems().contains(p.getName()))
-            comboProducts.getItems().add(p.getName());
-            
+            if (!comboProducts.getItems().contains(p.getName())) {
+                comboProducts.getItems().add(p.getName());
+            }
+
         }
     }
 
@@ -88,12 +87,12 @@ public class ProductDeleteController implements Initializable {
         textPrice.setText("");
         textAreaSupermarkets.setText("");
     }
-    
+
     @FXML
     private void loadData(ActionEvent event) {
-       
+
         Product p = Util.Utility.getProductByName(comboProducts.getValue());//////REVISAR
-        
+
         if (p != null) {
             clean();
             textId.setText(String.valueOf(p.getID()));

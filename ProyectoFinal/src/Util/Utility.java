@@ -51,7 +51,7 @@ public class Utility {
         }
         return flag;
     }
-    
+
     public static boolean addFood(Food food) throws TreeException {
         boolean flag = false;
         if (treeFoods.isEmpty() || !treeFoods.contains(food)) {
@@ -74,10 +74,11 @@ public class Utility {
     public static BST getTreeProducts() {
         return treeProducts;
     }
-    
+
     public static BST getTreeFoods() {
         return treeFoods;
     }
+
     //Devuelve el ultimo id del arbol de food
     public static int getLastIDFood() {
         return lastIDFood;
@@ -94,7 +95,6 @@ public class Utility {
     public static void setLastIDProduct(int lastIDProduct) {
         Utility.lastIDProduct = lastIDProduct;
     }
-
 
     //UTILIDAD 
     public static int random() {
@@ -160,23 +160,28 @@ public class Utility {
                 Product p3 = (Product) a;
                 String string = (String) b;
                 return p3.getName().equalsIgnoreCase(string);
+            case "foodRemove":
+                Food food = (Food) a;
+                String stringFood = (String) b;
+                return food.getName().equalsIgnoreCase(stringFood);
             case "place":
                 Place pla1 = (Place) a;
                 Place pla2 = (Place) b;
                 return pla1.getName().equalsIgnoreCase(pla2.getName());
-          case "edgeWeight":
-                EdgeWeight ew1=(EdgeWeight)a; EdgeWeight ew2=(EdgeWeight)b;
+            case "edgeWeight":
+                EdgeWeight ew1 = (EdgeWeight) a;
+                EdgeWeight ew2 = (EdgeWeight) b;
                 //return ew1.getEdge().equals(ew2.getEdge());
                 return equals(ew1.getEdge(), ew2.getEdge());
-                
+
             default:
 //                System.out.println("Objects");
                 Object o1 = (Object) a;
                 Object o2 = (Object) b;
-                return o1.toString().equalsIgnoreCase(o2.toString()); 
-                
+                return o1.toString().equalsIgnoreCase(o2.toString());
+
         }
-        
+
 //        return false; //En cualquier otro caso retorna un false
     }
 
@@ -205,14 +210,17 @@ public class Utility {
         if (a instanceof Product && b instanceof String) {
             return "productRemove";
         }
+        if (a instanceof Food && b instanceof String) {
+            return "foodRemove";
+        }
         if (a instanceof Place && b instanceof String) {
             return "placeString";
         }
 
-        if(a instanceof EdgeWeight && b instanceof EdgeWeight){
+        if (a instanceof EdgeWeight && b instanceof EdgeWeight) {
             return "edgeWeight";
         }
-       
+
         return "unknown";
     }
 
@@ -241,9 +249,12 @@ public class Utility {
             case "productRemove":
                 Product pr1 = (Product) a;
                 String pr2 = (String) b;
-                return pr1.getName().compareToIgnoreCase(pr2)<0|| pr1.getName().equalsIgnoreCase(pr2);
-       
-        
+                return pr1.getName().compareToIgnoreCase(pr2) < 0 || pr1.getName().equalsIgnoreCase(pr2);
+            case "foodRemove":
+                Food food = (Food) a;
+                String stringFood = (String) b;
+                return food.getName().compareToIgnoreCase(stringFood) < 0 || food.getName().equalsIgnoreCase(stringFood);
+
         }
         return false; //en cualquier otro caso
     }
@@ -273,8 +284,11 @@ public class Utility {
             case "productRemove":
                 Product pr1 = (Product) a;
                 String pr2 = (String) b;
-                return pr1.getName().compareToIgnoreCase(pr2)>0 || pr1.getName().equalsIgnoreCase(pr2);
-        
+                return pr1.getName().compareToIgnoreCase(pr2) > 0 || pr1.getName().equalsIgnoreCase(pr2);
+            case "foodRemove":
+                Food food = (Food) a;
+                String stringFood = (String) b;
+                return food.getName().compareToIgnoreCase(stringFood) > 0 || food.getName().equalsIgnoreCase(stringFood);
         }
         return false; //en cualquier otro caso
     }
@@ -306,7 +320,7 @@ public class Utility {
         return x;
     }
 
-public static Restaurant getRestaurantId(String restaurant) throws list.ListException {
+    public static Restaurant getRestaurantId(String restaurant) throws list.ListException {
         for (int i = 0; i < gRestaurants.size(); i++) {
             Restaurant restauran = (Restaurant) gRestaurants.getVertexByIndex(i).data;
             if (String.valueOf(restauran.getName()).equalsIgnoreCase(restaurant)) {
@@ -325,7 +339,7 @@ public static Restaurant getRestaurantId(String restaurant) throws list.ListExce
         }
         return null;
     }
-    
+
 //    public static Restaurant getSupermarketId(String supermarket) throws list.ListException {
 //        for (int i = 0; i < g.size(); i++) {
 //            Restaurant restauran = (Restaurant) gRestaurants.getVertexByIndex(i).data;
@@ -345,9 +359,8 @@ public static Restaurant getRestaurantId(String restaurant) throws list.ListExce
 //        }
 //        return null;
 //    }
-    
-    
     static Product pro;
+
     public static Product getProductByName(String product) {
         tourTree(treeProducts.getRoot(), product);
         return pro;
@@ -365,6 +378,7 @@ public static Restaurant getRestaurantId(String restaurant) throws list.ListExce
     }
 
     static Food foo;
+
     public static Food getFoodByName(String foodName) {
         tourTreeFood(treeFoods.getRoot(), foodName);
         return foo;
@@ -380,7 +394,7 @@ public static Restaurant getRestaurantId(String restaurant) throws list.ListExce
             tourTree(node.right, foodName);
         }
     }
-    
+
     public static int getProductID() {
         tourTreeProductID(treeProducts.getRoot());
         return lastIDProduct;
@@ -396,7 +410,7 @@ public static Restaurant getRestaurantId(String restaurant) throws list.ListExce
             tourTreeProductID(node.right);
         }
     }
-    
+
     public static int getFoodID() {
         tourTreeFoodID(treeFoods.getRoot());
         return lastIDFood;
@@ -412,5 +426,5 @@ public static Restaurant getRestaurantId(String restaurant) throws list.ListExce
             tourTreeFoodID(node.right);
         }
     }
-    
+
 }//end class
