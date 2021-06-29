@@ -86,16 +86,13 @@ public class PlaceReadController implements Initializable {
     public Text txtTitle;
 
     private Button btnRemoveRandom;
-    @FXML
-    private ImageView imageMap;
+    
     @FXML
     private ScrollPane scrRadioButtons;
     @FXML
     private TableView<String[]> tblPlaces;
     @FXML
     private Button btnRandomize;
-    @FXML
-    private Button btnGenerateGraph;
     @FXML
     private RadioButton rdbButton;
     @FXML
@@ -108,7 +105,7 @@ public class PlaceReadController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         clean();
-
+        txtTitle = new Text("");
         graph = Util.Utility.getPlacesGraph();
         //********************************************************
         try {
@@ -161,6 +158,7 @@ public class PlaceReadController implements Initializable {
     }
     
     AdjacencyListGraph aux;
+    
     public void loadRadioButtons() throws ListException{
     
     rdbArray = new RadioButton[graph.size()];
@@ -246,9 +244,9 @@ public class PlaceReadController implements Initializable {
 
         txtTitle = new Text("");
         apRoot.getChildren().add(rectangleGraph);
-        apRoot.getChildren().add(imageMap);
+        
         rectangleGraph.toBack();
-        imageMap.toBack();
+        
         apRoot.getChildren().add(txtTitle);
 
     }
@@ -588,25 +586,12 @@ public class PlaceReadController implements Initializable {
         
     }
 
-    @FXML
-    private void btnGenerateGraph(ActionEvent event) {
-    }
 
     public void loadTable(TableView<String[]> tbl, String[][] stringMatrix){
     
     
       tbl.getColumns().clear();
-//    String stringMatrix[][] = new String[2][array2.length];
-//    for (int i = 0; i < array2.length; i++) {
-//
-//            if(array3==null){
-//                stringMatrix[0][i]=i+"";
-//            }else{
-//                stringMatrix[0][i]=array3[i]+"";
-//            }
-//            stringMatrix[1][i]=array2[i]+"";
-//            
-//        }
+
 
         ObservableList<String[]> data = FXCollections.observableArrayList();
         data.addAll(Arrays.asList(stringMatrix));

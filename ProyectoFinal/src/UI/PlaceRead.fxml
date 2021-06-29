@@ -11,33 +11,33 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane id="AnchorPane" prefHeight="592.0" prefWidth="775.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PlaceReadController">
+<AnchorPane id="AnchorPane" prefHeight="592.0" prefWidth="775.0" style="-fx-background-image: url(&quot;\Resources\map.jpg&quot;); -fx-background-size: 775 592;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PlaceReadController">
     <stylesheets>
         <URL value="@/CSS/General.css" />
     </stylesheets>
    <children>
-      <AnchorPane fx:id="apRoot" layoutX="200.0" layoutY="179.0" prefHeight="404.0" prefWidth="556.0" style="-fx-background-color: #bbbbbb;" stylesheets="@../CSS/GraphButtons.css">
+      <ImageView fitHeight="604.0" fitWidth="775.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Resources/map.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="apRoot" layoutX="140.0" layoutY="62.0" opacity="0.87" prefHeight="406.0" prefWidth="441.0" style="-fx-background-color: #cccccc;" stylesheets="@../CSS/GraphButtons.css">
          <children>
-            <ImageView fx:id="imageMap" fitHeight="404.0" fitWidth="556.0" layoutX="6.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../Resources/map.jpg" />
-               </image>
-            </ImageView>
-            <Button fx:id="btnCenter" layoutX="222.0" layoutY="188.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="1.0" text="Button" visible="false" />
-            <Rectangle fx:id="rectangleGraph" arcHeight="5.0" arcWidth="5.0" fill="#3c4956" height="404.0" layoutX="4.0" layoutY="2.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="556.0" />
+            <Button fx:id="btnCenter" layoutX="194.0" layoutY="187.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="1.0" text="Button" visible="false" />
+            <Rectangle fx:id="rectangleGraph" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="404.0" layoutX="4.0" layoutY="2.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="458.0" />
          </children>
       </AnchorPane>
-      <ScrollPane fx:id="scrRadioButtons" layoutX="521.0" layoutY="5.0" prefHeight="166.0" prefWidth="235.0" stylesheets="@../CSS/General.css">
+      <ScrollPane fx:id="scrRadioButtons" layoutX="14.0" layoutY="394.0" opacity="0.89" prefHeight="196.0" prefWidth="222.0" stylesheets="@../CSS/General.css">
          <content>
-            <VBox fx:id="vbxRadioButtons" prefHeight="166.0" prefWidth="214.0" stylesheets="@../CSS/GraphButtons.css">
+            <VBox fx:id="vbxRadioButtons" opacity="0.79" prefHeight="184.0" prefWidth="202.0" stylesheets="@../CSS/GraphButtons.css">
                <children>
                   <RadioButton fx:id="rdbButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="205.0" text="RadioButton" />
                </children>
             </VBox>
          </content>
       </ScrollPane>
-      <TableView fx:id="tblPlaces" layoutX="-1.0" layoutY="180.0" prefHeight="406.0" prefWidth="210.0" stylesheets="@../CSS/GraphButtons.css" />
-      <Button fx:id="btnRandomize" layoutX="284.0" layoutY="127.0" mnemonicParsing="false" onAction="#btnRandomize" text="Randomize distances" />
-      <Button fx:id="btnGenerateGraph" layoutX="284.0" layoutY="94.0" mnemonicParsing="false" onAction="#btnGenerateGraph" prefHeight="26.0" prefWidth="128.0" text="Generate graph" />
+      <TableView fx:id="tblPlaces" layoutX="528.0" layoutY="394.0" opacity="0.81" prefHeight="196.0" prefWidth="232.0" stylesheets="@../CSS/GraphButtons.css" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b1c0cf" height="65.0" layoutX="286.0" layoutY="525.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="202.0" />
+      <Button fx:id="btnRandomize" layoutX="290.0" layoutY="538.0" mnemonicParsing="false" onAction="#btnRandomize" prefHeight="43.0" prefWidth="194.0" stylesheets="@../CSS/coolThings.css" text="Randomize distances" />
    </children>
 </AnchorPane>
