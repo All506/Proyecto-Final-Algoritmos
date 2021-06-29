@@ -22,13 +22,13 @@ import java.util.regex.Pattern;
 public class Utility {
 
     public static CircularLinkList lSecurity = new CircularLinkList();
-    public static AdjacencyListGraph gRestaurants = new AdjacencyListGraph(100);
+    public static AdjacencyListGraph gRestAndSuper = new AdjacencyListGraph(100);
     public static AdjacencyListGraph gPlaces = new AdjacencyListGraph(100);
     public static String userName;
     public static BST treeProducts = new BST();
     public static BST treeFoods = new BST();
     //Last Indexes
-    public static int lastIndexGRestaurant;
+    public static int lastIndexGRestAndSuper;
     public static int lastIndexGPlace;
     public static int lastIDFood;
     public static int lastIDProduct;
@@ -321,8 +321,8 @@ public class Utility {
     }
 
     public static Restaurant getRestaurantId(String restaurant) throws list.ListException {
-        for (int i = 0; i < gRestaurants.size(); i++) {
-            Restaurant restauran = (Restaurant) gRestaurants.getVertexByIndex(i).data;
+        for (int i = 0; i < gRestAndSuper.size(); i++) {
+            Restaurant restauran = (Restaurant) gRestAndSuper.getVertexByIndex(i).data;
             if (String.valueOf(restauran.getName()).equalsIgnoreCase(restaurant)) {
                 return restauran;
             }
@@ -331,8 +331,8 @@ public class Utility {
     }
 
     public static Restaurant getRestaurantId2(int restaurant) throws list.ListException {
-        for (int i = 0; i < gRestaurants.size(); i++) {
-            Restaurant restauran = (Restaurant) gRestaurants.getVertexByIndex(i).data;
+        for (int i = 0; i < gRestAndSuper.size(); i++) {
+            Restaurant restauran = (Restaurant) gRestAndSuper.getVertexByIndex(i).data;
             if (restauran.getID() == restaurant) {
                 return restauran;
             }
@@ -342,7 +342,7 @@ public class Utility {
 
 //    public static Restaurant getSupermarketId(String supermarket) throws list.ListException {
 //        for (int i = 0; i < g.size(); i++) {
-//            Restaurant restauran = (Restaurant) gRestaurants.getVertexByIndex(i).data;
+//            Restaurant restauran = (Restaurant) gRestAndSuper.getVertexByIndex(i).data;
 //            if (String.valueOf(restauran.getName()).equalsIgnoreCase(restaurant)) {
 //                return restauran;
 //            }
@@ -351,8 +351,8 @@ public class Utility {
 //    }
 //
 //    public static Restaurant getSupermarketId2(int supermarket) throws list.ListException {
-//        for (int i = 0; i < gRestaurants.size(); i++) {
-//            Restaurant restauran = (Restaurant) gRestaurants.getVertexByIndex(i).data;
+//        for (int i = 0; i < gRestAndSuper.size(); i++) {
+//            Restaurant restauran = (Restaurant) gRestAndSuper.getVertexByIndex(i).data;
 //            if (restauran.getID() == restaurant) {
 //                return restauran;
 //            }
