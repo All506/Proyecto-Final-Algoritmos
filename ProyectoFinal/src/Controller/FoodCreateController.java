@@ -69,17 +69,19 @@ public class FoodCreateController implements Initializable {
         } else {
             textID.setText(String.valueOf(1));
         }
-        //Food Radio Buttons Array
-        restaurant = new RadioButton[20];//CAMBIAR
+        
+        try {
+            //Food Radio Buttons Array
+            restaurant = new RadioButton[Util.Utility.gRestAndSuper.size()];//CAMBIAR
+        } catch (ListException ex) {
+            
+        }
 
         try {
             fillSupermarket();
         } catch (ListException ex) {
             Logger.getLogger(FoodCreateController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        //Cargar el combobox
-        loadComboBoxCourse();
 
         //Mascaras
         maskText(textName);
@@ -102,11 +104,6 @@ public class FoodCreateController implements Initializable {
             System.out.println("alert");
         }
         cleanDisplay();
-    }
-
-    //Carga el combo con los supermarcados
-    public void loadComboBoxCourse() {
-
     }
 
     public void maskText(TextField txtField) {

@@ -7,6 +7,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
+import list.ListException;
 
 /**
  * FXML Controller class
@@ -49,7 +52,11 @@ public class ProductReadController implements Initializable {
             System.out.println("No hay productos registrados");
             //callAlert("alert", "Error", "There are no registered products");
         } else {
-            loadTable();//Llena la tabla
+            try {
+                loadTable();//Llena la tabla
+            } catch (ListException ex) {
+                
+            }
         }
 
     }
@@ -61,7 +68,7 @@ public class ProductReadController implements Initializable {
         }
     }
 
-    private void loadTable() {//Llena tabla
+    private void loadTable() throws ListException {//Llena tabla
         columnId.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<List<String>, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<List<String>, String> data) {
@@ -93,7 +100,7 @@ public class ProductReadController implements Initializable {
         tableProduct.setItems(getData());
     }
 
-    public ObservableList<List<String>> getData() {
+    public ObservableList<List<String>> getData() throws ListException {
         final ObservableList<List<String>> data = FXCollections.observableArrayList();
 
         List<String> arrayList = new ArrayList<>();
@@ -104,7 +111,7 @@ public class ProductReadController implements Initializable {
         return data;
     }
 
-    private List<String> tourTree(BTreeNode node, ObservableList<List<String>> data) {
+    private List<String> tourTree(BTreeNode node, ObservableList<List<String>> data) throws ListException {
         List<String> arrayList = new ArrayList<>();
         if (node != null) {
             tourTree(node.left,data);
@@ -112,7 +119,8 @@ public class ProductReadController implements Initializable {
             arrayList.add(String.valueOf(p.getID()));
             arrayList.add(String.valueOf(p.getName()));
             arrayList.add(String.valueOf(p.getPrice()));
-            arrayList.add(String.valueOf(p.getSupermarketID()));
+            arrayList.add(String.valueOf(Util.Utility.getSupermarketId2(p.getSupermarketID()).getName()));
+            //arrayList.add(String.valueOf(p.getSupermarketID()));
             data.add(arrayList);
             tourTree(node.right,data);
         }

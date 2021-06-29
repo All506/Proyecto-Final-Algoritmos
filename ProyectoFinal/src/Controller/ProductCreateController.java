@@ -2,6 +2,8 @@ package Controller;
 
 import Domain.TreeException;
 import Objects.Product;
+import Objects.Restaurant;
+import Objects.Supermarket;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,9 +23,11 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import list.ListException;
 
 /**
  * FXML Controller class
@@ -64,8 +68,17 @@ public class ProductCreateController implements Initializable {
         }
 
         //Supermarkets Radio Buttons
-        supermarket = new RadioButton[20];//metodo donde llene el arreglo jeje
-        fillSupermarket();
+        try {
+            //Food Radio Buttons Array
+            supermarket = new RadioButton[Util.Utility.gRestAndSuper.size()];//CAMBIAR
+        } catch (ListException ex) {
+
+        }
+        try {
+            fillSupermarket();
+        } catch (ListException ex) {
+
+        }
 
         //Cargar el combobox
         loadComboBoxSuperMarkets();
@@ -75,12 +88,12 @@ public class ProductCreateController implements Initializable {
     }
 
     @FXML
-    private void btnAdd(ActionEvent event) throws TreeException {
+    private void btnAdd(ActionEvent event) throws TreeException, ListException {
         if (!textName.getText().equals("") && spinnerPrice.getValue() > 0) {
             for (int i = 0; supermarket[i] != null; i++) {
                 Product product;
                 if (supermarket[i].isSelected()) {
-                    product = new Product(Integer.parseInt(textID.getText()), textName.getText(), spinnerPrice.getValue(), i/*Util.Utility.getSupermarketById(supermarket[i].getText()).getID()*/);
+                    product = new Product(Integer.parseInt(textID.getText()), textName.getText(), spinnerPrice.getValue(), Util.Utility.getSupermarketId(supermarket[i].getText()).getID());
                     System.out.println(product.toString());
                     Util.Utility.addProduct(product);
                     //callAlert("Error", "The Product has been registered ");
@@ -104,7 +117,7 @@ public class ProductCreateController implements Initializable {
     public void cleanDisplay() {
         this.textName.setText("");
         value.setValue(1);
-       if (!Util.Utility.getTreeProducts().isEmpty()) {
+        if (!Util.Utility.getTreeProducts().isEmpty()) {
             textID.setText(String.valueOf(Util.Utility.getProductID() + 1));
         } else {
             textID.setText(String.valueOf(1));
@@ -129,22 +142,23 @@ public class ProductCreateController implements Initializable {
         });
     }
 
-    private void fillSupermarket() {
-        RadioButton radio = new RadioButton(String.valueOf("Fresh Market Cartago"));//38 caracteres
-        System.out.println(count);
-        radio.setLayoutY(count * 20);
-        anchorPane.setPrefHeight(anchorPane.getHeight() + 20);
-        supermarket[count] = radio;
-        anchorPane.getChildren().add(radio);
-        count++;
+    private void fillSupermarket() throws ListException {
+        if (Util.Utility.gRestAndSuper.size() == 0) {
+            Text empty = new Text("No supermarkets added yet");
+            anchorPane.getChildren().add(empty);
+        } else {
+            for (int i = 0; i < Util.Utility.gRestAndSuper.size(); i++) {
+                if (Util.Utility.gRestAndSuper.getVertexByIndex(i).data instanceof Supermarket) {
+                    Supermarket supermarket2 = (Supermarket) Util.Utility.gRestAndSuper.getVertexByIndex(i).data;
+                    RadioButton radio = new RadioButton(supermarket2.getName());
+                    radio.setLayoutY(count * 20);
+                    supermarket[count] = radio;
+                    anchorPane.getChildren().add(radio);
+                    count++;
+                }
 
-        RadioButton radio2 = new RadioButton(String.valueOf("Fresh Market San José"));//38 caracteres
-        System.out.println(count);
-        radio2.setLayoutY(count * 20);
-        anchorPane.setPrefHeight(anchorPane.getHeight() + 20);
-        supermarket[count] = radio2;
-        anchorPane.getChildren().add(radio2);
-        count++;
+            }
+        }
     }
 
     private void callAlert(String fxmlName, String text) {

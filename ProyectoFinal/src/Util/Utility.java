@@ -322,43 +322,53 @@ public class Utility {
 
     public static Restaurant getRestaurantId(String restaurant) throws list.ListException {
         for (int i = 0; i < gRestAndSuper.size(); i++) {
-            Restaurant restauran = (Restaurant) gRestAndSuper.getVertexByIndex(i).data;
-            if (String.valueOf(restauran.getName()).equalsIgnoreCase(restaurant)) {
-                return restauran;
+            if (gRestAndSuper.getVertexByIndex(i).data instanceof Restaurant) {
+                Restaurant restauran = (Restaurant) gRestAndSuper.getVertexByIndex(i).data;
+                if (String.valueOf(restauran.getName()).equalsIgnoreCase(restaurant)) {
+                    return restauran;
+                }
             }
         }
+
         return null;
     }
 
     public static Restaurant getRestaurantId2(int restaurant) throws list.ListException {
         for (int i = 0; i < gRestAndSuper.size(); i++) {
-            Restaurant restauran = (Restaurant) gRestAndSuper.getVertexByIndex(i).data;
-            if (restauran.getID() == restaurant) {
-                return restauran;
+            if (gRestAndSuper.getVertexByIndex(i).data instanceof Restaurant) {
+                Restaurant restauran = (Restaurant) gRestAndSuper.getVertexByIndex(i).data;
+                if (restauran.getID() == restaurant) {
+                    return restauran;
+                }
             }
         }
         return null;
     }
 
-//    public static Restaurant getSupermarketId(String supermarket) throws list.ListException {
-//        for (int i = 0; i < g.size(); i++) {
-//            Restaurant restauran = (Restaurant) gRestAndSuper.getVertexByIndex(i).data;
-//            if (String.valueOf(restauran.getName()).equalsIgnoreCase(restaurant)) {
-//                return restauran;
-//            }
-//        }
-//        return null;
-//    }
-//
-//    public static Restaurant getSupermarketId2(int supermarket) throws list.ListException {
-//        for (int i = 0; i < gRestAndSuper.size(); i++) {
-//            Restaurant restauran = (Restaurant) gRestAndSuper.getVertexByIndex(i).data;
-//            if (restauran.getID() == restaurant) {
-//                return restauran;
-//            }
-//        }
-//        return null;
-//    }
+    public static Supermarket getSupermarketId(String supermarket) throws list.ListException {
+        for (int i = 0; i < gRestAndSuper.size(); i++) {
+            if (gRestAndSuper.getVertexByIndex(i).data instanceof Supermarket) {
+                Supermarket supermarket2 = (Supermarket) gRestAndSuper.getVertexByIndex(i).data;
+                if (String.valueOf(supermarket2.getName()).equalsIgnoreCase(supermarket)) {
+                    return supermarket2;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static Supermarket getSupermarketId2(int supermarket) throws list.ListException {
+        for (int i = 0; i < gRestAndSuper.size(); i++) {
+            if (gRestAndSuper.getVertexByIndex(i).data instanceof Supermarket) {
+                Supermarket supermarket2 = (Supermarket) gRestAndSuper.getVertexByIndex(i).data;
+                if (supermarket2.getID() == supermarket) {
+                    return supermarket2;
+                }
+            }
+        }
+        return null;
+    }
+
     static Product pro;
 
     public static Product getProductByName(String product) {
@@ -390,8 +400,8 @@ public class Utility {
             if (f.getName().equalsIgnoreCase(foodName)) {
                 foo = f;
             }
-            tourTree(node.left, foodName);
-            tourTree(node.right, foodName);
+            tourTreeFood(node.left, foodName);
+            tourTreeFood(node.right, foodName);
         }
     }
 
