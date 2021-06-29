@@ -6,6 +6,7 @@
 package Controller;
 
 import Graphs.AdjacencyListGraph;
+import Graphs.AdjacencyMatrixGraph;
 import Graphs.Graph;
 import Graphs.GraphException;
 import Objects.Place;
@@ -117,6 +118,7 @@ public class PlaceReadController implements Initializable {
             graph.addVertex(new Place(40, "Paraíso"));
             graph.addVertex(new Place(50, "Cervantes"));
             graph.addVertex(new Place(60, "Guapiles"));
+            graph.addVertex(new Place(70, "La cruz"));
             randomizeEdges();
 //            drawGraph(graph);
 
@@ -132,17 +134,13 @@ public class PlaceReadController implements Initializable {
 
                 if (graph != null && !graph.isEmpty())
                         try {
-                    counter = 0;
+//                    counter = 0;
                     apRoot.getChildren().clear();
-                    btnArray = new Button[10];
-//                    drawVertices(aux);
-//                    drawEdges(aux);
+//                    btnArray = new Button[10];
+
                     drawGraph(aux);
                     txtTitle = new Text(100, 100, "");
-//                    apRoot.getChildren().add(rectangleGraph);
-//                    apRoot.getChildren().add(imageMap);
-//                    rectangleGraph.toBack();
-//                    imageMap.toBack();
+
                     apRoot.getChildren().add(txtTitle);
 
                 } catch (GraphException | ListException ex) {
@@ -164,7 +162,7 @@ public class PlaceReadController implements Initializable {
     
     AdjacencyListGraph aux;
     public void loadRadioButtons() throws ListException{
-    graph=Util.Utility.getPlacesGraph();
+    
     rdbArray = new RadioButton[graph.size()];
     vbxRadioButtons.getChildren().clear();
         for (int i = 0; i < graph.size(); i++) {
@@ -184,6 +182,7 @@ public class PlaceReadController implements Initializable {
                     matrix[0][0]="Origen-Destino";
                     int arrowCounter=1;
                     rdbButton = (RadioButton) event.getSource();
+                    
                     aux = new AdjacencyListGraph(graph.size());
                     
                         for (int j = 0; j < graph.size(); j++) {
@@ -204,19 +203,21 @@ public class PlaceReadController implements Initializable {
                                     Place p1 = (Place)aux.getVertexByIndex(j).data;
                                     Place p2 = (Place)aux.getVertexByIndex(k).data;
                                     if(!edges.contains((p2.getName()+"-"+p1.getName()))){
+                                        if(!Util.Utility.equals(p1, p2)){
                                         edges+=p1.getName()+"-"+p2.getName()+"//";
 //                                        System.out.println(p1.getName()+"-"+p2.getName()+"//"+graph.getWeight(p1, p2));
                                         matrix[arrowCounter][0]=p1.getName()+"-"+p2.getName();
+                                        System.out.println(p1.toString()+"************"+p2.toString());
                                         matrix[arrowCounter++][1]=graph.getWeight(p1, p2)+" Km";
                                         aux.addEdge(p1, p2);
                                         aux.addWeight(p1, p2, graph.getWeight(p1, p2));
-                                        
+                                        }
                                     }
                                 }
                             }
                         }
-                        load(tblPlaces, matrix);
-                        System.out.println("-----------------------------");
+                        loadTable(tblPlaces, matrix);
+                        
                         drawGraph(aux);
                     } catch (ListException | GraphException ex) {
                         Logger.getLogger(PlaceReadController.class.getName()).log(Level.SEVERE, null, ex);
@@ -271,7 +272,7 @@ public class PlaceReadController implements Initializable {
                 double x = Math.sin(Math.toRadians(auxI)) * hip;
                 double y = Math.cos(Math.toRadians(auxI)) * hip;
 
-                btn.setLayoutX(btnCenter.getLayoutX() + y * 1.2);
+                btn.setLayoutX(btnCenter.getLayoutX() + y * 1);
                 btn.setLayoutY(btnCenter.getLayoutY() - x);
             }
             if (i >= 90 && i < 180) {
@@ -279,7 +280,7 @@ public class PlaceReadController implements Initializable {
                 double x = Math.sin(Math.toRadians(auxI)) * hip;
                 double y = Math.cos(Math.toRadians(auxI)) * hip;
 
-                btn.setLayoutX(btnCenter.getLayoutX() - x * 1.2);
+                btn.setLayoutX(btnCenter.getLayoutX() - x * 1);
                 btn.setLayoutY(btnCenter.getLayoutY() - y);
             }
             if (i >= 180 && i < 270) {
@@ -287,7 +288,7 @@ public class PlaceReadController implements Initializable {
                 double x = Math.sin(Math.toRadians(auxI)) * hip;
                 double y = Math.cos(Math.toRadians(auxI)) * hip;
 
-                btn.setLayoutX(btnCenter.getLayoutX() - y * 1.2);
+                btn.setLayoutX(btnCenter.getLayoutX() - y * 1);
                 btn.setLayoutY(btnCenter.getLayoutY() + x);
             }
             if (i >= 270 && i < 360) {
@@ -295,7 +296,7 @@ public class PlaceReadController implements Initializable {
                 double x = Math.sin(Math.toRadians(auxI)) * hip;
                 double y = Math.cos(Math.toRadians(auxI)) * hip;
 
-                btn.setLayoutX(btnCenter.getLayoutX() + x * 1.2);
+                btn.setLayoutX(btnCenter.getLayoutX() + x * 1);
                 btn.setLayoutY(btnCenter.getLayoutY() + y);
             }
         }
@@ -582,13 +583,16 @@ public class PlaceReadController implements Initializable {
 
     @FXML
     private void btnRandomize(ActionEvent event) {
+        
+        
+        
     }
 
     @FXML
     private void btnGenerateGraph(ActionEvent event) {
     }
 
-    public void load(TableView<String[]> tbl, String[][] stringMatrix){
+    public void loadTable(TableView<String[]> tbl, String[][] stringMatrix){
     
     
       tbl.getColumns().clear();

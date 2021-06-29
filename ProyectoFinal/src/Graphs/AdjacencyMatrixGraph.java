@@ -271,4 +271,11 @@ public class AdjacencyMatrixGraph implements Graph {
         return vertexList[index];
     
     }
+    
+    public Object getWeight(Object a, Object b) throws GraphException, ListException  {
+        if (indexOf(a)!=-1 && indexOf(b)!=-1) {
+            return adjacencyMatrix[indexOf(a)][indexOf(b)];
+        }
+        return 0;
+    }
 }
