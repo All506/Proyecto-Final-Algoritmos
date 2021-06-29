@@ -8,6 +8,7 @@ package Controller;
 import Graphs.GraphException;
 import Objects.Place;
 import Objects.Restaurant;
+import Objects.Supermarket;
 import list.ListException;
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -45,6 +47,10 @@ public class RestaurantCreateController implements Initializable {
     private Button btnClean;
     @FXML
     private ComboBox<String> cmbLocation;
+    @FXML
+    private RadioButton radioRestaurant;
+    @FXML
+    private RadioButton radioSupermarket;
 
     /**
      * Initializes the controller class.
@@ -52,6 +58,7 @@ public class RestaurantCreateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Cargar el comboBox con los lugares
+        radioRestaurant.setSelected(true);
         if (Util.Utility.gPlaces.isEmpty()) {
             callAlert("Error", "There are no places to load");
         } else {
@@ -65,7 +72,7 @@ public class RestaurantCreateController implements Initializable {
             } catch (ListException ex) {
                 Logger.getLogger(RestaurantCreateController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            txtId.setText(String.valueOf(Util.Utility.lastIndexGRestaurant));
+            txtId.setText(String.valueOf(Util.Utility.lastIndexGRestAndSuper));
         }
 
     }
@@ -76,10 +83,17 @@ public class RestaurantCreateController implements Initializable {
             if (txtId.getText().equals("") || cmbLocation.getValue().equals("") || txtName.getText().equals("")) {
                 callAlert("Error", "There are empty spaces. Fill all blank spaces");
             } else {
-                Restaurant rest = new Restaurant(Integer.valueOf(txtId.getText()), txtName.getText(), cmbLocation.getValue());
-                Util.Utility.gRestaurants.addVertex(rest);
-                Util.Utility.lastIndexGRestaurant++; //Se suma uno al ultimo indice
-                callAlert("Error", "Restaurant has been added");
+                if (radioRestaurant.isSelected() == true) {
+                    Restaurant rest = new Restaurant(Integer.valueOf(txtId.getText()), txtName.getText(), cmbLocation.getValue());
+                    Util.Utility.gRestAndSuper.addVertex(rest);
+                    Util.Utility.lastIndexGRestAndSuper++; //Se suma uno al ultimo indice
+                    callAlert("Error", "Restaurant has been added");
+                } else {
+                    Supermarket supermarket = new Supermarket(Integer.valueOf(txtId.getText()), txtName.getText(), cmbLocation.getValue());
+                    Util.Utility.gRestAndSuper.addVertex(supermarket);
+                    Util.Utility.lastIndexGRestAndSuper++; //Se suma uno al ultimo indice
+                    callAlert("Error", "Supermarket has been added");
+                }
                 cleanUI();
             }
 
@@ -97,7 +111,7 @@ public class RestaurantCreateController implements Initializable {
 
     public void cleanUI() {
         cmbLocation.getSelectionModel().select(0);
-        txtId.setText(String.valueOf(Util.Utility.lastIndexGRestaurant));
+        txtId.setText(String.valueOf(Util.Utility.lastIndexGRestAndSuper));
         txtName.setText("");
     }
 
@@ -119,6 +133,16 @@ public class RestaurantCreateController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void radioRestaurant(ActionEvent event) {
+        radioSupermarket.setSelected(false);
+    }
+
+    @FXML
+    private void radioSupermarket(ActionEvent event) {
+        radioRestaurant.setSelected(false);
     }
 
 }

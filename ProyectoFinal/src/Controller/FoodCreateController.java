@@ -138,17 +138,20 @@ public class FoodCreateController implements Initializable {
     }
 
     private void fillSupermarket() throws ListException {
-        if (Util.Utility.gRestaurants.size() == 0) {
+        if (Util.Utility.gRestAndSuper.size() == 0) {
             Text empty = new Text("No restaurants added yet");
             anchorPane.getChildren().add(empty);
         } else {
-            for (int i = 0; i < Util.Utility.gRestaurants.size(); i++) {
-                Restaurant rest = (Restaurant) Util.Utility.gRestaurants.getVertexByIndex(i).data;
-                RadioButton radio = new RadioButton(rest.getName());
-                radio.setLayoutY(count * 20);
-                restaurant[count] = radio;
-                anchorPane.getChildren().add(radio);
-                count++;
+            for (int i = 0; i < Util.Utility.gRestAndSuper.size(); i++) {
+                if (Util.Utility.gRestAndSuper.getVertexByIndex(i).data instanceof Restaurant) {
+                    Restaurant rest = (Restaurant) Util.Utility.gRestAndSuper.getVertexByIndex(i).data;
+                    RadioButton radio = new RadioButton(rest.getName());
+                    radio.setLayoutY(count * 20);
+                    restaurant[count] = radio;
+                    anchorPane.getChildren().add(radio);
+                    count++;
+                }
+
             }
         }
     }

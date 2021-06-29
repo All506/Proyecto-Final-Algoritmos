@@ -48,4 +48,14 @@ public class Supermarket {
     public String toString() {
         return "Supermarket{" + "ID:" + ID + ", name:" + name + ", location:" + location + '}';
     }    
+    
+    public String[] dataName(){
+        String[] dataName = {"id","name","location"};
+        return dataName;
+    }
+    
+    public String[] data(){
+        String[] data = {String.valueOf(ID),name,location};
+        return data;
+    }
 }

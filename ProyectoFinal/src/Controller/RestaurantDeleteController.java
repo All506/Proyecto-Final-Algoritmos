@@ -58,12 +58,12 @@ public class RestaurantDeleteController implements Initializable {
 
     @FXML
     private void btnDelete(ActionEvent event) throws GraphException, list.ListException {
-        if (Util.Utility.gRestaurants.isEmpty()){
+        if (Util.Utility.gRestAndSuper.isEmpty()){
             callAlert("Error", "Graph is empty");
         } else {
             Restaurant rest = new Restaurant(0, txtName.getText(), txtLocation.getText());
-        if (Util.Utility.gRestaurants.containsVertex(rest)) {
-            Util.Utility.gRestaurants.removeVertex(rest);
+        if (Util.Utility.gRestAndSuper.containsVertex(rest)) {
+            Util.Utility.gRestAndSuper.removeVertex(rest);
 
             loadComboBoxRestaurants();
             cmbRestaurant.getSelectionModel().select(0);
@@ -79,10 +79,10 @@ public class RestaurantDeleteController implements Initializable {
     public void loadComboBoxRestaurants() {
         cmbRestaurant.getItems().clear(); //Se actualizan los datos que contiene el combobox
         //Para cargar un combobox
-        if (Util.Utility.gRestaurants.isEmpty()) {
+        if (Util.Utility.gRestAndSuper.isEmpty()) {
             callAlert("Error", "There are no restaurants registered");
         } else {
-            SinglyLinkedList list = Util.Utility.gRestaurants.getAllItemsAsList();
+            SinglyLinkedList list = Util.Utility.gRestAndSuper.getAllItemsAsList();
             String temporal = "";
 
             try {
@@ -110,8 +110,8 @@ public class RestaurantDeleteController implements Initializable {
     private void cmbChanged(ActionEvent event) throws list.ListException {
          if(cmbRestaurant.getValue()!=null){
             Restaurant p = null;
-            for (int i = 0; i < Util.Utility.gRestaurants.size(); i++) {
-                p=(Restaurant)Util.Utility.gRestaurants.getVertexByIndex(i).data;
+            for (int i = 0; i < Util.Utility.gRestAndSuper.size(); i++) {
+                p=(Restaurant)Util.Utility.gRestAndSuper.getVertexByIndex(i).data;
                 if(p.getName().equals(cmbRestaurant.getValue())){
                 txtLocation.setText(p.getLocation());
                 txtName.setText(p.getName());

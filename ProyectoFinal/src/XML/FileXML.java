@@ -12,6 +12,7 @@ import Objects.Place;
 import Objects.Product;
 import Objects.Security;
 import Objects.Restaurant;
+import Objects.Supermarket;
 import Security.AES;
 import java.io.File;
 import java.io.IOException;
@@ -167,8 +168,8 @@ public class FileXML {
         return lSecurity;
     }
 
-    public SinglyLinkedList readXMLtoRestaurantList() {
-        SinglyLinkedList lRestaurants = new SinglyLinkedList();
+    public SinglyLinkedList readXMLtoRestAndSuperList() {
+        SinglyLinkedList lRestAndSupermarket = new SinglyLinkedList();
 
         if (exist("Restaurants.xml")) {
 
@@ -190,15 +191,28 @@ public class FileXML {
                         newRestaurant.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
                         newRestaurant.setLocation(eElement.getElementsByTagName("location").item(0).getTextContent());
                     }
-                    lRestaurants.add(newRestaurant);
+                    lRestAndSupermarket.add(newRestaurant);
                 }
 
+                nList = doc.getElementsByTagName("Supermarkets"); //Cabecera de objeto
+
+                for (int indice = 0; indice < nList.getLength(); indice++) {
+                    Supermarket newSuperMarket = new Supermarket(0, "", "");
+                    Node nNode = nList.item(indice);
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element eElement = (Element) nNode;
+                        newSuperMarket.setID(Integer.valueOf(eElement.getAttribute("id")));
+                        newSuperMarket.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
+                        newSuperMarket.setLocation(eElement.getElementsByTagName("location").item(0).getTextContent());
+                    }
+                    lRestAndSupermarket.add(newSuperMarket);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        return lRestaurants;
+        return lRestAndSupermarket;
     }
 
     public SinglyLinkedList readXMLtoPlacesList() {
@@ -306,19 +320,24 @@ public class FileXML {
 
     public void loadFiles() throws ListException, GraphException {
         //Se carga la informacion de los restaurantes 
-        if (readXMLtoRestaurantList().isEmpty()) {
-            Util.Utility.lastIndexGRestaurant = 0; //Si no existe el documento, no se ha guardado ningun objeto
+        if (readXMLtoRestAndSuperList().isEmpty()) {
+            Util.Utility.lastIndexGRestAndSuper = 0; //Si no existe el documento, no se ha guardado ningun objeto
             System.out.println("El archivo de restaurantes no existe");
         } else {
-            SinglyLinkedList lRestaurantes = readXMLtoRestaurantList();
-            for (int i = 1; i <= lRestaurantes.size(); i++) {
-                Util.Utility.gRestaurants.addVertex(lRestaurantes.getNode(i).data);
-                Restaurant temporalRest = (Restaurant) lRestaurantes.getNode(i).data;
-                Util.Utility.lastIndexGRestaurant = temporalRest.getID(); //Se setea el valor del ultimo indice almacenado
+            SinglyLinkedList lRestAndSuper = readXMLtoRestAndSuperList();
+            for (int i = 1; i <= lRestAndSuper.size(); i++) {
+                Util.Utility.gRestAndSuper.addVertex(lRestAndSuper.getNode(i).data);
+                if (lRestAndSuper.getNode(i).data instanceof Restaurant) {
+                    Restaurant temporalRest = (Restaurant) lRestAndSuper.getNode(i).data;
+                    Util.Utility.lastIndexGRestAndSuper = temporalRest.getID(); //Se setea el valor del ultimo indice almacenado
+                } else {
+                    Supermarket temporalSupermarket = (Supermarket) lRestAndSuper.getNode(i).data;
+                    Util.Utility.lastIndexGRestAndSuper = temporalSupermarket.getID(); //Se setea el valor del ultimo indice almacenado
+                }
             }
         }
-        Util.Utility.lastIndexGRestaurant++; //Se anhade uno mas para que el siguiente valor almacenado conicida
-
+        Util.Utility.lastIndexGRestAndSuper++; //Se anhade uno mas para que el siguiente valor almacenado conicida
+        System.out.println("El grafo de restaurantes y supermercados contiene \n " + Util.Utility.gRestAndSuper.toString());
         //Se carga la informacion de los lugares
         if (readXMLtoPlacesList().isEmpty()) {
             Util.Utility.lastIndexGPlace = 0; //Si no existe el documento, no se ha guardado ningun objeto

@@ -12,6 +12,7 @@ import Objects.Place;
 import Objects.Product;
 import Objects.Restaurant;
 import Objects.Security;
+import Objects.Supermarket;
 import Security.AES;
 import XML.FileXML;
 import java.io.IOException;
@@ -51,13 +52,13 @@ public class SaveData {
         //La información acerca de restaurantes es almacenada
         if (!fXML.exist("Restaurants.xml")) { //Si el archivo no existe
             fXML.createXML("RestaurantsXML", "Restaurants");
-            if (!Util.Utility.gRestaurants.isEmpty()) {
+            if (!Util.Utility.gRestAndSuper.isEmpty()) {
                 writeRestaurants();
             }
         } else {
             fXML.deleteFile("Restaurants");
             fXML.createXML("RestaurantsXML", "Restaurants");
-            if (!Util.Utility.gRestaurants.isEmpty()) {
+            if (!Util.Utility.gRestAndSuper.isEmpty()) {
                 writeRestaurants();
             }
         }
@@ -129,15 +130,21 @@ public class SaveData {
     private void writeRestaurants() throws list.ListException, TransformerException, SAXException, IOException {
         FileXML fXML = new FileXML();
 
-        if (Util.Utility.gRestaurants.isEmpty()) {
+        if (Util.Utility.gRestAndSuper.isEmpty()) {
             if (fXML.exist("Restaurants.xml")) {
                 fXML.deleteFile("Restaurants");
             }
         } else {
-            SinglyLinkedList restaurantsToSave = Util.Utility.gRestaurants.getAllItemsAsList();
-            for (int i = 1; i <= restaurantsToSave.size(); i++) {
-                Restaurant restaurant = (Restaurant) restaurantsToSave.getNode(i).data;
-                fXML.writeXML("Restaurants.xml", "Restaurants", restaurant.dataName(), restaurant.data());
+            SinglyLinkedList restAndSuperToSave = Util.Utility.gRestAndSuper.getAllItemsAsList();
+            for (int i = 1; i <= restAndSuperToSave.size(); i++) {
+                if (restAndSuperToSave.getNode(i).data instanceof Restaurant) {
+                    Restaurant restaurant = (Restaurant) restAndSuperToSave.getNode(i).data;
+                    fXML.writeXML("Restaurants.xml", "Restaurants", restaurant.dataName(), restaurant.data());
+                } else {
+                    Supermarket supermarket = (Supermarket) restAndSuperToSave.getNode(i).data;
+                    fXML.writeXML("Restaurants.xml", "Supermarkets", supermarket.dataName(), supermarket.data());
+                }
+
             }
         }
     }
