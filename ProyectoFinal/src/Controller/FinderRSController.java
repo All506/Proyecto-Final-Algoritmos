@@ -76,6 +76,14 @@ public class FinderRSController implements Initializable {
     
     public Text txtTitle;
     
+    Place p;
+    @FXML
+    private AnchorPane apType;
+    @FXML
+    private Button btnFood;
+    @FXML
+    private Button btnProducts;
+    
    
     /**
      * Initializes the controller class.
@@ -83,7 +91,7 @@ public class FinderRSController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        apRoot.setVisible(false);
+        apType.setVisible(false);
 
         graph = Util.Utility.getPlacesGraph();
 
@@ -106,33 +114,6 @@ public class FinderRSController implements Initializable {
         try {
             drawGraph(graph);
             
-//        rectangleGraph.setOnMouseMoved(new EventHandler<MouseEvent>() {
-//
-//            @Override
-//            public void handle(MouseEvent event) {
-//
-//                if (graph != null && !graph.isEmpty())
-//                        try {
-//
-//                    apRoot.getChildren().clear();
-//
-//                    drawGraph(aux);
-//                    txtTitle = new Text(100, 100, "");
-//
-//                    apRoot.getChildren().add(txtTitle);
-//
-//                } catch (GraphException | ListException ex) {
-//                    Logger.getLogger(PlaceReadController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//
-//            }
-//        });
-
-//        try {
-//            loadRadioButtons();
-//        } catch (ListException ex) {
-//            Logger.getLogger(PlaceReadController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
         } catch (ListException ex) {
             Logger.getLogger(FinderRSController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (GraphException ex) {
@@ -143,78 +124,8 @@ public class FinderRSController implements Initializable {
 
     AdjacencyListGraph aux;
 
-//    public void loadRadioButtons() throws ListException {
-//
-//        rdbArray = new RadioButton[graph.size()];
-//        vbxRadioButtons.getChildren().clear();
-//        for (int i = 0; i < graph.size(); i++) {
-//            Place p = (Place) graph.getVertexByIndex(i).data;
-//            rdbButton = new RadioButton(p.getName());
-//            rdbButton.setId(p.toString());
-//            vbxRadioButtons.getChildren().add(rdbButton);
-//            rdbButton.getStyleClass().add("button");
-//            rdbButton.setPrefWidth(209);
-//            rdbArray[i] = rdbButton;
-//            rdbButton.setOnAction(new EventHandler<ActionEvent>() {
-//                @Override
-//                public void handle(ActionEvent event) {
-//                    rdbButton = (RadioButton) event.getSource();
-//                    rdbEvent();
-//
-//                }
-//            });
-//        }
-//
-//    }
 
-    public void rdbEvent() {
-
-        try {
-            String[][] matrix = new String[graph.size() * graph.size()][2];
-            matrix[0][1] = "Dist.";
-            matrix[0][0] = "Origen-Destino";
-            int arrowCounter = 1;
-
-            aux = new AdjacencyListGraph(graph.size());
-
-            for (int j = 0; j < graph.size(); j++) {
-                if (rdbArray != null) {
-                    if (rdbArray[j].isSelected()) {
-                        Place p = (Place) graph.getVertexByIndex(j).data;
-                        aux.addVertex(p);
-
-                    }
-                }
-            }
-
-            String edges = "";
-            for (int j = 0; j < aux.size(); j++) {
-                for (int k = 0; k < aux.size(); k++) {
-                    if (graph.containsEdge(aux.getVertexByIndex(j).data, graph.getVertexByIndex(k).data)) {
-                        Place p1 = (Place) aux.getVertexByIndex(j).data;
-                        Place p2 = (Place) aux.getVertexByIndex(k).data;
-                        if (!edges.contains((p2.getName() + "-" + p1.getName()))) {
-                            if (!Util.Utility.equals(p1, p2)) {
-                                edges += p1.getName() + "-" + p2.getName() + "//";
-                                matrix[arrowCounter][0] = p1.getName() + "-" + p2.getName();
-                                matrix[arrowCounter++][1] = graph.getWeight(p1, p2) + " Km";
-                                aux.addEdge(p1, p2);
-                                aux.addWeight(p1, p2, graph.getWeight(p1, p2));
-                            }
-                        }
-                    }
-                }
-            }
-//            loadTable(tblPlaces, matrix);
-
-            drawGraph(aux);
-        } catch (ListException | GraphException ex) {
-            Logger.getLogger(PlaceReadController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
     public void drawGraph(AdjacencyListGraph graph) throws ListException, GraphException {
-        apRoot.getChildren().clear();
         apRoot.setVisible(true);
 
         counter = 0;
@@ -224,15 +135,6 @@ public class FinderRSController implements Initializable {
         if (graph != null && !graph.isEmpty()) {
             drawVertices(graph);
         }
-
-        drawEdges(graph);
-
-        txtTitle = new Text("");
-        apRoot.getChildren().add(rectangleGraph);
-
-        rectangleGraph.toBack();
-
-        apRoot.getChildren().add(txtTitle);
 
     }
 
@@ -247,13 +149,26 @@ public class FinderRSController implements Initializable {
             btn.setId(p.toString());
             btn.setText(p.getName());
             counter++;
+            
+            btn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    btn = (Button) event.getSource();
+                    try {
+                        buttonEvent();
+                    } catch (ListException ex) {
+                        Logger.getLogger(FinderRSController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+            });
 
             if (i >= 0 && i < 90) {
                 auxI = i;
                 double x = Math.sin(Math.toRadians(auxI)) * hip;
                 double y = Math.cos(Math.toRadians(auxI)) * hip;
 
-                btn.setLayoutX(btnCenter.getLayoutX() + y * 1);
+                btn.setLayoutX(btnCenter.getLayoutX() + y * 1.5);
                 btn.setLayoutY(btnCenter.getLayoutY() - x);
             }
             if (i >= 90 && i < 180) {
@@ -261,7 +176,7 @@ public class FinderRSController implements Initializable {
                 double x = Math.sin(Math.toRadians(auxI)) * hip;
                 double y = Math.cos(Math.toRadians(auxI)) * hip;
 
-                btn.setLayoutX(btnCenter.getLayoutX() - x * 1);
+                btn.setLayoutX(btnCenter.getLayoutX() - x * 1.5);
                 btn.setLayoutY(btnCenter.getLayoutY() - y);
             }
             if (i >= 180 && i < 270) {
@@ -269,7 +184,7 @@ public class FinderRSController implements Initializable {
                 double x = Math.sin(Math.toRadians(auxI)) * hip;
                 double y = Math.cos(Math.toRadians(auxI)) * hip;
 
-                btn.setLayoutX(btnCenter.getLayoutX() - y * 1);
+                btn.setLayoutX(btnCenter.getLayoutX() - y * 1.5);
                 btn.setLayoutY(btnCenter.getLayoutY() + x);
             }
             if (i >= 270 && i < 360) {
@@ -277,71 +192,26 @@ public class FinderRSController implements Initializable {
                 double x = Math.sin(Math.toRadians(auxI)) * hip;
                 double y = Math.cos(Math.toRadians(auxI)) * hip;
 
-                btn.setLayoutX(btnCenter.getLayoutX() + x * 1);
+                btn.setLayoutX(btnCenter.getLayoutX() + x * 1.5);
                 btn.setLayoutY(btnCenter.getLayoutY() + y);
             }
         }
     }
-
-    Line line = new Line();
-
-    public void drawEdges(AdjacencyListGraph graph) throws GraphException, ListException {//Dibuja las aristas
-
-        edgesCounter = 0;
-        int i;
-        int j;
-        for (i = 0; i < graph.size(); i++) {
-            for (j = 0; j < graph.size(); j++) {
-                if (btnArray[j].getId() != btnArray[i].getId()) {
-                    //Arista hacia otro vertice    
-                    if (graph.containsEdge(btnArray[i].getId(), btnArray[j].getId())) {
-                        edgesCounter++;
-
-                        lne = new Line();
-
-                        apRoot.getChildren().add(lne);
-                        lne.setLayoutX(btnArray[j].getLayoutX());
-                        lne.setLayoutY(btnArray[j].getLayoutY());
-                        lne.toBack();
-                        lne.setStartX(15);
-                        lne.setStartY(15);
-                        lne.setEndX((btnArray[i]).getLayoutX() - btnArray[j].getLayoutX() + 15);
-                        lne.setEndY((btnArray[i]).getLayoutY() - btnArray[j].getLayoutY() + 15);
-                        lne.setStrokeWidth(8);
-                        lne.setStroke(Paint.valueOf("#666666"));
-                        lne.setOpacity(0.4);
-                        lne.setId(String.valueOf(graph.getWeight(btnArray[i].getId(), btnArray[j].getId())) + " Km");
-                        lne.setOnMouseMoved(new EventHandler<MouseEvent>() {
-
-                            @Override
-                            public void handle(MouseEvent event) {
-                                line.setStroke(Paint.valueOf("#666666"));
-
-                                line = (Line) event.getSource();
-                                line.setStroke(Paint.valueOf("#008080"));
-                                line.setOpacity(0.9);
-                                txtTitle.setText(line.getId());
-                                Bounds boundsInScreen = rectangleGraph.localToScreen(rectangleGraph.getBoundsInLocal());
-                                Point punto = MouseInfo.getPointerInfo().getLocation();
-                                double x = punto.x - boundsInScreen.getMinX();
-                                double y = punto.y - boundsInScreen.getMinY();
-                                txtTitle.setLayoutX(x - 130);
-                                txtTitle.setLayoutY(y - 130);
-                                txtTitle.setFill(Paint.valueOf("#000035"));
-                                txtTitle.setFont(Font.font("Century Gothic", FontWeight.EXTRA_BOLD, 25));
-                            }
-                        });
-
-                    }
-
-                }
+    
+    public void buttonEvent() throws ListException{
+    
+        
+        for (int i = 0; i < graph.size() && p==null; i++) {
+            if (Util.Utility.equals(graph.getVertexByIndex(i).data, btn.getId())) {
+                 p =(Place) graph.getVertexByIndex(i).data;
             }
         }
-        edgesCounter = edgesCounter / 2;
+        apType.toFront();
+        apRoot.setOpacity(0.7);
+        apType.setVisible(true);
+        
+    
     }
-
-    Line a1;
-    Line a2;
 
     private void randomizeEdges() throws GraphException, ListException {
 
@@ -357,10 +227,9 @@ public class FinderRSController implements Initializable {
 
     }
 
-    @FXML
     private void btnRandomize(ActionEvent event) throws GraphException, ListException {
         randomizeEdges();
-        rdbEvent();
+//        rdbEvent();
     }
 
     public void loadTable(TableView<String[]> tbl, String[][] stringMatrix) {
@@ -386,5 +255,17 @@ public class FinderRSController implements Initializable {
             tbl.getColumns().add(tc);
         }
         tbl.setItems(data);
+    }
+
+    @FXML
+    private void btnFood(ActionEvent event) {
+        apType.setVisible(false);
+        apRoot.setVisible(false);
+    }
+
+    @FXML
+    private void btnProducts(ActionEvent event) {
+        apType.setVisible(false);
+        apRoot.setVisible(false);
     }
 }
