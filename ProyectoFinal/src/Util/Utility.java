@@ -54,7 +54,7 @@ public class Utility {
     
     public static boolean addFood(Food food) throws TreeException {
         boolean flag = false;
-        if (treeFoods.isEmpty() || !treeProducts.contains(food)) {
+        if (treeFoods.isEmpty() || !treeFoods.contains(food)) {
             treeFoods.add(food);
             flag = true;
         }

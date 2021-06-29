@@ -81,6 +81,7 @@ public class ProductCreateController implements Initializable {
                 Product product;
                 if (supermarket[i].isSelected()) {
                     product = new Product(Integer.parseInt(textID.getText()), textName.getText(), spinnerPrice.getValue(), i/*Util.Utility.getSupermarketById(supermarket[i].getText()).getID()*/);
+                    System.out.println(product.toString());
                     Util.Utility.addProduct(product);
                     //callAlert("Error", "The Product has been registered ");
                     System.out.println("agrego");
