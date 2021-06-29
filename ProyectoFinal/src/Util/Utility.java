@@ -72,7 +72,7 @@ public class Utility {
         return treeProducts;
     }
     
-    public static BST getFoodProducts() {
+    public static BST getTreeFoods() {
         return treeFoods;
     }
     
