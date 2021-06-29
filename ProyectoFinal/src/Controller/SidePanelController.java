@@ -148,7 +148,8 @@ public class SidePanelController implements Initializable {
                 callback.updateColor("PlaceCreate");
                 break;
             case "Market":
-
+                callback.setPaneVisible(Boolean.TRUE);
+                callback.updateColor("FinderR&S");
                 break;
         }
     }

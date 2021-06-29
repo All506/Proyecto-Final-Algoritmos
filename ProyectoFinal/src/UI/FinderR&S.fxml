@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane id="AnchorPane" prefHeight="592.0" prefWidth="775.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controller.FinderRSController">
+    <stylesheets>
+        <URL value="@/CSS/General.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane fx:id="apRoot" layoutX="94.0" layoutY="76.0" prefHeight="415.0" prefWidth="586.0" style="-fx-background-color: #cccccc;">
+         <children>
+            <Button fx:id="btnCenter" layoutX="241.0" layoutY="195.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="9.0" text="Button" visible="false" />
+            <Rectangle fx:id="rectangleGraph" arcHeight="5.0" arcWidth="5.0" fill="#acc9e4" height="415.0" stroke="BLACK" strokeType="INSIDE" width="586.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
