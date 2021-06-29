@@ -41,6 +41,7 @@ public class PlaceDeleteController implements Initializable {
     private Button btnDeletePlace;
     
     AdjacencyListGraph gPlace;
+    
     Place aux;
     @FXML
     private TextField txfPlaceId;
@@ -51,6 +52,7 @@ public class PlaceDeleteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gPlace = Util.Utility.getPlacesGraph();
+        btnDeletePlace.setDisable(true);
         try {
             loadCombobox();
         } catch (ListException ex) {
@@ -61,6 +63,7 @@ public class PlaceDeleteController implements Initializable {
     @FXML
     private void cmbPlaceId(ActionEvent event) throws ListException {
         if(cmbPlaceId.getValue()!=null){
+            btnDeletePlace.setDisable(false);
             Place p = null;
             for (int i = 0; i < gPlace.size(); i++) {
                 p=(Place)gPlace.getVertexByIndex(i).data;
@@ -75,12 +78,13 @@ public class PlaceDeleteController implements Initializable {
 
     @FXML
     private void btnDeletePlace(ActionEvent event) throws GraphException, ListException {
+        btnDeletePlace.setDisable(true);
         txfPlaceId.setText("");
         txfPlaceName.setText("");
         gPlace.removeVertex(aux);
         cmbPlaceId.getItems().clear();
         loadCombobox();
-        callAlert("Confirmation", "Place deleted successfully");  
+        callConfirmation("Confirmation", "Place deleted successfully");  
         
     }
     
@@ -104,6 +108,26 @@ public class PlaceDeleteController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Alert");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void callConfirmation(String fxmlName, String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ConfirmationController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Confirmation");
             //Se le asigna la información a la controladora
             controller.fill(text);
             stage.setScene(new Scene(root1));

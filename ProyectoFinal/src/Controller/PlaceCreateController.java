@@ -59,7 +59,7 @@ public class PlaceCreateController implements Initializable {
     private void btnSavePlace(ActionEvent event) throws GraphException, ListException {
         if(txfPlaceName.getText().length()>4){
             gPlaces.addVertex(new Place(Integer.parseInt(txfPlaceId.getText()), txfPlaceName.getText()));
-//            callAlert("Confirmation", "Place added successfully");  
+            callConfirmation("Confirmation", "Place added successfully");  
             txfPlaceName.setText("");
             Util.Utility.lastIndexGPlace++;
             loadTextField();
@@ -80,6 +80,26 @@ public class PlaceCreateController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Alert");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+     private void callConfirmation(String fxmlName, String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ConfirmationController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Confirmation");
             //Se le asigna la información a la controladora
             controller.fill(text);
             stage.setScene(new Scene(root1));

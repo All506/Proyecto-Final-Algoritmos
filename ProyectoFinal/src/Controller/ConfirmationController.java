@@ -7,9 +7,12 @@ package Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -20,6 +23,8 @@ public class ConfirmationController implements Initializable {
 
     @FXML
     private Text txtContent;
+    @FXML
+    private Button btnContinue;
 
     /**
      * Initializes the controller class.
@@ -31,6 +36,12 @@ public class ConfirmationController implements Initializable {
 
     public void fill(String content) {
         this.txtContent.setText(content);
+    }
+
+    @FXML
+    private void btnContinue(ActionEvent event) {
+         Stage stage = (Stage) this.btnContinue.getScene().getWindow();
+         stage.close();
     }
 
 }
