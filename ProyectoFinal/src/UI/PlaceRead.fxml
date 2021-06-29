@@ -36,8 +36,7 @@
             </VBox>
          </content>
       </ScrollPane>
-      <TableView fx:id="tblPlaces" layoutX="528.0" layoutY="394.0" opacity="0.81" prefHeight="196.0" prefWidth="232.0" stylesheets="@../CSS/GraphButtons.css" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b1c0cf" height="65.0" layoutX="286.0" layoutY="525.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="202.0" />
-      <Button fx:id="btnRandomize" layoutX="290.0" layoutY="538.0" mnemonicParsing="false" onAction="#btnRandomize" prefHeight="43.0" prefWidth="194.0" stylesheets="@../CSS/coolThings.css" text="Randomize distances" />
+      <TableView fx:id="tblPlaces" layoutX="512.0" layoutY="398.0" opacity="0.81" prefHeight="196.0" prefWidth="252.0" stylesheets="@../CSS/GraphButtons.css" />
+      <Button fx:id="btnRandomize" layoutX="267.0" layoutY="523.0" mnemonicParsing="false" onAction="#btnRandomize" prefHeight="43.0" prefWidth="194.0" stylesheets="@../CSS/coolThings.css" text="Randomize distances" />
    </children>
 </AnchorPane>
