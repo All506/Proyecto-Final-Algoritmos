@@ -7,7 +7,9 @@ package Util;
 
 import Domain.CircularLinkList;
 import Domain.ListException;
+import Objects.Food;
 import Objects.Place;
+import Objects.Product;
 import Objects.Restaurant;
 import Objects.Security;
 import Security.AES;
@@ -73,6 +75,37 @@ public class SaveData {
                 writePlaces();
             }
         }
+
+        //La información acerca de los productos es almacenada
+        if (!fXML.exist("Products.xml")) { //Si el archivo no existe
+            fXML.createXML("ProductsXML", "Products");
+            if (!Util.Utility.treeProducts.isEmpty()) {
+                writeProducts();
+            }
+        } else {
+            fXML.deleteFile("Products");
+            fXML.createXML("ProductsXML", "Products");
+            if (!Util.Utility.treeProducts.isEmpty()) {
+                writeProducts();
+            }
+        }
+
+        //La información acerca de las comidas es almacenada
+        if (!fXML.exist("Foods.xml")) { //Si el archivo no existe
+            fXML.createXML("FoodsXML", "Foods");
+            if (!Util.Utility.treeFoods.isEmpty()) {
+                writeFoods();
+            }
+        } else {
+            fXML.deleteFile("Foods");
+            fXML.createXML("FoodsXML", "Foods");
+            if (!Util.Utility.treeFoods.isEmpty()) {
+                writeFoods();
+            }
+        }
+
+        SinglyLinkedList listaPrueba = Util.Utility.treeProducts.getTreeAsList();
+        System.out.println("LAS PRODUCTS EN LA LISTA SON \n " + listaPrueba.toString());
     }
 
     public void writeSecurity() throws ListException, TransformerException, SAXException, IOException {
@@ -121,6 +154,38 @@ public class SaveData {
             for (int i = 1; i <= placesToSave.size(); i++) {
                 Place place = (Place) placesToSave.getNode(i).data;
                 fXML.writeXML("Places.xml", "Places", place.dataName(), place.data());
+            }
+        }
+    }
+
+    private void writeProducts() throws list.ListException, TransformerException, SAXException, IOException {
+        FileXML fXML = new FileXML();
+
+        if (Util.Utility.treeProducts.isEmpty()) {
+            if (fXML.exist("Products.xml")) {
+                fXML.deleteFile("Products");
+            }
+        } else {
+            SinglyLinkedList productsToSave = Util.Utility.treeProducts.getTreeAsList();
+            for (int i = 1; i <= productsToSave.size(); i++) {
+                Product product = (Product) productsToSave.getNode(i).data;
+                fXML.writeXML("Products.xml", "Products", product.dataName(), product.data());
+            }
+        }
+    }
+
+    private void writeFoods() throws list.ListException, TransformerException, SAXException, IOException {
+        FileXML fXML = new FileXML();
+
+        if (Util.Utility.treeFoods.isEmpty()) {
+            if (fXML.exist("Foods.xml")) {
+                fXML.deleteFile("Foods");
+            }
+        } else {
+            SinglyLinkedList foodsToSave = Util.Utility.treeFoods.getTreeAsList();
+            for (int i = 1; i <= foodsToSave.size(); i++) {
+                Food food = (Food) foodsToSave.getNode(i).data;
+                fXML.writeXML("Foods.xml", "Foods", food.dataName(), food.data());
             }
         }
     }

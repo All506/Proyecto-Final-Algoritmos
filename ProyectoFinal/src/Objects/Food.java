@@ -59,6 +59,14 @@ public class Food {
         return "Food{" + "ID: " + ID + ", name: " + name + ", price: " + price + ", restaurantID: " + restaurantID + '}';
     }
 
-
+    public String[] dataName(){
+        String[] dataName = {"id","name","price","restaurantID"};
+        return dataName;
+    }
+    
+    public String[] data(){
+        String[] data = {String.valueOf(ID),name,String.valueOf(price),String.valueOf(restaurantID)};
+        return data;
+    }
     
 }

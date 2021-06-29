@@ -7,7 +7,9 @@ package XML;
 
 import Domain.CircularLinkList;
 import Graphs.GraphException;
+import Objects.Food;
 import Objects.Place;
+import Objects.Product;
 import Objects.Security;
 import Objects.Restaurant;
 import Security.AES;
@@ -167,7 +169,7 @@ public class FileXML {
 
     public SinglyLinkedList readXMLtoRestaurantList() {
         SinglyLinkedList lRestaurants = new SinglyLinkedList();
-        
+
         if (exist("Restaurants.xml")) {
 
             try {
@@ -198,10 +200,10 @@ public class FileXML {
 
         return lRestaurants;
     }
-    
+
     public SinglyLinkedList readXMLtoPlacesList() {
         SinglyLinkedList lPlaces = new SinglyLinkedList();
-        
+
         if (exist("Places.xml")) {
 
             try {
@@ -232,6 +234,76 @@ public class FileXML {
         return lPlaces;
     }
 
+    public SinglyLinkedList readXMLtoProductList() {
+        SinglyLinkedList lProducts = new SinglyLinkedList();
+
+        if (exist("Products.xml")) {
+
+            try {
+                File inputFile = new File("Products.xml");
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                Document doc = dBuilder.parse(inputFile);
+                doc.getDocumentElement().normalize();
+
+                NodeList nList = doc.getElementsByTagName("Products"); //Cabecera de objeto
+
+                for (int indice = 0; indice < nList.getLength(); indice++) {
+                    Product newProduct = new Product(0, "", 0, 0);
+                    Node nNode = nList.item(indice);
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element eElement = (Element) nNode;
+                        newProduct.setID(Integer.valueOf(eElement.getAttribute("ID")));
+                        newProduct.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
+                        newProduct.setPrice(Double.valueOf(eElement.getElementsByTagName("price").item(0).getTextContent()));
+                        newProduct.setSupermarketID(Integer.valueOf(eElement.getElementsByTagName("supermarketID").item(0).getTextContent()));
+                    }
+                    lProducts.add(newProduct);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return lProducts;
+    }
+
+    private SinglyLinkedList readXMLtoFoodList() {
+        SinglyLinkedList lFoods = new SinglyLinkedList();
+
+        if (exist("Foods.xml")) {
+
+            try {
+                File inputFile = new File("Foods.xml");
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                Document doc = dBuilder.parse(inputFile);
+                doc.getDocumentElement().normalize();
+
+                NodeList nList = doc.getElementsByTagName("Foods"); //Cabecera de objeto
+
+                for (int indice = 0; indice < nList.getLength(); indice++) {
+                    Food newFood = new Food(0, "", 0, 0);
+                    Node nNode = nList.item(indice);
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element eElement = (Element) nNode;
+                        newFood.setID(Integer.valueOf(eElement.getAttribute("id")));
+                        newFood.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
+                        newFood.setPrice(Double.valueOf(eElement.getElementsByTagName("price").item(0).getTextContent()));
+                        newFood.setRestaurantID(Integer.valueOf(eElement.getElementsByTagName("restaurantID").item(0).getTextContent()));
+                    }
+                    lFoods.add(newFood);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return lFoods;
+    }
+
     public void loadFiles() throws ListException, GraphException {
         //Se carga la informacion de los restaurantes 
         if (readXMLtoRestaurantList().isEmpty()) {
@@ -241,27 +313,45 @@ public class FileXML {
             SinglyLinkedList lRestaurantes = readXMLtoRestaurantList();
             for (int i = 1; i <= lRestaurantes.size(); i++) {
                 Util.Utility.gRestaurants.addVertex(lRestaurantes.getNode(i).data);
-                Restaurant temporalRest = (Restaurant)lRestaurantes.getNode(i).data;
+                Restaurant temporalRest = (Restaurant) lRestaurantes.getNode(i).data;
                 Util.Utility.lastIndexGRestaurant = temporalRest.getID(); //Se setea el valor del ultimo indice almacenado
             }
         }
         Util.Utility.lastIndexGRestaurant++; //Se anhade uno mas para que el siguiente valor almacenado conicida
-        
+
         //Se carga la informacion de los lugares
-    if (readXMLtoPlacesList().isEmpty()) {
+        if (readXMLtoPlacesList().isEmpty()) {
             Util.Utility.lastIndexGPlace = 0; //Si no existe el documento, no se ha guardado ningun objeto
             System.out.println("El archivo de lugares no existe");
         } else {
             SinglyLinkedList lPlaces = readXMLtoPlacesList();
-            System.out.println("lRestaurantes contiene " + lPlaces.toString());
             for (int i = 1; i <= lPlaces.size(); i++) {
                 Util.Utility.gPlaces.addVertex(lPlaces.getNode(i).data);
-                Place temporalPlaces = (Place)lPlaces.getNode(i).data;
+                Place temporalPlaces = (Place) lPlaces.getNode(i).data;
                 Util.Utility.lastIndexGPlace = temporalPlaces.getID(); //Se setea el valor del ultimo indice almacenado
             }
         }
         Util.Utility.lastIndexGPlace++; //Se anhade uno mas para que el siguiente valor almacenado conicida
-    
+
+        //Se carga la informacion de los productos
+        if (readXMLtoProductList().isEmpty()) {
+            System.out.println("El archivo de productos no existe");
+        } else {
+            SinglyLinkedList lProducts = readXMLtoProductList();
+            for (int i = 1; i <= lProducts.size(); i++) {
+                Util.Utility.treeProducts.add(lProducts.getNode(i).data);
+            }
+        }
+
+        //Se carga la informacion de los productos
+        if (readXMLtoFoodList().isEmpty()) {
+            System.out.println("El archivo de productos no existe");
+        } else {
+            SinglyLinkedList lFoods = readXMLtoFoodList();
+            for (int i = 1; i <= lFoods.size(); i++) {
+                Util.Utility.treeFoods.add(lFoods.getNode(i).data);
+            }
+        }
     }
-    
+
 }

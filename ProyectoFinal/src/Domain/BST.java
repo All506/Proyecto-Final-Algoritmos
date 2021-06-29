@@ -5,6 +5,10 @@
  */
 package Domain;
 
+import Objects.Food;
+import Objects.Product;
+import list.SinglyLinkedList;
+
 /**
  *
  * @author Profesor Gilberth Chaves A <gchavesav@ucr.ac.cr>
@@ -280,4 +284,24 @@ public class BST implements Tree {
         }
     }
     
+    public SinglyLinkedList getTreeAsList(){
+        SinglyLinkedList temporal = new SinglyLinkedList();
+        SinglyLinkedList list = tourTree(root, temporal);
+        return list;
+    }
+    
+    private SinglyLinkedList tourTree(BTreeNode node, SinglyLinkedList arrayList2) {
+        if (node != null) {
+            tourTree(node.left, arrayList2);
+            if (node.data instanceof Product) {
+                Product p = (Product) node.data;
+                arrayList2.add(p);
+            } else {
+                Food f = (Food) node.data;
+                arrayList2.add(f);
+            }
+            tourTree(node.right, arrayList2);
+        }
+        return arrayList2;
+    }
 }

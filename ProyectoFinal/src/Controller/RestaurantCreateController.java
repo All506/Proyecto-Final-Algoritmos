@@ -6,6 +6,7 @@
 package Controller;
 
 import Graphs.GraphException;
+import Objects.Place;
 import Objects.Restaurant;
 import list.ListException;
 import java.io.IOException;
@@ -24,6 +25,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import list.SinglyLinkedList;
 
 /**
  * FXML Controller class
@@ -50,11 +52,21 @@ public class RestaurantCreateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Cargar el comboBox con los lugares
-        cmbLocation.getSelectionModel().select("Cartago");
-        cmbLocation.getItems().add("Cartago");
-        cmbLocation.getItems().add("San Jose");
-        cmbLocation.getItems().add("Alajuela");
-        txtId.setText(String.valueOf(Util.Utility.lastIndexGRestaurant));
+        if (Util.Utility.gPlaces.isEmpty()) {
+            callAlert("Error", "There are no places to load");
+        } else {
+            SinglyLinkedList lPlaces = Util.Utility.gPlaces.getAllItemsAsList();
+            try {
+                for (int i = 1; i < lPlaces.size(); i++) {
+                    Place tempPlace = (Place) lPlaces.getNode(i).data;
+                    cmbLocation.getItems().add(tempPlace.getName());
+                }
+                cmbLocation.getSelectionModel().select(0);
+            } catch (ListException ex) {
+                Logger.getLogger(RestaurantCreateController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            txtId.setText(String.valueOf(Util.Utility.lastIndexGRestaurant));
+        }
 
     }
 
@@ -84,7 +96,7 @@ public class RestaurantCreateController implements Initializable {
     }
 
     public void cleanUI() {
-        cmbLocation.getSelectionModel().select("Cartago");
+        cmbLocation.getSelectionModel().select(0);
         txtId.setText(String.valueOf(Util.Utility.lastIndexGRestaurant));
         txtName.setText("");
     }

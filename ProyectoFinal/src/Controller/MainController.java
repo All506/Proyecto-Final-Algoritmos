@@ -231,9 +231,7 @@ public class MainController implements Initializable, ChangeCallback {
                     if (transition.getStatus().equals(Animation.Status.STOPPED)) {
                         drawer.toBack();
                         scpMenu.toFront();
-
                     }
-
                 }
             });
 
