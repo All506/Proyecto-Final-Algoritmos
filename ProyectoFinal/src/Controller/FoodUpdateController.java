@@ -2,19 +2,26 @@ package Controller;
 
 import Domain.BST;
 import Domain.BTreeNode;
+import Domain.TreeException;
 import Objects.Food;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import list.ListException;
 
 /**
@@ -30,11 +37,10 @@ public class FoodUpdateController implements Initializable {
     private TextField txtName;
     @FXML
     private Button btnUpdate;
-    @FXML
-    private Spinner<Integer> spinnerPrice;
 
-    SpinnerValueFactory<Integer> value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000000);
-    
+    @FXML
+    private TextField txtPrice;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cmbFood.getItems().clear();
@@ -42,19 +48,35 @@ public class FoodUpdateController implements Initializable {
     }
 
     @FXML
-    private void btnUpdate(ActionEvent event) {
-
+    private void btnUpdate(ActionEvent event) throws TreeException {
+        if (this.txtName.getText().equals("") || this.txtPrice.getText().equals("") || this.cmbFood.getValue().equals("")) {
+            callAlert("Error", "Fill all the information to continue");
+        } else {
+            //Generate a temporal tree
+            BST tempTree = Util.Utility.getTreeFoods();
+            
+            //Call the food to delete
+            Food foodToDelete = Util.Utility.getFoodByName(this.cmbFood.getValue());
+            
+            //Create new food to replace (Basically the old but upgrated)
+            Food updatedFood = new Food(foodToDelete.getID(),this.txtName.getText(),
+            Integer.parseInt(txtPrice.getText()),foodToDelete.getRestaurantID());
+            
+            //Remove the old one, add the updated
+            tempTree.remove(foodToDelete);
+            tempTree.add(updatedFood);
+            
+            //Replace the original tree for the temporal and load the combobox
+            Util.Utility.setTreeFoods(tempTree);
+            loadComboFood();
+        }
     }
 
-    @FXML
     private void cmbFood(ActionEvent event) {
         Food food = Util.Utility.getFoodByName(cmbFood.getValue());
-        System.out.println(food.toString());
         txtName.setText(food.getName());
-        value.setValue(1);
-        spinnerPrice.setValueFactory(value);
     }
- 
+
     private void loadComboFood() {
         BST treeFoodTemp = new BST();
         treeFoodTemp = Util.Utility.getTreeFoods();
@@ -62,7 +84,7 @@ public class FoodUpdateController implements Initializable {
             tourTree(treeFoodTemp.getRoot(), cmbFood);
             this.cmbFood.setValue(null);
         } else {
-            System.out.println("No hay productos registrados");
+            callAlert("Information", "No foods to show");
         }
     }
 
@@ -74,6 +96,26 @@ public class FoodUpdateController implements Initializable {
             if (!cmbFood.getItems().contains(food.getName())) {
                 cmbFood.getItems().add(food.getName());
             }
+        }
+    }
+
+    private void callAlert(String type, String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + type + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ErrorController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Alert");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

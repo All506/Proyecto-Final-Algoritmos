@@ -351,6 +351,10 @@ public class Utility {
         return null;
     }
 
+    public static void setTreeFoods(BST treeFoods) {
+        Utility.treeFoods = treeFoods;
+    }
+    
     public static Supermarket getSupermarketId(String supermarket) throws list.ListException {
         for (int i = 0; i < gRestAndSuper.size(); i++) {
             if (gRestAndSuper.getVertexByIndex(i).data instanceof Supermarket) {
@@ -431,6 +435,7 @@ public class Utility {
         tourTreeFoodID(treeFoods.getRoot());
         return lastIDFood;
     }
+    
 
     private static void tourTreeFoodID(BTreeNode node) {
         if (node != null) {

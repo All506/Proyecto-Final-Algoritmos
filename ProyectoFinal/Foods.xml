@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><FoodsXML/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><FoodsXML><Foods id="1"><name>Papas</name><price>1000.0</price><restaurantID>2</restaurantID></Foods><Foods id="2"><name>Tacos al pastor</name><price>2500.0</price><restaurantID>2</restaurantID></Foods><Foods id="3"><name>Hamburguesa</name><price>2000.0</price><restaurantID>2</restaurantID></Foods></FoodsXML>
