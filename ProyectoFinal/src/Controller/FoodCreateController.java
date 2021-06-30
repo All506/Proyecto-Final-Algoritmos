@@ -185,15 +185,7 @@ public class FoodCreateController implements Initializable {
             }
         }
     }
-
-    public boolean checkRadioButtons(RadioButton[] rbuttonArray) {
-        for (int i = 0; i < rbuttonArray.length; i++) {
-            if (rbuttonArray[i].isSelected()) {
-                return true;
-            }
-        }
-        return false;
-    }
+    
 
     private void callAlert(String text) {
         //Se llama la alerta
