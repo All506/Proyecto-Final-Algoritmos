@@ -83,11 +83,13 @@ public class RestaurantDeleteController implements Initializable {
                 }
 
             }//REVISAR LA ALERT
-//            if (aux instanceof Restaurant && !flag) {
-//                callAlert("The Restaurant cannot been deleted");
-//            } else {
-//                callAlert("The Supermarket cannot been deleted");
-//            }
+            if (!flag) {
+                if (aux instanceof Restaurant) {
+                    callAlert("The Restaurant cannot been deleted");
+                }else{
+                    callAlert("The Supermarket cannot been deleted");
+                }
+            }
         }
         flag = false;
         gRestAndSuper = Util.Utility.gRestAndSuper;
