@@ -105,7 +105,7 @@ public class FoodCreateController implements Initializable {
                 if (flag) {
                     callConfirmation("The Food(s) has been registered");
                     cleanDisplay();
-                }else{
+                } else {
                     callAlert("Choose a restaurant to continue");
                 }
 
@@ -148,7 +148,7 @@ public class FoodCreateController implements Initializable {
                 if (txtField.getText().length() == 4) {
                     txtField.positionCaret(txtField.getText().length());
                 }
-                if(txtField.getText().length() >= 11){
+                if (txtField.getText().length() >= 7) {
                     event.consume();
                 }
             }
@@ -186,15 +186,15 @@ public class FoodCreateController implements Initializable {
         }
     }
 
-    public boolean checkRadioButtons(RadioButton[] rbuttonArray){
+    public boolean checkRadioButtons(RadioButton[] rbuttonArray) {
         for (int i = 0; i < rbuttonArray.length; i++) {
-            if(rbuttonArray[i].isSelected()){
+            if (rbuttonArray[i].isSelected()) {
                 return true;
             }
         }
         return false;
     }
-    
+
     private void callAlert(String text) {
         //Se llama la alerta
         try {
@@ -250,19 +250,22 @@ public class FoodCreateController implements Initializable {
 
     @FXML
     private void txtFieldPrice(KeyEvent event) {
-        if (!this.txtFieldPrice.getText().equals("") || Integer.parseInt(this.txtFieldPrice.getText())<1000000) {
-            this.btnUp.setText(String.valueOf(Integer.parseInt(this.txtFieldPrice.getText()) + 500));
+        if (!this.txtFieldPrice.getText().equals("")) {
+            if (Integer.parseInt(this.txtFieldPrice.getText()) < 9999999) {
 
-            if (Integer.parseInt(this.txtFieldPrice.getText()) < 500) {
-                this.btnDown.setText("0");
-            } else {
-                this.btnDown.setText(String.valueOf(Integer.parseInt(this.txtFieldPrice.getText()) - 500));
+                this.btnUp.setText(String.valueOf(Integer.parseInt(this.txtFieldPrice.getText()) + 500));
+
+                if (Integer.parseInt(this.txtFieldPrice.getText()) < 500) {
+                    this.btnDown.setText("0");
+                } else {
+                    this.btnDown.setText(String.valueOf(Integer.parseInt(this.txtFieldPrice.getText()) - 500));
+                }
             }
         }
     }
 
     @FXML
-    private void btnDown(ActionEvent event){
+    private void btnDown(ActionEvent event) {
         this.txtFieldPrice.setText(this.btnDown.getText());
 
         this.btnUp.setText(String.valueOf(Integer.parseInt(this.txtFieldPrice.getText()) + 500));
