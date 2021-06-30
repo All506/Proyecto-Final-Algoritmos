@@ -24,7 +24,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import Misc.ChangeCallback;
 import java.io.File;
@@ -62,6 +61,8 @@ public class MainController implements Initializable, ChangeCallback {
     boolean f = false;
     @FXML
     private Text txtWelcome;
+    
+    MediaView mediaView;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -72,7 +73,7 @@ public class MainController implements Initializable, ChangeCallback {
         //Instantiating MediaPlayer class
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         //Instantiating MediaView class
-        MediaView mediaView = new MediaView(mediaPlayer);
+        mediaView = new MediaView(mediaPlayer);
 
         mediaView.setPreserveRatio(true);
         mediaView.fitWidthProperty().bind(root.minHeightProperty());
@@ -120,6 +121,7 @@ public class MainController implements Initializable, ChangeCallback {
                         if (transition.getStatus().equals(Animation.Status.STOPPED)) {
                             drawer.toBack();
                             scpMenu.toFront();
+                            mediaView.toBack();
 
                         }
 
@@ -131,6 +133,7 @@ public class MainController implements Initializable, ChangeCallback {
                 drawer.open();
                 drawer.toFront();
                 scpMenu.toBack();
+                mediaView.toBack();
 
                 transition.setOnFinished(new EventHandler<ActionEvent>() {
                     @Override
@@ -139,6 +142,7 @@ public class MainController implements Initializable, ChangeCallback {
                         if (transition.getStatus().equals(Animation.Status.STOPPED)) {
                             drawer.toFront();
                             scpMenu.toBack();
+                            mediaView.toBack();
                         }
 
                     }
@@ -231,6 +235,7 @@ public class MainController implements Initializable, ChangeCallback {
                     if (transition.getStatus().equals(Animation.Status.STOPPED)) {
                         drawer.toBack();
                         scpMenu.toFront();
+                        mediaView.toBack();
                     }
                 }
             });
@@ -240,6 +245,7 @@ public class MainController implements Initializable, ChangeCallback {
             drawer.open();
             drawer.toFront();
             scpMenu.toBack();
+            mediaView.toBack();
 
             transition.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
@@ -248,6 +254,7 @@ public class MainController implements Initializable, ChangeCallback {
                     if (transition.getStatus().equals(Animation.Status.STOPPED)) {
                         drawer.toFront();
                         scpMenu.toBack();
+                        mediaView.toBack();
                     }
 
                 }

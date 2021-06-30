@@ -11,6 +11,7 @@ import Graphs.GraphException;
 import Objects.Place;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import static java.awt.SystemColor.control;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -92,6 +93,7 @@ public class PlaceReadController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         apRoot.setVisible(false);
+        scrRadioButtons.setStyle("-fx-control-inner-background: transparent;");
 
         graph = Util.Utility.getPlacesGraph();
 
@@ -218,7 +220,7 @@ public class PlaceReadController implements Initializable {
         apRoot.setVisible(true);
 
         counter = 0;
-        hip = 180;//longitud del centro a cada vertice
+        hip = 160;//longitud del centro a cada vertice
 
         btnArray = new Button[graph.size()];
         if (graph != null && !graph.isEmpty()) {
@@ -253,7 +255,7 @@ public class PlaceReadController implements Initializable {
                 double x = Math.sin(Math.toRadians(auxI)) * hip;
                 double y = Math.cos(Math.toRadians(auxI)) * hip;
 
-                btn.setLayoutX(btnCenter.getLayoutX() + y * 1);
+                btn.setLayoutX(btnCenter.getLayoutX() + y * 1.7);
                 btn.setLayoutY(btnCenter.getLayoutY() - x);
             }
             if (i >= 90 && i < 180) {
@@ -261,7 +263,7 @@ public class PlaceReadController implements Initializable {
                 double x = Math.sin(Math.toRadians(auxI)) * hip;
                 double y = Math.cos(Math.toRadians(auxI)) * hip;
 
-                btn.setLayoutX(btnCenter.getLayoutX() - x * 1);
+                btn.setLayoutX(btnCenter.getLayoutX() - x * 1.7);
                 btn.setLayoutY(btnCenter.getLayoutY() - y);
             }
             if (i >= 180 && i < 270) {
@@ -269,7 +271,7 @@ public class PlaceReadController implements Initializable {
                 double x = Math.sin(Math.toRadians(auxI)) * hip;
                 double y = Math.cos(Math.toRadians(auxI)) * hip;
 
-                btn.setLayoutX(btnCenter.getLayoutX() - y * 1);
+                btn.setLayoutX(btnCenter.getLayoutX() - y * 1.7);
                 btn.setLayoutY(btnCenter.getLayoutY() + x);
             }
             if (i >= 270 && i < 360) {
@@ -277,7 +279,7 @@ public class PlaceReadController implements Initializable {
                 double x = Math.sin(Math.toRadians(auxI)) * hip;
                 double y = Math.cos(Math.toRadians(auxI)) * hip;
 
-                btn.setLayoutX(btnCenter.getLayoutX() + x * 1);
+                btn.setLayoutX(btnCenter.getLayoutX() + x * 1.7);
                 btn.setLayoutY(btnCenter.getLayoutY() + y);
             }
         }

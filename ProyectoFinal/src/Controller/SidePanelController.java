@@ -95,8 +95,8 @@ public class SidePanelController implements Initializable {
                 module = "Places";
                 break;
             case "b6":
-                apB1.setVisible(true);
-                module = "Market";
+                callback.setPaneVisible(Boolean.TRUE);
+                callback.updateColor("FinderR&S");
                 break;
         }
     }
