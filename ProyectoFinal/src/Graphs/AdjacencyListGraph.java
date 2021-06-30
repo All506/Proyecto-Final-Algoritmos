@@ -257,12 +257,9 @@ public class AdjacencyListGraph implements Graph {
     
     
     public Object getWeight(Object a, Object b) throws GraphException, ListException {
-//        if(indexOf(a)!=-1&&indexOf(b)!=-1){
         EdgeWeight ew = (EdgeWeight) vertexList[indexOf(a)].edgesList.getNode(
         vertexList[indexOf(a)].edgesList.indexOf(new EdgeWeight(b, null))).getData();
-        return ew.getWeight();
-//        }else
-//            return null;
+        return ew.getWeight();   
         
     }
     

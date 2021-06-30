@@ -9,6 +9,7 @@ import Domain.BST;
 import Domain.BTreeNode;
 import Domain.TreeException;
 import Graphs.AdjacencyListGraph;
+import Graphs.DijkstrasAlgorithm;
 import Graphs.Graph;
 import Graphs.GraphException;
 import Objects.Food;
@@ -16,6 +17,7 @@ import Objects.Place;
 import Objects.Product;
 import Objects.Restaurant;
 import Objects.Supermarket;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -28,7 +30,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
@@ -38,6 +43,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import list.ListException;
 import list.SinglyLinkedList;
@@ -298,22 +305,22 @@ public class FinderRSController implements Initializable {
       matrix[0][0]="Name";
       matrix[0][1]="Price";
       
-      for (int i = 0; i < itemsArray.length; i++) {
-           if(itemsArray[i] instanceof Food){
-                Food f = (Food)itemsArray[i];
-                if(!cmbItems.getItems().contains(f.getName())){
-                cmbItems.getItems().add(f.getName());
-                matrix[i+1][0]=f.getName();
-                matrix[i+1][1]=String.valueOf(f.getPrice());
+        for (int i = 0; i < itemsArray.length; i++) {
+            if (itemsArray[i] instanceof Food) {
+                Food f = (Food) itemsArray[i];
+                if (!cmbItems.getItems().contains(f.getName())) {
+                    cmbItems.getItems().add(f.getName());
+                    matrix[i + 1][0] = f.getName();
+                    matrix[i + 1][1] = String.valueOf(f.getPrice());
                 }
-           }else{
-               if(!cmbItems.getItems().contains(p.getName())){
-                Product p = (Product)itemsArray[i];
-                cmbItems.getItems().add(p.getName());
-                matrix[i+1][0]=p.getName();
-                matrix[i+1][1]=String.valueOf(p.getPrice());
-               }
-           }
+            } else {
+                Product p = (Product) itemsArray[i];
+                if (!cmbItems.getItems().contains(p.getName())) {
+                    cmbItems.getItems().add(p.getName());
+                    matrix[i + 1][0] = p.getName();
+                    matrix[i + 1][1] = String.valueOf(p.getPrice());
+                }
+          }
          
         }
         loadTable(tblItems, cleanMatrix(matrix));
@@ -389,7 +396,17 @@ public class FinderRSController implements Initializable {
    }
 
     @FXML
-    private void btnConfirm(ActionEvent event) {
+    private void btnConfirm(ActionEvent event) throws ListException, GraphException {
+        
+        if(cmbItems.getValue()==null){
+            callAlert("You must select a product or food.");
+        }
+        else
+        {
+            nearestRestSup(cmbItems.getValue());
+        }
+        
+           
     }
     
     public String[][] cleanMatrix(String matrix[][]){
@@ -412,5 +429,52 @@ public class FinderRSController implements Initializable {
         return aux;
     }
     
+    private void callAlert(String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + "Error" + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ErrorController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Alert");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void callConfirmation(String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + "Confirmation" + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ConfirmationController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Confirmation");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void nearestRestSup(String item) throws ListException, GraphException{
+    String matrix[] = DijkstrasAlgorithm.getPath(graph, p);
+    Arrays.sort(matrix);
+    System.out.println(Arrays.toString(matrix));
+        
+    
+    }
     
 }
