@@ -80,38 +80,31 @@ public class ProductCreateController implements Initializable {
 
         }
 
-        //Cargar el combobox
-        loadComboBoxSuperMarkets();
-
         //Mascaras
         maskText(textName);
     }
 
     @FXML
     private void btnAdd(ActionEvent event) throws TreeException, ListException {
+        boolean flag = false;
         if (!textName.getText().equals("") && spinnerPrice.getValue() > 0) {
             for (int i = 0; supermarket[i] != null; i++) {
                 Product product;
                 if (supermarket[i].isSelected()) {
                     product = new Product(Integer.parseInt(textID.getText()), textName.getText(), spinnerPrice.getValue(), Util.Utility.getSupermarketId(supermarket[i].getText()).getID());
-                    System.out.println(product.toString());
                     Util.Utility.addProduct(product);
-                    //callAlert("Error", "The Product has been registered ");
-                    System.out.println("agrego");
+                    flag = true;     
                 }
             }
-
+            if (flag) {
+                callConfirmation("The Product(s) has been registered");
+            }
         } else {
             //Alert de que hay espacios vacios
-            callAlert("Error", "The name space is empty");
-            System.out.println("alert");
+            callAlert("Please check the empty space(s)");
         }
+        flag = false;
         cleanDisplay();
-    }
-
-    //Carga el combo con los supermarcados
-    public void loadComboBoxSuperMarkets() {
-
     }
 
     public void cleanDisplay() {
@@ -161,10 +154,10 @@ public class ProductCreateController implements Initializable {
         }
     }
 
-    private void callAlert(String fxmlName, String text) {
+    private void callAlert(String text) {
         //Se llama la alerta
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + "Error" + ".fxml"));
             Parent root1;
             root1 = (Parent) loader.load();
             //Se llama al controller de la nueva ventana abierta
@@ -172,6 +165,26 @@ public class ProductCreateController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Alert");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void callConfirmation(String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + "Confirmation" + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ConfirmationController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Confirmation");
             //Se le asigna la información a la controladora
             controller.fill(text);
             stage.setScene(new Scene(root1));

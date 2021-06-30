@@ -3,6 +3,7 @@ package Controller;
 import Domain.BST;
 import Domain.BTreeNode;
 import Objects.Product;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +15,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import list.ListException;
 
@@ -49,8 +55,7 @@ public class ProductReadController implements Initializable {
 
 
         if (treeProducts.isEmpty()) {
-            System.out.println("No hay productos registrados");
-            //callAlert("alert", "Error", "There are no registered products");
+            callAlert("There are no Product(s) registered");
         } else {
             try {
                 loadTable();//Llena la tabla
@@ -127,4 +132,24 @@ public class ProductReadController implements Initializable {
         return arrayList;
     }
 
+    private void callAlert(String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + "Error" + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ErrorController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Alert");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }//end class

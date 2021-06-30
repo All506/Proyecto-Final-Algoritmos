@@ -4,14 +4,21 @@ import Domain.BST;
 import Domain.BTreeNode;
 import Domain.TreeException;
 import Objects.Food;
-import Objects.Product;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -36,11 +43,17 @@ public class FoodDeleteController implements Initializable {
 
     @FXML
     private void btnRemove(ActionEvent event) throws TreeException {
-        System.out.println("hola");
+        boolean flag = false;
         while (!Util.Utility.getTreeFoods().isEmpty() && Util.Utility.getTreeFoods().contains(comboFood.getValue())) {
-            System.out.println("remove");
             Util.Utility.getTreeFoods().remove(comboFood.getValue());
+            flag = true;
         }
+        if (flag) {
+            callConfirmation("The Food(s) has been deleted");
+        }else{
+            callAlert("Please check the empty space");
+        }
+        flag = false;
         comboFood.getItems().clear();
         loadComboFood();
     }
@@ -52,7 +65,7 @@ public class FoodDeleteController implements Initializable {
             tourTree(treeFoodTemp.getRoot(), comboFood);
             this.comboFood.setValue(null);
         } else {
-            System.out.println("No hay productos registrados");
+            callAlert("There are no Food(s) registered");
         }
     }
 
@@ -68,4 +81,45 @@ public class FoodDeleteController implements Initializable {
         }
     }
 
+    private void callAlert(String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + "Error" + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ErrorController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Alert");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void callConfirmation(String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + "Confirmation" + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ConfirmationController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Confirmation");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
 }//end class

@@ -4,16 +4,21 @@ import Domain.BST;
 import Domain.BTreeNode;
 import Domain.TreeException;
 import Objects.Product;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -23,19 +28,9 @@ import javafx.scene.layout.GridPane;
 public class ProductDeleteController implements Initializable {
 
     @FXML
-    private TextField textId;
-    @FXML
-    private TextField textName;
-    @FXML
-    private TextField textPrice;
-    @FXML
-    private TextArea textAreaSupermarkets;
-    @FXML
     private Button btnRemove;
     @FXML
     private ComboBox<String> comboProducts;
-    @FXML
-    private GridPane gridProduct;
 
     Product pTemp;
 
@@ -46,14 +41,17 @@ public class ProductDeleteController implements Initializable {
 
     @FXML
     private void btnRemove(ActionEvent event) throws TreeException {
-
-        while (!Util.Utility.getTreeProducts().isEmpty() && Util.Utility.getTreeProducts().contains(textName.getText())) {
-            System.out.println("remove");
-            Util.Utility.getTreeProducts().remove(textName.getText());
+        boolean flag = false;
+        while (!Util.Utility.getTreeProducts().isEmpty() && Util.Utility.getTreeProducts().contains(comboProducts.getValue())) {
+            Util.Utility.getTreeProducts().remove(comboProducts.getValue());
+            flag = true;
         }
-//        if (pTemp != null) {
-//            //tourTreeRemove(Util.Utility.getTreeProducts().getRoot(), pTemp);
-//        }
+        if (flag) {
+            callConfirmation("The Product(s) has been deleted");
+        }else{
+            callAlert("Please check the empty space");
+        }
+        flag = false;
         comboProducts.getItems().clear();
         loadComboProducts();
     }
@@ -65,7 +63,7 @@ public class ProductDeleteController implements Initializable {
             tourTree(treeProductsTemp.getRoot(), comboProducts);
             this.comboProducts.setValue(null);
         } else {
-            System.out.println("No hay productos registrados");
+            callAlert("There are no Product(s) registered");
         }
     }
 
@@ -81,27 +79,47 @@ public class ProductDeleteController implements Initializable {
         }
     }
 
-    private void clean() {
-        textId.setText("");
-        textName.setText("");
-        textPrice.setText("");
-        textAreaSupermarkets.setText("");
-    }
-
     @FXML
     private void loadData(ActionEvent event) {
+    }
 
-        Product p = Util.Utility.getProductByName(comboProducts.getValue());//////REVISAR
+    private void callAlert(String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + "Error" + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ErrorController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Alert");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
-        if (p != null) {
-            clean();
-            textId.setText(String.valueOf(p.getID()));
-            textName.setText(p.getName());
-            textPrice.setText(String.valueOf(p.getPrice()));
-            //textAreaSupermarkets.setText(Util.Utility.getSupermarketById(String.valueOf(p.getSupermarketID())).getName());
-            gridProduct.setVisible(true);
-        } else {
-            System.out.println("no hay");
+    private void callConfirmation(String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + "Confirmation" + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ConfirmationController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Confirmation");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

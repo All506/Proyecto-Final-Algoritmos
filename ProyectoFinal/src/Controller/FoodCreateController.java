@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller;
 
 import Domain.TreeException;
@@ -89,6 +84,7 @@ public class FoodCreateController implements Initializable {
 
     @FXML
     private void btnAdd(ActionEvent event) throws TreeException, ListException {
+        boolean flag = true;
         if (!textName.getText().equals("") && spinnerPrice.getValue() > 0) {
             for (int i = 0; restaurant[i] != null; i++) {
                 Food food;
@@ -96,13 +92,17 @@ public class FoodCreateController implements Initializable {
                     food = new Food(Integer.parseInt(textID.getText()), textName.getText(), spinnerPrice.getValue(), Util.Utility.getRestaurantId(restaurant[i].getText()).getID());
                     System.out.println(food.toString());
                     Util.Utility.addFood(food);
+                    flag = true;
+                }
+                if (flag) {
+                    callConfirmation("The Food(s) has been registered");
                 }
             }
         } else {
             //Alert de que hay espacios vacios
-            callAlert("Error", "The Name space is empty!!!");
-            System.out.println("alert");
+            callAlert("The Name space is empty!!!");
         }
+        flag = false;
         cleanDisplay();
     }
 
@@ -153,10 +153,10 @@ public class FoodCreateController implements Initializable {
         }
     }
 
-    private void callAlert(String fxmlName, String text) {
+    private void callAlert(String text) {
         //Se llama la alerta
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + "Error" + ".fxml"));
             Parent root1;
             root1 = (Parent) loader.load();
             //Se llama al controller de la nueva ventana abierta
@@ -172,4 +172,25 @@ public class FoodCreateController implements Initializable {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-}
+
+    private void callConfirmation(String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + "Confirmation" + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ConfirmationController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Confirmation");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+}//end class

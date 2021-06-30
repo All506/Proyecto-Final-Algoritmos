@@ -28,15 +28,15 @@ public class Search {
         this.searchDate = searchDate;
     }
     
-//    public String[] dataName(){
-//        String[] data = {"id","date","studentId","courseId","schedule"};
-//        return data;
-//    }
-//    
-//    public String[] getData(){
-//        LocalDate dataFormat = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(this.date));
-//        String[] data = {String.valueOf(id),dataFormat.toString(),this.studentID, this.courseID, this.schedule};
-//        return data;
-//    }
+    public String[] dataName(){
+        String[] data = {"date"};
+        return data;
+    }
+    
+    public String[] getData(){
+        //LocalDate dataFormat = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(this.date));
+        String[] data = {searchDate.toString()};
+        return data;
+    }
     
 }//end class
