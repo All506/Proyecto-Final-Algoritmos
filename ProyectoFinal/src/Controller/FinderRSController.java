@@ -5,12 +5,17 @@
  */
 package Controller;
 
+import Domain.BST;
+import Domain.BTreeNode;
+import Domain.TreeException;
 import Graphs.AdjacencyListGraph;
 import Graphs.Graph;
 import Graphs.GraphException;
+import Objects.Food;
 import Objects.Place;
-import java.awt.MouseInfo;
-import java.awt.Point;
+import Objects.Product;
+import Objects.Restaurant;
+import Objects.Supermarket;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -24,23 +29,18 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import list.ListException;
+import list.SinglyLinkedList;
 
 /**
  * FXML Controller class
@@ -73,7 +73,7 @@ public class FinderRSController implements Initializable {
     Line lne;
 
     AdjacencyListGraph graph;
-    
+   
     public Text txtTitle;
     
     Place p;
@@ -83,6 +83,16 @@ public class FinderRSController implements Initializable {
     private Button btnFood;
     @FXML
     private Button btnProducts;
+    @FXML
+    private Button btnBack;
+    @FXML
+    private AnchorPane apFinal;
+    @FXML
+    private TableView<String[]> tblItems;
+    @FXML
+    private ComboBox<String> cmbItems;
+    @FXML
+    private Button btnConfirm;
     
    
     /**
@@ -92,7 +102,7 @@ public class FinderRSController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         apType.setVisible(false);
-
+        apFinal.setVisible(false);
         graph = Util.Utility.getPlacesGraph();
 
         try {
@@ -258,14 +268,149 @@ public class FinderRSController implements Initializable {
     }
 
     @FXML
-    private void btnFood(ActionEvent event) {
+    private void btnFood(ActionEvent event) throws TreeException, ListException {
         apType.setVisible(false);
         apRoot.setVisible(false);
+        apFinal.setVisible(true);
+        treeAsArray(Util.Utility.treeFoods);
+        loadComboBox();
     }
 
     @FXML
-    private void btnProducts(ActionEvent event) {
+    private void btnProducts(ActionEvent event) throws TreeException, ListException {
         apType.setVisible(false);
         apRoot.setVisible(false);
+        apFinal.setVisible(true);
+        treeAsArray(Util.Utility.treeProducts);
+        loadComboBox();
+        
     }
+
+    @FXML
+    private void btnBack(ActionEvent event) {
+        apRoot.setOpacity(1);
+        apType.setVisible(false);
+        
+    }
+    
+    public void loadComboBox(){
+      String matrix[][] = new String[itemsArray.length+1][2];
+      matrix[0][0]="Name";
+      matrix[0][1]="Price";
+      
+      for (int i = 0; i < itemsArray.length; i++) {
+           if(itemsArray[i] instanceof Food){
+                Food f = (Food)itemsArray[i];
+                if(!cmbItems.getItems().contains(f.getName())){
+                cmbItems.getItems().add(f.getName());
+                matrix[i+1][0]=f.getName();
+                matrix[i+1][1]=String.valueOf(f.getPrice());
+                }
+           }else{
+               if(!cmbItems.getItems().contains(p.getName())){
+                Product p = (Product)itemsArray[i];
+                cmbItems.getItems().add(p.getName());
+                matrix[i+1][0]=p.getName();
+                matrix[i+1][1]=String.valueOf(p.getPrice());
+               }
+           }
+         
+        }
+        loadTable(tblItems, cleanMatrix(matrix));
+    }
+    
+   
+    int itemCounter;
+    Object itemsArray[];
+    public void treeAsArray(BST tree) throws TreeException {
+        if(tree.isEmpty())
+            throw new TreeException("Binary Search Tree is empty");
+        
+        itemsArray = new Object[tree.size()];
+        itemCounter = 0;
+        treeAsArray(tree.getRoot());
+        
+    }
+    
+    //Tranversal tour: L-N-R
+    private void treeAsArray(BTreeNode node){
+        if(node!=null){
+            treeAsArray(node.left);
+            itemsArray[itemCounter++]=node.data;
+            treeAsArray(node.right);
+        }
+        
+    }
+    
+    
+    
+   public SinglyLinkedList getRestSupByItemName(String item) throws ListException{
+       SinglyLinkedList list = new SinglyLinkedList();
+       for (int i = 0; i < itemsArray.length; i++) {
+           if(itemsArray[i] instanceof Food){
+                Food f = (Food)itemsArray[i];
+                if(f.getName().equals(item)){
+                    Restaurant r =(Restaurant)getRestSupById(f.getRestaurantID());
+                    if(r!=null){
+                        list.add(r);
+                    }
+                }
+           }else{
+                Product p = (Product)itemsArray[i];
+                 if(p.getName().equals(item)){
+                    Supermarket s =(Supermarket)getRestSupById(p.getSupermarketID());
+                    if(s!=null){
+                        list.add(s);
+                    }
+                }
+           }
+       }
+
+       return list;
+   }
+   
+   public Object getRestSupById(int id) throws ListException{
+   
+       Graph g = Util.Utility.gRestAndSuper;
+       
+       for (int i = 0; i < g.size(); i++) {
+           if(g.getVertexByIndex(i).data instanceof Restaurant){
+               Restaurant r = (Restaurant) g.getVertexByIndex(i).data;
+               if(r.getID()==id)
+                   return r;
+           }else{
+               Supermarket s = (Supermarket) g.getVertexByIndex(i).data;
+               if(s.getID()==id)
+                   return s;
+           }
+       }
+       
+   return null;
+   }
+
+    @FXML
+    private void btnConfirm(ActionEvent event) {
+    }
+    
+    public String[][] cleanMatrix(String matrix[][]){
+    int counter= 0;
+        for (int i = 0; i < matrix.length; i++) {
+           if(matrix[i][0]!=null&&!matrix[i][0].equals("")){
+               counter++;
+           }    
+        }
+    
+        String aux[][]= new String[counter][2];
+        counter= 0;
+        for (int i = 0; i < matrix.length; i++) {
+           if(matrix[i][0]!=null&&!matrix[i][0].equals("")){
+               aux[counter][0]=matrix[i][0];
+               aux[counter++][1]=matrix[i][1];
+           }    
+        }
+    
+        return aux;
+    }
+    
+    
 }

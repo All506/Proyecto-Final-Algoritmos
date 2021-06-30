@@ -365,6 +365,8 @@ public class PlaceReadController implements Initializable {
 
     public void loadTable(TableView<String[]> tbl, String[][] stringMatrix) {
 
+        stringMatrix = cleanMatrix(stringMatrix);
+        
         tbl.getColumns().clear();
 
         ObservableList<String[]> data = FXCollections.observableArrayList();
@@ -387,4 +389,25 @@ public class PlaceReadController implements Initializable {
         }
         tbl.setItems(data);
     }
+    
+    public String[][] cleanMatrix(String matrix[][]){
+    int counter= 0;
+        for (int i = 0; i < matrix.length; i++) {
+           if(matrix[i][0]!=null&&!matrix[i][0].equals("")){
+               counter++;
+           }    
+        }
+    
+        String aux[][]= new String[counter][2];
+        counter= 0;
+        for (int i = 0; i < matrix.length; i++) {
+           if(matrix[i][0]!=null&&!matrix[i][0].equals("")){
+               aux[counter][0]=matrix[i][0];
+               aux[counter++][1]=matrix[i][1];
+           }    
+        }
+    
+        return aux;
+    }
+    
 }

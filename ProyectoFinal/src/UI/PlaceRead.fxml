@@ -21,7 +21,7 @@
             <Image url="@../Resources/map.jpg" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="apRoot" layoutX="140.0" layoutY="62.0" opacity="0.87" prefHeight="406.0" prefWidth="441.0" style="-fx-background-color: #cccccc;" stylesheets="@../CSS/GraphButtons.css">
+      <AnchorPane fx:id="apRoot" layoutX="140.0" layoutY="62.0" prefHeight="406.0" prefWidth="441.0" stylesheets="@../CSS/GraphButtons.css">
          <children>
             <Button fx:id="btnCenter" layoutX="194.0" layoutY="187.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="1.0" text="Button" visible="false" />
             <Rectangle fx:id="rectangleGraph" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="404.0" layoutX="4.0" layoutY="2.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="458.0" />
