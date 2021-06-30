@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller;
 
 import Graphs.GraphException;
@@ -60,7 +55,7 @@ public class RestaurantCreateController implements Initializable {
         //Cargar el comboBox con los lugares
         radioRestaurant.setSelected(true);
         if (Util.Utility.gPlaces.isEmpty()) {
-            callAlert("Error", "There are no places to load");
+            callAlert("There are no places to load");
         } else {
             SinglyLinkedList lPlaces = Util.Utility.gPlaces.getAllItemsAsList();
             try {
@@ -81,25 +76,23 @@ public class RestaurantCreateController implements Initializable {
     private void btnCreate(ActionEvent event) {
         try {
             if (txtId.getText().equals("") || cmbLocation.getValue().equals("") || txtName.getText().equals("")) {
-                callAlert("Error", "There are empty spaces. Fill all blank spaces");
+                callAlert("There are empty spaces. Fill all blank spaces");
             } else {
                 if (radioRestaurant.isSelected() == true) {
                     Restaurant rest = new Restaurant(Integer.valueOf(txtId.getText()), txtName.getText(), cmbLocation.getValue());
                     Util.Utility.gRestAndSuper.addVertex(rest);
                     Util.Utility.lastIndexGRestAndSuper++; //Se suma uno al ultimo indice
-                    callAlert("Error", "Restaurant has been added");
+                    callConfirmation("Restaurant has been added");
                 } else {
                     Supermarket supermarket = new Supermarket(Integer.valueOf(txtId.getText()), txtName.getText(), cmbLocation.getValue());
                     Util.Utility.gRestAndSuper.addVertex(supermarket);
                     Util.Utility.lastIndexGRestAndSuper++; //Se suma uno al ultimo indice
-                    callAlert("Error", "Supermarket has been added");
+                    callConfirmation("Supermarket has been added");
                 }
                 cleanUI();
             }
 
-        } catch (GraphException ex) {
-            Logger.getLogger(RestaurantCreateController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ListException ex) {
+        } catch (GraphException | ListException ex) {
             Logger.getLogger(RestaurantCreateController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -115,10 +108,10 @@ public class RestaurantCreateController implements Initializable {
         txtName.setText("");
     }
 
-    private void callAlert(String fxmlName, String text) {
+    private void callAlert(String text) {
         //Se llama la alerta
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + "Error" + ".fxml"));
             Parent root1;
             root1 = (Parent) loader.load();
             //Se llama al controller de la nueva ventana abierta
@@ -126,6 +119,26 @@ public class RestaurantCreateController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Alert");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void callConfirmation(String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + "Confirmation" + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ConfirmationController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Confirmation");
             //Se le asigna la información a la controladora
             controller.fill(text);
             stage.setScene(new Scene(root1));
@@ -145,4 +158,4 @@ public class RestaurantCreateController implements Initializable {
         radioRestaurant.setSelected(false);
     }
 
-}
+}//end class

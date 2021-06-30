@@ -156,6 +156,10 @@ public class Utility {
                 Restaurant res1 = (Restaurant) a;
                 Restaurant res2 = (Restaurant) b;
                 return res1.getName().equals(res2.getName()) && res1.getLocation().equals(res2.getLocation());
+            case "supermarket":
+                Supermarket superm1 = (Supermarket) a;
+                Supermarket superm2 = (Supermarket) b;
+                return superm1.getName().equals(superm2.getName()) && superm1.getLocation().equals(superm2.getLocation());
             case "productRemove":
                 Product p3 = (Product) a;
                 String string = (String) b;
@@ -204,6 +208,9 @@ public class Utility {
         if (a instanceof Restaurant && b instanceof Restaurant) {
             return "restaurant";
         }
+        if (a instanceof Supermarket && b instanceof Supermarket) {
+            return "supermarket";
+        }
         if (a instanceof Place && b instanceof Place) {
             return "place";
         }
@@ -216,7 +223,6 @@ public class Utility {
         if (a instanceof Place && b instanceof String) {
             return "placeString";
         }
-
         if (a instanceof EdgeWeight && b instanceof EdgeWeight) {
             return "edgeWeight";
         }

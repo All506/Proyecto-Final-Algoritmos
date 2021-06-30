@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="610.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RestaurantDeleteController">
    <children>
-      <ComboBox fx:id="cmbRestaurant" layoutX="373.0" layoutY="165.0" prefHeight="25.0" prefWidth="278.0" />
+      <ComboBox fx:id="cmbRestaurant" layoutX="373.0" layoutY="165.0" onAction="#cmbRestaurant" prefHeight="25.0" prefWidth="278.0" />
       <TextField fx:id="txtName" disable="true" editable="false" layoutX="373.0" layoutY="226.0" prefHeight="25.0" prefWidth="278.0" />
       <TextField fx:id="txtLocation" disable="true" editable="false" layoutX="373.0" layoutY="287.0" prefHeight="25.0" prefWidth="278.0" />
       <Button fx:id="btnDelete" layoutX="373.0" layoutY="344.0" mnemonicParsing="false" onAction="#btnDelete" prefHeight="26.0" prefWidth="278.0" stylesheets="@../CSS/coolThings.css" text="Delete" />
