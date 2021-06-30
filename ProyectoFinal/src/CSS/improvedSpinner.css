@@ -1,0 +1,29 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 30 jun. 2021, 10:32:56
+    Author     : Sebastián Navarro Martínez
+*/
+
+.button{
+    -fx-background-color:#ECECEC;
+    -fx-border-color: transparent;
+    -fx-text-alignment: center;
+    -fx-font: 10px "Lucida Fax";
+}
+
+.button:pressed{
+    -fx-background-color:  #DFDFDF;
+}
+
+.text-field{
+    -fx-alignment: center;
+    -fx-font: 15px "Lucida Fax";
+    -fx-background-color: #B4B4B4;
+    -fx-border-color: #909090;
+    -fx-border-style: solid;
+    -fx-border-width: 2px 0px 2px 0px;
+}

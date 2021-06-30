@@ -98,13 +98,15 @@ public class ProductCreateController implements Initializable {
             }
             if (flag) {
                 callConfirmation("The Product(s) has been registered");
+                cleanDisplay();
+            }else{
+                callAlert("Choose a supermarket to continue");
             }
         } else {
             //Alert de que hay espacios vacios
             callAlert("Please check the empty space(s)");
         }
         flag = false;
-        cleanDisplay();
     }
 
     public void cleanDisplay() {
