@@ -9,7 +9,7 @@ package Graphs;
  *
  * @author Alán
  */
-public class EdgeWeight {
+public class EdgeWeight implements Comparable<EdgeWeight>{
 
     private Object edge; //Arista
     private Object weight; //Peso
@@ -40,6 +40,20 @@ public class EdgeWeight {
         if (weight == null) return "Edge="+edge;
         else return "Edge="+edge+",Weight="+weight;
     }
+
+    @Override
+    public int compareTo(EdgeWeight o) {
+       
+       if(Util.Utility.greaterT(this.weight, o.weight))
+           return 1;
+       else
+           return -1;
+    }
+    
+//    public String toString(boolean b) {
+//    
+//    return String.format("(%s -> %s, %f)", source.name, destination.name, weight);
+//}
     
     
     
