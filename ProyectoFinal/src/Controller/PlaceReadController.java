@@ -31,6 +31,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -85,13 +86,15 @@ public class PlaceReadController implements Initializable {
     private RadioButton rdbButton;
     @FXML
     private VBox vbxRadioButtons;
+    @FXML
+    private ImageView animation;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        animation.setVisible(true);
         apRoot.setVisible(false);
         scrRadioButtons.setStyle("-fx-control-inner-background: transparent;");
 
@@ -162,6 +165,7 @@ public class PlaceReadController implements Initializable {
                 public void handle(ActionEvent event) {
                     rdbButton = (RadioButton) event.getSource();
                     rdbEvent();
+                    animation.setVisible(false);
 
                 }
             });
