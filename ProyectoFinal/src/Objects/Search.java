@@ -3,6 +3,7 @@ package Objects;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import list.SinglyLinkedList;
 
 /**
  *
@@ -18,6 +19,15 @@ public class Search {
     }
 
     public Search() {
+        
+        
+        
+    }
+
+    public Search(Date d, String value, SinglyLinkedList suggestions) {
+        
+        
+        
     }
 
     public Date getSearchDate() {
