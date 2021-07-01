@@ -97,13 +97,13 @@ public class FoodCreateController implements Initializable {
                 for (int i = 0; restaurant[i] != null; i++) {
                     Food food;
                     if (restaurant[i].isSelected()) {
-                        food = new Food(Integer.parseInt(textID.getText()), textName.getText(), Integer.parseInt(this.txtFieldPrice.getText()), Util.Utility.getRestaurantId(restaurant[i].getText()).getID());
+                        food = new Food(Integer.parseInt(textID.getText()), textName.getText(), Double.valueOf(this.txtFieldPrice.getText()), Util.Utility.getRestaurantId(restaurant[i].getText()).getID());
                         Util.Utility.addFood(food);
                         flag = true;
                     }
                 }
                 if (flag) {
-                    callConfirmation("The Food(s) has been registered");
+                    callConfirmation("The food(s) has been registered");
                     cleanDisplay();
                 } else {
                     callAlert("Choose a restaurant to continue");
