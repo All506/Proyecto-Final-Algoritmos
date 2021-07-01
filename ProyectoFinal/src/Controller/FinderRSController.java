@@ -16,6 +16,7 @@ import Objects.Food;
 import Objects.Place;
 import Objects.Product;
 import Objects.Restaurant;
+import Objects.Search;
 import Objects.Supermarket;
 import java.io.IOException;
 import java.net.URL;
@@ -403,7 +404,14 @@ public class FinderRSController implements Initializable {
         }
         else
         {
-            nearestRestSup(cmbItems.getValue());
+            java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
+            SinglyLinkedList suggestions = nearestRestSup(cmbItems.getValue());
+            Search s = new Search(
+                    d,//Fecha
+                    cmbItems.getValue(),//Nombre del producto
+                    suggestions//sugerencias     
+            );
+            
         }
         
            
@@ -469,12 +477,88 @@ public class FinderRSController implements Initializable {
         }
     }
     
-    public void nearestRestSup(String item) throws ListException, GraphException{
+    public SinglyLinkedList nearestRestSup(String item) throws ListException, GraphException{
     String matrix[] = DijkstrasAlgorithm.getPath(graph, p);
+        System.out.println(Arrays.toString(matrix));
     Arrays.sort(matrix);
-    System.out.println(Arrays.toString(matrix));
+
+    SinglyLinkedList listRestSup= getRestSupByItemName(item);
+//        System.out.println("Lista********\n"+listRestSup);
         
+        
+    SinglyLinkedList suggestions = new SinglyLinkedList();
+    suggestions.add("Empty");
     
+        for (int i = 0; i < matrix.length && suggestions.size()<4; i++) {
+            String data[] = matrix[i].split("-");
+            System.out.println(Arrays.toString(data));
+            Place pl =(Place) graph.getVertexByIndex(Integer.parseInt(data[2])).data;
+            for (int j = 1; j <= listRestSup.size() && suggestions.size()<4; j++) {
+                if(listRestSup.getNode(j).data instanceof Restaurant){
+                    Restaurant r = (Restaurant) listRestSup.getNode(j).data;
+                    if(r.getLocation().equalsIgnoreCase(pl.getName())){
+                    suggestions.add(suggestionAsString(r, data));
+                    }
+                }else{
+                     Supermarket s = (Supermarket) listRestSup.getNode(j).data;
+                    if(s.getLocation().equalsIgnoreCase(pl.getName())){
+                    suggestions.add(suggestionAsString(s, data));
+                    }
+                }
+            }
+            
+        }
+        suggestions.removeFirst();
+        System.out.println(suggestions);
+        return suggestions;
     }
+    
+    public Place getPlaceById(String id) throws ListException{
+        AdjacencyListGraph g = Util.Utility.getPlacesGraph();
+        for (int i = 0; i < g.size(); i++) {
+            Place pl =(Place) g.getVertexByIndex(i).data;
+            if(id.equals(String.valueOf(pl.getID()))){
+            return pl;
+            }
+            
+        }
+        
+        return null;
+    }
+    
+    public String suggestionAsString(Object obj, String[] data) throws ListException{
+        String sug=""; 
+        if(obj instanceof Restaurant){
+           Restaurant rest = (Restaurant) obj;
+           sug="Restaurant "+rest.getName()+ " Located in "+rest.getLocation();
+        }else{
+           Supermarket sup = (Supermarket) obj; 
+           sug="Supermarket "+sup.getName()+ " Located in "+sup.getLocation();
+        }
+        
+        if(data.length==4){
+            sug+="Is already located in your town.";
+        }
+        if(data.length==5){
+            sug+=" Distance from your actual location "+data[0]+" Km";
+        }
+        if(data.length>5){
+            sug+=" Distance from your actual location "+data[0]+" Km passing through ";
+            
+            for (int  i = 3; i < data.length-1; i++) {
+                Place pla = (Place)getPlaceById(data[i]);
+                sug+= pla.getName();
+                if(i<data.length-2){
+                    sug+=" and ";
+                }else{
+                    sug+=".";
+                }
+                
+            }
+        }
+    
+    return sug;
+    }
+    
     
 }

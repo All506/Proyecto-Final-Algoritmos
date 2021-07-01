@@ -130,7 +130,7 @@ public class DijkstrasAlgorithm {
                 counter=vertexIndex;
                 printPath(vertexIndex, parents);
             }else{
-            result[vertexIndex]="0-"+startVertex+"-"+vertexIndex+"-";
+            result[vertexIndex]="0-"+startVertex+"-"+vertexIndex+"-"+vertexIndex+"-";
             }
         }
         System.out.println("\n----------------------------------");

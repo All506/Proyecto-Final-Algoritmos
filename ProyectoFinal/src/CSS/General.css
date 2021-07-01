@@ -200,12 +200,12 @@
     -fx-background-color: 
         #70AFFF,
         linear-gradient(#70AFFF, #4295FF),
-        linear-gradient(#91abf5 0%, #8299dc 49%, #7488c4 50%, #6577ab 100%);
+        linear-gradient(#68B8F9 0%, #499DE1 49%, #238BE0 50%, #146EB7 100%);
     -fx-background-insets: 0,1,2;
     -fx-background-radius: 3,2,1;
     -fx-padding: 3 30 3 30;
     -fx-text-fill: black;
-    -fx-font-size: 14   px;
+    -fx-font: 13px "Lucida Fax";    
 }
 .windows7 {
     -fx-background-color: 
