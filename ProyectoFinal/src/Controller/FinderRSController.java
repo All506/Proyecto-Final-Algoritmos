@@ -479,11 +479,10 @@ public class FinderRSController implements Initializable {
     
     public SinglyLinkedList nearestRestSup(String item) throws ListException, GraphException{
     String matrix[] = DijkstrasAlgorithm.getPath(graph, p);
-        System.out.println(Arrays.toString(matrix));
     Arrays.sort(matrix);
 
     SinglyLinkedList listRestSup= getRestSupByItemName(item);
-//        System.out.println("Lista********\n"+listRestSup);
+
         
         
     SinglyLinkedList suggestions = new SinglyLinkedList();
@@ -491,7 +490,7 @@ public class FinderRSController implements Initializable {
     
         for (int i = 0; i < matrix.length && suggestions.size()<4; i++) {
             String data[] = matrix[i].split("-");
-            System.out.println(Arrays.toString(data));
+            
             Place pl =(Place) graph.getVertexByIndex(Integer.parseInt(data[2])).data;
             for (int j = 1; j <= listRestSup.size() && suggestions.size()<4; j++) {
                 if(listRestSup.getNode(j).data instanceof Restaurant){
@@ -513,17 +512,11 @@ public class FinderRSController implements Initializable {
         return suggestions;
     }
     
-    public Place getPlaceById(String id) throws ListException{
+    public Place getPlaceByPosition(int index) throws ListException{
         AdjacencyListGraph g = Util.Utility.getPlacesGraph();
-        for (int i = 0; i < g.size(); i++) {
-            Place pl =(Place) g.getVertexByIndex(i).data;
-            if(id.equals(String.valueOf(pl.getID()))){
-            return pl;
-            }
-            
-        }
         
-        return null;
+        Place place =(Place) g.getVertexByIndex(index).data;
+        return place;
     }
     
     public String suggestionAsString(Object obj, String[] data) throws ListException{
@@ -537,21 +530,22 @@ public class FinderRSController implements Initializable {
         }
         
         if(data.length==4){
-            sug+="Is already located in your town.";
+            sug+=". Is already located in your town.-";
         }
         if(data.length==5){
-            sug+=" Distance from your actual location "+data[0]+" Km";
+            sug+=". Distance from your actual location "+data[0]+" Km.-";
         }
         if(data.length>5){
-            sug+=" Distance from your actual location "+data[0]+" Km passing through ";
+            sug+=". Distance from your actual location "+data[0]+" Km passing through ";
             
-            for (int  i = 3; i < data.length-1; i++) {
-                Place pla = (Place)getPlaceById(data[i]);
+            for (int  i = 4; i < data.length-1; i++) {
+                
+                Place pla = getPlaceByPosition(Integer.parseInt(data[i]));
                 sug+= pla.getName();
                 if(i<data.length-2){
                     sug+=" and ";
                 }else{
-                    sug+=".";
+                    sug+=".-";
                 }
                 
             }

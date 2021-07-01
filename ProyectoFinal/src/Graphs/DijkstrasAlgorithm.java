@@ -168,7 +168,7 @@ public class DijkstrasAlgorithm {
     }
     
     public static String[] getPath(AdjacencyListGraph g, Object start) throws ListException, GraphException{
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < g.size(); i++) {
             if(Util.Utility.equals(g.getVertexByIndex(i).data, start)){
                     return dijkstra(graphAsMatrix(g),i);
             }
