@@ -52,13 +52,13 @@
 }
 
 .scroll-Pane  {
+    -fx-opacity: 0.6;
     -fx-base: transparent;
     -fx-control-inner-background: transparent;
     -fx-background-color: transparent;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
-    
 }
 
 .scroll-bar:horizontal, .scroll-bar:vertical{
@@ -79,7 +79,7 @@
 
 
 .scroll-bar:vertical .thumb {
-    -fx-background-color: #228DDE;
+    -fx-background-color: #FFFFFF;
     -fx-background-radius: 5em;
 }
 
@@ -144,11 +144,11 @@
 }
 
 .button {
-         -fx-background-color: #228DDE;
+         -fx-background-color: #969696;
          -fx-border-color: #FFFFFF;
          -fx-border-width: 2;
          -fx-text-fill: #FFFFFF;
-         -fx-font-family: "Century Gothic";
+         -fx-font-family: "Lucida Fax";
          -fx-font-style: italic;
          -fx-font-size: 15px;
          -fx-background-radius: 10 10 10 10;

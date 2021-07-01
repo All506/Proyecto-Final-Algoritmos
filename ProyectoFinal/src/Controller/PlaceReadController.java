@@ -177,8 +177,8 @@ public class PlaceReadController implements Initializable {
 
         try {
             String[][] matrix = new String[graph.size() * graph.size()][2];
-            matrix[0][1] = "Dist.";
-            matrix[0][0] = "Origen-Destino";
+            matrix[0][1] = "Distance";
+            matrix[0][0] = "Path";
             int arrowCounter = 1;
 
             aux = new AdjacencyListGraph(graph.size());
@@ -219,6 +219,7 @@ public class PlaceReadController implements Initializable {
         }
 
     }
+
     public void drawGraph(AdjacencyListGraph graph) throws ListException, GraphException {
         apRoot.getChildren().clear();
         apRoot.setVisible(true);
@@ -372,13 +373,13 @@ public class PlaceReadController implements Initializable {
     public void loadTable(TableView<String[]> tbl, String[][] stringMatrix) {
 
         stringMatrix = cleanMatrix(stringMatrix);
-        
+
         tbl.getColumns().clear();
 
         ObservableList<String[]> data = FXCollections.observableArrayList();
         data.addAll(Arrays.asList(stringMatrix));
         data.remove(0);//remove titles from data
-
+        int x = 130;
         for (int i = 0; i < stringMatrix[0].length; i++) {
             TableColumn tc = new TableColumn(stringMatrix[0][i]);
             tc.setEditable(false);
@@ -392,28 +393,31 @@ public class PlaceReadController implements Initializable {
             });
 
             tbl.getColumns().add(tc);
+            tc.setPrefWidth(x);
+            x = 87;
+
         }
         tbl.setItems(data);
     }
-    
-    public String[][] cleanMatrix(String matrix[][]){
-    int counter= 0;
+
+    public String[][] cleanMatrix(String matrix[][]) {
+        int counter = 0;
         for (int i = 0; i < matrix.length; i++) {
-           if(matrix[i][0]!=null&&!matrix[i][0].equals("")){
-               counter++;
-           }    
+            if (matrix[i][0] != null && !matrix[i][0].equals("")) {
+                counter++;
+            }
         }
-    
-        String aux[][]= new String[counter][2];
-        counter= 0;
+
+        String aux[][] = new String[counter][2];
+        counter = 0;
         for (int i = 0; i < matrix.length; i++) {
-           if(matrix[i][0]!=null&&!matrix[i][0].equals("")){
-               aux[counter][0]=matrix[i][0];
-               aux[counter++][1]=matrix[i][1];
-           }    
+            if (matrix[i][0] != null && !matrix[i][0].equals("")) {
+                aux[counter][0] = matrix[i][0];
+                aux[counter++][1] = matrix[i][1];
+            }
         }
-    
+
         return aux;
     }
-    
+
 }
