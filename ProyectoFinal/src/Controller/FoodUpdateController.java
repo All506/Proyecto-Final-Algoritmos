@@ -20,6 +20,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import list.ListException;
@@ -44,6 +45,7 @@ public class FoodUpdateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cmbFood.getItems().clear();
+        maskNumbers(txtPrice);
         loadComboFood();
     }
 
@@ -60,21 +62,26 @@ public class FoodUpdateController implements Initializable {
             
             //Create new food to replace (Basically the old but upgrated)
             Food updatedFood = new Food(foodToDelete.getID(),this.txtName.getText(),
-            Integer.parseInt(txtPrice.getText()),foodToDelete.getRestaurantID());
+            Double.valueOf(this.txtPrice.getText()),foodToDelete.getRestaurantID());
             
             //Remove the old one, add the updated
             tempTree.remove(foodToDelete);
             tempTree.add(updatedFood);
             
-            //Replace the original tree for the temporal and load the combobox
+            //Replace the original tree for the temporal and reload the combobox
             Util.Utility.setTreeFoods(tempTree);
             loadComboFood();
+            System.out.println("SI SE PUDO CRACK");
+            callConfirmation("Confirmation", "Food successfully updated");
+            
         }
     }
 
+    @FXML
     private void cmbFood(ActionEvent event) {
         Food food = Util.Utility.getFoodByName(cmbFood.getValue());
         txtName.setText(food.getName());
+        txtPrice.setText(String.valueOf(food.getPrice()));
     }
 
     private void loadComboFood() {
@@ -84,7 +91,7 @@ public class FoodUpdateController implements Initializable {
             tourTree(treeFoodTemp.getRoot(), cmbFood);
             this.cmbFood.setValue(null);
         } else {
-            callAlert("Information", "No foods to show");
+            callInformation("Information", "No foods to show");
         }
     }
 
@@ -99,10 +106,50 @@ public class FoodUpdateController implements Initializable {
         }
     }
 
-    private void callAlert(String type, String text) {
+    private void callConfirmation(String fxmlName, String text) {
         //Se llama la alerta
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + type + ".fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            ConfirmationController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Confirmation");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void callInformation(String fxmlName, String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            InformationController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Information");
+            //Se le asigna la información a la controladora
+            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void callAlert(String fxmlName, String text) {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + fxmlName + ".fxml"));
             Parent root1;
             root1 = (Parent) loader.load();
             //Se llama al controller de la nueva ventana abierta
@@ -118,5 +165,25 @@ public class FoodUpdateController implements Initializable {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    public void maskNumbers(TextField txtField) {
+        txtField.setOnKeyTyped((KeyEvent event) -> {
+            if ("0123456789".contains(event.getCharacter()) == false) {
+                event.consume();
+            }
+            if (event.getCharacter().trim().length() == 0) {
+                if (txtField.getText().length() == 6) {
+                    txtField.positionCaret(txtField.getText().length());
+                }
+            } else {
+                if (txtField.getText().length() == 4) {
+                    txtField.positionCaret(txtField.getText().length());
+                }
+                if (txtField.getText().length() >= 7) {
+                    event.consume();
+                }
+            }
+        });
+    }
+    
 }//end class

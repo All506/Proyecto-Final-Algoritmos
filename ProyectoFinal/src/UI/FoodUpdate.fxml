@@ -20,7 +20,7 @@
             <Font name="Segoe UI" size="26.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cmbFood" layoutX="354.0" layoutY="185.0" prefHeight="25.0" prefWidth="278.0" />
+      <ComboBox fx:id="cmbFood" layoutX="354.0" layoutY="185.0" onAction="#cmbFood" prefHeight="25.0" prefWidth="278.0" />
       <TextField fx:id="txtName" layoutX="354.0" layoutY="246.0" prefHeight="25.0" prefWidth="278.0" />
       <TextField fx:id="txtPrice" layoutX="354.0" layoutY="307.0" prefHeight="25.0" prefWidth="278.0" />
       <Button fx:id="btnUpdate" layoutX="354.0" layoutY="360.0" mnemonicParsing="false" onAction="#btnUpdate" prefHeight="26.0" prefWidth="278.0" stylesheets="@../CSS/coolThings.css" text="Update" />
