@@ -43,8 +43,6 @@ public class ProductCreateController implements Initializable {
     @FXML
     private Button btnAdd;
     @FXML
-    private Spinner<Integer> spinnerPrice;
-    @FXML
     private ScrollPane scrollPane;
     @FXML
     private AnchorPane anchorPane;
@@ -52,12 +50,24 @@ public class ProductCreateController implements Initializable {
     RadioButton[] supermarket;
     int count = 0;
 
-    SpinnerValueFactory<Integer> value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000000);
+    @FXML
+    private Button btnUp;
+    @FXML
+    private Button btnDown;
+    @FXML
+    private TextField txtFieldPrice;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        value.setValue(1);
-        spinnerPrice.setValueFactory(value);
+        
+        //Initialize the improved awesome Sebas' spinner
+        //=========================================================================================
+        maskNumbers(txtFieldPrice);
+        this.txtFieldPrice.setText("500");
+        this.btnUp.setText(String.valueOf(Integer.parseInt(this.txtFieldPrice.getText()) + 500));
+        this.btnDown.setText(String.valueOf(Integer.parseInt(this.txtFieldPrice.getText()) - 500));
+        //=========================================================================================
+        
 
         Popup pop = new Popup();
 
@@ -87,39 +97,64 @@ public class ProductCreateController implements Initializable {
     @FXML
     private void btnAdd(ActionEvent event) throws TreeException, ListException {
         boolean flag = false;
-        if (!textName.getText().equals("") && spinnerPrice.getValue() > 0) {
-            for (int i = 0; supermarket[i] != null; i++) {
-                Product product;
-                if (supermarket[i].isSelected()) {
-                    product = new Product(Integer.parseInt(textID.getText()), textName.getText(), spinnerPrice.getValue(), Util.Utility.getSupermarketId(supermarket[i].getText()).getID());
-                    Util.Utility.addProduct(product);
-                    flag = true;     
+        if (!this.txtFieldPrice.getText().equals("")) {
+            if (!textName.getText().equals("") && Integer.parseInt(this.txtFieldPrice.getText()) > 0) {
+                for (int i = 0; supermarket[i] != null; i++) {
+                    Product product;
+                    if (supermarket[i].isSelected()) {
+                        product = new Product(Integer.parseInt(textID.getText()), textName.getText(), Double.valueOf(this.txtFieldPrice.getText()), Util.Utility.getSupermarketId(supermarket[i].getText()).getID());
+                        Util.Utility.addProduct(product);
+                        flag = true;
+                    }
                 }
+                if (flag) {
+                    callConfirmation("The product(s) has been registered");
+                    cleanDisplay();
+                } else {
+                    callAlert("Choose a supermarket to continue");
+                }
+
+            } else {
+                callAlert("Fill all the spaces to continue");
             }
-            if (flag) {
-                callConfirmation("The Product(s) has been registered");
-                cleanDisplay();
-            }else{
-                callAlert("Choose a supermarket to continue");
-            }
+            flag = false;
         } else {
-            //Alert de que hay espacios vacios
-            callAlert("Please check the empty space(s)");
+            callAlert("Fill all the spaces to continue");
         }
-        flag = false;
     }
 
     public void cleanDisplay() {
         this.textName.setText("");
-        value.setValue(1);
         if (!Util.Utility.getTreeProducts().isEmpty()) {
             textID.setText(String.valueOf(Util.Utility.getProductID() + 1));
         } else {
             textID.setText(String.valueOf(1));
         }
-        spinnerPrice.setValueFactory(value);
+        this.txtFieldPrice.setText("500");
+        this.btnUp.setText(String.valueOf(Integer.parseInt(this.txtFieldPrice.getText()) + 500));
+        this.btnDown.setText(String.valueOf(Integer.parseInt(this.txtFieldPrice.getText()) - 500));
     }
 
+    public void maskNumbers(TextField txtField) {
+        txtField.setOnKeyTyped((KeyEvent event) -> {
+            if ("0123456789".contains(event.getCharacter()) == false) {
+                event.consume();
+            }
+            if (event.getCharacter().trim().length() == 0) {
+                if (txtField.getText().length() == 6) {
+                    txtField.positionCaret(txtField.getText().length());
+                }
+            } else {
+                if (txtField.getText().length() == 4) {
+                    txtField.positionCaret(txtField.getText().length());
+                }
+                if (txtField.getText().length() >= 7) {
+                    event.consume();
+                }
+            }
+        });
+    }
+    
     public void maskText(TextField txtField) {
         txtField.setOnKeyTyped((KeyEvent event) -> {
             if (!"0123456789".contains(event.getCharacter()) == false) {
@@ -193,6 +228,48 @@ public class ProductCreateController implements Initializable {
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void btnUp(ActionEvent event) {
+        this.txtFieldPrice.setText(this.btnUp.getText());
+
+        this.btnUp.setText(String.valueOf(Integer.parseInt(this.txtFieldPrice.getText()) + 500));
+
+        if (Integer.parseInt(this.txtFieldPrice.getText()) < 500) {
+            this.btnDown.setText("0");
+        } else {
+            this.btnDown.setText(String.valueOf(Integer.parseInt(this.txtFieldPrice.getText()) - 500));
+        }
+    }
+
+    @FXML
+    private void btnDown(ActionEvent event) {
+        this.txtFieldPrice.setText(this.btnDown.getText());
+
+        this.btnUp.setText(String.valueOf(Integer.parseInt(this.txtFieldPrice.getText()) + 500));
+
+        if (Integer.parseInt(this.txtFieldPrice.getText()) < 500) {
+            this.btnDown.setText("0");
+        } else {
+            this.btnDown.setText(String.valueOf(Integer.parseInt(this.txtFieldPrice.getText()) - 500));
+        }
+    }
+
+    @FXML
+    private void txtFieldPrice(KeyEvent event) {
+        if (!this.txtFieldPrice.getText().equals("")) {
+            if (Integer.parseInt(this.txtFieldPrice.getText()) < 9999999) {
+
+                this.btnUp.setText(String.valueOf(Integer.parseInt(this.txtFieldPrice.getText()) + 500));
+
+                if (Integer.parseInt(this.txtFieldPrice.getText()) < 500) {
+                    this.btnDown.setText("0");
+                } else {
+                    this.btnDown.setText(String.valueOf(Integer.parseInt(this.txtFieldPrice.getText()) - 500));
+                }
+            }
         }
     }
 
