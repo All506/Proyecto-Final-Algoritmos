@@ -123,7 +123,7 @@ public class LogInController implements Initializable {
 
     }
 
-    private void callMenu() throws IOException, list.ListException, GraphException {
+    private void callMenu() throws IOException, list.ListException, GraphException, ListException {
         FileXML fXML = new FileXML();
         fXML.loadFiles();
         Stage stage = (Stage) this.txtUser.getScene().getWindow();
