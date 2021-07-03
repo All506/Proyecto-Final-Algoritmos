@@ -82,21 +82,9 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="exit" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutY="646.0" onAction="#exit" prefHeight="72.0" prefWidth="508.0" ripplerFill="#fc0000" styleClass="windows7-default" text=" " textAlignment="JUSTIFY">
-         <font>
-            <Font size="15.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="41.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Resources/Exit.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </JFXButton>
-      <AnchorPane fx:id="apB1" layoutY="547.0" prefHeight="79.0" prefWidth="508.0">
+      <AnchorPane fx:id="apB1" layoutY="535.0" prefHeight="113.0" prefWidth="508.0">
          <children>
-            <JFXButton fx:id="btnNewRestSup" contentDisplay="TOP" onAction="#btnNewRestSup" prefHeight="98.0" prefWidth="100.0" text="Create">
+            <JFXButton fx:id="btnNewRestSup" contentDisplay="TOP" layoutY="19.0" onAction="#btnNewRestSup" prefHeight="98.0" prefWidth="100.0" text="Create">
                <graphic>
                   <ImageView fitHeight="49.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -105,7 +93,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnModifyRestSup" contentDisplay="TOP" layoutX="103.0" onAction="#btnModifyRestSup" prefHeight="98.0" prefWidth="100.0" text="Update">
+            <JFXButton fx:id="btnModifyRestSup" contentDisplay="TOP" layoutX="103.0" layoutY="19.0" onAction="#btnModifyRestSup" prefHeight="98.0" prefWidth="100.0" text="Update">
                <graphic>
                   <ImageView fitHeight="48.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -114,7 +102,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnRemoveRestSup" contentDisplay="TOP" layoutX="206.0" layoutY="1.0" onAction="#btnRemoveRestSup" prefHeight="98.0" prefWidth="100.0" text="Remove">
+            <JFXButton fx:id="btnRemoveRestSup" contentDisplay="TOP" layoutX="206.0" layoutY="20.0" onAction="#btnRemoveRestSup" prefHeight="98.0" prefWidth="100.0" text="Remove">
                <graphic>
                   <ImageView fitHeight="49.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -123,7 +111,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnDisplayRestSup" contentDisplay="TOP" layoutX="307.0" layoutY="1.0" onAction="#btnDisplayRestSup" prefHeight="98.0" prefWidth="100.0" text="Display">
+            <JFXButton fx:id="btnDisplayRestSup" contentDisplay="TOP" layoutX="307.0" layoutY="20.0" onAction="#btnDisplayRestSup" prefHeight="98.0" prefWidth="100.0" text="Display">
                <graphic>
                   <ImageView fitHeight="49.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -132,7 +120,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnCancelRestSup" contentDisplay="TOP" layoutX="408.0" layoutY="2.0" onAction="#btnCancelRestSup" prefHeight="98.0" prefWidth="100.0" text="Cancel">
+            <JFXButton fx:id="btnCancelRestSup" contentDisplay="TOP" layoutX="408.0" layoutY="21.0" onAction="#btnCancelRestSup" prefHeight="98.0" prefWidth="100.0" text="Cancel">
                <graphic>
                   <ImageView fitHeight="54.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -141,6 +129,11 @@
                   </ImageView>
                </graphic>
             </JFXButton>
+            <Text fx:id="txtButtons" layoutX="67.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="371.20001220703114">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <JFXButton fx:id="b6" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutX="48.0" layoutY="167.0" onAction="#changeColor" prefHeight="84.0" prefWidth="417.0" ripplerFill="#fc0000" styleClass="windows7-default" text="Find your perfect meal!">
@@ -190,6 +183,18 @@
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Resources/reports.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="exit" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="1.0" layoutY="646.0" onAction="#exit" prefHeight="72.0" prefWidth="508.0" ripplerFill="#fc0000" styleClass="windows7-default" text=" " textAlignment="JUSTIFY">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="41.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/Exit.png" />
                </image>
             </ImageView>
          </graphic>

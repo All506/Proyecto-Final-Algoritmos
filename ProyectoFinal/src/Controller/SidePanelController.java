@@ -17,6 +17,7 @@ import Misc.ChangeCallback;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.text.Text;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 
@@ -59,10 +60,17 @@ public class SidePanelController implements Initializable {
     String module;
 
     MainController mc = new MainController();
+    @FXML
+    private Text txtButtons;
+    @FXML
+    private JFXButton b51;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        apB1.setVisible(false);
+        showButtons(false);
+        
     }
 
     public void setCallback(ChangeCallback callback) {
@@ -71,30 +79,46 @@ public class SidePanelController implements Initializable {
 
     @FXML
     private void changeColor(ActionEvent event) {
+        showButtons(false);
         JFXButton btn = (JFXButton) event.getSource();
         switch (btn.getId()) {
 
             case "b1":
+                showButtons(true);
+                txtButtons.setText("Restaurants and Supermarkets");
                 apB1.setVisible(true);
                 module = "Restaurants";
                 break;
             case "b2":
+                showButtons(true);
+                txtButtons.setText("Foods");
                 apB1.setVisible(true);
                 module = "Food";
                 break;
             case "b3":
+                showButtons(true);
+                txtButtons.setText("Products");
                 apB1.setVisible(true);
                 module = "Products";
                 break;
             case "b4":
+                btnNewRestSup.setVisible(true);
+                btnCancelRestSup.setVisible(true);
+                txtButtons.setText("Users");
                 apB1.setVisible(true);
                 module = "Users";
                 break;
             case "b5":
+                btnNewRestSup.setVisible(true);
+                btnDisplayRestSup.setVisible(true);
+                btnRemoveRestSup.setVisible(true);
+                btnCancelRestSup.setVisible(true);
+                txtButtons.setText("Places");
                 apB1.setVisible(true);
                 module = "Places";
                 break;
             case "b6":
+                showButtons(false);
                 callback.setPaneVisible(Boolean.TRUE);
                 callback.updateColor("FinderR&S");
                 break;
@@ -186,7 +210,6 @@ public class SidePanelController implements Initializable {
     private void btnRemoveRestSup(ActionEvent event) {
         apB1.setVisible(false);
         switch (module) {
-
             case "Restaurants":
                 callback.setPaneVisible(Boolean.TRUE);
                 callback.updateColor("RestaurantDelete");
@@ -200,14 +223,12 @@ public class SidePanelController implements Initializable {
                 callback.updateColor("ProductDelete");
                 break;
             case "Users":
-
                 break;
             case "Places":
                 callback.setPaneVisible(Boolean.TRUE);
                 callback.updateColor("PlaceDelete");
                 break;
             case "Market":
-
                 break;
         }
 
@@ -247,6 +268,15 @@ public class SidePanelController implements Initializable {
     @FXML
     private void btnCancelRestSup(ActionEvent event) {
         apB1.setVisible(false);
+    }
+    
+    public void showButtons(boolean b){
+        btnCancelRestSup.setVisible(b);
+        btnDisplayRestSup.setVisible(b);
+        btnNewRestSup.setVisible(b);
+        btnModifyRestSup.setVisible(b);
+        btnRemoveRestSup.setVisible(b);
+        txtButtons.setText("");
     }
 
 }
