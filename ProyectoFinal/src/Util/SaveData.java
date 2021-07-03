@@ -5,12 +5,14 @@
  */
 package Util;
 
+import Domain.CircularDoublyLinkList;
 import Domain.CircularLinkList;
 import Domain.ListException;
 import Objects.Food;
 import Objects.Place;
 import Objects.Product;
 import Objects.Restaurant;
+import Objects.Search;
 import Objects.Security;
 import Objects.Supermarket;
 import Security.AES;
@@ -104,9 +106,20 @@ public class SaveData {
                 writeFoods();
             }
         }
-
-        SinglyLinkedList listaPrueba = Util.Utility.treeProducts.getTreeAsList();
-        System.out.println("LAS PRODUCTS EN LA LISTA SON \n " + listaPrueba.toString());
+        
+        //La información acerca de las busquedas es almacenada
+        if (!fXML.exist("Searches.xml")) { //Si el archivo no existe
+            fXML.createXML("SearchesXML", "Searches");
+            if (!Util.Utility.lSearches.isEmpty()) {
+                writeSearches();
+            }
+        } else {
+            fXML.deleteFile("Searches");
+            fXML.createXML("SearchesXML", "Searches");
+            if (!Util.Utility.lSearches.isEmpty()) {
+                writeSearches();
+            }
+        }
     }
 
     public void writeSecurity() throws ListException, TransformerException, SAXException, IOException {
@@ -193,6 +206,22 @@ public class SaveData {
             for (int i = 1; i <= foodsToSave.size(); i++) {
                 Food food = (Food) foodsToSave.getNode(i).data;
                 fXML.writeXML("Foods.xml", "Foods", food.dataName(), food.data());
+            }
+        }
+    }
+
+    private void writeSearches() throws list.ListException, TransformerException, SAXException, IOException, ListException {
+        FileXML fXML = new FileXML();
+        
+        if (Util.Utility.lSearches.isEmpty()) {
+            if (fXML.exist("Searches.xml")) {
+                fXML.deleteFile("Searches");
+            }
+        } else {
+            CircularDoublyLinkList searchesToSave = Util.Utility.lSearches;
+            for (int i = 1; i <= searchesToSave.size(); i++) {
+                Search search = (Search) searchesToSave.getNode(i).data;
+                fXML.writeXML("Searches.xml", "Searches", search.dataName(), search.data());
             }
         }
     }

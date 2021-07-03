@@ -24,14 +24,10 @@ public class Search {
         this.hour = hour;
     }
 
-    
-
     public Search() {
     
     }
 
-    
-    
     public String[] dataName() {
         String[] dataName = {"date", "location", "product", "suggestions", "hour"};
         return dataName;
@@ -81,6 +77,11 @@ public class Search {
 
     public void setHour(String hour) {
         this.hour = hour;
+    }
+
+    @Override
+    public String toString() {
+        return "Search{" + "searchDate=" + searchDate + ", location=" + location + ", product=" + product + ", suggestions=" + suggestions + ", hour=" + hour + '}';
     }
     
     

@@ -5,6 +5,7 @@
  */
 package XML;
 
+import Domain.CircularDoublyLinkList;
 import Domain.CircularLinkList;
 import Graphs.GraphException;
 import Objects.Food;
@@ -12,6 +13,7 @@ import Objects.Place;
 import Objects.Product;
 import Objects.Security;
 import Objects.Restaurant;
+import Objects.Search;
 import Objects.Supermarket;
 import Security.AES;
 import java.io.File;
@@ -22,6 +24,7 @@ import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -318,7 +321,46 @@ public class FileXML {
         return lFoods;
     }
 
-    public void loadFiles() throws ListException, GraphException {
+    private CircularDoublyLinkList readXMLtoSearchList() {
+        CircularDoublyLinkList lSearches = new CircularDoublyLinkList();
+
+        if (exist("Searches.xml")) {
+
+            try {
+                File inputFile = new File("Searches.xml");
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                Document doc = dBuilder.parse(inputFile);
+                doc.getDocumentElement().normalize();
+
+                NodeList nList = doc.getElementsByTagName("Searches"); //Cabecera de objeto
+
+                for (int indice = 0; indice < nList.getLength(); indice++) {
+                    Search newSearch = new Search(null, "", "", "", "");
+                    Node nNode = nList.item(indice);
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element eElement = (Element) nNode;
+                        //Se obtiene la fecha de la busqueda
+                        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                        Date date = format.parse(eElement.getAttribute("date"));
+                        newSearch.setSearchDate(date);
+                        newSearch.setLocation(eElement.getElementsByTagName("location").item(0).getTextContent());
+                        newSearch.setProduct(eElement.getElementsByTagName("product").item(0).getTextContent());
+                        newSearch.setSuggestions(eElement.getElementsByTagName("suggestions").item(0).getTextContent());
+                        newSearch.setHour(eElement.getElementsByTagName("hour").item(0).getTextContent());
+                    }
+                    lSearches.add(newSearch);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return lSearches;
+    }
+
+    public void loadFiles() throws ListException, GraphException, Domain.ListException {
         //Se carga la informacion de los restaurantes 
         if (readXMLtoRestAndSuperList().isEmpty()) {
             Util.Utility.lastIndexGRestAndSuper = 0; //Si no existe el documento, no se ha guardado ningun objeto
@@ -337,7 +379,7 @@ public class FileXML {
             }
         }
         Util.Utility.lastIndexGRestAndSuper++; //Se anhade uno mas para que el siguiente valor almacenado conicida
-        System.out.println("El grafo de restaurantes y supermercados contiene \n " + Util.Utility.gRestAndSuper.toString());
+
         //Se carga la informacion de los lugares
         if (readXMLtoPlacesList().isEmpty()) {
             Util.Utility.lastIndexGPlace = 0; //Si no existe el documento, no se ha guardado ningun objeto
@@ -362,15 +404,27 @@ public class FileXML {
             }
         }
 
-        //Se carga la informacion de los productos
+        //Se carga la informacion de las comidas
         if (readXMLtoFoodList().isEmpty()) {
-            System.out.println("El archivo de productos no existe");
+            System.out.println("El archivo de comidas no existe");
         } else {
             SinglyLinkedList lFoods = readXMLtoFoodList();
             for (int i = 1; i <= lFoods.size(); i++) {
                 Util.Utility.treeFoods.add(lFoods.getNode(i).data);
             }
         }
+
+        //Se carga la informacion de las busquedas
+        if (readXMLtoSearchList().isEmpty()) {
+            System.out.println("El archivo de búsquedas no existe");
+        } else {
+            CircularDoublyLinkList lSearches = readXMLtoSearchList();
+            for (int i = 1; i <= lSearches.size(); i++) {
+                Util.Utility.lSearches.add(lSearches.getNode(i).data);
+            }
+        }
+
+        System.out.println(Util.Utility.lSearches.toString());
     }
 
 }
