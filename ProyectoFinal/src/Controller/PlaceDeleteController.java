@@ -8,6 +8,8 @@ package Controller;
 import Graphs.AdjacencyListGraph;
 import Graphs.GraphException;
 import Objects.Place;
+import Objects.Restaurant;
+import Objects.Supermarket;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -78,13 +80,37 @@ public class PlaceDeleteController implements Initializable {
 
     @FXML
     private void btnDeletePlace(ActionEvent event) throws GraphException, ListException {
+        
         btnDeletePlace.setDisable(true);
         txfPlaceId.setText("");
         txfPlaceName.setText("");
-        gPlace.removeVertex(aux);
+        
+        AdjacencyListGraph rs = Util.Utility.gRestAndSuper;
+        boolean canDelete  = true;
+        for (int i = 0; i < rs.size(); i++) {
+            if(rs.getVertexByIndex(i).data instanceof Restaurant){
+                Restaurant r = (Restaurant) rs.getVertexByIndex(i).data;
+                if(Util.Utility.equals(r.getLocation(), aux.getName())){
+                    canDelete=false;
+                }
+            }else{
+                Supermarket s = (Supermarket) rs.getVertexByIndex(i).data;
+                if(Util.Utility.equals(s.getLocation(), aux.getName())){
+                    canDelete=false;
+                }
+            }
+        }
+       
+        if (canDelete) {
+            gPlace.removeVertex(aux);
+            callConfirmation("Confirmation", "Place deleted successfully");
+        } else {
+            callAlert("Error", "Can't delete this place");
+        }
+        
         cmbPlaceId.getItems().clear();
         loadCombobox();
-        callConfirmation("Confirmation", "Place deleted successfully");  
+         
         
     }
     
@@ -104,7 +130,7 @@ public class PlaceDeleteController implements Initializable {
             Parent root1;
             root1 = (Parent) loader.load();
             //Se llama al controller de la nueva ventana abierta
-            ConfirmationController controller = loader.getController();
+            ErrorController controller = loader.getController();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Alert");
