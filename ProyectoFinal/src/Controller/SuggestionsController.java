@@ -59,8 +59,8 @@ public class SuggestionsController implements Initializable {
         
         String sug[] = s.getSuggestions().split("-");
         String suggest = "";
-        for (int i = 0; i < sug.length; i++) {
-            suggest+=sug[i]+"\n\n";
+        for (int i = 0; i < sug.length ; i++) {
+            suggest+=sug[i]+"\n";
         }
     
         txtSuggestions.setText(suggest);

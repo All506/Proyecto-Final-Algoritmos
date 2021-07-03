@@ -1,42 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="592.0" prefWidth="775.0" style="-fx-background-color: #6384b2;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SuggestionsController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#07060752" height="275.0" layoutX="52.0" layoutY="142.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 85; -fx-arc-width: 85;" width="672.0" />
-      <VBox alignment="TOP_CENTER" layoutX="70.0" layoutY="166.0" prefHeight="163.0" prefWidth="636.0" spacing="10.0" style="-fx-spacing: 20;">
-         <children>
-            <Text fx:id="txtPlace" strokeType="OUTSIDE" strokeWidth="0.0" text="Place" textAlignment="CENTER" wrappingWidth="251.01318359375">
-               <font>
-                  <Font name="Segoe UI Semibold" size="35.0" />
-               </font>
-            </Text>
-            <Text fx:id="txtProduct" fill="WHITE" layoutX="313.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product" textAlignment="CENTER" wrappingWidth="324.353515625">
-               <font>
-                  <Font name="Segoe UI Bold" size="37.0" />
-               </font>
-            </Text>
-            <Text fx:id="txtSuggestions" fill="#31ae1e" layoutX="313.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suggestions" textAlignment="CENTER" wrappingWidth="627.2242584228516">
-               <font>
-                  <Font name="Segoe UI Bold" size="25.0" />
-               </font>
-            </Text>
-            <Text fx:id="txtDate" fill="#8a8a8a" layoutX="313.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" textAlignment="CENTER" wrappingWidth="139.55029296875">
-               <font>
-                  <Font name="Segoe UI Bold" size="27.0" />
-               </font>
-            </Text>
-         </children>
-      </VBox>
-      <Text fill="WHITE" layoutX="113.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here is what we found..." textAlignment="CENTER" wrappingWidth="549.546875">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#07060752" height="248.0" layoutX="52.0" layoutY="302.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="672.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#07060752" height="75.0" layoutX="52.0" layoutY="210.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="672.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#07060752" height="75.0" layoutX="52.0" layoutY="123.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 50; -fx-arc-width: 50;" width="672.0" />
+      <Text fx:id="txtPlace" fill="WHITE" layoutX="342.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="324.353515625">
+         <font>
+            <Font name="Segoe UI Symbol" size="25.0" />
+         </font>
+      </Text>
+      <Text fx:id="txtProduct" fill="WHITE" layoutX="342.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="324.353515625">
+         <font>
+            <Font name="Segoe UI Symbol" size="25.0" />
+         </font>
+      </Text>
+      <Text fx:id="txtSuggestions" fill="WHITE" layoutX="73.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="JUSTIFY" wrappingWidth="633.0">
+         <font>
+            <Font name="Segoe UI Symbol" size="25.0" />
+         </font>
+      </Text>
+      <Text fx:id="txtDate" fill="#070707" layoutX="223.0" layoutY="576.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="337.55029296875">
+         <font>
+            <Font name="Segoe UI" size="17.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="117.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here is what we found..." textAlignment="CENTER" wrappingWidth="549.546875">
          <font>
             <Font name="Segoe UI Semibold" size="45.0" />
          </font>
       </Text>
+      <Text fill="#8efc95" layoutX="82.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Place selected:" wrappingWidth="196.25">
+         <font>
+            <Font name="Segoe UI Semibold" size="29.0" />
+         </font>
+      </Text>
+      <Text fill="#8efc95" layoutX="81.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product searching:" wrappingWidth="263.25">
+         <font>
+            <Font name="Segoe UI Semibold" size="28.0" />
+         </font>
+      </Text>
+      <Text fill="#fff457" layoutX="289.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suggestions" textAlignment="CENTER" wrappingWidth="196.25">
+         <font>
+            <Font name="Segoe UI Semibold" size="29.0" />
+         </font>
+      </Text>
+      <Line endX="321.0" layoutX="387.0" layoutY="355.0" startX="-311.0" stroke="WHITE" />
    </children>
 </AnchorPane>

@@ -556,20 +556,20 @@ public class FinderRSController implements Initializable {
         String sug=""; 
         if(obj instanceof Restaurant){
            Restaurant rest = (Restaurant) obj;
-           sug="Restaurant "+rest.getName()+ " Located in "+rest.getLocation();
+           sug="Restaurant \""+rest.getName()+ "\", located in "+rest.getLocation();
         }else{
            Supermarket sup = (Supermarket) obj; 
-           sug="Supermarket "+sup.getName()+ " Located in "+sup.getLocation();
+           sug="Supermarket \""+sup.getName()+ "\", located in "+sup.getLocation();
         }
         
         if(data.length==4){
-            sug+=". Is already located in your town.-";
+            sug+=", is already located in your town.-";
         }
         if(data.length==5){
-            sug+=". Distance from your actual location "+data[0]+" Km.-";
+            sug+=". The distance from your actual location is "+data[0]+"Km.-";
         }
         if(data.length>5){
-            sug+=". Distance from your actual location "+data[0]+" Km passing through ";
+            sug+=". The distance from your actual location is "+data[0]+"Km passing through ";
             
             for (int  i = 4; i < data.length-1; i++) {
                 

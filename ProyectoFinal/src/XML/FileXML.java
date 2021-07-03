@@ -424,7 +424,7 @@ public class FileXML {
             }
         }
 
-        System.out.println(Util.Utility.lSearches.toString());
+        //System.out.println(Util.Utility.lSearches.toString());
     }
 
 }
