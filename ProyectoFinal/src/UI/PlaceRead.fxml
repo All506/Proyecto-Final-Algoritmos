@@ -42,9 +42,9 @@
             <Image url="@../Resources/source%20(3).gif" />
          </image>
       </ImageView>
-      <TableView fx:id="tblPlaces" layoutX="524.0" layoutY="405.0" opacity="0.81" prefHeight="135.0" prefWidth="243.0" stylesheets="@../CSS/GraphButtons.css" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7f8c8d" height="56.0" layoutX="524.0" layoutY="540.0" opacity="0.81" stroke="TRANSPARENT" strokeType="INSIDE" width="243.0" />
-      <Button fx:id="btnRandomize" layoutX="578.0" layoutY="547.0" mnemonicParsing="false" onAction="#btnRandomize" prefHeight="43.0" prefWidth="135.0" stylesheets="@../CSS/randomizeButton.css" text="Randomize distances" />
+      <TableView fx:id="tblPlaces" layoutX="509.0" layoutY="367.0" opacity="0.81" prefHeight="174.0" prefWidth="258.0" stylesheets="@../CSS/GraphButtons.css" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7f8c8d" height="56.0" layoutX="509.0" layoutY="540.0" opacity="0.81" stroke="TRANSPARENT" strokeType="INSIDE" width="258.0" />
+      <Button fx:id="btnRandomize" layoutX="570.0" layoutY="546.0" mnemonicParsing="false" onAction="#btnRandomize" prefHeight="43.0" prefWidth="135.0" stylesheets="@../CSS/randomizeButton.css" text="Randomize distances" />
       <ScrollPane fx:id="scrRadioButtons" layoutX="14.0" layoutY="394.0" opacity="0.89" prefHeight="202.0" prefWidth="230.0" style="-fx-background-color: transparent;" stylesheets="@../CSS/GraphButtons.css">
          <content>
             <VBox fx:id="vbxRadioButtons" prefHeight="230.0" prefWidth="202.0" style="-fx-background-color: transparent;" stylesheets="@../CSS/GraphButtons.css">

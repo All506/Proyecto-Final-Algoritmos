@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Domain.TreeException;
 import Graphs.AdjacencyListGraph;
 import Graphs.GraphException;
 import Objects.Restaurant;
@@ -64,24 +65,35 @@ public class RestaurantDeleteController implements Initializable {
     }
 
     @FXML
-    private void btnDelete(ActionEvent event) throws GraphException, list.ListException {
+    private void btnDelete(ActionEvent event) throws GraphException, list.ListException, TreeException {
         boolean flag = false;
         if (Util.Utility.gRestAndSuper.isEmpty()) {
             callAlert("Graph is empty");
         } else {
 
-            for (int i = 0; i < Util.Utility.gRestAndSuper.size(); i++) {
-                if (Util.Utility.gRestAndSuper.containsVertex(aux)) {
-                    Util.Utility.gRestAndSuper.removeVertex(aux);
-                    flag = true;
-                    if (aux instanceof Restaurant) {
-                        callConfirmation("The Restaurant has been deleted");
-                    } else {
-                        callConfirmation("The Supermarket has been deleted");
+            boolean canDelete = false;
+            if (aux instanceof Restaurant) {
+                Restaurant r = (Restaurant) aux;
+                canDelete = Util.Utility.canDeleteRest(r);
+            } else {
+                Supermarket s = (Supermarket) aux;
+                canDelete = Util.Utility.canDeleteSup(s);
+            }
+
+            if (canDelete) {
+                for (int i = 0; i < Util.Utility.gRestAndSuper.size(); i++) {
+                    if (Util.Utility.gRestAndSuper.containsVertex(aux)) {
+                        Util.Utility.gRestAndSuper.removeVertex(aux);
+                        flag = true;
+                        if (aux instanceof Restaurant) {
+                            callConfirmation("The Restaurant has been deleted");
+                        } else {
+                            callConfirmation("The Supermarket has been deleted");
+                        }
+
                     }
 
                 }
-
             }//REVISAR LA ALERT
             if (!flag) {
                 if (aux instanceof Restaurant) {

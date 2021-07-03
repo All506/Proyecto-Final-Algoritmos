@@ -2,6 +2,7 @@ package Util;
 
 import Domain.BST;
 import Domain.BTreeNode;
+import Domain.CircularDoublyLinkList;
 import Domain.CircularLinkList;
 import Domain.ListException;
 import Domain.TreeException;
@@ -24,7 +25,7 @@ public class Utility {
     public static CircularLinkList lSecurity = new CircularLinkList();
     public static AdjacencyListGraph gRestAndSuper = new AdjacencyListGraph(100);
     public static AdjacencyListGraph gPlaces = new AdjacencyListGraph(100);
-    public static CircularLinkList lSearches = new CircularLinkList();
+    public static CircularDoublyLinkList lSearches = new CircularDoublyLinkList();
     public static String userName;
     public static BST treeProducts = new BST();
     public static BST treeFoods = new BST();
@@ -446,6 +447,43 @@ public class Utility {
             }
             tourTreeFoodID(node.left);
             tourTreeFoodID(node.right);
+        }
+    }
+    
+    private static boolean canDelete;
+    public static boolean canDeleteRest(Restaurant r) {
+        canDelete=true;
+        canDeleteRest(treeFoods.getRoot(), r);
+        return canDelete;
+    }
+    
+
+    private static void canDeleteRest(BTreeNode node, Restaurant r) {
+        if (node != null) {
+            Food f = (Food) node.data;
+            if (equals(r.getID(), f.getRestaurantID())) {
+                canDelete=false;
+            }
+            canDeleteRest(node.left, r);
+            canDeleteRest(node.right, r);
+        }
+    }
+    
+    public static boolean canDeleteSup(Supermarket s) {
+        canDelete=true;
+        canDeleteSup(treeProducts.getRoot(), s);
+        return canDelete;
+    }
+    
+
+    private static void canDeleteSup(BTreeNode node, Supermarket s) {
+        if (node != null) {
+            Product f = (Product) node.data;
+            if (equals(s.getID(), f.getSupermarketID())) {
+                canDelete=false;
+            }
+            canDeleteSup(node.left, s);
+            canDeleteSup(node.right, s);
         }
     }
 
