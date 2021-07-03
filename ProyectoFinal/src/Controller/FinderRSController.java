@@ -20,7 +20,10 @@ import Objects.Search;
 import Objects.Supermarket;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,6 +53,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import list.ListException;
 import list.SinglyLinkedList;
+import sun.util.calendar.Gregorian;
 
 /**
  * FXML Controller class
@@ -409,6 +413,11 @@ public class FinderRSController implements Initializable {
         {
 
             java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
+            Calendar calendar = GregorianCalendar.getInstance();
+            calendar.setTime(d);
+            
+            
+            
             SinglyLinkedList suggestions = nearestRestSup(cmbItems.getValue());
             Search s = new Search(
                     d,//Fecha
@@ -416,7 +425,8 @@ public class FinderRSController implements Initializable {
                     cmbItems.getValue(),//Nombre del producto
                     suggestions.getNode(1).data.toString() //Sugerencias
                     + (suggestions.size() >= 2 ? suggestions.getNode(2).data.toString() : "")//La aguega solo si existe
-                    + (suggestions.size() >= 3 ? suggestions.getNode(3).data.toString() : "")//La aguega solo si existe
+                    + (suggestions.size() >= 3 ? suggestions.getNode(3).data.toString() : ""),//La aguega solo si existe
+                    LocalDateTime.now().getHour()+":"+LocalDateTime.now().getMinute()
             );
 
             Util.Utility.lSearches.add(s);

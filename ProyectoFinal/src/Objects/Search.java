@@ -14,13 +14,17 @@ public class Search {
     private String location;
     private String product;
     private String suggestions;
+    private String hour;
 
-    public Search(Date searchDate, String location, String product, String suggestions) {
+    public Search(Date searchDate, String location, String product, String suggestions, String hour) {
         this.searchDate = searchDate;
         this.location = location;
         this.product = product;
         this.suggestions = suggestions;
+        this.hour = hour;
     }
+
+    
 
     public Search() {
     
@@ -29,13 +33,13 @@ public class Search {
     
     
     public String[] dataName() {
-        String[] dataName = {"date", "location", "product", "suggestions"};
+        String[] dataName = {"date", "location", "product", "suggestions", "hour"};
         return dataName;
     }
 
     public String[] data() {
 
-        String[] data = {new SimpleDateFormat("dd-MM-yyyy").format(searchDate), location, product, suggestions};
+        String[] data = {new SimpleDateFormat("dd-MM-yyyy").format(searchDate), location, product, suggestions, hour};
         return data;
     }
 
@@ -70,5 +74,15 @@ public class Search {
     public void setSuggestions(String suggestions) {
         this.suggestions = suggestions;
     }
+
+    public String getHour() {
+        return hour;
+    }
+
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
+    
+    
     
 }//end class

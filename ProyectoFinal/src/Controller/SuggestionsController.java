@@ -51,7 +51,7 @@ public class SuggestionsController implements Initializable {
     
     public void loadInfo(Search s){
     
-        txtDate.setText(new SimpleDateFormat("dd-MM-yyyy").format(s.getSearchDate()));
+        txtDate.setText(new SimpleDateFormat("dd-MM-yyyy").format(s.getSearchDate())+"  "+s.getHour());
     
         txtPlace.setText(s.getLocation());
         
