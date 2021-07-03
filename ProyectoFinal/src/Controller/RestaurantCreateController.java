@@ -59,7 +59,7 @@ public class RestaurantCreateController implements Initializable {
         } else {
             SinglyLinkedList lPlaces = Util.Utility.gPlaces.getAllItemsAsList();
             try {
-                for (int i = 1; i < lPlaces.size(); i++) {
+                for (int i = 1; i <= lPlaces.size(); i++) {
                     Place tempPlace = (Place) lPlaces.getNode(i).data;
                     cmbLocation.getItems().add(tempPlace.getName());
                 }
