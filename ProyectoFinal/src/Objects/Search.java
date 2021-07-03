@@ -1,9 +1,7 @@
 package Objects;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
-import list.SinglyLinkedList;
 
 /**
  *
@@ -13,21 +11,32 @@ public class Search {
   
     //Atributos
     private Date searchDate;
+    private String location;
+    private String product;
+    private String suggestions;
 
-    public Search(Date searchDate) {
+    public Search(Date searchDate, String location, String product, String suggestions) {
         this.searchDate = searchDate;
+        this.location = location;
+        this.product = product;
+        this.suggestions = suggestions;
     }
 
     public Search() {
-        
-        
-        
+    
     }
 
-    public Search(Date d, String value, SinglyLinkedList suggestions) {
-        
-        
-        
+    
+    
+    public String[] dataName() {
+        String[] dataName = {"date", "location", "product", "suggestions"};
+        return dataName;
+    }
+
+    public String[] data() {
+
+        String[] data = {new SimpleDateFormat("dd-MM-yyyy").format(searchDate), location, product, suggestions};
+        return data;
     }
 
     public Date getSearchDate() {
@@ -37,16 +46,29 @@ public class Search {
     public void setSearchDate(Date searchDate) {
         this.searchDate = searchDate;
     }
-    
-    public String[] dataName(){
-        String[] data = {"date"};
-        return data;
+
+    public String getLocation() {
+        return location;
     }
-    
-    public String[] getData(){
-        //LocalDate dataFormat = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(this.date));
-        String[] data = {searchDate.toString()};
-        return data;
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public String getSuggestions() {
+        return suggestions;
+    }
+
+    public void setSuggestions(String suggestions) {
+        this.suggestions = suggestions;
     }
     
 }//end class

@@ -41,6 +41,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -101,6 +102,8 @@ public class FinderRSController implements Initializable {
     private ComboBox<String> cmbItems;
     @FXML
     private Button btnConfirm;
+    @FXML
+    private BorderPane bpRoot;
     
    
     /**
@@ -397,24 +400,44 @@ public class FinderRSController implements Initializable {
    }
 
     @FXML
-    private void btnConfirm(ActionEvent event) throws ListException, GraphException {
+   public void btnConfirm(ActionEvent event) throws ListException, GraphException {
         
         if(cmbItems.getValue()==null){
             callAlert("You must select a product or food.");
         }
         else
         {
+
             java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
             SinglyLinkedList suggestions = nearestRestSup(cmbItems.getValue());
             Search s = new Search(
                     d,//Fecha
+                    p.getName(),//Nombre del producto que se buscó
                     cmbItems.getValue(),//Nombre del producto
-                    suggestions//sugerencias     
+                    suggestions.getNode(1).data.toString() //Sugerencias
+                    + (suggestions.size() >= 2 ? suggestions.getNode(2).data.toString() : "")//La aguega solo si existe
+                    + (suggestions.size() >= 3 ? suggestions.getNode(3).data.toString() : "")//La aguega solo si existe
             );
+
+            Util.Utility.lSearches.add(s);
             
+            
+            loadPage("Suggestions");
         }
+
+
+    }
+    
+    public void loadPage(String page){
         
-           
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/UI/" + page + ".fxml"));
+
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        bpRoot.setCenter(root);
     }
     
     public String[][] cleanMatrix(String matrix[][]){

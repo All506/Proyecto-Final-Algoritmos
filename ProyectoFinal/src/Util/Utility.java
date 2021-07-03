@@ -24,6 +24,7 @@ public class Utility {
     public static CircularLinkList lSecurity = new CircularLinkList();
     public static AdjacencyListGraph gRestAndSuper = new AdjacencyListGraph(100);
     public static AdjacencyListGraph gPlaces = new AdjacencyListGraph(100);
+    public static CircularLinkList lSearches = new CircularLinkList();
     public static String userName;
     public static BST treeProducts = new BST();
     public static BST treeFoods = new BST();

@@ -9,152 +9,158 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="592.0" prefWidth="775.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FinderRSController">
-    <stylesheets>
-        <URL value="@/CSS/General.css" />
-    </stylesheets>
-   <children>
-      <AnchorPane fx:id="apRoot" layoutX="56.0" layoutY="96.0" prefHeight="442.0" prefWidth="663.0" style="-fx-background-color: #cccccc;" stylesheets="@../CSS/GraphButtons.css">
+
+<BorderPane fx:id="bpRoot" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FinderRSController">
+   <center>
+      <AnchorPane id="AnchorPane" fx:id="apRoot" prefHeight="592.0" prefWidth="775.0" styleClass="mainFxmlClass">
+          <stylesheets>
+              <URL value="@/CSS/General.css" />
+          </stylesheets>
          <children>
-            <Button fx:id="btnCenter" layoutX="278.0" layoutY="221.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="9.0" text="Button" visible="false" />
-            <Rectangle fx:id="rectangleGraph" arcHeight="5.0" arcWidth="5.0" fill="#acc9e4" height="442.0" layoutX="-1.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="664.0" />
-            <ImageView fitHeight="442.0" fitWidth="663.0" layoutX="-1.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../Resources/map.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="248.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Resources/place1.png" />
-               </image>
-            </ImageView>
-            <Text fill="#110346" layoutX="158.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select your current location" textAlignment="CENTER">
-               <font>
-                  <Font name="Century Gothic Bold" size="26.0" />
-               </font>
-               <effect>
-                  <DropShadow spread="0.68">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Text>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="apType" layoutX="145.0" layoutY="198.0" prefHeight="194.0" prefWidth="479.0">
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c3c8cc" height="200.0" layoutX="1.0" layoutY="1.0" opacity="0.9" stroke="#110346" strokeLineJoin="ROUND" strokeWidth="2.0" width="475.0" />
-            <Button fx:id="btnFood" layoutX="39.0" layoutY="53.0" mnemonicParsing="false" onAction="#btnFood" prefHeight="106.0" prefWidth="116.0" style="-fx-background-color: #9bafc1; -fx-border-color: #110346;" textFill="#8c6a6a">
-               <graphic>
-                  <ImageView fitHeight="88.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+            <AnchorPane fx:id="apRoot" layoutX="56.0" layoutY="96.0" prefHeight="442.0" prefWidth="663.0" style="-fx-background-color: #cccccc;" stylesheets="@../CSS/GraphButtons.css">
+               <children>
+                  <Button fx:id="btnCenter" layoutX="278.0" layoutY="221.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="9.0" text="Button" visible="false" />
+                  <Rectangle fx:id="rectangleGraph" arcHeight="5.0" arcWidth="5.0" fill="#acc9e4" height="442.0" layoutX="-1.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="664.0" />
+                  <ImageView fitHeight="442.0" fitWidth="663.0" layoutX="-1.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../Resources/food.png" />
+                        <Image url="@../Resources/map.jpg" />
                      </image>
                   </ImageView>
-               </graphic>
-               <effect>
-                  <DropShadow spread="0.44">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Button>
-            <Button fx:id="btnProducts" layoutX="324.0" layoutY="48.0" mnemonicParsing="false" onAction="#btnProducts" opacity="0.92" prefHeight="106.0" prefWidth="116.0" style="-fx-background-color: #9bafc1; -fx-border-color: #110346;">
-               <graphic>
-                  <ImageView fitHeight="77.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="248.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Resources/product.png" />
+                        <Image url="@../Resources/place1.png" />
                      </image>
                   </ImageView>
-               </graphic>
-               <effect>
-                  <DropShadow spread="0.44">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Button>
-            <Text fill="#110346" layoutX="74.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Food" textAlignment="CENTER">
-               <font>
-                  <Font name="Century Gothic Bold" size="19.0" />
-               </font>
-               <effect>
-                  <DropShadow spread="0.68">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Text>
-            <Text fill="#110346" layoutX="342.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products" textAlignment="CENTER">
-               <font>
-                  <Font name="Century Gothic Bold" size="19.0" />
-               </font>
-               <effect>
-                  <DropShadow spread="0.68">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Text>
-            <Text fill="#110346" layoutX="16.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What type of product do you want to search for?" textAlignment="CENTER">
-               <font>
-                  <Font name="Century Gothic Bold" size="19.0" />
-               </font>
-               <effect>
-                  <DropShadow spread="0.68">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Text>
-            <Button fx:id="btnBack" layoutX="200.0" layoutY="153.0" mnemonicParsing="false" onAction="#btnBack" opacity="0.92" prefHeight="38.0" prefWidth="79.0" style="-fx-background-color: #9bafc1; -fx-border-color: #110346;" text="Back">
-               <effect>
-                  <DropShadow spread="0.44">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </DropShadow>
-               </effect>
-               <font>
-                  <Font name="Century Gothic Bold Italic" size="19.0" />
-               </font>
-            </Button>
+                  <Text fill="#110346" layoutX="158.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select your current location" textAlignment="CENTER">
+                     <font>
+                        <Font name="Century Gothic Bold" size="26.0" />
+                     </font>
+                     <effect>
+                        <DropShadow spread="0.68">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="apType" layoutX="145.0" layoutY="198.0" prefHeight="194.0" prefWidth="479.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c3c8cc" height="200.0" layoutX="1.0" layoutY="1.0" opacity="0.9" stroke="#110346" strokeLineJoin="ROUND" strokeWidth="2.0" width="475.0" />
+                  <Button fx:id="btnFood" layoutX="39.0" layoutY="53.0" mnemonicParsing="false" onAction="#btnFood" prefHeight="106.0" prefWidth="116.0" style="-fx-background-color: #9bafc1; -fx-border-color: #110346;" textFill="#8c6a6a">
+                     <graphic>
+                        <ImageView fitHeight="88.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Resources/food.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <effect>
+                        <DropShadow spread="0.44">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Button>
+                  <Button fx:id="btnProducts" layoutX="324.0" layoutY="48.0" mnemonicParsing="false" onAction="#btnProducts" opacity="0.92" prefHeight="106.0" prefWidth="116.0" style="-fx-background-color: #9bafc1; -fx-border-color: #110346;">
+                     <graphic>
+                        <ImageView fitHeight="77.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Resources/product.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <effect>
+                        <DropShadow spread="0.44">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Button>
+                  <Text fill="#110346" layoutX="74.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Food" textAlignment="CENTER">
+                     <font>
+                        <Font name="Century Gothic Bold" size="19.0" />
+                     </font>
+                     <effect>
+                        <DropShadow spread="0.68">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Text>
+                  <Text fill="#110346" layoutX="342.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products" textAlignment="CENTER">
+                     <font>
+                        <Font name="Century Gothic Bold" size="19.0" />
+                     </font>
+                     <effect>
+                        <DropShadow spread="0.68">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Text>
+                  <Text fill="#110346" layoutX="16.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What type of product do you want to search for?" textAlignment="CENTER">
+                     <font>
+                        <Font name="Century Gothic Bold" size="19.0" />
+                     </font>
+                     <effect>
+                        <DropShadow spread="0.68">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Text>
+                  <Button fx:id="btnBack" layoutX="200.0" layoutY="153.0" mnemonicParsing="false" onAction="#btnBack" opacity="0.92" prefHeight="38.0" prefWidth="79.0" style="-fx-background-color: #9bafc1; -fx-border-color: #110346;" text="Back">
+                     <effect>
+                        <DropShadow spread="0.44">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <font>
+                        <Font name="Century Gothic Bold Italic" size="19.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="apFinal" prefHeight="594.0" prefWidth="777.0" style="-fx-background-color: #CCCCCCCC;">
+               <children>
+                  <Text fill="#110346" layoutX="242.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search for the desired product" textAlignment="CENTER">
+                     <font>
+                        <Font name="Century Gothic Bold" size="19.0" />
+                     </font>
+                     <effect>
+                        <DropShadow spread="0.68">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Text>
+                  <TableView fx:id="tblItems" layoutX="212.0" layoutY="229.0" prefHeight="200.0" prefWidth="338.0">
+                    <columns>
+                      <TableColumn prefWidth="158.40003967285156" text="C1" />
+                      <TableColumn minWidth="0.800048828125" prefWidth="176.79998779296875" text="C2" />
+                    </columns>
+                  </TableView>
+                  <ComboBox fx:id="cmbItems" layoutX="193.0" layoutY="166.0" prefHeight="28.0" prefWidth="279.0" />
+                  <Button fx:id="btnConfirm" layoutX="494.0" layoutY="170.0" mnemonicParsing="false" onAction="#btnConfirm" styleClass="windows7-default" stylesheets="@../CSS/General.css" text="Confirm" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="apFinal" prefHeight="594.0" prefWidth="777.0" style="-fx-background-color: #CCCCCCCC;">
-         <children>
-            <Text fill="#110346" layoutX="242.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search for the desired product" textAlignment="CENTER">
-               <font>
-                  <Font name="Century Gothic Bold" size="19.0" />
-               </font>
-               <effect>
-                  <DropShadow spread="0.68">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Text>
-            <TableView fx:id="tblItems" layoutX="212.0" layoutY="229.0" prefHeight="200.0" prefWidth="338.0">
-              <columns>
-                <TableColumn prefWidth="158.40003967285156" text="C1" />
-                <TableColumn minWidth="0.800048828125" prefWidth="176.79998779296875" text="C2" />
-              </columns>
-            </TableView>
-            <ComboBox fx:id="cmbItems" layoutX="193.0" layoutY="166.0" prefHeight="28.0" prefWidth="279.0" />
-            <Button fx:id="btnConfirm" layoutX="494.0" layoutY="170.0" mnemonicParsing="false" onAction="#btnConfirm" styleClass="windows7-default" stylesheets="@../CSS/General.css" text="Confirm" />
-         </children>
-      </AnchorPane>
-   </children>
-</AnchorPane>
+   </center>
+</BorderPane>
