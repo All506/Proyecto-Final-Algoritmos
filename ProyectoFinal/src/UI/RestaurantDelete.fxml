@@ -15,22 +15,22 @@
       <TextField fx:id="txtLocation" disable="true" editable="false" layoutX="373.0" layoutY="287.0" prefHeight="25.0" prefWidth="278.0" />
       <Button fx:id="btnDelete" layoutX="373.0" layoutY="344.0" mnemonicParsing="false" onAction="#btnDelete" prefHeight="26.0" prefWidth="278.0" stylesheets="@../CSS/coolThings.css" text="Delete" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#10a475" height="97.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="782.0" />
-      <Label alignment="CENTER" layoutX="258.0" layoutY="18.0" prefHeight="61.0" prefWidth="266.0" text="Delete a Restaurant" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="167.0" layoutY="18.0" prefHeight="61.0" prefWidth="449.0" text="Delete a Restaurant or a Supermarket" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Segoe UI" size="26.0" />
          </font>
       </Label>
-      <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutX="171.0" layoutY="157.0" prefHeight="35.0" prefWidth="190.0" text="Restaurant:">
+      <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutX="117.0" layoutY="155.0" prefHeight="35.0" prefWidth="243.0" text="Restaurant/Supermarket:">
          <font>
             <Font name="Segoe UI" size="19.0" />
          </font>
       </Label>
-      <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutX="169.0" layoutY="221.0" prefHeight="33.0" prefWidth="192.0" text="Name:">
+      <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutX="269.0" layoutY="221.0" prefHeight="33.0" prefWidth="63.0" text="Name:">
          <font>
             <Font name="Segoe UI" size="19.0" />
          </font>
       </Label>
-      <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutX="167.0" layoutY="280.0" prefHeight="33.0" prefWidth="192.0" text="Location:">
+      <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutX="246.0" layoutY="283.0" prefHeight="33.0" prefWidth="93.0" text="Location:">
          <font>
             <Font name="Segoe UI" size="19.0" />
          </font>

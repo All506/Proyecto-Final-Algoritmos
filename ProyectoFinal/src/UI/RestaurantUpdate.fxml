@@ -8,11 +8,10 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="610.0" prefWidth="780.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controller.RestaurantUpdateController">
+<AnchorPane id="AnchorPane" prefHeight="610.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RestaurantUpdateController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#10a475" height="97.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="782.0" />
-      <Label alignment="CENTER" layoutX="258.0" layoutY="18.0" prefHeight="61.0" prefWidth="266.0" text="Update a Restaurant" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="150.0" layoutY="18.0" prefHeight="61.0" prefWidth="466.0" text="Update a Restaurant or a Supermarket" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Segoe UI" size="26.0" />
          </font>
@@ -21,17 +20,17 @@
       <TextField fx:id="txtName" layoutX="383.0" layoutY="236.0" prefHeight="25.0" prefWidth="278.0" />
       <TextField fx:id="txtLocation" layoutX="383.0" layoutY="297.0" prefHeight="25.0" prefWidth="278.0" />
       <Button fx:id="btnUpdate" layoutX="383.0" layoutY="354.0" mnemonicParsing="false" onAction="#btnUpdate" prefHeight="26.0" prefWidth="278.0" stylesheets="@../CSS/coolThings.css" text="Update" />
-      <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutX="181.0" layoutY="167.0" prefHeight="35.0" prefWidth="190.0" text="Restaurant:">
+      <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutX="130.0" layoutY="167.0" prefHeight="35.0" prefWidth="215.0" text="Restaurant/Supermarket:">
          <font>
             <Font name="Segoe UI" size="19.0" />
          </font>
       </Label>
-      <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutX="179.0" layoutY="231.0" prefHeight="33.0" prefWidth="192.0" text="Name:">
+      <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutX="282.0" layoutY="232.0" prefHeight="33.0" prefWidth="61.0" text="Name:">
          <font>
             <Font name="Segoe UI" size="19.0" />
          </font>
       </Label>
-      <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutX="177.0" layoutY="290.0" prefHeight="33.0" prefWidth="192.0" text="Location:">
+      <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutX="263.0" layoutY="289.0" prefHeight="33.0" prefWidth="80.0" text="Location:">
          <font>
             <Font name="Segoe UI" size="19.0" />
          </font>
