@@ -39,7 +39,7 @@ public class SuggestionsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         try {
-            Search search = (Search) Util.Utility.lSearches.getLast();
+            Search search = (Search) Util.Utility.lSearches.getNode(Util.Utility.lSearches.size()).data;
             loadInfo(search);
         } catch (ListException ex) {
             Logger.getLogger(SuggestionsController.class.getName()).log(Level.SEVERE, null, ex);

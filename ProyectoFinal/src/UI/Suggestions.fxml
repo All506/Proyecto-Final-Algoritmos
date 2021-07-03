@@ -1,39 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="592.0" prefWidth="775.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controller.SuggestionsController">
-    <stylesheets>
-        <URL value="@/CSS/General.css" />
-    </stylesheets>
+<AnchorPane id="AnchorPane" prefHeight="592.0" prefWidth="775.0" style="-fx-background-color: #6384b2;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SuggestionsController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="58.0" layoutY="145.0" prefHeight="318.0" prefWidth="658.0" spacing="10.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#07060752" height="275.0" layoutX="52.0" layoutY="142.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 85; -fx-arc-width: 85;" width="672.0" />
+      <VBox alignment="TOP_CENTER" layoutX="70.0" layoutY="166.0" prefHeight="163.0" prefWidth="636.0" spacing="10.0" style="-fx-spacing: 20;">
          <children>
-            <Text fx:id="txtPlace" strokeType="OUTSIDE" strokeWidth="0.0" text="place">
+            <Text fx:id="txtPlace" strokeType="OUTSIDE" strokeWidth="0.0" text="Place" textAlignment="CENTER" wrappingWidth="251.01318359375">
                <font>
-                  <Font name="Century Gothic Bold" size="27.0" />
+                  <Font name="Segoe UI Semibold" size="35.0" />
                </font>
             </Text>
-            <Text fx:id="txtProduct" layoutX="313.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="product">
+            <Text fx:id="txtProduct" fill="WHITE" layoutX="313.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product" textAlignment="CENTER" wrappingWidth="324.353515625">
                <font>
-                  <Font name="Century Gothic Bold" size="27.0" />
+                  <Font name="Segoe UI Bold" size="37.0" />
                </font>
             </Text>
-            <Text fx:id="txtSuggestions" layoutX="313.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="suggestions" textAlignment="CENTER" wrappingWidth="647.2242584228516">
+            <Text fx:id="txtSuggestions" fill="#31ae1e" layoutX="313.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suggestions" textAlignment="CENTER" wrappingWidth="627.2242584228516">
                <font>
-                  <Font name="Century Gothic Bold" size="20.0" />
+                  <Font name="Segoe UI Bold" size="25.0" />
                </font>
             </Text>
-            <Text fx:id="txtDate" layoutX="313.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date">
+            <Text fx:id="txtDate" fill="#8a8a8a" layoutX="313.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" textAlignment="CENTER" wrappingWidth="139.55029296875">
                <font>
-                  <Font name="Century Gothic Bold" size="27.0" />
+                  <Font name="Segoe UI Bold" size="27.0" />
                </font>
             </Text>
          </children>
       </VBox>
+      <Text fill="WHITE" layoutX="113.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here is what we found..." textAlignment="CENTER" wrappingWidth="549.546875">
+         <font>
+            <Font name="Segoe UI Semibold" size="45.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
