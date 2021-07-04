@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import Misc.ChangeCallback;
+import PDF.FilePDF;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,16 +72,16 @@ public class SidePanelController implements Initializable {
 
         apB1.setVisible(false);
         showButtons(false);
-        
+
         //Se setea el menu con respecto al tipo de usuario
-        if (Util.Utility.kindUser.equalsIgnoreCase("false")){
+        if (Util.Utility.kindUser.equalsIgnoreCase("false")) {
             b1.setVisible(false);
             b3.setVisible(false);
             b2.setVisible(false);
             b4.setVisible(false);
             b5.setVisible(false);
         }
-        
+
     }
 
     public void setCallback(ChangeCallback callback) {
@@ -146,19 +147,27 @@ public class SidePanelController implements Initializable {
         try {
             Util.SaveData dataSaver = new Util.SaveData();
             dataSaver.saveData();
+            deletePdf();//elimina los pdf si existen para que no se enreden los datos del sistema 
             System.exit(0);
-        } catch (ListException ex) {
-            Logger.getLogger(SidePanelController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
-            Logger.getLogger(SidePanelController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(SidePanelController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SidePanelController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (list.ListException ex) {
+        } catch (ListException | TransformerException | SAXException | IOException | list.ListException ex) {
             Logger.getLogger(SidePanelController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public void deletePdf() {
+        FilePDF pdf = new FilePDF();
+        if (pdf.exist("Restaurants&Supermarkets")) {
+            pdf.deleteFile("Restaurants&Supermarkets");
+        }
+
+        if (pdf.exist("Searchs")) {
+            pdf.deleteFile("Searchs");
+        }
+
+        if (pdf.exist("Products&Food")) {
+            pdf.deleteFile("Products&Food");
+        }
     }
 
     @FXML
@@ -214,7 +223,7 @@ public class SidePanelController implements Initializable {
 
                 break;
             case "Places":
-                
+
                 break;
             case "Market":
 
@@ -285,8 +294,8 @@ public class SidePanelController implements Initializable {
     private void btnCancelRestSup(ActionEvent event) {
         apB1.setVisible(false);
     }
-    
-    public void showButtons(boolean b){
+
+    public void showButtons(boolean b) {
         btnCancelRestSup.setVisible(b);
         btnDisplayRestSup.setVisible(b);
         btnNewRestSup.setVisible(b);

@@ -56,8 +56,8 @@ public class FilePDF {
     }
 
     //Genera el pdf y escribe lo que queremos
-    public void productsAndFood(String fileName, BST treeProducts, BST treeFood) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException, ListException {
-        FileOutputStream file = new FileOutputStream(fileName + ".pdf");
+    public void productsAndFood(BST treeProducts, BST treeFood) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException, ListException, list.ListException {
+        FileOutputStream file = new FileOutputStream("Products&Food" + ".pdf");
         Document document = new Document();
         PdfWriter.getInstance(document, file);
 
@@ -94,7 +94,7 @@ public class FilePDF {
                     table.addCell(String.valueOf(product.getID()));
                     table.addCell(product.getName());
                     table.addCell(String.valueOf(product.getPrice()));
-                    table.addCell(String.valueOf(product.getSupermarketID()));//Cambiar para que aparezca el supermercado
+                    table.addCell(Util.Utility.getSupermarketId2(product.getSupermarketID()).getName());
                 }
                 document.add(table);//Agrega la tabla al documento
 
@@ -132,7 +132,7 @@ public class FilePDF {
                     table2.addCell(String.valueOf(food.getID()));
                     table2.addCell(food.getName());
                     table2.addCell(String.valueOf(food.getPrice()));
-                    table2.addCell(String.valueOf(food.getRestaurantID()));//Cambiar para que aparezca el restaurante
+                    table2.addCell(Util.Utility.getRestaurantId2(food.getRestaurantID()).getName());
                 }
                 document.add(table2);//Agrega la tabla al documento
 
@@ -166,8 +166,8 @@ public class FilePDF {
     }
 
     //Genera el pdf y escribe lo que queremos
-    public void restaurantsAndSupermarket(String fileName, AdjacencyListGraph graph) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException, ListException, list.ListException {
-        FileOutputStream file = new FileOutputStream(fileName + ".pdf");
+    public void restaurantsAndSupermarket(AdjacencyListGraph graph) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException, ListException, list.ListException {
+        FileOutputStream file = new FileOutputStream("Restaurants&Supermarkets" + ".pdf");
         Document document = new Document();
         PdfWriter.getInstance(document, file);
 
@@ -244,7 +244,7 @@ public class FilePDF {
         } else {
             Paragraph parrafoTemp = new Paragraph();
             parrafoTemp.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafoTemp.add("\nThere's no Restaurants registered\n");
+            parrafoTemp.add("\nThere's no food registered\n");
             document.add(table2);//Agrega la tabla al documento
             document.add(parrafoTemp);
         }
@@ -273,32 +273,39 @@ public class FilePDF {
         parrafo.add("\n\nRegistered Searchs\n\n");
         document.add(parrafo);
 
-        try {
-            for (int i = 1; i <= list.size(); i++) {
-                Paragraph parrafo1 = new Paragraph();
-                
-                Search search = (Search) list.getNode(i).data;
+        if (!list.isEmpty()) {
+            try {
+                for (int i = 1; i <= list.size(); i++) {
+                    Paragraph parrafo1 = new Paragraph();
 
-                parrafo1.add("\nDate: " + new SimpleDateFormat("dd-MM-yyyy").format(search.getSearchDate()) + " , Hour: " + search.getHour());
-                parrafo1.add("\nLocation: " + search.getLocation());
-                parrafo1.add("\nSearch Item: " + search.getProduct());
-                String[] sugg = search.getSuggestions().split("-");
-                parrafo1.add("\nSuggestions: \n");
-                for (int j = 0; j < sugg.length; j++) {
-                     parrafo1.add(sugg[j] + "\n");
+                    Search search = (Search) list.getNode(i).data;
+
+                    parrafo1.add("\nDate: " + new SimpleDateFormat("dd-MM-yyyy").format(search.getSearchDate()) + " , Hour: " + search.getHour());
+                    parrafo1.add("\nLocation: " + search.getLocation());
+                    parrafo1.add("\nSearch Item: " + search.getProduct());
+                    String[] sugg = search.getSuggestions().split("-");
+                    parrafo1.add("\nSuggestions: \n");
+                    for (int j = 0; j < sugg.length; j++) {
+                        parrafo1.add(sugg[j] + "\n");
+                    }
+
+                    parrafo1.add("----------------------------------------------------------------------------------------------------------------------------------");
+                    document.add(parrafo1);
+
                 }
-               
-                parrafo1.add("----------------------------------------------------------------------------------------------------------------------------------");
-                document.add(parrafo1);
-                
-            }
 
-        } catch (ListException | DocumentException e) {
-            System.out.println(e);
+            } catch (ListException | DocumentException e) {
+                System.out.println(e);
+            }
+        } else {
+            Paragraph parrafoTemp = new Paragraph();
+            parrafoTemp.setAlignment(Paragraph.ALIGN_CENTER);
+            parrafoTemp.add("\nThere's no search made\n");
+            document.add(parrafoTemp);
         }
 
         //Importante cerrar el pdf
         document.close();
     }
-    
+
 }//end class
