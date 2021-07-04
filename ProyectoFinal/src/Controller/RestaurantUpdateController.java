@@ -133,6 +133,7 @@ public class RestaurantUpdateController implements Initializable {
             
             //Agrego el nuevo
             Util.Utility.gRestAndSuper.addVertex(rNew);
+            cmbRestaurant.getSelectionModel().select(0);
             loadInfo();
             callConfirmation("Restaurant successfully updated");
             
@@ -152,6 +153,7 @@ public class RestaurantUpdateController implements Initializable {
             
             //Agrego el nuevo
             Util.Utility.gRestAndSuper.addVertex(sNew);
+            cmbRestaurant.getSelectionModel().select(0);
             loadInfo();
             callConfirmation("Supermarket successfully updated");
             
