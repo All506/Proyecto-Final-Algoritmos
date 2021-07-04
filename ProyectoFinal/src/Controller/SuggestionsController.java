@@ -12,8 +12,12 @@ import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 /**
@@ -31,13 +35,25 @@ public class SuggestionsController implements Initializable {
     private Text txtSuggestions;
     @FXML
     private Text txtDate;
+    @FXML
+    private Button btnSendByEmail;
+    @FXML
+    private Button btnBackToMenu;
+    @FXML
+    private TextField txfEmail;
+    @FXML
+    private Button btnSend;
+    @FXML
+    private Button btnBack;
+    @FXML
+    private AnchorPane apEmail;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        apEmail.setVisible(false);
         try {
             Search search = (Search) Util.Utility.lSearches.getNode(Util.Utility.lSearches.size()).data;
             loadInfo(search);
@@ -64,6 +80,26 @@ public class SuggestionsController implements Initializable {
         }
     
         txtSuggestions.setText(suggest);
+    }
+
+    @FXML
+    private void btnSendByEmail(ActionEvent event) {
+        apEmail.setVisible(true);
+    }
+
+    @FXML
+    private void btnBackToMenu(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnSend(ActionEvent event) {
+        apEmail.setVisible(false);
+        //Envio de correo
+    }
+
+    @FXML
+    private void btnBack(ActionEvent event) {
+        apEmail.setVisible(false);
     }
     
 }

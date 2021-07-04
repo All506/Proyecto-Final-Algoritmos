@@ -379,7 +379,7 @@ public class PlaceReadController implements Initializable {
         ObservableList<String[]> data = FXCollections.observableArrayList();
         data.addAll(Arrays.asList(stringMatrix));
         data.remove(0);//remove titles from data
-        int x = 130;
+        int x = 160;
         for (int i = 0; i < stringMatrix[0].length; i++) {
             TableColumn tc = new TableColumn(stringMatrix[0][i]);
             tc.setEditable(false);
@@ -394,7 +394,7 @@ public class PlaceReadController implements Initializable {
 
             tbl.getColumns().add(tc);
             tc.setPrefWidth(x);
-            x = 87;
+            x = 65;
 
         }
         tbl.setItems(data);
