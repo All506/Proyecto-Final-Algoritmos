@@ -104,8 +104,7 @@ public class SuggestionsController implements Initializable {
     private void btnSend(ActionEvent event) throws Exception {
         if (!txfEmail.equals("")) {
             if (Util.Utility.emailChecker(txfEmail.getText())) {
-                Stage stage = callSending();
-
+                Stage stage = callSending(); 
                 Thread hilo = new Thread() {
                     @Override
                     public void run() {
