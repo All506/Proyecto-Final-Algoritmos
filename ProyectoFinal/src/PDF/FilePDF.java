@@ -2,12 +2,14 @@ package PDF;
 
 import Domain.BST;
 import Domain.BTreeNode;
+import Domain.CircularDoublyLinkList;
 import Domain.CircularLinkList;
 import Domain.ListException;
 import Graphs.AdjacencyListGraph;
 import Objects.Food;
 import Objects.Product;
 import Objects.Restaurant;
+import Objects.Search;
 import Objects.Supermarket;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
@@ -27,6 +29,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -250,6 +253,47 @@ public class FilePDF {
         document.close();
     }
 
-    
+    //Genera el pdf y escribe lo que queremos
+    public void searchPDF(CircularDoublyLinkList list) throws FileNotFoundException, DocumentException, BadElementException, URISyntaxException, IOException {
+        FileOutputStream file = new FileOutputStream("Searchs" + ".pdf");
+        Document document = new Document();
+        PdfWriter.getInstance(document, file);
+
+        //Instancia para poder hacer la img, importante poner la imagen en la carpeta img
+        Image header = Image.getInstance("src/img/records.jpg");
+        header.scaleToFit(250, 600);
+        header.setAlignment(Chunk.ALIGN_CENTER);
+        //Se abre el documento para poder escribir en el
+        document.open();
+        document.add(header);//Se agrega la img
+
+        Paragraph parrafo = new Paragraph();
+        parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+        parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.BLACK));
+        parrafo.add("\n\nRegistered Searchs\n\n");
+        document.add(parrafo);
+
+        try {
+            for (int i = 1; i <= list.size(); i++) {
+                Paragraph parrafo1 = new Paragraph();
+                
+                Search search = (Search) list.getNode(i).data;
+
+                parrafo1.add("\nDate: " + new SimpleDateFormat("dd-MM-yyyy").format(search.getSearchDate()) + " , Hour: " + search.getHour());
+                parrafo1.add("\nLocation: " + search.getLocation());
+                parrafo1.add("\nSearch Item: " + search.getProduct());
+                parrafo1.add("\nSuggestions: \n" + search.getSuggestions());
+                parrafo1.add("\n----------------------------------------------------------------------------------------------------------------------------------");
+                document.add(parrafo1);
+                
+            }
+
+        } catch (ListException | DocumentException e) {
+            System.out.println(e);
+        }
+
+        //Importante cerrar el pdf
+        document.close();
+    }
     
 }//end class
