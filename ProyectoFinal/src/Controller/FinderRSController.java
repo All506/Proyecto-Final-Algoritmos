@@ -428,7 +428,7 @@ public class FinderRSController implements Initializable {
                     + (suggestions.size() >= 3 ? suggestions.getNode(3).data.toString() : ""),//La aguega solo si existe
                     LocalDateTime.now().getHour()+":"+LocalDateTime.now().getMinute()
             );
-
+            
             Util.Utility.lSearches.add(s);
             
             

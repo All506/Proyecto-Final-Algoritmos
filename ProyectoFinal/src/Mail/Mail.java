@@ -1,8 +1,19 @@
 package Mail;
 
-import Domain.CircularLinkList;
+import Controller.ErrorController;
+import Controller.LoadingController;
+import Controller.LogInController;
+import Objects.Search;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -26,7 +37,7 @@ public class Mail {
     }
 
     //Metodo para enviar el correo de registrar estudiante
-    public static void sendEmail(String recepient) throws Exception {
+    public static void sendEmail(String recepient, Search search) throws Exception {
         System.out.println("Preparando para mandar el correo");
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
@@ -45,13 +56,13 @@ public class Mail {
             }
         });
 
-        Message message = sendEmailSuggestion(session, myAccountEmail, recepient);
+        Message message = sendEmailSuggestion(session, myAccountEmail, recepient, search);
         Transport.send(message);
         System.out.println("Correo Registrar listo");
     }
 
     //Contenido del message register(Correo)
-    private static Message sendEmailSuggestion(Session session, String myAccountEmail, String recepient) throws IOException{
+    private static Message sendEmailSuggestion(Session session, String myAccountEmail, String recepient, Search search) throws IOException {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
@@ -62,24 +73,23 @@ public class Mail {
 
             //Body 
             MimeBodyPart mimeBody = new MimeBodyPart();
-            String text = "Your information about your search: \n";
-//            text += "\n";
-//            for (int i = 1; i < data.length; i++) {
-//                if (i == 2) {
-//                    //text += (dataName[i] + ": " + data[i] + " - " + Util.Utility.getCarrerByID(data[2]).getDescription() +"\n");
-//                }else{
-////                    text += (dataName[i] + ": " + data[i] + "\n");
-//                }
-//                
-//            }
-//            text += "\nYour User is: " + data[1] + " and your Password is: " + data[0];
+            String text = "Your information about your suggestion: \n";
+            text += "\nDate: " + new SimpleDateFormat("dd-MM-yyyy").format(search.getSearchDate()) + " , Hour: " + search.getHour();
+            text += "\nLocation: " + search.getLocation();   
+            text += "\nSearch Item: " + search.getProduct();
+            text += "\n";
+            text += "\nSuggestions: \n";
+            String[] sugg = search.getSuggestions().split("-");
+            for (String sugg1 : sugg) {
+                text += sugg1 + "\n";
+            }
+
             mimeBody.setText(text);
 
             //Image Attachment
-//            MimeBodyPart pdfAttachment = new MimeBodyPart();
-            //pdfAttachment.attachFile("src/img/logo-ucr.png");
-
-//            emailContent.addBodyPart(pdfAttachment);
+            MimeBodyPart pdfAttachment = new MimeBodyPart();
+            pdfAttachment.attachFile("src/img/sugg.png");
+            emailContent.addBodyPart(pdfAttachment);
             emailContent.addBodyPart(mimeBody);
 
             //Agregamos al mensaje el contenido a mandar
@@ -93,6 +103,25 @@ public class Mail {
         return null;
     }
 
-    
+     private void callAlert() {
+        //Se llama la alerta
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/" + "Loading" + ".fxml"));
+            Parent root1;
+            root1 = (Parent) loader.load();
+            //Se llama al controller de la nueva ventana abierta
+            LoadingController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Alert");
+            //Se le asigna la información a la controladora
+//            controller.fill(text);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 
 }//end class

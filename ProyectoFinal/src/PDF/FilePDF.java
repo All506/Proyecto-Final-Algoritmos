@@ -282,8 +282,13 @@ public class FilePDF {
                 parrafo1.add("\nDate: " + new SimpleDateFormat("dd-MM-yyyy").format(search.getSearchDate()) + " , Hour: " + search.getHour());
                 parrafo1.add("\nLocation: " + search.getLocation());
                 parrafo1.add("\nSearch Item: " + search.getProduct());
-                parrafo1.add("\nSuggestions: \n" + search.getSuggestions());
-                parrafo1.add("\n----------------------------------------------------------------------------------------------------------------------------------");
+                String[] sugg = search.getSuggestions().split("-");
+                parrafo1.add("\nSuggestions: \n");
+                for (int j = 0; j < sugg.length; j++) {
+                     parrafo1.add(sugg[j] + "\n");
+                }
+               
+                parrafo1.add("----------------------------------------------------------------------------------------------------------------------------------");
                 document.add(parrafo1);
                 
             }
