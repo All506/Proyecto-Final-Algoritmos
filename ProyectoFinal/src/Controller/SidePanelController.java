@@ -17,6 +17,7 @@ import Misc.ChangeCallback;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
@@ -130,6 +131,11 @@ public class SidePanelController implements Initializable {
                 showButtons(false);
                 callback.setPaneVisible(Boolean.TRUE);
                 callback.updateColor("FinderR&S");
+                break;
+            case "b51":
+                showButtons(false);
+                callback.setPaneVisible(Boolean.TRUE);
+                callback.updateColor("Reports");
                 break;
         }
     }
