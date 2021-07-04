@@ -328,7 +328,7 @@ public class Utility {
         return x;
     }
 
-    public static Restaurant getRestaurantId(String restaurant) throws list.ListException {
+    public static Restaurant getRestaurantId(String restaurant) throws list.ListException {//Nombre
         for (int i = 0; i < gRestAndSuper.size(); i++) {
             if (gRestAndSuper.getVertexByIndex(i).data instanceof Restaurant) {
                 Restaurant restauran = (Restaurant) gRestAndSuper.getVertexByIndex(i).data;
@@ -341,7 +341,7 @@ public class Utility {
         return null;
     }
 
-    public static Restaurant getRestaurantId2(int restaurant) throws list.ListException {
+    public static Restaurant getRestaurantId2(int restaurant) throws list.ListException {//Id
         for (int i = 0; i < gRestAndSuper.size(); i++) {
             if (gRestAndSuper.getVertexByIndex(i).data instanceof Restaurant) {
                 Restaurant restauran = (Restaurant) gRestAndSuper.getVertexByIndex(i).data;
@@ -356,8 +356,8 @@ public class Utility {
     public static void setTreeFoods(BST treeFoods) {
         Utility.treeFoods = treeFoods;
     }
-    
-    public static Supermarket getSupermarketId(String supermarket) throws list.ListException {
+
+    public static Supermarket getSupermarketId(String supermarket) throws list.ListException {//Nombre
         for (int i = 0; i < gRestAndSuper.size(); i++) {
             if (gRestAndSuper.getVertexByIndex(i).data instanceof Supermarket) {
                 Supermarket supermarket2 = (Supermarket) gRestAndSuper.getVertexByIndex(i).data;
@@ -369,7 +369,7 @@ public class Utility {
         return null;
     }
 
-    public static Supermarket getSupermarketId2(int supermarket) throws list.ListException {
+    public static Supermarket getSupermarketId2(int supermarket) throws list.ListException {//Id
         for (int i = 0; i < gRestAndSuper.size(); i++) {
             if (gRestAndSuper.getVertexByIndex(i).data instanceof Supermarket) {
                 Supermarket supermarket2 = (Supermarket) gRestAndSuper.getVertexByIndex(i).data;
@@ -437,7 +437,6 @@ public class Utility {
         tourTreeFoodID(treeFoods.getRoot());
         return lastIDFood;
     }
-    
 
     private static void tourTreeFoodID(BTreeNode node) {
         if (node != null) {
@@ -449,38 +448,37 @@ public class Utility {
             tourTreeFoodID(node.right);
         }
     }
-    
+
     private static boolean canDelete;
+
     public static boolean canDeleteRest(Restaurant r) {
-        canDelete=true;
+        canDelete = true;
         canDeleteRest(treeFoods.getRoot(), r);
         return canDelete;
     }
-    
 
     private static void canDeleteRest(BTreeNode node, Restaurant r) {
         if (node != null) {
             Food f = (Food) node.data;
             if (equals(r.getID(), f.getRestaurantID())) {
-                canDelete=false;
+                canDelete = false;
             }
             canDeleteRest(node.left, r);
             canDeleteRest(node.right, r);
         }
     }
-    
+
     public static boolean canDeleteSup(Supermarket s) {
-        canDelete=true;
+        canDelete = true;
         canDeleteSup(treeProducts.getRoot(), s);
         return canDelete;
     }
-    
 
     private static void canDeleteSup(BTreeNode node, Supermarket s) {
         if (node != null) {
             Product f = (Product) node.data;
             if (equals(s.getID(), f.getSupermarketID())) {
-                canDelete=false;
+                canDelete = false;
             }
             canDeleteSup(node.left, s);
             canDeleteSup(node.right, s);
