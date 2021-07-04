@@ -13,10 +13,12 @@ public class Security {
     
     private String user;
     private String password;
+    private String kindUser;
 
-    public Security(String user, String password) {
+    public Security(String user, String password, String kindUser) {
         this.user = user;
         this.password = password;
+        this.kindUser = kindUser;
     }
 
     public String getUser() {
@@ -35,18 +37,26 @@ public class Security {
         this.password = password;
     }
 
+    public String getKindUser() {
+        return kindUser;
+    }
+
+    public void setKindUser(String kindUser) {
+        this.kindUser = kindUser;
+    }
+
     @Override
     public String toString() {
-        return "Security{" + "user:" + user + ", password:" + password + '}';
+        return "Security{" + "user:" + user + ", password:" + password + ", tipoUsuario " + kindUser;
     }
 
     public String[] getDataName(){
-        String[] dataName = {"User","Password"};
+        String[] dataName = {"User","Password","KindUser"};
         return dataName;
     }
     
     public String[] getData(){
-        String[] data = {this.getUser(), this.getPassword()};
+        String[] data = {this.getUser(), this.getPassword(),this.getKindUser()};
         return data;
     }
 

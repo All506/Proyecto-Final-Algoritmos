@@ -134,7 +134,8 @@ public class SaveData {
             AES encrypt = new AES();
             for (int i = 1; i <= lSecurity.size(); i++) {
                 Security tempSec = (Security) lSecurity.getNode(i).data;
-                Security encSec = new Security(encrypt.encrypt(tempSec.getUser(), "Proyecto"), encrypt.encrypt(tempSec.getPassword(), "Proyecto"));
+                Security encSec = new Security(encrypt.encrypt(tempSec.getUser(), "Proyecto"), encrypt.encrypt(tempSec.getPassword(), "Proyecto"),
+                encrypt.encrypt(tempSec.getKindUser(), "Proyecto"));
                 fXML.writeXML("Security.xml", "Security", encSec.getDataName(), encSec.getData());
             }
         }

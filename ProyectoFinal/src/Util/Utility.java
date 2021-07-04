@@ -34,6 +34,7 @@ public class Utility {
     public static int lastIndexGPlace;
     public static int lastIDFood;
     public static int lastIDProduct;
+    public static String kindUser;
 
     //Métodos relacionados al manejo de las listas, arboles y grafos
     public static boolean addSecurity(Security sec) throws ListException {

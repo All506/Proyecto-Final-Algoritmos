@@ -92,7 +92,7 @@ public class LogInController implements Initializable {
                 }
             }
 
-            Security auxiliar = new Security("admin", "prueba"); //En caso de que no haya ninguno registrado, admin-prueba se utilizarán para entrar
+            Security auxiliar = new Security("admin", "prueba","true"); //En caso de que no haya ninguno registrado, admin-prueba se utilizarán para entrar
             Util.Utility.addSecurity(auxiliar);
             System.out.println("La lista contiene: " + Util.Utility.lSecurity.toString());
         } catch (ListException ex) {
@@ -104,16 +104,16 @@ public class LogInController implements Initializable {
     @FXML
     private void btnLogIn(ActionEvent event) throws IOException, ListException, list.ListException, GraphException {
         FileXML fXML = new FileXML();
-
-        System.out.println("La lista contiene: " + Util.Utility.lSecurity.toString());
-
         if (txtUser.getText().equalsIgnoreCase("") || txtPassword.getText().equalsIgnoreCase("")) {
             callAlert("Error", "The User spacer is empty!!!");
             //System.out.println("El usuario se encuentra vacio");
         } else {
-            Security logInUser = new Security(txtUser.getText(), txtPassword.getText());
+            Security logInUser = new Security(txtUser.getText(), txtPassword.getText(),"true");
             if (Util.Utility.lSecurity.contains(logInUser)) {
+                int index = Util.Utility.lSecurity.indexOf(logInUser);
+                Security secTemp = (Security)Util.Utility.lSecurity.getNode(index).data;
                 Util.Utility.userName = txtUser.getText();
+                Util.Utility.kindUser = secTemp.getKindUser();
                 callMenu();
             } else {
                 callAlert("Error", "Try again...");

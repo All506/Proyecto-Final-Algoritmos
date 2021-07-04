@@ -3,6 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -23,7 +24,9 @@
       <TextField fx:id="txtUser" layoutX="331.0" layoutY="226.0" prefHeight="25.0" prefWidth="174.0" />
       <PasswordField fx:id="txtPassword" layoutX="332.0" layoutY="262.0" prefHeight="25.0" prefWidth="174.0" />
       <PasswordField fx:id="txtPassword2" layoutX="331.0" layoutY="302.0" prefHeight="25.0" prefWidth="174.0" />
-      <Button fx:id="btnCreate" layoutX="381.0" layoutY="345.0" mnemonicParsing="false" onAction="#btnCreate" text="Create" />
+      <Button fx:id="btnCreate" layoutX="381.0" layoutY="365.0" mnemonicParsing="false" onAction="#btnCreate" text="Create" />
       <Text layoutX="225.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password Check" />
+      <RadioButton fx:id="radioUser" layoutX="340.0" layoutY="336.0" mnemonicParsing="false" onAction="#radioUser" text="User" />
+      <RadioButton fx:id="radioAdmin" layoutX="405.0" layoutY="336.0" mnemonicParsing="false" onAction="#radioAdmin" text="Administrator" />
    </children>
 </AnchorPane>

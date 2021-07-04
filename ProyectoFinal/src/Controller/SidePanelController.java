@@ -71,6 +71,15 @@ public class SidePanelController implements Initializable {
         apB1.setVisible(false);
         showButtons(false);
         
+        //Se setea el menu con respecto al tipo de usuario
+        if (Util.Utility.kindUser.equalsIgnoreCase("false")){
+            b1.setVisible(false);
+            b3.setVisible(false);
+            b2.setVisible(false);
+            b4.setVisible(false);
+            b5.setVisible(false);
+        }
+        
     }
 
     public void setCallback(ChangeCallback callback) {

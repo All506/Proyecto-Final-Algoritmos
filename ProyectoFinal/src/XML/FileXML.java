@@ -150,16 +150,18 @@ public class FileXML {
             NodeList nList = doc.getElementsByTagName("Security"); //Cabecera de objeto
 
             for (int indice = 0; indice < nList.getLength(); indice++) {
-                Security sec = new Security("", "");
+                Security sec = new Security("", "","");
                 Node nNode = nList.item(indice);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     sec.setUser(eElement.getAttribute("User"));
                     sec.setPassword(eElement.getElementsByTagName("Password").item(0).getTextContent());
+                    sec.setKindUser(eElement.getElementsByTagName("KindUser").item(0).getTextContent());
 
                 }
                 AES deEnc = new AES();
-                Security desUser = new Security(deEnc.deCrypt(sec.getUser(), "Proyecto"), deEnc.deCrypt(sec.getPassword(), "Proyecto"));
+                Security desUser = new Security(deEnc.deCrypt(sec.getUser(), "Proyecto"), deEnc.deCrypt(sec.getPassword(), "Proyecto"),
+                deEnc.deCrypt(String.valueOf(sec.getKindUser()), "Proyecto"));
                 lSecurity.add(desUser);
             }
 
