@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -34,9 +35,15 @@ public class ReportsController implements Initializable {
     private Button reportSearch;
     @FXML
     private Button reportRyS;
+    @FXML
+    private Label label1;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if (Util.Utility.kindUser.equals("false")) {
+            reportSearch.setVisible(false);
+            label1.setVisible(false);
+        }
     }
 
     @FXML

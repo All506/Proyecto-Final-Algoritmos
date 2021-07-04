@@ -47,7 +47,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label alignment="CENTER" layoutX="295.0" layoutY="305.0" prefHeight="57.0" prefWidth="190.0" text="Report Searchs">
+      <Label fx:id="label1" alignment="CENTER" layoutX="295.0" layoutY="305.0" prefHeight="57.0" prefWidth="190.0" text="Report Searchs">
          <font>
             <Font size="25.0" />
          </font>
