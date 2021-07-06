@@ -1,10 +1,6 @@
 package Misc;
 
-/**
- *
- * @author Villan
- */
 public interface ChangeCallback {
-    void updateColor(String newColor);
+    void updateMenu(String MenuName);
     void setPaneVisible(Boolean b);
 }

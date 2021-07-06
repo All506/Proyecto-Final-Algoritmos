@@ -6,6 +6,7 @@
 package Controller;
 
 import Domain.ListException;
+import Misc.ChangeCallback;
 import Objects.Search;
 import java.io.IOException;
 import java.net.URL;
@@ -43,8 +44,6 @@ public class SuggestionsController implements Initializable {
     private Text txtDate;
     @FXML
     private Button btnSendByEmail;
-    @FXML
-    private Button btnBackToMenu;
     @FXML
     private TextField txfEmail;
     @FXML
@@ -96,15 +95,18 @@ public class SuggestionsController implements Initializable {
         apEmail.setVisible(true);
     }
 
-    @FXML
-    private void btnBackToMenu(ActionEvent event) {
+    private ChangeCallback callback;
+
+    public void setCallback(ChangeCallback callback) {
+        this.callback = callback;
     }
+
 
     @FXML
     private void btnSend(ActionEvent event) throws Exception {
         if (!txfEmail.equals("")) {
             if (Util.Utility.emailChecker(txfEmail.getText())) {
-                Stage stage = callSending(); 
+                Stage stage = callSending();
                 Thread hilo = new Thread() {
                     @Override
                     public void run() {
@@ -119,7 +121,6 @@ public class SuggestionsController implements Initializable {
                     }
                 };
                 hilo.start();
-                
 
                 //hilo.join();
             } else {

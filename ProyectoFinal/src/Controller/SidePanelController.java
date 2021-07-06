@@ -131,12 +131,12 @@ public class SidePanelController implements Initializable {
             case "b6":
                 showButtons(false);
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("FinderR&S");
+                callback.updateMenu("FinderR&S");
                 break;
             case "b51":
                 showButtons(false);
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("Reports");
+                callback.updateMenu("Reports");
                 break;
         }
     }
@@ -177,27 +177,27 @@ public class SidePanelController implements Initializable {
 
             case "Restaurants":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("RestaurantCreate");
+                callback.updateMenu("RestaurantCreate");
                 break;
             case "Food":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("FoodCreate");
+                callback.updateMenu("FoodCreate");
                 break;
             case "Products":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("ProductCreate");
+                callback.updateMenu("ProductCreate");
                 break;
             case "Users":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("UserCreate");
+                callback.updateMenu("UserCreate");
                 break;
             case "Places":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("PlaceCreate");
+                callback.updateMenu("PlaceCreate");
                 break;
             case "Market":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("FinderR&S");
+                callback.updateMenu("FinderR&S");
                 break;
         }
     }
@@ -209,15 +209,15 @@ public class SidePanelController implements Initializable {
 
             case "Restaurants":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("RestaurantUpdate");
+                callback.updateMenu("RestaurantUpdate");
                 break;
             case "Food":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("FoodUpdate");
+                callback.updateMenu("FoodUpdate");
                 break;
             case "Products":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("ProductUpdate");
+                callback.updateMenu("ProductUpdate");
                 break;
             case "Users":
 
@@ -237,21 +237,21 @@ public class SidePanelController implements Initializable {
         switch (module) {
             case "Restaurants":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("RestaurantDelete");
+                callback.updateMenu("RestaurantDelete");
                 break;
             case "Food":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("FoodDelete");
+                callback.updateMenu("FoodDelete");
                 break;
             case "Products":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("ProductDelete");
+                callback.updateMenu("ProductDelete");
                 break;
             case "Users":
                 break;
             case "Places":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("PlaceDelete");
+                callback.updateMenu("PlaceDelete");
                 break;
             case "Market":
                 break;
@@ -266,22 +266,22 @@ public class SidePanelController implements Initializable {
 
             case "Restaurants":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("RestaurantRead");
+                callback.updateMenu("RestaurantRead");
                 break;
             case "Food":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("FoodRead");
+                callback.updateMenu("FoodRead");
                 break;
             case "Products":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("ProductRead");
+                callback.updateMenu("ProductRead");
                 break;
             case "Users":
 
                 break;
             case "Places":
                 callback.setPaneVisible(Boolean.TRUE);
-                callback.updateColor("PlaceRead");
+                callback.updateMenu("PlaceRead");
                 break;
             case "Market":
 

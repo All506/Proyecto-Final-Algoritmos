@@ -160,12 +160,12 @@ public class MainController implements Initializable, ChangeCallback {
             StackPane pane = FXMLLoader.load(getClass().getResource(("/UI/splash.fxml")));
             root.getChildren().setAll(pane);
 
-            FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.1), pane);
+            FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.5), pane);
             fadeIn.setFromValue(0);
             fadeIn.setToValue(1);
             fadeIn.setCycleCount(1);
 
-            FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.1), pane);
+            FadeTransition fadeOut = new FadeTransition(Duration.seconds(1.5), pane);
             fadeOut.setFromValue(1);
             fadeOut.setToValue(0);
             fadeOut.setCycleCount(1);
@@ -191,7 +191,7 @@ public class MainController implements Initializable, ChangeCallback {
     }
 
     @Override
-    public void updateColor(String newColor) {
+    public void updateMenu(String newColor) {
         loadPage(newColor);
     }
 
