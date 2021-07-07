@@ -5,13 +5,13 @@
  */
 package Controller;
 
-
 import Graphs.AdjacencyListGraph;
 import Graphs.Graph;
 import Graphs.GraphException;
 import Objects.Place;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.io.File;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -35,6 +35,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -42,6 +45,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+import javafx.util.Duration;
 import list.ListException;
 
 /**
@@ -88,12 +92,39 @@ public class PlaceReadController implements Initializable {
     private VBox vbxRadioButtons;
     @FXML
     private ImageView animation;
+    @FXML
+    private AnchorPane rootPane;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        String path = "src/Resources/VideoMapa.mp4";
+        Media media = new Media(new File(path).toURI().toString());
+        //Instantiating MediaPlayer class
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        //Instantiating MediaView class
+        MediaView mediaView = new MediaView(mediaPlayer);
+
+        mediaView.setPreserveRatio(false);
+        mediaView.fitWidthProperty().bind(rootPane.widthProperty());
+        mediaView.fitHeightProperty().bind(rootPane.heightProperty());
+
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                mediaPlayer.seek(Duration.ZERO);
+                mediaPlayer.play();
+            }
+        });
+        mediaPlayer.setAutoPlay(true);
+
+        rootPane.getChildren().addAll(mediaView);
+        
+        mediaView.toBack();
+
+        //========================================================================
         animation.setVisible(true);
         apRoot.setVisible(false);
         scrRadioButtons.setStyle("-fx-control-inner-background: transparent;");

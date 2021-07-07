@@ -18,6 +18,7 @@ import Objects.Product;
 import Objects.Restaurant;
 import Objects.Search;
 import Objects.Supermarket;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -45,12 +46,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
 import list.ListException;
 import list.SinglyLinkedList;
 import sun.util.calendar.Gregorian;
@@ -116,6 +121,32 @@ public class FinderRSController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        String path = "src/Resources/VideoMapa.mp4";
+        Media media = new Media(new File(path).toURI().toString());
+        //Instantiating MediaPlayer class
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        //Instantiating MediaView class
+        MediaView mediaView = new MediaView(mediaPlayer);
+
+        mediaView.setPreserveRatio(false);
+        mediaView.fitWidthProperty().bind(apRoot.widthProperty());
+        mediaView.fitHeightProperty().bind(apRoot.heightProperty());
+
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                mediaPlayer.seek(Duration.ZERO);
+                mediaPlayer.play();
+            }
+        });
+        mediaPlayer.setAutoPlay(true);
+
+        apRoot.getChildren().addAll(mediaView);
+        
+        mediaView.toBack();
+
+        //========================================================================
 
         apType.setVisible(false);
         apFinal.setVisible(false);

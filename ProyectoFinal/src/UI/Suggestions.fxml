@@ -28,7 +28,7 @@
             <Font name="Segoe UI Symbol" size="20.0" />
          </font>
       </Text>
-      <Text fx:id="txtDate" fill="#070707" layoutX="223.0" layoutY="538.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="337.55029296875">
+      <Text fx:id="txtDate" fill="#070707" layoutX="50.0" layoutY="560.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" visible="false" wrappingWidth="134.0">
          <font>
             <Font name="Segoe UI" size="17.0" />
          </font>
