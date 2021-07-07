@@ -15,7 +15,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <BorderPane fx:id="bpRoot" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FinderRSController">
    <center>
       <AnchorPane id="AnchorPane" fx:id="apRoot" prefHeight="592.0" prefWidth="775.0" styleClass="mainFxmlClass">
@@ -136,28 +135,22 @@
                   </Button>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="apFinal" prefHeight="594.0" prefWidth="777.0" style="-fx-background-color: #CCCCCCCC;">
+            <AnchorPane fx:id="apFinal" prefHeight="594.0" prefWidth="777.0" style="-fx-background-color: #AED6F1;">
                <children>
-                  <Text fill="#110346" layoutX="242.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search for the desired product" textAlignment="CENTER">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2980b9" height="147.0" stroke="BLACK" strokeType="INSIDE" width="778.0" />
+                  <Text fill="WHITE" layoutX="147.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search for the desired product" textAlignment="CENTER" wrappingWidth="484.0944519042969">
                      <font>
-                        <Font name="Century Gothic Bold" size="19.0" />
+                        <Font name="Century Gothic Bold" size="27.0" />
                      </font>
-                     <effect>
-                        <DropShadow spread="0.68">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </DropShadow>
-                     </effect>
                   </Text>
-                  <TableView fx:id="tblItems" layoutX="212.0" layoutY="229.0" prefHeight="200.0" prefWidth="338.0">
+                  <TableView fx:id="tblItems" layoutX="166.0" layoutY="225.0" prefHeight="354.0" prefWidth="445.0" stylesheets="@../CSS/GraphButtons.css">
                     <columns>
                       <TableColumn prefWidth="158.40003967285156" text="C1" />
                       <TableColumn minWidth="0.800048828125" prefWidth="176.79998779296875" text="C2" />
                     </columns>
                   </TableView>
-                  <ComboBox fx:id="cmbItems" layoutX="193.0" layoutY="166.0" prefHeight="28.0" prefWidth="279.0" />
-                  <Button fx:id="btnConfirm" layoutX="494.0" layoutY="170.0" mnemonicParsing="false" onAction="#btnConfirm" styleClass="windows7-default" stylesheets="@../CSS/General.css" text="Confirm" />
+                  <ComboBox fx:id="cmbItems" layoutX="177.0" layoutY="165.0" prefHeight="28.0" prefWidth="279.0" styleClass="windows7-default" stylesheets="@../CSS/General.css" />
+                  <Button fx:id="btnConfirm" layoutX="473.0" layoutY="166.0" mnemonicParsing="false" onAction="#btnConfirm" prefHeight="27.0" prefWidth="128.0" styleClass="windows7-default" stylesheets="@../CSS/General.css" text="Confirm" />
                </children>
             </AnchorPane>
          </children>
