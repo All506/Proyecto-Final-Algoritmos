@@ -6,61 +6,59 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="610.0" prefWidth="780.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReportsController">
+<AnchorPane id="AnchorPane" prefHeight="611.0" prefWidth="782.0" style="-fx-background-color: #EAEAEA;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReportsController">
     <stylesheets>
         <URL value="@/CSS/General.css" />
     </stylesheets>
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e12323" height="109.0" layoutY="-3.0" stroke="#ffffff00" strokeType="INSIDE" width="780.0" />
-      <Text layoutX="338.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports" wrappingWidth="103.869140625">
+      <Circle fill="#76a6ff" layoutX="640.0" layoutY="523.0" radius="46.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <Circle fill="#76a6ff" layoutX="141.0" layoutY="523.0" radius="46.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <Circle fill="#76a6ff" layoutX="640.0" layoutY="357.0" radius="46.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <Circle fill="#76a6ff" layoutX="141.0" layoutY="357.0" radius="46.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <Circle fill="#76a6ff" layoutX="639.0" layoutY="190.0" radius="46.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <Circle fill="#76a6ff" layoutX="140.0" layoutY="190.0" radius="46.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <Button fx:id="reportRyS" layoutX="141.0" layoutY="282.0" mnemonicParsing="false" onAction="#reportRyS" prefHeight="150.0" prefWidth="498.0" style="-fx-background-color: #CDCDCD; -fx-background-radius: 20 20 20 20; -fx-border-radius: 20 20 20 20;" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#76a6ff" height="109.0" layoutY="-3.0" stroke="#ffffff00" strokeType="INSIDE" width="782.0" />
+      <Text fill="WHITE" layoutX="338.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports" wrappingWidth="103.869140625">
          <font>
-            <Font size="29.0" />
+            <Font name="Segoe UI" size="29.0" />
          </font></Text>
-      <Button fx:id="reportFyP" layoutX="442.0" layoutY="208.0" mnemonicParsing="false" onAction="#reportFyP" prefHeight="57.0" prefWidth="85.0" style="-fx-background-color: transparent;">
-         <graphic>
-            <ImageView fitHeight="48.0" fitWidth="49.0" layoutX="14.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/dairy-products.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="reportSearch" layoutX="332.0" layoutY="362.0" mnemonicParsing="false" onAction="#reportSearch" prefHeight="57.0" prefWidth="115.0" style="-fx-background-color: transparent;">
-         <graphic>
-            <ImageView fitHeight="51.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/seo.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="reportRyS" layoutX="186.0" layoutY="208.0" mnemonicParsing="false" onAction="#reportRyS" prefHeight="57.0" prefWidth="115.0" style="-fx-background-color: transparent;">
-         <graphic>
-            <ImageView fitHeight="48.0" fitWidth="91.0" layoutX="29.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/restaurant.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Label fx:id="label1" alignment="CENTER" layoutX="295.0" layoutY="305.0" prefHeight="57.0" prefWidth="190.0" text="Report Searchs">
+      <Button fx:id="reportFyP" layoutX="141.0" layoutY="115.0" mnemonicParsing="false" onAction="#reportFyP" prefHeight="150.0" prefWidth="498.0" style="-fx-background-color: #CDCDCD; -fx-background-radius: 20 20 20 20; -fx-border-radius: 20 20 20 20;" />
+      <Button fx:id="reportSearch" layoutX="141.0" layoutY="447.0" mnemonicParsing="false" onAction="#reportSearch" prefHeight="150.0" prefWidth="498.0" style="-fx-background-color: #CDCDCD; -fx-background-radius: 20 20 20 20; -fx-border-radius: 20 20 20 20;" />
+      <Label fx:id="label1" alignment="CENTER" layoutX="283.0" layoutY="461.0" prefHeight="57.0" prefWidth="207.0" text="Search's report" textFill="#616161">
          <font>
-            <Font size="25.0" />
+            <Font name="Segoe UI" size="23.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="148.0" layoutY="151.0" prefHeight="57.0" prefWidth="190.0" text="Report R &amp; S">
+      <Label alignment="CENTER" layoutX="233.0" layoutY="133.0" prefHeight="57.0" prefWidth="302.0" text="Foods and Products' report" textFill="#616161">
          <font>
-            <Font size="25.0" />
+            <Font name="Segoe UI" size="23.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="390.0" layoutY="151.0" prefHeight="57.0" prefWidth="190.0" text="Report F &amp; P">
+      <Label alignment="CENTER" layoutX="188.0" layoutY="300.0" prefHeight="57.0" prefWidth="404.0" text="Restaurants and Supermarkets' report" textFill="#616161">
          <font>
-            <Font size="25.0" />
+            <Font name="Segoe UI" size="23.0" />
          </font>
       </Label>
+      <ImageView fitHeight="48.0" fitWidth="91.0" layoutX="366.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/restaurant.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="49.0" layoutX="366.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/dairy-products.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="81.0" layoutX="358.0" layoutY="523.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/seo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
