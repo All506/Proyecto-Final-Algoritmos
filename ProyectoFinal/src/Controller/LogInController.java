@@ -92,7 +92,7 @@ public class LogInController implements Initializable {
 
             Security auxiliar = new Security("admin", "prueba","true"); //En caso de que no haya ninguno registrado, admin-prueba se utilizarán para entrar
             Util.Utility.addSecurity(auxiliar);
-            System.out.println("La lista contiene: " + Util.Utility.lSecurity.toString());
+           
         } catch (ListException ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -104,7 +104,7 @@ public class LogInController implements Initializable {
         FileXML fXML = new FileXML();
         if (txtUser.getText().equalsIgnoreCase("") || txtPassword.getText().equalsIgnoreCase("")) {
             callAlert("Error", "The User spacer is empty!!!");
-            //System.out.println("El usuario se encuentra vacio");
+           
         } else {
             Security logInUser = new Security(txtUser.getText(), txtPassword.getText(),"true");
             if (Util.Utility.lSecurity.contains(logInUser)) {
@@ -115,7 +115,7 @@ public class LogInController implements Initializable {
                 callMenu();
             } else {
                 callAlert("Error", "Try again...");
-                //System.out.println("Intente nuevamente");
+              
             }
         }
 
