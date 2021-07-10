@@ -22,16 +22,16 @@
               <URL value="@/CSS/General.css" />
           </stylesheets>
          <children>
-            <AnchorPane fx:id="apRoot" layoutX="56.0" layoutY="96.0" prefHeight="442.0" prefWidth="663.0" stylesheets="@../CSS/GraphButtons.css">
+            <AnchorPane fx:id="apRoot" layoutX="1.0" layoutY="1.0" prefHeight="605.0" prefWidth="769.0" stylesheets="@../CSS/GraphButtons.css">
                <children>
-                  <Button fx:id="btnCenter" layoutX="278.0" layoutY="221.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="9.0" text="Button" visible="false" />
-                  <Rectangle fx:id="rectangleGraph" arcHeight="5.0" arcWidth="5.0" fill="#acc9e4" height="442.0" layoutX="-1.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="664.0" />
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="248.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+                  <Button fx:id="btnCenter" layoutX="356.0" layoutY="258.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="9.0" text="Button" visible="false" />
+                  <Rectangle fx:id="rectangleGraph" arcHeight="5.0" arcWidth="5.0" fill="#acc9e4" height="594.0" layoutX="-45.0" layoutY="-88.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="751.0" />
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="302.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Resources/place1.png" />
                      </image>
                   </ImageView>
-                  <Text fill="#110346" layoutX="162.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select your current location" textAlignment="CENTER">
+                  <Text fill="#110346" layoutX="208.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select your current location" textAlignment="CENTER">
                      <font>
                         <Font name="Segoe UI Bold" size="26.0" />
                      </font>
@@ -130,7 +130,7 @@
                   </Button>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="apFinal" prefHeight="612.0" prefWidth="778.0" style="-fx-background-color: #CBCBCB;">
+            <AnchorPane fx:id="apFinal" prefHeight="612.0" prefWidth="778.0" style="-fx-background-color: #CBCBCB;" visible="false">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2980b9" height="117.0" stroke="TRANSPARENT" strokeType="INSIDE" width="778.0" />
                   <Text fill="WHITE" layoutX="146.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search the desired product" textAlignment="CENTER" wrappingWidth="484.0944519042969">

@@ -573,7 +573,6 @@ public class FinderRSController implements Initializable {
             
         }
         suggestions.removeFirst();
-        System.out.println(suggestions);
         return suggestions;
     }
     

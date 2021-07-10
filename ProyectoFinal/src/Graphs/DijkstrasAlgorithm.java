@@ -118,22 +118,20 @@ public class DijkstrasAlgorithm {
                                       int[] parents)
     {
         int nVertices = distances.length;
-        System.out.print("Vertex\t Distance\tPath");
+       
          
         for (int vertexIndex = 0;vertexIndex < nVertices;vertexIndex++){
             if (vertexIndex != startVertex)
             {
                 result[vertexIndex]=distances[vertexIndex]+"-"+startVertex+"-"+vertexIndex+"-";
-                System.out.print("\n" + startVertex + " -> ");
-                System.out.print(vertexIndex + " \t\t ");
-                System.out.print(distances[vertexIndex] + "\t\t");
+               
                 counter=vertexIndex;
                 printPath(vertexIndex, parents);
             }else{
             result[vertexIndex]="0-"+startVertex+"-"+vertexIndex+"-"+vertexIndex+"-";
             }
         }
-        System.out.println("\n----------------------------------");
+       
     }
  
     // Function to print shortest path
@@ -150,7 +148,7 @@ public class DijkstrasAlgorithm {
             return;
         }
         printPath(parents[currentVertex], parents);
-        System.out.print(currentVertex + " ");
+       
         result[counter]+=currentVertex +"-";
     }
     
